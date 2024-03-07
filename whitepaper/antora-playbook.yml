@@ -1,0 +1,15 @@
+site:
+  title: Atto Whitepaper
+  url: https://whitepaper.atto.cash
+  robots: allow
+
+content:
+  sources:
+    - url: .
+      start_path: whitepaper
+      branches: HEAD
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
