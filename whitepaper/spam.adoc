@@ -1,0 +1,21 @@
+= Spam
+
+Atto incorporates robust measures to safeguard its network from unnecessary traffic and ensure its nodes remain secure and efficient.
+
+== Dust Transaction
+Atto's minimal proof-of-work (PoW) mechanism for each transaction raises the cost and computational effort needed to initiate dust transactions, thus discouraging them by making spam uneconomical.
+
+== Transaction Replay
+By caching seen transactions, Atto efficiently filters out duplicates. If a transaction hash has been evicted from cache it will still discarded by height check from a cached account.
+
+== DDoS
+Atto uses WebSocket protocols which allow for the integration of advanced DDoS protection tools
+
+== Message Spam
+Atto evaluates the frequency of messages from each node, comparing them to voting nodes averages. Anomalously high traffic results in automatic node blacklisting, safeguarding against targeted spam attacks.
+
+== Pre-computed Transaction Spam
+Atto ignores transactions set in the future and prioritizes transactions based on the difference between the transaction timestamp and the time the transaction was received. The greater the difference, the lower the priority.
+
+== Transaction spam
+Atto uses bucketing to mitigate the impact of spam. Each transaction within a bucket is prioritized based on the difference between the transaction timestamp and the received time. Once a bucket is filled, transactions with the largest differences will start being dropped.

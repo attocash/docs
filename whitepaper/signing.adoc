@@ -1,0 +1,13 @@
+= Signing
+
+The Atto protocol ensures the integrity and non-repudiation of transactions through a robust signing mechanism. Utilizing the ED25519 signature scheme and the Blake2b hashing function, Atto provides a secure and efficient method for verifying transactions within the network.
+
+== ED25519 Signature Scheme
+Atto employs the ED25519 signature scheme for its transaction signing process due to its security features and performance advantages. ED25519 is a public-key signature system that offers fast verification times, resistance against side-channel attacks, and compact signature sizes.
+
+In the context of Atto, each transaction is signed by the sender's private key, generating a unique signature for the transaction. This signature, alongside the sender's public key, allows anyone in the network to verify the authenticity of the transaction without needing access to the private key.
+
+== Blake2b Hashing Function
+To further enhance security and efficiency, Atto uses the Blake2b hashing algorithm. Blake2b is renowned for its speed and security, providing cryptographic strength comparable to that of the latest standards while being significantly faster in practice.
+
+Before signing, each transaction is hashed using Blake2b. This creates a fixed-size hash value representing the original data of the transaction. The hashing step ensures that the transaction remains immutable; any alteration to the transaction data after hashing would result in a completely different hash, signaling tampering or corruption.

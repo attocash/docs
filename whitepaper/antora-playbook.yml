@@ -5,7 +5,7 @@ site:
 
 content:
   sources:
-    - url: .
+    - url: https://github.com/attocash/docs.git
       start_path: whitepaper
       branches: HEAD
 

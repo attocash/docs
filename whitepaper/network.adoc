@@ -1,0 +1,10 @@
+= Network
+
+== HTTP Port (8080)
+The HTTP port is utilized for general communications within the Atto network. When configuring a node, this port should not be used if the node acts as a voting node. This measure is crucial to reduce the attack surface, thereby safeguarding the voting nodes from potential external threats.
+
+== HTTP Management Port (8081)
+Port 8081 serves as the management and monitoring gateway for Atto nodes, offering access to critical endpoints such as /health, /prometheus, and /metrics. These endpoints provide essential insights into node health, performance metrics, and monitoring statistics. While crucial for node maintenance and monitoring, this port should not be publicly exposed to safeguard sensitive operational data and prevent unauthorized access to node management functions.
+
+== WebSocket Port (8082)
+Port 8082 facilitates transaction broadcasts and voting among Atto nodes, crucial for network consensus. While endpoint security may not require strict controls, implementing DDOS prevention is advised to maintain network stability. Additionally, DNS is supported for node connectivity, but the resolved IP must match the node's outbound IP to ensure legitimate communication.

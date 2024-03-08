@@ -1,0 +1,12 @@
+= Introduction
+
+Atto employs a unique consensus mechanism known as Open Representative Voting (ORV). Unlike traditional Proof of Work (PoW) or Proof of Stake (PoS) systems, ORV leverages the collective power of account representatives to secure the network and validate transactions. This method fosters a more energy-efficient and decentralized approach, as it shifts the focus from mining or staking to representation and delegation.
+
+== How ORV Works
+In the ORV consensus model, each Atto account holder can choose a representative, effectively delegating their vote to this entity. These representatives are responsible for voting on behalf of their delegators, with the weight of each vote being equivalent to the amount of Atto delegated to them. This system inherently protects against Sybil attacks by making it economically impractical to control a significant portion of the voting weight and allows for quick re-delegation, enhancing network security and flexibility.
+
+== Representative Responsibilities and Voting Power
+Representatives play a critical role in the Atto ecosystem. They are tasked with maintaining the network's integrity by validating transactions and participating in consensus. The voting power of each representative is directly proportional to the total balance of Atto delegated to them by other account holders. This means that representatives with a higher balance of delegated funds have a greater influence on the network's decision-making process.
+
+== Transaction Confirmation Process
+For a transaction to be confirmed in the Atto network, it must achieve a certain threshold of consensus among the representatives. Specifically, a transaction is considered confirmed once it receives votes representing at least 65% of the total online voting weight. "Online votes" refer to the sum of all votes cast by representatives who have been active within the last seven days. This criterion ensures that only the votes of engaged and current participants are counted towards transaction validation, effectively preventing network stagnation even if multiple voting nodes go offline, as only the votes of active representatives influence the consensus.

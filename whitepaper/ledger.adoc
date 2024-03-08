@@ -1,0 +1,9 @@
+= Ledger Design
+
+The Atto ledger employs a decentralized architecture, where each account maintains its own chain of transactions.
+This structure enables rapid, concurrent processing across the network, eliminating bottlenecks associated with traditional blockchain designs.
+
+Transactions in Atto are individualized, meaning each transaction forms a block within an account's chain, streamlining the process from initiation to confirmation.
+This method ensures immediate transaction propagation and verification, enhancing user experience and network efficiency.
+
+In conclusion, Atto's ledger design focuses on speed, scalability, and security, providing a robust foundation for the digital currency.

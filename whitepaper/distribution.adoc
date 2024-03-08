@@ -1,0 +1,18 @@
+= Distribution Overview
+The Atto network employs a strategic distribution model designed to support its ecosystem's growth, stability, and longevity. The distribution is carefully segmented to cater to different stakeholders within the network, ensuring balanced and sustained development. Here's a detailed breakdown:
+
+== User Distribution (20%)
+This segment is dedicated to the users of the Atto network. A total of 20% of the distribution is allocated directly to the user base, incentivizing participation and engagement within the ecosystem. This allocation underscores the network's commitment to its community, ensuring users are directly benefited and involved in the network's growth.
+
+== Node Distribution (20%)
+Nodes, being integral to the network's operation and security, receive a significant portion of the distribution:
+
+- Years 1-2: A total of 5% is allocated, with 2.5% distributed each year. This initial phase focuses on establishing a robust node network, ensuring the system's security and reliability.
+- Years 3-6: The allocation increases to 8%, equating to 2% each year. This phase supports the expanded network as it matures, incentivizing sustained participation.
+- Years 7-10: The allocation slightly reduces to 7%, or 1.75% each year, reflecting the network's transition to a more established phase while still supporting node operators.
+
+== Various Expenses (20%)
+This allocation covers a range of essential expenses necessary for the network's growth and maintenance. It includes funds for listing fees, promotions, and various projects that drive the network forward. This 20% allocation ensures that the network can adapt and expand, responding effectively to new challenges and opportunities.
+
+== Dev Fund (40%)
+The largest portion of the distribution, the Dev Fund, is allocated 40% of the total resources. This substantial investment in development underscores the network's commitment to continuous improvement and innovation. The fund is used to support the ongoing development of the network, including software updates, new features, security enhancements, and research into new technologies. This long-term commitment to development is essential for maintaining the network's competitiveness and relevance.
