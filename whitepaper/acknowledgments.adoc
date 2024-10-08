@@ -1,3 +1,0 @@
-= Acknowledgments
-
-We wish to express our profound gratitude to those whose groundbreaking work has paved the way for innovations like Atto. Specifically, we acknowledge Satoshi Nakamoto, whose visionary Bitcoin protocol laid the cornerstone for modern cryptocurrencies, and Colin LeMahieu, whose development of Nano has heavily influenced our approach to also achieving instant and efficient transactions. Their pioneering efforts have been invaluable in guiding the direction and values of our work.

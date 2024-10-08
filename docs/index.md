@@ -216,3 +216,7 @@ Transaction spam involves sending a large number of transactions to overload the
 - **Bounded Queue**: Transactions are queued based on the number of decimals (up to 8). Low-value transactions compete in the lowest-priority queue. When the queue exceeds 1,000 transactions, the lowest priority transactions are removed to maintain network efficiency.
 - **Transaction Prioritization Cache**: When an election is active for a transaction and a new transaction is received that links to one still in election mode, the node will cache it until the transaction is either saved or the election expires. If there is no active election (e.g., when a node is sending many transactions without waiting for confirmation), the transaction will be submitted  for validation, leading to its  rejection.
 - **Frequency Analysis**: Atto evaluates the frequency of messages from each node, comparing them against the average traffic of voting nodes. Nodes exhibiting anomalously high message frequency are automatically blacklisted, protecting the network from targeted spam attacks.
+
+## Acknowledgments
+
+We wish to express our profound gratitude to those whose groundbreaking work has paved the way for innovations like Atto. Specifically, we acknowledge Satoshi Nakamoto, whose visionary Bitcoin protocol laid the cornerstone for modern cryptocurrencies, and Colin LeMahieu, whose development of Nano has heavily influenced Atto design to also achieving instant and efficient transactions. Their pioneering efforts have been invaluable in guiding the direction and values of our work.

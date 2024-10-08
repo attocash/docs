@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://atto.cash',
+  url: 'https://docs.atto.cash',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -34,11 +34,8 @@ const config: Config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/attocash/docs/tree/main',
+          routeBasePath: '/',
+          editUrl: 'https://github.com/attocash/docs/tree/main',
         },
         blog: {
           showReadingTime: true,
@@ -46,11 +43,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/attocash/docs/tree/main',
-          // Useful options to enforce blogging best practices
+          editUrl: 'https://github.com/attocash/docs/tree/main',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -72,13 +65,6 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Docs',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/attocash/docs',
           label: 'GitHub',

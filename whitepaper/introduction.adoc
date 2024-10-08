@@ -1,6 +1,0 @@
-= Introduction
-
-Atto is a cryptocurrency developed with a focus on improving transaction efficiency and reducing environmental footprint. It seeks to address common challenges in the digital currency space, such as transaction latency and energy consumption, through unique protocol design.
-
-In this white paper, we present Atto as a project grounded in continuous improvement and realism. We are committed to developing a cryptocurrency that not only addresses current technological limitations but also remains adaptable to future challenges and innovations in the digital finance sector.
-
