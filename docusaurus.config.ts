@@ -80,7 +80,7 @@ const config: Config = {
           items: [
             {
               label: 'Whitepaper',
-              to: '/docs/whitepaper',
+              to: '/',
             },
           ],
         },
