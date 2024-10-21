@@ -16,7 +16,7 @@ This level is for **reporting** urgent, critical security issues that threaten t
 
 **IMPORTANT**: Please do not open a public pull request or create an issue in the public issue tracker for security vulnerabilities. To qualify for a reward, report vulnerabilities privately using [this link](https://github.com/attocash/node/), and wait for us to acknowledge and address the issue before sharing any details publicly.
 
-**Reward**: **1,000,000 units of Atto**
+**Reward**: **1,500,000 units of Atto**
 
 ---
 
