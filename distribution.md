@@ -23,7 +23,7 @@ Community members who contribute to the Atto project can earn tokens as rewards.
 
 - **Types of Contributions**:
     - Software development
-    - Bug reporting
+    - Critical vulnerability reporting
     - Writing tutorials or guides
 - **Reward Mechanism**: Tokens are awarded based on the impact and quality of the contribution.
 
