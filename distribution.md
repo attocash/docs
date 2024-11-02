@@ -26,3 +26,7 @@ Community members who contribute to the Atto project can earn tokens as rewards.
     - Bug reporting
     - Writing tutorials or guides
 - **Reward Mechanism**: Tokens are awarded based on the impact and quality of the contribution.
+
+### Voting Node Rewards (NOT IMPLEMENTED YET)
+
+Work in progress...
