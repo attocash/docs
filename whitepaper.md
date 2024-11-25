@@ -157,8 +157,6 @@ Transactions are fundamental to Atto's account chain model. Every transaction is
 - **Signature**: The transaction is signed by the account holder's private key using Ed25519. The signature ensures that the transaction is authorized by the rightful owner of the account and that it cannot be tampered with after creation.
 - **Work**: Proof of Work (PoW) is included to prevent spam. Although lightweight, it ensures that creating a transaction requires computational effort, deterring malicious actors from overwhelming the network with fraudulent transactions.
 
-
-
 ## Malicious Actors and Countermeasures
 
 Atto incorporates a multitude of measures to safeguard its network from unnecessary traffic and ensure that nodes remain healthy by addressing different types of malicious actions and providing specific protections against them
@@ -216,6 +214,50 @@ Transaction spam involves sending a large number of transactions to overload the
 - **Bounded Queue**: Transactions are queued based on the number of decimals (up to 8). Low-value transactions compete in the lowest-priority queue. When the queue exceeds 1,000 transactions, the lowest priority transactions are removed to maintain network efficiency.
 - **Transaction Prioritization Cache**: When an election is active for a transaction and a new transaction is received that links to one still in election mode, the node will cache it until the transaction is either saved or the election expires. If there is no active election (e.g., when a node is sending many transactions without waiting for confirmation), the transaction will be submitted  for validation, leading to its  rejection.
 - **Frequency Analysis**: Atto evaluates the frequency of messages from each node, comparing them against the average traffic of voting nodes. Nodes exhibiting anomalously high message frequency are automatically blacklisted, protecting the network from targeted spam attacks.
+
+## Tokenomics
+
+All tokens were minted at the genesis block, adopting a non-inflationary model to preserve value over time. Below, we outline the key aspects of Atto's tokenomics, including total supply, distribution, utility, and our commitment to transparency.
+
+### Total Supply and Decimals
+
+- **Total Supply:** 18,000,000,000 Atto
+- **Decimals:** 9
+
+We've capped the total supply at 18 billion Atto tokens. With 9 decimal places, each token can be divided down to 0.000000001 Atto. This high level of divisibility enables fine-grained transactions and micro-payments.
+
+### Token Distribution
+
+Our allocation of the 18 billion Atto tokens is designed to promote growth, encourage participation, and maintain transparency. Here's the breakdown:
+
+| **Percentage** | **Timeline** | **Description**                                                                                   |
+|----------------|--------------|---------------------------------------------------------------------------------------------------|
+| **1%**         | N/A          | **Creator:** Reserved for the project's founder.                                                  |
+| **40%**        | N/A          | **Development:** Allocated for development, infrastructure, and growth initiatives.               |
+| **15%**        | 1 year       | **Faucet:** Distributed over 1 year to encourage early user adoption and engagement.               |
+| **20%**        | 10 years     | **Voters:** Gradual distribution over 10 years to incentivize participation in governance and network security. |
+| **24%**        | N/A          | **Rewards:** Set aside for bounties, community contributions, and fostering ecosystem activities.  |
+
+We welcome community feedback to refine and enhance this allocation, ensuring it aligns with our shared goals and values.
+
+#### Open for Feedback
+
+We're inviting the community to share insights and suggestions on the token distribution plan. Our aim is to support sustainable growth while empowering users and contributors. By collaborating, we hope to create a distribution model that resonates with our collective vision for the Atto ecosystem.
+
+### Token Utility
+
+Atto tokens are primarily designed for micro-transactions and real-life payments, leveraging ultra-fast transaction speeds that make face-to-face payments seamless. Key utilities include:
+
+- **Micro-Transactions:** Ideal for everyday use, enabling small purchases with minimal fees.
+- **Real-Life Transactions:** Facilitating instant payments in real-world commerce, enhancing the practicality of digital currency in daily life.
+- **Ultra-Fast Transactions:** Ensuring rapid confirmation times to support face-to-face payments where speed is crucial.
+- **Medium of Exchange:** Serving as a reliable currency for exchanging value within and beyond the Atto ecosystem.
+
+By focusing on these utilities, we're aiming to make cryptocurrency transactions as convenient and practical as traditional payment methods, bridging the gap between digital currencies and everyday use.
+
+### Transparency Commitment
+
+Transparency is central to our philosophy. Alongside our open distribution plan, we maintain a transparency log to record all token-related activities, ensuring accountability and clarity for everyone involved. You can access our regularly updated transparency log [here](https://github.com/attocash/transparency/blob/main/log/2024-11.csv). This ongoing record reflects our dedication to open communication and trust within the community.
 
 ## Acknowledgments
 
