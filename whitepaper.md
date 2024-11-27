@@ -12,7 +12,7 @@ This white paper details the technology behind Atto, its vision for the future o
 
 ## Consensus
 
-Atto uses an Open Representative Voting (ORV) consensus mechanism, to achieve a secure and efficient network. ORV leverages a system of representatives who are trusted by users to validate transactions and maintain the integrity of the ledger. This approach allows a colaborative and decentralized consensus without the need for energy-intensive mining, making it environmentally friendly and scalable.
+Atto uses an Open Representative Voting (ORV) consensus mechanism, to achieve a secure and efficient network. ORV leverages a system of representatives who are trusted by users to validate transactions and maintain the integrity of the ledger. This approach allows a collaborative and decentralized consensus without the need for energy-intensive mining, making it environmentally friendly and scalable.
 
 ### Open Representative Voting (ORV)
 
@@ -32,7 +32,7 @@ The ORV consensus mechanism allows Atto to achieve instant and feeless transacti
 
 ## Ledger Design
 
-The Atto ledger uses a decentralized architecture where each account maintains its own chain of transactions, known as an 'account chain' model. In Atto, only the account holder can modify their account, including receiving funds. This design is key to enabling ORV consensus, as it eliminates global blockchain contention, limiting contention to individual accounts and allowing parallel and idependent transaction validation.\
+The Atto ledger uses a decentralized architecture where each account maintains its own chain of transactions, known as an 'account chain' model. In Atto, only the account holder can modify their account, including receiving funds. This design is key to enabling ORV consensus, as it eliminates global blockchain contention, limiting contention to individual accounts and allowing parallel and independent transaction validation.\
 &#x20;
 
 ### Account Chain Structure
@@ -47,7 +47,7 @@ The Atto ledger uses a decentralized architecture where each account maintains i
 
 Atto's ledger relies on a unique block structure designed to support its efficient, scalable, and decentralized model. Instead of a single, monolithic blockchain, Atto uses an 'account chain' model, where each account maintains its own chain of blocks. Each action, such as sending or receiving funds, is represented by a specific type of block.
 
-We currently support only the Blake2b hashing algorithm along with Ed25519 for digital signatures, however blocks are designed to support other combinations.
+Currently, only the Blake2b hashing algorithm and Ed25519 digital signatures are supported, but blocks are designed to accommodate other combinations.
 
 ### Open
 
