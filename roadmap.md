@@ -8,7 +8,7 @@ sidebar_position: 4
 
 Welcome to the journey of **Atto**, where we are committed to bringing cryptocurrency back to its original purpose—a medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the upcoming phases and initiatives we are excited to share with our community.
 
-## hase 1: Explorer Launch & Platform Stabilization
+## Phase 1: Explorer Launch & Platform Stabilization
 
 ### Network Explorer Release
 
