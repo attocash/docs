@@ -66,7 +66,7 @@ We are introducing the **Atto Representative Program**, designed to enhance netw
 - **Hourly Rewards**: Awards distributed every hour, proportional to voting weight and capped at 1%.
 - **Transparency**: Clear criteria and real-time performance metrics will be available to all participants.
 
-### How to Get Involved**
+### How to Get Involved
 
 - **Become a Representative**: Instructions will be provided on how to set up and optimize your node.
 - **Maximize Your Impact**: Tips on improving performance and increasing your contribution to the network.
