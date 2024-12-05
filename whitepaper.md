@@ -10,6 +10,79 @@ With a focus on addressing the inefficiencies of traditional blockchain systems,
 
 This white paper details the technology behind Atto, its vision for the future of digital finance, and the unique approach it takes to solve the challenges faced by existing cryptocurrencies.
 
+## ESG Considerations
+
+Atto strives to operate in a way that aligns with Environmental, Social, and Governance (ESG) principles, making a positive contribution to the community and adhering to responsible practices.
+
+### Environmental Impact
+
+Atto was built with sustainability as a priority, focusing on reducing energy consumption and minimizing the carbon footprint of its network operations. Unlike traditional cryptocurrencies that depend on energy-hungry Proof of Work (PoW) mining, Atto uses the Open Representative Voting (ORV) consensus mechanism. This allows trusted representatives to validate transactions without heavy computations, making Atto a much greener alternative.
+
+- **Energy Efficiency**: The ORV consensus mechanism eliminates the need for large-scale mining operations, which greatly cuts down on energy use compared to other cryptocurrencies like Bitcoin. Atto maintains network integrity with minimal energy, positioning itself as an efficient, environmentally conscious alternative.
+- **Minimal Carbon Footprint**: By relying on energy-efficient protocols, Atto significantly lowers the carbon emissions typical of blockchain networks. The lightweight nature of the system means it can function with a minimal environmental impact, aligning with sustainability initiatives.
+
+### Social Responsibility
+
+Atto aims to create an inclusive and accessible digital payment space, empowering individuals to manage their finances, regardless of their technical know-how or economic background.
+
+- **Financial Inclusion**: Instant, feeless transactions mean that anyone, regardless of their financial situation, can participate in the digital economy. This helps break down barriers and ensures that users don't have to bear unnecessary costs when making payments or using the network.
+- **Community Engagement**: Atto’s governance model, which uses ORV, lets users delegate voting power to trusted representatives. This encourages community engagement and ensures that every user has a voice in the network, keeping the system fair and decentralized.
+- **Educational Resources**: Atto is committed to providing educational resources to help new users understand the system. This aligns with the goal of making digital finance accessible and closing the knowledge gap in the blockchain space.
+
+### Governance Model
+
+The governance structure at Atto focuses on transparency, accountability, and ethical practices, which are key to maintaining trust and ensuring the long-term sustainability of the ecosystem.
+
+- **Centralized to Decentralized Transition**: Atto is currently centralized, as it is still in the distribution phase. However, as more tokens are distributed, the network will gradually become more decentralized. Our goal is to reach a **Satoshi Nakamoto coefficient** of 10 within the next three years, ensuring that governance power is shared among multiple entities, increasing resilience and reducing centralization risks.
+- **Decentralized Governance**: Atto uses a decentralized governance system where users can delegate voting power to trusted representatives. This helps distribute governance more widely, reducing the risks of concentrated control.
+- **Representative Accountability**: Representatives are key to maintaining the network's integrity. They are encouraged to act transparently and responsibly, as any misconduct could lead to a loss of delegated voting power. This ensures that representatives remain accountable to the users who trust them.
+
+By integrating ESG principles, Atto is not just about providing fast and feeless payments; it's about committing to long-term sustainability, inclusivity, and responsible governance. These values are central to Atto’s development, ensuring that the network stays user-focused, eco-friendly, and resilient in the face of future challenges.
+
+## Tokenomics
+
+All tokens were minted at the genesis block, adopting a non-inflationary model to preserve value over time. Below, we outline the key aspects of Atto's tokenomics, including total supply, distribution, utility, and our commitment to transparency.
+
+### Total Supply and Decimals
+
+- **Total Supply:** 18,000,000,000 Atto
+- **Decimals:** 9
+
+We've capped the total supply at 18 billion Atto tokens. With 9 decimal places, each token can be divided down to 0.000000001 Atto. This high level of divisibility enables fine-grained transactions and micro-payments.
+
+### Token Distribution
+
+Our allocation of the 18 billion Atto tokens is designed to promote growth, encourage participation, and maintain transparency. Here's the breakdown:
+
+| **Percentage** | **Timeline** | **Description**                                                                                   |
+|----------------|--------------|---------------------------------------------------------------------------------------------------|
+| **1%**         | N/A          | **Creator:** Reserved for the project's founder.                                                  |
+| **40%**        | N/A          | **Development:** Allocated for development, infrastructure, and growth initiatives.               |
+| **15%**        | 1 year       | **Faucet:** Distributed over 1 year to encourage early user adoption and engagement.               |
+| **20%**        | 10 years     | **Voters:** Gradual distribution over 10 years to incentivize participation in governance and network security. |
+| **24%**        | N/A          | **Rewards:** Set aside for bounties, community contributions, and fostering ecosystem activities.  |
+
+We welcome community feedback to refine and enhance this allocation, ensuring it aligns with our shared goals and values.
+
+#### Open for Feedback
+
+We're inviting the community to share insights and suggestions on the token distribution plan. Our aim is to support sustainable growth while empowering users and contributors. By collaborating, we hope to create a distribution model that resonates with our collective vision for the Atto ecosystem.
+
+### Token Utility
+
+Atto tokens are primarily designed for micro-transactions and real-life payments, leveraging ultra-fast transaction speeds that make face-to-face payments seamless. Key utilities include:
+
+- **Micro-Transactions:** Ideal for everyday use, enabling small purchases with minimal fees.
+- **Real-Life Transactions:** Facilitating instant payments in real-world commerce, enhancing the practicality of digital currency in daily life.
+- **Ultra-Fast Transactions:** Ensuring rapid confirmation times to support face-to-face payments where speed is crucial.
+- **Medium of Exchange:** Serving as a reliable currency for exchanging value within and beyond the Atto ecosystem.
+
+By focusing on these utilities, we're aiming to make cryptocurrency transactions as convenient and practical as traditional payment methods, bridging the gap between digital currencies and everyday use.
+
+### Transparency Commitment
+
+Transparency is central to our philosophy. Alongside our open distribution plan, we maintain a transparency log to record all token-related activities, ensuring accountability and clarity for everyone involved. You can access our regularly updated transparency log [here](https://github.com/attocash/transparency/blob/main/log/2024-11.csv). This ongoing record reflects our dedication to open communication and trust within the community.
+
 ## Consensus
 
 Atto uses an Open Representative Voting (ORV) consensus mechanism, to achieve a secure and efficient network. ORV leverages a system of representatives who are trusted by users to validate transactions and maintain the integrity of the ledger. This approach allows a collaborative and decentralized consensus without the need for energy-intensive mining, making it environmentally friendly and scalable.
@@ -27,8 +100,6 @@ Atto uses an Open Representative Voting (ORV) consensus mechanism, to achieve a 
 - **Energy Efficiency**: Unlike Proof of Work consensus, ORV does not require energy-intensive calculations, making Atto highly efficient and sustainable for long-term use.
 
 The ORV consensus mechanism allows Atto to achieve instant and feeless transactions, ensuring that the network remains accessible and effective for all users.
-
-
 
 ## Ledger Design
 
@@ -214,50 +285,6 @@ Transaction spam involves sending a large number of transactions to overload the
 - **Bounded Queue**: Transactions are queued based on the number of decimals (up to 8). Low-value transactions compete in the lowest-priority queue. When the queue exceeds 1,000 transactions, the lowest priority transactions are removed to maintain network efficiency.
 - **Transaction Prioritization Cache**: When an election is active for a transaction and a new transaction is received that links to one still in election mode, the node will cache it until the transaction is either saved or the election expires. If there is no active election (e.g., when a node is sending many transactions without waiting for confirmation), the transaction will be submitted  for validation, leading to its  rejection.
 - **Frequency Analysis**: Atto evaluates the frequency of messages from each node, comparing them against the average traffic of voting nodes. Nodes exhibiting anomalously high message frequency are automatically blacklisted, protecting the network from targeted spam attacks.
-
-## Tokenomics
-
-All tokens were minted at the genesis block, adopting a non-inflationary model to preserve value over time. Below, we outline the key aspects of Atto's tokenomics, including total supply, distribution, utility, and our commitment to transparency.
-
-### Total Supply and Decimals
-
-- **Total Supply:** 18,000,000,000 Atto
-- **Decimals:** 9
-
-We've capped the total supply at 18 billion Atto tokens. With 9 decimal places, each token can be divided down to 0.000000001 Atto. This high level of divisibility enables fine-grained transactions and micro-payments.
-
-### Token Distribution
-
-Our allocation of the 18 billion Atto tokens is designed to promote growth, encourage participation, and maintain transparency. Here's the breakdown:
-
-| **Percentage** | **Timeline** | **Description**                                                                                   |
-|----------------|--------------|---------------------------------------------------------------------------------------------------|
-| **1%**         | N/A          | **Creator:** Reserved for the project's founder.                                                  |
-| **40%**        | N/A          | **Development:** Allocated for development, infrastructure, and growth initiatives.               |
-| **15%**        | 1 year       | **Faucet:** Distributed over 1 year to encourage early user adoption and engagement.               |
-| **20%**        | 10 years     | **Voters:** Gradual distribution over 10 years to incentivize participation in governance and network security. |
-| **24%**        | N/A          | **Rewards:** Set aside for bounties, community contributions, and fostering ecosystem activities.  |
-
-We welcome community feedback to refine and enhance this allocation, ensuring it aligns with our shared goals and values.
-
-#### Open for Feedback
-
-We're inviting the community to share insights and suggestions on the token distribution plan. Our aim is to support sustainable growth while empowering users and contributors. By collaborating, we hope to create a distribution model that resonates with our collective vision for the Atto ecosystem.
-
-### Token Utility
-
-Atto tokens are primarily designed for micro-transactions and real-life payments, leveraging ultra-fast transaction speeds that make face-to-face payments seamless. Key utilities include:
-
-- **Micro-Transactions:** Ideal for everyday use, enabling small purchases with minimal fees.
-- **Real-Life Transactions:** Facilitating instant payments in real-world commerce, enhancing the practicality of digital currency in daily life.
-- **Ultra-Fast Transactions:** Ensuring rapid confirmation times to support face-to-face payments where speed is crucial.
-- **Medium of Exchange:** Serving as a reliable currency for exchanging value within and beyond the Atto ecosystem.
-
-By focusing on these utilities, we're aiming to make cryptocurrency transactions as convenient and practical as traditional payment methods, bridging the gap between digital currencies and everyday use.
-
-### Transparency Commitment
-
-Transparency is central to our philosophy. Alongside our open distribution plan, we maintain a transparency log to record all token-related activities, ensuring accountability and clarity for everyone involved. You can access our regularly updated transparency log [here](https://github.com/attocash/transparency/blob/main/log/2024-11.csv). This ongoing record reflects our dedication to open communication and trust within the community.
 
 ## Acknowledgments
 
