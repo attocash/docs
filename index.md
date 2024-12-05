@@ -1,4 +1,8 @@
-# Welcome
+---
+sidebar_position: 0
+---
+
+# Introduction
 
 This documentation provides essential information about the project's goals, contributions, and distribution.
 
