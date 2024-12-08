@@ -8,19 +8,20 @@ sidebar_position: 4
 
 Welcome to the journey of **Atto**, where we are committed to bringing cryptocurrency back to its original purpose—a medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the upcoming phases and initiatives we are excited to share with our community.
 
-## Phase 1: Explorer Launch & Platform Stabilization
+## Phase 1: Explorer Launch & Platform Stabilization ✅
+
+<details>
+<summary>View Details</summary>
 
 ### Network Explorer Release
 
-We are thrilled to announce the upcoming release of the **Atto Network Explorer**. This tool will provide real-time visibility into all network transactions and activities, enhancing transparency and allowing users to monitor the health and performance of the Atto network.
+We are thrilled to announce the upcoming release of the **Atto Network Explorer**. This tool will provide real-time visibility into all network transactions and activities, improving transparency and allowing users to monitor the health and performance of the Atto network.
 
 ### Faucet and Wallet Enhancements
 
-Our team is working diligently to make the **Atto Faucet** and **Wallet** robust and user-friendly. We are focusing on:
+Our team is working diligently to make the **Atto Faucet** and **Wallet** robust and user-friendly.
 
-- **Stability Improvements**: Ensuring seamless and reliable transactions.
-- **Security Enhancements**: Protecting user assets with advanced security measures.
-- **User Experience**: Simplifying interfaces for ease of use by everyone.
+</details>
 
 ## Phase 2: Mobile Wallet Releases
 
