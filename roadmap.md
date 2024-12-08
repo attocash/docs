@@ -43,9 +43,9 @@ Simultaneously, we are making significant strides with the **Atto iOS Wallet**.
 - **Unified User Experience**: Our goal is to ensure that both Android and iOS users enjoy the same level of functionality and ease of use with the Atto Wallet.
 
 
-## Phase 3: Official Atto Launch
+## Phase 3: Full Atto Launch
 
-### Transition from Pre-Release to Official Release
+### Transition from Beta Stage to Official Release
 
 With the platform stabilized and mobile apps launched, we will officially unveil Atto to the world. This milestone signifies our readiness to support a growing user base and our commitment to continuous improvement.
 
