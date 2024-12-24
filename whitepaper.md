@@ -23,51 +23,56 @@ positive contribution to the community and adhering to responsible practices.
 
 ### Environmental Impact
 
-Atto was built with sustainability as a priority, focusing on reducing energy consumption and minimizing the carbon
-footprint of its network operations. Unlike traditional cryptocurrencies that depend on energy-hungry Proof of Work (
-PoW) mining, Atto uses the Open Representative Voting (ORV) consensus mechanism. This allows trusted representatives to
-validate transactions without heavy computations, making Atto a much greener alternative.
+Atto places sustainability at the forefront, aiming to reduce overall energy consumption and minimize its carbon
+footprint. Unlike traditional cryptocurrencies that rely on energy-hungry Proof of Work (PoW) mining, Atto’s Open
+Representative Voting (ORV) mechanism requires far less computational power. This design choice makes Atto an inherently
+greener alternative to other blockchain networks.
 
-- **Energy Efficiency**: The ORV consensus mechanism eliminates the need for large-scale mining operations, which
-  greatly cuts down on energy use compared to other cryptocurrencies like Bitcoin. Atto maintains network integrity with
-  minimal energy, positioning itself as an efficient, environmentally conscious alternative.
-- **Minimal Carbon Footprint**: By relying on energy-efficient protocols, Atto significantly lowers the carbon emissions
-  typical of blockchain networks. The lightweight nature of the system means it can function with a minimal
-  environmental impact, aligning with sustainability initiatives.
+Currently (as of December 24, 2024), Atto runs on 11 known nodes plus a single NVIDIA L4 GPU, consuming an estimated *
+*2,500–3,500 kWh** of energy per year. By eliminating large-scale mining operations, Atto achieves a fraction of the
+energy use seen in PoW-based systems. Even if the network were to grow substantially—to 200 nodes and 20
+GPUs—projections suggest an annual consumption of around **57,000 kWh**, which remains notably lower than the energy
+demands of traditional PoW blockchains. Through ORV, Atto ensures that expanding network capacity does not translate
+into exponential increases in energy requirements, underscoring its commitment to reducing environmental impact.
 
 ### Social Responsibility
 
 Atto aims to create an inclusive and accessible digital payment space, empowering individuals to manage their finances,
 regardless of their technical know-how or economic background.
 
-- **Financial Inclusion**: Instant, feeless transactions mean that anyone, regardless of their financial situation, can
-  participate in the digital economy. This helps break down barriers and ensures that users don't have to bear
-  unnecessary costs when making payments or using the network.
-- **Community Engagement**: Atto’s governance model, which uses ORV, lets users delegate voting power to trusted
-  representatives. This encourages community engagement and ensures that every user has a voice in the network, keeping
-  the system fair and decentralized.
-- **Educational Resources**: Atto is committed to providing educational resources to help new users understand the
-  system. This aligns with the goal of making digital finance accessible and closing the knowledge gap in the blockchain
-  space.
+- **Financial Inclusion**  
+  Instant, feeless transactions mean that anyone, regardless of their financial situation, can participate in the
+  digital economy. This helps break down barriers and ensures that users don’t have to bear unnecessary costs when
+  making payments or using the network.
+
+- **Community Engagement**  
+  Atto’s governance model, which uses ORV, lets users delegate voting power to trusted representatives. This encourages
+  community engagement and ensures that every user has a voice in the network, keeping the system fair and
+  decentralized.
+
+- **Educational Resources**  
+  Atto is committed to providing educational resources to help new users understand the system. This aligns with the
+  goal of making digital finance accessible and closing the knowledge gap in the blockchain space.
 
 ### Governance Model
 
 The governance structure at Atto focuses on transparency, accountability, and ethical practices, which are key to
 maintaining trust and ensuring the long-term sustainability of the ecosystem.
 
-- **Centralized to Decentralized Transition**: Atto is currently centralized, as it is still in the distribution phase.
-  However, as more tokens are distributed, the network will gradually become more decentralized. Our goal is to reach a
-  **Satoshi Nakamoto coefficient** of 10 within the next three years, ensuring that governance power is shared among
-  multiple entities, increasing resilience and reducing centralization risks.
-- **Decentralized Governance**: Atto uses a decentralized governance system where users can delegate voting power to
-  trusted representatives. This helps distribute governance more widely, reducing the risks of concentrated control.
-- **Representative Accountability**: Representatives are key to maintaining the network's integrity. They are encouraged
-  to act transparently and responsibly, as any misconduct could lead to a loss of delegated voting power. This ensures
-  that representatives remain accountable to the users who trust them.
+- **Centralized to Decentralized Transition**  
+  Atto is currently centralized, as it is still in the distribution phase. However, as more tokens are distributed, the
+  network will gradually become more decentralized. Our goal is to reach a **Satoshi Nakamoto coefficient** of 10 within
+  the next three years, ensuring that governance power is shared among multiple entities, increasing resilience and
+  reducing centralization risks.
 
-By integrating ESG principles, Atto is not just about providing fast and feeless payments; it's about committing to
-long-term sustainability, inclusivity, and responsible governance. These values are central to Atto’s development,
-ensuring that the network stays user-focused, eco-friendly, and resilient in the face of future challenges.
+- **Decentralized Governance**  
+  Atto uses a decentralized governance system where users can delegate voting power to trusted representatives. This
+  helps distribute governance more widely, reducing the risks of concentrated control.
+
+- **Representative Accountability**  
+  Representatives are key to maintaining the network’s integrity. They are encouraged to act transparently and
+  responsibly, as any misconduct could lead to a loss of delegated voting power. This ensures that representatives
+  remain accountable to the users who trust them.
 
 ## Tokenomics
 
