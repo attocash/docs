@@ -6,7 +6,9 @@ sidebar_position: 4
 
 *Redefining Cryptocurrency as a True Currency*
 
-Welcome to the journey of **Atto**, where we are committed to bringing cryptocurrency back to its original purpose—a medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the upcoming phases and initiatives we are excited to share with our community.
+Welcome to the journey of **Atto**, where we are committed to bringing cryptocurrency back to its original purpose—a
+medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the
+upcoming phases and initiatives we are excited to share with our community.
 
 ## Phase 1: Explorer Launch & Platform Stabilization ✅
 
@@ -15,7 +17,9 @@ Welcome to the journey of **Atto**, where we are committed to bringing cryptocur
 
 ### Network Explorer Release
 
-We are thrilled to announce the upcoming release of the **Atto Network Explorer**. This tool will provide real-time visibility into all network transactions and activities, improving transparency and allowing users to monitor the health and performance of the Atto network.
+We are thrilled to announce the upcoming release of the **Atto Network Explorer**. This tool will provide real-time
+visibility into all network transactions and activities, improving transparency and allowing users to monitor the health
+and performance of the Atto network.
 
 ### Faucet and Wallet Enhancements
 
@@ -23,31 +27,36 @@ Our team is working diligently to make the **Atto Faucet** and **Wallet** robust
 
 </details>
 
-## Phase 2: Mobile Wallet Releases
+## Phase 2: Mobile Wallet Releases ✅
 
-### Android App Release
+<details>
+<summary>View Details</summary>
+Originally, we planned to develop native Android and iOS wallet applications. After careful consideration and initial development efforts, we’ve concluded our mobile app approach. We’re now pivoting toward a **Web Wallet** solution to provide a more unified and accessible experience.
 
-We are thrilled to announce that the **Atto Android Wallet** is **almost ready** for launch!
+### Introducing the Atto Web Wallet
 
-- **Final Testing Phase**: The Android app is currently undergoing extensive testing to ensure it meets our high standards for performance, security, and user experience.
-- **Google Play Store Launch**: We will soon be releasing the Atto Android Wallet on the **Google Play Store**, making it easily accessible to all Android users worldwide.
-- **Community Involvement**: We invite our community members to participate in the final testing stages. Your feedback is invaluable in helping us fine-tune the app before the official release.
+- **Cross-Platform Accessibility**: Users will be able to access the Atto Wallet from any modern web browser, removing
+  the need for separate native apps.
+- **Unified Codebase**: Streamlined development and maintenance, ensuring faster feature updates and security patches.
+- **Seamless User Experience**: Designed with simplicity and performance in mind, the Web Wallet will offer a consistent
+  interface across devices.
 
-### iOS App Development
+</details>
 
-Simultaneously, we are making significant strides with the **Atto iOS Wallet**.
+## Phase 3: Miner
 
-- **Adapting Common Libraries**: Our team will be adapting the core libraries and wallet functionalities to be fully compatible with iOS devices.
-- **Progress Update**: **Most of the development for the wallet can be re-used**, bringing us closer to offering a seamless unified experience for our iOS users.
-- **Upcoming Testing Phase**: Once adaptation is complete, we will enter the testing phase and welcome community feedback to refine the app.
-- **Unified User Experience**: Our goal is to ensure that both Android and iOS users enjoy the same level of functionality and ease of use with the Atto Wallet.
+Atto remains committed to a fast and green cryptocurrency model and will not compromise on that principle. Traditional
+mining is not only wasteful but also largely unnecessary to achieve network security. Instead, our "miner" utilizes
+[folding@home](http://foldingathome.org), ensuring that electricity goes into meaningful computations that aid scientific research rather than being
+wasted on repetitive hashing. This approach is inspired by Banano and aligns with our vision of a sustainable and
+community-driven cryptocurrency.
 
-
-## Phase 3: Full Atto Launch
+## Phase 4: Full Atto Launch
 
 ### Transition from Beta Stage to Official Release
 
-With the platform stabilized and mobile apps launched, we will officially unveil Atto to the world. This milestone signifies our readiness to support a growing user base and our commitment to continuous improvement.
+With the platform stabilized and mobile apps launched, we will officially unveil Atto to the world. This milestone
+signifies our readiness to support a growing user base and our commitment to continuous improvement.
 
 ### Educational Resources
 
@@ -57,11 +66,12 @@ To assist new users, we will provide:
 - **FAQs and Support**: Answers to common questions and dedicated support channels.
 - **Community Forums**: Platforms for users to share knowledge and help each other.
 
-## Phase 4: Representative Program Introduction
+## Phase 5: Representative Program Introduction
 
 ### Empowering Network Participants
 
-We are introducing the **Atto Representative Program**, designed to enhance network efficiency and reward participants who contribute positively.
+We are introducing the **Atto Representative Program**, designed to enhance network efficiency and reward participants
+who contribute positively.
 
 - **Performance-Based Scoring**: Representatives will be evaluated on transaction confirmation speed and frequency.
 - **Hourly Rewards**: Awards distributed every hour, proportional to voting weight and capped at 1%.
@@ -72,7 +82,7 @@ We are introducing the **Atto Representative Program**, designed to enhance netw
 - **Become a Representative**: Instructions will be provided on how to set up and optimize your node.
 - **Maximize Your Impact**: Tips on improving performance and increasing your contribution to the network.
 
-## Phase 5: Community Growth and Engagement
+## Phase 6: Community Growth and Engagement
 
 ### Organic Growth Initiatives
 
@@ -89,14 +99,16 @@ Atto thrives on collaboration. We encourage developers and enthusiasts to:
 - **Share Ideas**: Propose new concepts and solutions on our community platforms.
 - **Collaborate on Projects**: Work together on initiatives that align with Atto's vision.
 
-
 ## Our Vision
 
-Atto is more than just a cryptocurrency; it's a movement to reaffirm the original intent of digital currencies—as tools for everyday transactions that are fast, secure, and decentralized. We are committed to building a platform that embodies these principles, and we believe that with your support, we can make this vision a reality.
+Atto is more than just a cryptocurrency; it's a movement to reaffirm the original intent of digital currencies—as tools
+for everyday transactions that are fast, secure, and decentralized. We are committed to building a platform that
+embodies these principles, and we believe that with your support, we can make this vision a reality.
 
 ## Get Involved
 
-Your involvement is crucial to the success of Atto. Whether you're a developer, a crypto enthusiast, or someone who believes in the future of decentralized currencies, there's a place for you in our community.
+Your involvement is crucial to the success of Atto. Whether you're a developer, a crypto enthusiast, or someone who
+believes in the future of decentralized currencies, there's a place for you in our community.
 
 - **Participate in Testing**: Help us refine our products by providing feedback.
 - **Spread the Word**: Share Atto with friends and on social media.
@@ -104,9 +116,11 @@ Your involvement is crucial to the success of Atto. Whether you're a developer, 
 
 ## Thank You for Being Part of Atto
 
-We appreciate your interest and support. Together, we can reshape the landscape of cryptocurrency and build a platform that serves the true purpose of digital currency.
+We appreciate your interest and support. Together, we can reshape the landscape of cryptocurrency and build a platform
+that serves the true purpose of digital currency.
 
-For any questions or feedback, please reach out to us on our community channels. Let's make Atto the currency of the future—starting today.
+For any questions or feedback, please reach out to us on our community channels. Let's make Atto the currency of the
+future—starting today.
 
 ---
 
