@@ -5,6 +5,7 @@ sidebar_position: 1
 # Whitepaper
 
 **DTIF G3JQMFD76**
+**ISIN XTB89R03SZ10**
 
 Atto is designed to provide instant, feeless transactions with a minimal environmental footprint. By utilizing an open
 representative consensus and a lightweight protocol, Atto aims to offer a sustainable, scalable, and user-friendly
