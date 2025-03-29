@@ -307,10 +307,10 @@ scenarios:
 ### Enabling True Micropayments
 
 Micropayments have been touted as a potential internet revolution – imagine being able to pay a few cents to read an
-article instead of seeing ads, tipping
-creators $0.10 for a good post, or IoT devices paying each other fractions of a penny for data and services. In practice, however, such use cases have been stymied because moving tiny amounts of money is inefficient on legacy systems. Credit card networks have minimum fee structures (often $
-0.20 or more per transaction) that make anything under a dollar
-uneconomical.
+article instead of seeing ads, tipping creators \$0.10 for a good post, or IoT devices paying each other fractions of a
+penny for data and services. In practice, however, such use cases have been stymied because moving tiny amounts of money
+is inefficient on legacy systems. Credit card networks have minimum fee structures (often \$0.20 or more per
+transaction) that make anything under a dollar uneconomical.
 Even cryptocurrencies like Bitcoin or Ethereum, in their base layer, have variable fees that can exceed the value of a
 micropayment, and confirmation times that are too slow for interactive use.
 
