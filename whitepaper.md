@@ -26,8 +26,9 @@ the equivalent of a small solar farm (only about the energy of six average house
 This makes Atto not only fast and feeless, but also environmentally friendly and sustainable for the long term.
 
 Importantly, Atto is not just a theoretical proposal – it is already a **live, working network**. The project launched
-in late 2024 and has since rolled out a public block **explorer**, a user-friendly web **wallet**, and a **faucet** that
-lets anyone claim free Atto tokens to try out the system.
+in late 2024 and has since rolled out a public block [**explorer**](https://atto.cash/explorer), a user-friendly
+web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](https://atto.cash/faucet) that lets anyone claim free
+Atto tokens to try out the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
 functionality (sending, receiving, and confirming transactions) is fully operational. The following sections of this
 whitepaper will explain how Atto works under the hood, highlighting the key features and design elements that make it
