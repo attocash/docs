@@ -21,8 +21,6 @@ If you haven’t already, download and install Folding@Home.
 
 Make sure to create an identity during the setup process.
 
----
-
 ## ⚙️ Step 2: Configure Your Account
 
 Once Folding@Home is installed:
@@ -40,6 +38,20 @@ Once Folding@Home is installed:
 
 That’s all! Folding@Home will start processing work units, and your contributions will be linked to your Atto address
 automatically.
+
+## 📤 How Rewards Are Distributed
+
+Folding@Home updates user scores via their API approximately once per hour, though it can occasionally take longer during peak load.
+
+Each time we fetch an update, we distribute Atto based on the team members’ Folding@Home scores. The calculation works like this:
+
+- **5,000 attos are distributed per minute.**
+- If the Folding@Home stats haven’t updated for 60 minutes, we’ll distribute `5,000 × 60 = 300,000 attos`.
+- The total amount is **divided proportionally** based on the scores reported by Folding@Home.
+
+So if your machine contributed 10% of the total team score since the last update, you'll receive 10% of the rewards for that round.
+
+Your Atto address (used as your Folding@Home username) is what links your contributions to your wallet—so make sure it’s correct!
 
 ---
 
