@@ -9,26 +9,27 @@ sidebar_position: 1
 
 ## Introduction
 
-In the world of digital payments, **micropayments** – transactions of very small value – have long been considered
-impractical. Traditional payment networks (like credit cards) and even early cryptocurrencies impose fees and delays
-that make sending a few cents or pennies infeasible.
+In the world of digital payments, **[micropayments](https://en.wikipedia.org/wiki/Micropayment)** – transactions of very
+small value – have long been considered impractical. Traditional payment networks (like credit cards) and even early
+cryptocurrencies impose fees and delays that make sending a few cents or pennies infeasible.
 **Atto** is a cryptocurrency designed from the ground up to solve this problem. Atto aims to fulfill the original
 promise of cryptocurrency as **fast, cheap, and accessible digital cash for everyone**. Whether you're buying a cup of
 coffee face-to-face or tipping someone a fraction of a cent online, Atto enables these payments with **near-instant
-confirmation and zero fees**.
+[confirmation](https://coinmarketcap.com/academy/glossary/confirmation) and zero fees**.
 
 Atto’s core design focuses on **speed, efficiency, and sustainability**. It achieves high performance through a unique
-consensus mechanism called **Open Representative Voting (ORV)** and an innovative ledger architecture where each user
-has their own chain of transactions.
-This means **transactions are finalized in under a second in real-world conditions**, without anyone having to pay
-network fees. Moreover, Atto avoids energy-hungry mining; the network’s power usage is so low that it could be run on
-the equivalent of a small solar farm (only about the energy of six average households).
-This makes Atto not only fast and feeless, but also environmentally friendly and sustainable for the long term.
+consensus mechanism called **Open Representative Voting** and an innovative ledger architecture where each user has
+their own chain of transactions. This means **transfers are
+[finalized](https://cointelegraph.com/explained/what-is-finality-in-blockchain-and-why-does-it-matter) in under a
+second in real-world conditions**, without anyone having to pay network fees. Moreover, Atto avoids
+[energy-hungry mining](https://en.wikipedia.org/wiki/Environmental_impact_of_bitcoin); the network’s power usage is so
+low that it could be run on the equivalent of a small solar farm (only about the energy of six average households). This
+makes Atto not only fast and feeless, but also environmentally friendly and sustainable for the long term.
 
 Importantly, Atto is not just a theoretical proposal – it is already a **live, working network**. The project launched
-in late
-[2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08), and
-has since rolled out a public block [**explorer**](https://atto.cash/explorer), a user-friendly
+in
+late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
+and has since rolled out a public block [**explorer**](https://atto.cash/explorer), a user-friendly
 web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](https://atto.cash/faucet) that lets anyone claim free
 Atto tokens to try out the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
@@ -64,8 +65,8 @@ uniquely suited for micropayments and face-to-face transactions.
   **collaborative consensus** mechanism. Users vote on transactions via their chosen **representatives**, achieving
   consensus once a supermajority (around 65%) of weighted votes is reached.
   ORV (Open Representative Voting Consensus) provides decentralized security while avoiding the high energy and hardware
-  costs of Proof-of-Work. This keeps the
-  network efficient and **eco-friendly**.
+  costs of [Proof-of-Work](https://en.wikipedia.org/wiki/Proof_of_work) consensus. This keeps the network efficient and
+  **eco-friendly**.
 
 - **Scalable, Parallel Ledger Architecture:** Atto uses an **account-chain model** where each account (user) has its own
   blockchain. This means there is no single sequential chain bottleneck – multiple transactions can be processed in
@@ -89,7 +90,7 @@ With these key features, Atto sets out to redefine digital cash, focusing on the
 fast, borderless, and decentralized means of exchange that anyone can use. Next, we dive deeper into how these features
 are implemented at the technical level.
 
-## Consensus Mechanism: Open Representative Voting (ORV)
+## Consensus Mechanism: Open Representative Voting
 
 Atto achieves consensus through a system called **Open Representative Voting (ORV)**, which is central to its ability to
 be fast, feeless, and secure. ORV is a form of delegated voting: every user can participate in securing the network by
@@ -181,8 +182,9 @@ different actions in an account, simplifying the logic and ensuring consistency.
 - A **Receive block** is how the recipient actually claims the funds from a pending send. When Bob sees that Alice sent
   him some Atto (the transaction will be visible as pending to Bob’s node/wallet), Bob’s wallet will create a Receive
   block in Bob’s account chain to add those funds to his balance. The receive block explicitly references the hash of
-  Alice’s send block to tie them together. This two-step send/receive process implements a form of **asynchronous
-  double-entry bookkeeping**: Alice’s ledger shows a debit and Bob’s shows the corresponding credit.
+  Alice’s send block to tie them together. This two-step send/receive process implements a form of
+  **asynchronous [double-entry bookkeeping](https://www.investopedia.com/terms/d/double-entry.asp)**:
+  Alice’s ledger shows a debit and Bob’s shows the corresponding credit.
   Both sides of the transaction are recorded, which prevents any ambiguity or double-spending – a send without a
   matching receive remains incomplete, and funds cannot be spent twice.
 
