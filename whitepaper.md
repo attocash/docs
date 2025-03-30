@@ -201,7 +201,7 @@ each one.
 In normal use, the PoW is unnoticeable (wallet software usually computes it in the background), but it dramatically
 increases the cost for an attacker trying to flood the network.
 
-**Transaction Process:** A complete transfer in Atto actually involves two blocks (a send and a receive) and the ORV
+**Transfer Process:** A complete transfer in Atto actually involves two blocks (a send and a receive) and the ORV
 voting to confirm them. For example, if Alice pays Bob 10 Atto:
 
 1. Alice's wallet creates a **Send** block deducting 10 from her balance (and references her latest previous block).
