@@ -20,7 +20,7 @@ coffee face-to-face or tipping someone a fraction of a cent online, Atto enables
 Atto’s core design focuses on **speed, efficiency, and sustainability**. It achieves high performance through a unique
 consensus mechanism called **Open Representative Voting** and an innovative ledger architecture where each user has
 their own chain of transactions. This means **transfers are
-[finalized](https://cointelegraph.com/explained/what-is-finality-in-blockchain-and-why-does-it-matter) in under a
+[finalized](https://www.ledger.com/academy/glossary/finality) in under a
 second in real-world conditions**, without anyone having to pay network fees. Moreover, Atto avoids
 [energy-hungry mining](https://en.wikipedia.org/wiki/Environmental_impact_of_bitcoin); the network’s power usage is so
 low that it could be run on the equivalent of a small solar farm (only about the energy of six average households). This
@@ -61,11 +61,11 @@ uniquely suited for micropayments and face-to-face transactions.
   a contactless card. The **finality** of Atto transactions (once confirmed by the network majority) ensures that the
   recipient can trust the payment irreversibly, which is important in physical exchanges.
 
-- **Open Representative Voting Consensus:** Instead of wasteful mining, Atto secures its ledger through a
+- **Open Representative Voting Consensus (ORV):** Instead of wasteful mining, Atto secures its ledger through a
   **collaborative consensus** mechanism. Users vote on transactions via their chosen **representatives**, achieving
   consensus once a supermajority (around 65%) of weighted votes is reached.
-  ORV (Open Representative Voting Consensus) provides decentralized security while avoiding the high energy and hardware
-  costs of [Proof-of-Work](https://en.wikipedia.org/wiki/Proof_of_work) consensus. This keeps the network efficient and
+  ORV provides decentralized security while avoiding the high energy and hardware costs
+  of [Proof-of-Work](https://en.wikipedia.org/wiki/Proof_of_work) consensus. This keeps the network efficient and
   **eco-friendly**.
 
 - **Scalable, Parallel Ledger Architecture:** Atto uses an **account-chain model** where each account (user) has its own
