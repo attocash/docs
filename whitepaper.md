@@ -509,7 +509,7 @@ current status of the network and the resources available for users and develope
 
 **Launch and Maturity:** The Atto mainnet was launched in
 late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
-initially in a "pre-release" phase where core
+initially in a "[pre-release](https://atto.cash/blog/pre-release)" phase where core
 features were live and the community was invited to participate early.
 Since then, Atto has matured rapidly. The basic functionality – creating accounts, sending and receiving transactions,
 and consensus via representatives – has proven to work reliably. The network has processed a growing number of
