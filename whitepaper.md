@@ -28,9 +28,9 @@ makes Atto not only fast and feeless, but also environmentally friendly and sust
 
 Importantly, Atto is not just a theoretical proposal – it is already a **live, working network**. The project launched
 in
-late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
-and has since rolled out a public block [**explorer**](https://atto.cash/explorer), a user-friendly
-web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](https://atto.cash/faucet) that lets anyone claim free
+late [2024](/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
+and has since rolled out a public block [**explorer**](/explorer), a user-friendly
+web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free
 Atto tokens to try out the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
 functionality (sending, receiving, and confirming transactions) is fully operational. The following sections of this
@@ -395,11 +395,11 @@ The distribution of this supply is structured to foster growth and decentralizat
 was divided into several portions with different
 purposes:
 
-- **Faucet (15% of supply):** A significant share of tokens is being given out through a public faucet over time (
-  scheduled for about the first year).
-  This means anyone can claim a small amount of Atto for free. The purpose is to **jumpstart adoption** by seeding the
-  user base – new users can try Atto without having to buy in, which lowers the barrier to entry. It also distributes
-  tokens widely, which is healthy for decentralization.
+- **Faucet and [Folding@home integration](/docs/mining) (15% of supply):**
+  A significant share of tokens is being given out through a public faucet and folding@home over time (scheduled for
+  about the first year). This means anyone can claim Atto essentially for free. The purpose is to **jumpstart adoption**
+  by seeding the user base – new users can try Atto without having to buy in, which lowers the barrier to entry. It also
+  distributes tokens widely, which is healthy for decentralization.
 
 - **Voter Incentives (20% of supply):** To encourage community participation in consensus, a portion is reserved to
   reward those who help secure the network. Over a period of up to 10 years, these tokens will be gradually distributed
@@ -510,8 +510,8 @@ As of 2025, the Atto network is fully operational and accessible to the public. 
 current status of the network and the resources available for users and developers to engage with Atto.
 
 **Launch and Maturity:** The Atto mainnet was launched in
-late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
-initially in a "[pre-release](https://atto.cash/blog/pre-release)" phase where core
+late [2024](/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
+initially in a "[pre-release](/blog/pre-release)" phase where core
 features were live and the community was invited to participate early.
 Since then, Atto has matured rapidly. The basic functionality – creating accounts, sending and receiving transactions,
 and consensus via representatives – has proven to work reliably. The network has processed a growing number of
