@@ -28,7 +28,7 @@ makes Atto not only fast and feeless, but also environmentally friendly and sust
 
 Importantly, Atto is not just a theoretical proposal – it is already a **live, working network**. The project launched
 in
-late [2024](/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
+late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 and has since rolled out a public block [**explorer**](/explorer), a user-friendly
 web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free
 Atto tokens to try out the system.  
@@ -510,7 +510,7 @@ As of 2025, the Atto network is fully operational and accessible to the public. 
 current status of the network and the resources available for users and developers to engage with Atto.
 
 **Launch and Maturity:** The Atto mainnet was launched in
-late [2024](/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
+late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 initially in a "[pre-release](/blog/pre-release)" phase where core
 features were live and the community was invited to participate early.
 Since then, Atto has matured rapidly. The basic functionality – creating accounts, sending and receiving transactions,
