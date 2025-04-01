@@ -1,5 +1,4 @@
 ---
-
 sidebar_position: 2
 ---
 
@@ -22,45 +21,77 @@ If you haven’t already, download and install Folding@Home.
 
 🔗 [Official Folding@Home Installation & Account Guide](https://foldingathome.org/start-folding/)
 
-Make sure to create an account during the setup process.
+Make sure to create an account during the setup process if prompted, although for reward purposes, the key is setting the correct username and team number in the client later.
 
 ## ⚙️ Step 2: Configure Your Account
 
 Once Folding@Home is installed:
 
-1. Open the Folding@Home Web Control.
-1. Go to the **Account Settings** tab (top right).
-1. Set the following:
-    - **Username**: Your Atto address without the `atto://` prefix
+1.  Open the Folding@Home Web Control (usually accessible via `http://localhost:7396` or `http://127.0.0.1:7396` in your browser, or via the F@H application interface).
+2.  Click on **"Settings"**.
+3.  Set the following:
+* **Name**: Your Atto address **without** the `atto://` prefix
 
-    _Example:_ `atto://adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
+_Example:_ `atto://adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
 
-    ➡️ Use: `adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
-    - **Team Number**: `1066107`
+➡️ Use: `adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
+* **Team Number**: `1066107`
+* **(Optional) Passkey**: You can obtain a passkey from Folding@Home to secure your username and potentially earn bonus points. Follow their instructions if desired.
 
-    <IdealImage img={require('./example.jpg')} alt="Screen shot from folding@home." />
+<IdealImage img={require('./example.jpg')} alt="Screen shot from folding@home configuration." />
 
-1. Click to start
+4.  Click **"Save"**.
+5.  Ensure Folding@Home is running (click the "Start Folding" button if it's stopped).
 
-That’s all! Folding@Home will start processing work units, and your contributions will be linked to your Atto address
-automatically.
+That’s all! Folding@Home will start processing work units, and your contributions will be linked to your Atto address automatically for reward distribution.
 
 ---
 
 ## 📤 How Rewards Are Distributed
 
-Folding@Home updates user scores via their API approximately once per hour, though it can occasionally take longer during peak load.
+The system checks for updated Folding@Home scores periodically. While this currently happens roughly **twice a day on average**, the exact timing can vary and **isn't guaranteed**.
 
-Each time we fetch an update, we distribute Atto based on the team members’ Folding@Home scores. The calculation works like this:
+Each time the system finds an update from folding@home api, it calculates the total rewards to distribute based on the time elapsed since the *last* update. The calculation works like this:
 
-- **5,000 attos are distributed per minute.**
-- If the Folding@Home stats haven’t updated for 60 minutes, we’ll distribute `5,000 × 60 = 300,000 attos`.
-- The total amount is **divided proportionally** based on the scores reported by Folding@Home.
+* **5,000 attos are allocated per minute.**
+* If the system checks for updates after, say, 12 hours (720 minutes) since the last check, it will distribute a total of `5,000 × 720 = 3,600,000 attos` in that cycle.
+* This total amount is then **divided proportionally** among team members based on the Folding@Home points they contributed during that specific period, as reported by the Folding@Home stats API.
 
-So if your machine contributed 10% of the total team score since the last update, you'll receive 10% of the rewards for that round.
+So, if your machine contributed 10% of the total team score accumulated since the last reward distribution, you'll receive 10% of the total attos distributed in that cycle.
 
-Your Atto address (used as your Folding@Home username) is what links your contributions to your wallet—so make sure it’s correct!
+Your Atto address (used as your Folding@Home username) is what links your contributions to your wallet—so make sure it’s entered correctly!
 
 ---
 
-Your computer is now helping scientific research—and you're earning Atto in the process.
+## ❓ Frequently Asked Questions (FAQ)
+
+* **Can I use my GPU for Folding@Home?**
+  * Yes! Folding@Home supports GPU processing for many work units. Using a capable GPU can significantly increase your contribution score compared to using only a CPU. Check the Folding@Home client settings to ensure your GPU is configured correctly.
+
+* **How often are Atto rewards distributed?**
+  * The distribution timing isn't fixed to a strict schedule. Currently, updates and distributions happen roughly twice a day on average, but this is not guaranteed and can vary.
+
+* **If the updates aren't frequent, do I lose potential rewards?**
+  * No, **no work is lost** due to the timing of distributions. The system calculates rewards based on the *total time passed* since the last distribution cycle and your *proportional contribution* during that entire period. Whether the updates happen every hour or every 12 hours, the total reward pool for that time is distributed fairly based on reported scores.
+
+* **Will I receive Atto rewards for incomplete Folding@Home Work Units (WUs)?**
+  * No. Atto rewards are distributed based on the points awarded by Folding@Home. Folding@Home only awards points for Work Units that are fully completed and successfully uploaded back to their servers. Incomplete or partially processed WUs do not contribute to your score for Atto reward calculation.
+
+* **Can the Atto reward rate (5,000 attos/minute) change?**
+  * The current reward rate is fixed for now. However, it *could* potentially be adjusted in the future depending on factors like the overall distribution progress and project goals. Any changes would be communicated to the community.
+
+* **How can I check my Folding@Home contribution stats?**
+  * You can monitor your personal progress, completed work units, and estimated points directly within the Folding@Home client software. You can also check team stats on the official Folding@Home website, though there might be a delay.
+
+* **Where can I see my received Atto rewards?**
+  * Your earned Atto will be sent directly to the Atto address you configured as your username in Folding@Home. You can check your balance using your Atto wallet interface or a compatible block explorer.
+
+* **What happens if I entered the wrong Atto address as my username?**
+  * Rewards are sent *exclusively* to the address configured as your Folding@Home username within Team `1066107`. If you enter an incorrect or invalid address, the rewards associated with your folding work will be sent to that incorrect address and likely be inaccessible to you. **It is crucial to double-check that you have entered your correct Atto address.**
+
+* **Do I need to run Folding@Home 24/7?**
+  * No, you can start and stop Folding@Home whenever you like. However, rewards are proportional to your contribution. The more you run it (and the more powerful your hardware), the higher your contribution score will be relative to the team, and thus the larger your share of the distributed attos.
+
+---
+
+Your computer is now helping scientific research—and you're earning Atto in the process. Thank you for your contribution!
