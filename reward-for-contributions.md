@@ -10,7 +10,7 @@ We're excited to recognize and reward everyone who contributes to our Atto open 
 
 ---
 
-### 1. **Critical Vulnerability**
+## 1. **Critical Vulnerability**
 
 This level is for **reporting** urgent, critical security issues that threaten the core stability and safety of the ecosystem. Identifying such vulnerabilities requires deep expertise and swift action to ensure the security of Atto.
 
@@ -20,7 +20,7 @@ This level is for **reporting** urgent, critical security issues that threaten t
 
 ---
 
-### 2. **Epic**
+## 2. **Epic**
 
 Epics are big projects that have a huge impact across our repositories. They often involve a lot of planning, coding, and teamwork.
 
@@ -28,7 +28,7 @@ Epics are big projects that have a huge impact across our repositories. They oft
 
 ---
 
-### 3. **Major**
+## 3. **Major**
 
 Major tasks are significant changes or new features that play an important role in making our projects better. They’re not as large as an Epic, but still require solid effort and skill.
 
@@ -36,7 +36,7 @@ Major tasks are significant changes or new features that play an important role 
 
 ---
 
-### 4. **Minor**
+## 4. **Minor**
 
 Minor tasks are small improvements or bug fixes that help make the projects smoother and more reliable. They might not be huge, but they add up.
 
@@ -44,7 +44,7 @@ Minor tasks are small improvements or bug fixes that help make the projects smoo
 
 ---
 
-### 5. **Tweak**
+## 5. **Tweak**
 
 Tweaks are quick, small adjustments like UI updates or optimizations. They may be minor, but they help make the project feel more complete.
 
