@@ -26,15 +26,14 @@ and recognition systems in place for contributors.
 
 ### [Token Distribution](/docs/distribution)
 
-Explore detailed information on how Atto tokens are distributed within the community. Transparency is a core value at
-Atto, and our token distribution strategy ensures fairness and clarity regarding allocations, incentives, and future
-distribution plans.
+Explore how attos are distributed within the community. Transparency is a core value at Atto, and our token distribution
+strategy ensures fairness and clarity regarding allocations, incentives, and future distribution plans.
 
 ### [Mining via Folding@Home](/docs/mining)
 
-Earn Atto cryptocurrency by contributing your spare computing power to Folding@Home, a project dedicated to scientific
-research. Support vital research against diseases like cancer and Alzheimer’s, while simultaneously earning attos. Our
-integration makes it easy to start mining—no specialized hardware required.
+Earn attos by contributing your spare computing power to Folding@Home, a project dedicated to scientific research.
+Support vital research against diseases like cancer and Alzheimer’s, while simultaneously earning attos.
+Our integration makes it easy to start mining—no specialized hardware required.
 
 Whether you're a developer, researcher, contributor, or enthusiast, these resources will guide you through everything
 you need to get started and thrive within the Atto community.

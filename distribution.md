@@ -6,7 +6,7 @@ sidebar_position: 2
 # Distribution
 
 Atto is a decentralized cryptocurrency focused on providing fast, secure, and scalable transactions. The initial
-distribution of Atto tokens is designed to be fair and community-driven, encouraging widespread participation and
+distribution of attos is designed to be fair and community-driven, encouraging widespread participation and
 network growth.
 
 ## Distribution Methods

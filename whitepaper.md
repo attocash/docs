@@ -30,8 +30,7 @@ Importantly, Atto is not just a theoretical proposal – it is already a **live,
 in
 late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 and has since rolled out a public block [**explorer**](/explorer), a user-friendly
-web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free
-Atto tokens to try out the system.  
+web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free attos to try out the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
 functionality (sending, receiving, and confirming transactions) is fully operational. The following sections of this
 whitepaper will explain how Atto works under the hood, highlighting the key features and design elements that make it
@@ -50,7 +49,7 @@ uniquely suited for micropayments and face-to-face transactions.
   in-person transactions like retail purchases or splitting a bill with friends.
 
 - **Micropayment Optimized:** The system is designed specifically for handling high volumes of tiny payments. The
-  protocol supports a high degree of divisibility (each Atto token can be split into 10^9 units) to enable very
+  protocol supports a high degree of divisibility (each atto can be split into 10^9 units) to enable very
   fine-grained payments. Because there are no fees and fast confirmations, Atto can power use-cases like pay-per-use
   services, tipping, IoT payments, and other scenarios where value transfer might be just pennies or less.
 
@@ -319,7 +318,7 @@ Even cryptocurrencies like Bitcoin or Ethereum, in their base layer, have variab
 micropayment, and confirmation times that are too slow for interactive use.
 
 Atto removes these barriers. With **zero fees**, you can send **any amount** of value – even ¥0.000001 (a millionth of
-an Atto token) – and the recipient will get exactly that amount. This opens the door to a true **micropayment economy**.
+an atto) – and the recipient will get exactly that amount. This opens the door to a true **micropayment economy**.
 Content platforms could charge mere cents for access without forcing users into subscriptions, or implement pay-per-use
 pricing models that were previously impossible. For example, a cloud API could bill clients per request in real-time
 using Atto, deducting a tenth of a cent for each call. A video game or app could reward users with small Atto payments
