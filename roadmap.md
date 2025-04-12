@@ -50,7 +50,7 @@ Originally, we planned to develop native Android and iOS wallet applications. Af
 
 Atto remains committed to a fast and green cryptocurrency model and will not compromise on that principle. Traditional
 mining is not only wasteful but also largely unnecessary to achieve network security. Instead, our "miner" utilizes
-[folding@home](http://foldingathome.org), ensuring that electricity goes into meaningful computations that aid scientific research rather than being
+[folding@home](https://foldingathome.org), ensuring that electricity goes into meaningful computations that aid scientific research rather than being
 wasted on repetitive hashing. This approach is inspired by Banano and aligns with our vision of a sustainable and
 community-driven cryptocurrency.
 
