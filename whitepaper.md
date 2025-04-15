@@ -18,8 +18,8 @@ coffee face-to-face or tipping someone a fraction of a cent online, Atto enables
 [confirmation](https://coinmarketcap.com/academy/glossary/confirmation) and zero fees**.
 
 Atto’s core design focuses on **speed, efficiency, and sustainability**. It achieves high performance through a unique
-consensus mechanism called **Open Representative Voting** and an innovative ledger architecture where each user has
-their own chain of transactions. This means **transfers are
+consensus mechanism called **Open Representative Voting** and built on an innovative ledger architecture where each user
+has their own chain of transactions. This means **transfers are
 [finalized](https://www.ledger.com/academy/glossary/finality) in under a
 second in real-world conditions**, without anyone having to pay network fees. Moreover, Atto avoids
 [energy-hungry mining](https://en.wikipedia.org/wiki/Environmental_impact_of_bitcoin); the network’s power usage is so
@@ -30,7 +30,8 @@ Importantly, Atto is not just a theoretical proposal – it is already a **live,
 in
 late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 and has since rolled out a public block [**explorer**](/explorer), a user-friendly
-web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free attos to try out the system.  
+web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free attos to try out
+the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
 functionality (sending, receiving, and confirming transactions) is fully operational. The following sections of this
 whitepaper will explain how Atto works under the hood, highlighting the key features and design elements that make it
