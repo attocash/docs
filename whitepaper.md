@@ -253,13 +253,13 @@ countermeasures to ensure the network remains smooth and secure even under load 
   minimal that even a mobile phone can handle transactions comfortably.
 
 - **Bounded Queues and Prioritization:** To handle heavy load, the Atto protocol uses bounded queues that categorize
-  transactions based on the account balance (plus send amount if it's send block). Each balance range has
+  transactions based on the account balance (plus the send amount in the case of a send block). Each balance range has
   its own bucket, and each bucket has a maximum size of 1000 transactions. When a bucket is full, lower-priority
   transactions within that group are discarded. Priority within a bucket is determined by the difference between the
-  node’s time when transaction was received and the transaction’s timestamp. Transactions that appear significantly
+  node’s time when the transaction was received and the transaction’s timestamp. Transactions that appear significantly
   older or in the future are deprioritized. This time-based sorting ensures that timely, legitimate transactions are
   kept, while stale or suspicious ones are dropped first. This strategy helps maintain network responsiveness during
-  high-volume periods and protects against spam or denial-of-service attempts using pre-computed transactions or
+  high-volume periods and protects against spam or denial-of-service attempts that use pre-computed transactions or
   low-value spam floods.
 
 - **Anti-Spam and Anti-DoS Measures:** Beyond PoW and queuing, Atto nodes have additional rules to combat malicious
@@ -279,7 +279,7 @@ countermeasures to ensure the network remains smooth and secure even under load 
     be **flagged as a spammer and blacklisted** temporarily. This automated rate limiting stops
     malicious nodes from flooding genuine nodes with traffic. Honest nodes behaving within normal parameters won’t
     trigger this.
-  - *Efficient Gossip Network:* Atto uses WebSocket to communication between nodes, which allows it to integrate with
+  - *Efficient Gossip Network:* Atto uses WebSocket for communication between nodes, which allows it to integrate with
     DDoS protection techniques and efficiently propagate messages. By keeping the bandwidth requirements low and using
     protocols that can be guarded by common DDoS mitigation (like WebSocket proxies), the network remains robust even
     under denial-of-service attempts.
