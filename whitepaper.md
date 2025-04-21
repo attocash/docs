@@ -252,8 +252,7 @@ countermeasures to ensure the network remains smooth and secure even under load 
   transactions, giving defenders time to react. Honest users sending normal volumes are unaffected, as the PoW is so
   minimal that even a mobile phone can handle transactions comfortably.
 
-- **Bounded Queues and Prioritization:** The Atto protocol uses **bounded queues** to manage transactions efficiently
-  under heavy load. Transactions entering To handle heavy load, the Atto protocol uses bounded queues that categorize
+- **Bounded Queues and Prioritization:** To handle heavy load, the Atto protocol uses bounded queues that categorize
   transactions based on the account balance (plus send amount if it's send block). Each balance range has
   its own bucket, and each bucket has a maximum size of 1000 transactions. When a bucket is full, lower-priority
   transactions within that group are discarded. Priority within a bucket is determined by the difference between the
