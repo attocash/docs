@@ -7,12 +7,12 @@ export const miningFaq = [
   {
     question: "How often are Atto rewards distributed?",
     answer:
-      "The distribution timing isn't fixed to a strict schedule. Currently, updates and distributions happen roughly twice a day on average, but this is not guaranteed and can vary."
+      "The distribution timing isn't fixed to a strict schedule. Currently, updates and distributions happen roughly every 3 hours on average, but this is not guaranteed and can vary."
   },
   {
     question: "If the updates aren't frequent, do I lose potential rewards?",
     answer:
-      "No, no work is lost due to the timing of distributions. The system calculates rewards based on the total time passed since the last distribution cycle and your proportional contribution during that entire period. Whether the updates happen every hour or every 3 hours, the total reward pool for that time is distributed fairly based on reported scores."
+      "No, no work is lost due to the timing of distributions. The system calculates rewards based on the total time passed since the last distribution cycle and your proportional contribution during that entire period. Whether the updates happen every hour or every 12 hours, the total reward pool for that time is distributed fairly based on reported scores."
   },
   {
     question: "Will I receive Atto rewards for incomplete Folding@Home Work Units (WUs)?",
