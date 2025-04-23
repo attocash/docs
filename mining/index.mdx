@@ -6,61 +6,96 @@ import Head from "@docusaurus/Head";
 
 > ⚠️ **Note:** This isn’t “mining” in the traditional sense.
 
-Rather than securing the network with energy-intensive calculations, you can instead earn Atto by contributing your computer’s processing power to **medical research** through Folding@Home. This integration isn’t part of Atto’s consensus mechanism—it’s simply a practical way to reward users for **real-world** contributions. Each unit of work you complete benefits scientific studies and aligns with Atto’s mission of remaining **green and sustainable**.
+Instead of securing the network through energy-intensive calculations, you can earn Atto by contributing your computer’s processing
+power to **medical research** via Folding@Home. This isn’t part of Atto’s consensus mechanism—it’s a way to reward users for
+**real-world impact**. Every unit of work helps scientific research and supports Atto’s commitment to being **green and sustainable**.
 
-By harnessing your computing power for good, we also gain a fair method to **distribute attos** to those who support meaningful research.
+By putting your computing power to good use, we create a fair and meaningful way to **distribute attos** to supporters of valuable causes.
 
-Here’s how to get set up:
+Here’s how to get started:
 
-## ✅ Step 1: Install Folding@Home
+## Installation
+
+### Step 1: Install Folding@Home
 
 If you haven’t already, download and install Folding@Home.
 
-🔗 [Official Folding@Home Installation & Account Guide](https://foldingathome.org/start-folding/)
+#### Mac & Windows
 
-Make sure to create an account during the setup process if prompted, although for reward purposes, the key is setting the correct username and team number in the client later.
+Download the client from [folding@home](https://foldingathome.org/start-folding/) and follow the installation instructions.
 
-## ⚙️ Step 2: Configure Your Account
+#### Ubuntu & Debian
 
-Once Folding@Home is installed:
+```bash
+wget https://download.foldingathome.org/releases/public/fah-client/debian-10-64bit/release/fah-client_8.4.9_amd64.deb
+sudo dpkg -i --ignore-depends=policykit-1 fah-client_8.4.9_amd64.deb
+```
 
-1. Open the Folding@Home Web Control (usually accessible locally via `http://localhost:7396` or remotely at `https://v8-4.foldingathome.org` in your browser).
-2.  Click on **"Settings"**.
-3.  Set the following:
-* **Name**: Your Atto address **without** the `atto://` prefix
+To ensure the Folding@Home client starts automatically:
+```bash
+sudo systemctl enable --now fahclient
+```
 
-_Example:_ `atto://adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
+### Step 2: Create an Account
 
-➡️ Use: `adwmbykpqs3mgbqogizzwm6arokkcmuxium7rbh343drwd2q5om6vj3jrfiyk`
-* **Team Number**: `1066107`
-* **(Optional) Passkey**: You can obtain a passkey from Folding@Home to secure your username and potentially earn bonus points. Follow their instructions if desired.
+Go to: https://v8-4.foldingathome.org
 
-<IdealImage img={require('./example.jpg')} alt="Screen shot from folding@home configuration." />
+Fill out the following fields:
+1. Email
+2. Passphrase (and Confirm Passphrase)
+3. Username — use your Atto account **without** the `atto://` prefix
+4. Team — enter `1066107`
 
-4.  Click **"Save"**.
-5.  Ensure Folding@Home is running (click the "Start Folding" button if it's stopped).
+<IdealImage img={require('./account-creation.jpg')} alt="Screenshot showing Folding@Home account creation." />
 
-That’s all! Folding@Home will start processing work units, and your contributions will be linked to your Atto address automatically for reward distribution.
+> ⚠️ **Important:** You can change your username and team later, but if you start mining, **incorrect values will prevent you from receiving rewards**.
 
----
 
-## 📤 How Rewards Are Distributed
+### Step 3: Add a Passkey (Optional but Recommended)
 
-The system checks for updated Folding@Home scores periodically. While this currently happens roughly **twice a day on average**, the exact timing can vary and **isn't guaranteed**.
+A passkey is a unique 32-character token that links your work to your Folding@Home username. It unlocks the Quick Return Bonus (QRB), which can boost your points by 2× to over 10× if you consistently return work units on time with a success rate of 80% or higher.
 
-Each time the system finds an update from folding@home api, it calculates the total rewards to distribute based on the time elapsed since the *last* update. The calculation works like this:
+#### How to get your passkey (takes less than 30 seconds):
+
+1. Visit [apps.foldingathome.org/getpasskey](https://apps.foldingathome.org/getpasskey)
+2. Enter your Folding@Home username and email address
+3. Click **Get Passkey** – the token will be emailed to you
+4. Copy the 32-character passkey from the email
+
+#### Add it to your account
+
+Click the gear icon at the top right:
+<IdealImage img={require('./click-configuration.png')} alt="Screenshot showing where to click to configure your Folding@Home account." />
+
+Paste your passkey and save:
+<IdealImage img={require('./add-passkey.png')} alt="Screenshot showing where to add your Folding@Home passkey." />
+
+### Step 4: Start folding
+
+Now it's time to shine! Open the Folding@Home interface and click **Fold All** to begin contributing.
+Your computer will start working on a unit of research, which may take some time to complete depending on your hardware and system settings.
+
+You can monitor progress, adjust CPU and GPU usage, and choose whether Folding@Home runs only when your computer is idle or continuously.
+
+> 💡 Tip: To maximize your contribution, consider running Folding@Home continuously. You can also enable GPU folding (if supported) to significantly boost your output.
+
+As long as your username and team are correctly configured, your points will be tracked and converted into Atto automatically.
+
+## How Rewards Are Distributed
+
+The system periodically checks Folding@Home scores—about **twice per day**, although the exact timing may vary.
+
+When an update is detected, the system calculates the rewards based on the time since the last update:
 
 * **5,000 attos are allocated per minute.**
-* If the system checks for updates after, say, 12 hours (720 minutes) since the last check, it will distribute a total of `5,000 × 720 = 3,600,000 attos` in that cycle.
-* This total amount is then **divided proportionally** among team members based on the Folding@Home points they contributed during that specific period, as reported by the Folding@Home stats API.
+* If 12 hours (720 minutes) have passed, then `5,000 × 720 = 3,600,000 attos` are distributed in that cycle.
+* This total is then **split proportionally** among team members, based on the points they contributed during that time (as reported by the Folding@Home stats API).
 
-So, if your machine contributed 10% of the total team score accumulated since the last reward distribution, you'll receive 10% of the total attos distributed in that cycle.
+So if your machine provided 10% of the team’s total contribution, you’d receive 10% of that round’s rewards.
 
-Your Atto address (used as your Folding@Home username) is what links your contributions to your wallet—so make sure it’s entered correctly!
+Your Atto address (used as your Folding@Home username) is what links your contribution to your wallet—make sure it's accurate!
 
----
-
-## ❓ Frequently Asked Questions (FAQ)
+## Frequently Asked Questions (FAQ)
 
 <Head>
   <script type="application/ld+json">
@@ -88,4 +123,4 @@ Your Atto address (used as your Folding@Home username) is what links your contri
 
 ---
 
-Your computer is now helping scientific research—and you're earning Atto in the process. Thank you for your contribution!
+Your computer is now contributing to scientific research—and earning Atto as a reward. Thank you for making a difference!
