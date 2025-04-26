@@ -408,9 +408,11 @@ purposes:
 
 - **Development Fund (40% of supply):** This allocation is set aside for ongoing development, infrastructure, and
   ecosystem growth. Building a sustainable network requires funding developers, running servers, and promoting the
-  platform. The development fund ensures that the team has resources to improve Atto over time, add features, and scale
-  the network, all while being transparent about how these funds are used. It is effectively an investment in the
-  project’s future capabilities (e.g., further optimization, community programs, etc.).
+  platform. It's important to note that Atto did not, and will not, conduct an ICO. Unlike many projects, we don't have
+  millions from investors to fund development — this fund is critical for sustaining and improving Atto over time. Some
+  users have brought up concerns about the development fund allocation, and we've started a
+  discussion [here](https://github.com/attocash/docs/discussions/5) to address them and gather feedback. We're committed
+  to being transparent about how these funds are used and to continuously working with the community as Atto evolves.
 
 - **Community Rewards (24% of supply):** Another large portion is allocated to community-driven contributions and
   bounties.
