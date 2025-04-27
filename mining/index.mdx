@@ -82,12 +82,12 @@ As long as your username and team are correctly configured, your points will be 
 
 ## How Rewards Are Distributed
 
-The system periodically checks Folding@Home scores—about **twice per day**, although the exact timing may vary.
+The system periodically checks Folding@Home scores—about every 15 minutes, although the exact **timing may vary**.
 
 When an update is detected, the system calculates the rewards based on the time since the last update:
 
 * **5,000 attos are allocated per minute.**
-* If 12 hours (720 minutes) have passed, then `5,000 × 720 = 3,600,000 attos` are distributed in that cycle.
+* If 12 hours (720 minutes) have passed since last update, then `5,000 × 720 = 3,600,000 attos` are distributed in that cycle.
 * This total is then **split proportionally** among team members, based on the points they contributed during that time (as reported by the Folding@Home stats API).
 
 So if your machine provided 10% of the team’s total contribution, you’d receive 10% of that round’s rewards.
