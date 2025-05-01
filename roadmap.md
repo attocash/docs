@@ -10,6 +10,23 @@ Welcome to the journey of **Atto**, where we are committed to bringing cryptocur
 medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the
 upcoming phases and initiatives we are excited to share with our community.
 
+## Phase 0: Pre Release ✅
+
+<details>
+<summary>View Details</summary>
+
+### Website
+
+Launched the official Atto website to introduce the project, share the vision, and provide access to key resources like
+documentation, the whitepaper, and community links.
+
+### Live Network Launch
+
+Deployed the Atto network and opened it to early users and testers. This marked the beginning of real transactions on
+the network, laying the foundation for future growth and stability.
+
+</details>
+
 ## Phase 1: Explorer Launch & Platform Stabilization ✅
 
 <details>
@@ -31,7 +48,10 @@ Our team is working diligently to make the **Atto Faucet** and **Wallet** robust
 
 <details>
 <summary>View Details</summary>
-Originally, we planned to develop native Android and iOS wallet applications. After careful consideration and initial development efforts, we’ve concluded our mobile app approach. We’re now pivoting toward a **Web Wallet** solution to provide a more unified and accessible experience.
+
+Originally, we planned to develop native Android and iOS wallet applications. After careful consideration and initial
+development efforts, we’ve concluded our mobile app approach. We’re now pivoting toward a **Web Wallet** solution to
+provide a more unified and accessible experience.
 
 ### Introducing the Atto Web Wallet
 
@@ -50,28 +70,46 @@ Originally, we planned to develop native Android and iOS wallet applications. Af
 
 Atto remains committed to a fast and green cryptocurrency model and will not compromise on that principle. Traditional
 mining is not only wasteful but also largely unnecessary to achieve network security. Instead, our "miner" utilizes
-[folding@home](https://foldingathome.org), ensuring that electricity goes into meaningful computations that aid scientific research rather than being
-wasted on repetitive hashing. This approach is inspired by Banano and aligns with our vision of a sustainable and
-community-driven cryptocurrency.
+[folding@home](https://foldingathome.org), ensuring that electricity goes into meaningful computations that aid
+scientific research rather than being wasted on repetitive hashing. This approach is inspired by Banano and aligns with
+our vision of a sustainable and community-driven cryptocurrency.
 
 </details>
 
-## Phase 4: Full Atto Launch
+## Phase 4: Atto Full Launch ✅
 
-### Transition from Beta Stage to Official Release
+<details>
+<summary>View Details</summary>
 
-With the platform stabilized and mobile apps launched, we will officially unveil Atto to the world. This milestone
-signifies our readiness to support a growing user base and our commitment to continuous improvement.
+### Transition from Pre-Release Stage to Official Release
+
+After running for several months, we are now confident that Atto is ready for a broader audience. With the platform
+stabilized and the web wallet successfully launched, we officially unveiled Atto to a bigger audience.
+
+</details>
+
+## Phase 5: Integration
+
+### API Wallet (In Progress)
+
+We're currently developing an API Wallet to make integrating with the Atto network seamless. This will allow developers
+and services to interact with the network effortlessly, paving the way for broader adoption and listings.
+
+### Listings (In Progress)
+
+We're actively working on getting Atto listed on key platforms to increase visibility and accessibility. Listings will
+make it easier for users to discover, trade, and adopt Atto across various ecosystems.
 
 ### Educational Resources
 
 To assist new users, we will provide:
 
-- **Comprehensive Guides**: Step-by-step instructions on using Atto services.
+- **Comprehensive Guides**: Step-by-step instructions on hwo to integrate Atto.
 - **FAQs and Support**: Answers to common questions and dedicated support channels.
-- **Community Forums**: Platforms for users to share knowledge and help each other.
+- Promote: Incentivize community members, developers, and content creators to spread the word about Atto through
+  bounties, referral programs, and educational content campaigns.
 
-## Phase 5: Representative Program Introduction
+## Phase 6: Representative Program Introduction
 
 ### Empowering Network Participants
 
@@ -87,7 +125,7 @@ who contribute positively.
 - **Become a Representative**: Instructions will be provided on how to set up and optimize your node.
 - **Maximize Your Impact**: Tips on improving performance and increasing your contribution to the network.
 
-## Phase 6: Community Growth and Engagement
+## Phase 7: Community Growth and Engagement
 
 ### Organic Growth Initiatives
 
