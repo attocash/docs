@@ -125,22 +125,14 @@ who contribute positively.
 - **Become a Representative**: Instructions will be provided on how to set up and optimize your node.
 - **Maximize Your Impact**: Tips on improving performance and increasing your contribution to the network.
 
-## Phase 7: Community Growth and Engagement
+## Phase 7: Micropayments
 
-### Organic Growth Initiatives
+We will introduce a payment protocol and browser extension to enable seamless micropayments across the web.
 
-We believe in the power of community-driven growth. Our plans include:
+- **Atto Payment Protocol**: A simple, open protocol for requesting and confirming payments.
+- **Self-Hosted Server**: A reference implementation that can be run by merchants or developers.
+- **Browser Extension**: A lightweight plugin to allow users to approve and send payments directly from their browser.
 
-- **Contests and Events**: Engaging activities with opportunities to earn rewards.
-- **Ambassador Programs**: Recognizing and supporting community members who actively promote Atto.
-
-### Open-Source Collaboration
-
-Atto thrives on collaboration. We encourage developers and enthusiasts to:
-
-- **Contribute to Our Codebase**: Help improve and expand Atto's features.
-- **Share Ideas**: Propose new concepts and solutions on our community platforms.
-- **Collaborate on Projects**: Work together on initiatives that align with Atto's vision.
 
 ## Our Vision
 
