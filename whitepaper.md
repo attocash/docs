@@ -9,7 +9,7 @@ sidebar_position: 1
 **Date of Publication:** 2024-10-08 **Date of Notification:** 2025-05-10
 
 This crypto-asset white paper has not been approved by any competent authority in any Member State of the European
-Union. The issuer of the crypto-asset is solely responsible for the content of this crypto-asset white paper.
+Union. The issuer of the crypto-asset is solely responsible for the content of this crypto-asset whitepaper.
 
 The management body of **Atto B.V.** hereby confirms that this crypto-asset white paper complies with Regulation (EU)
 2023/1114 (MiCA), and that to the best of its knowledge the information presented is fair, clear and not misleading,
@@ -31,8 +31,8 @@ Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-f
 energy-efficient consensus model called Open Representative Voting, where users delegate voting power to trusted
 nodes. Transactions are confirmed in under a second and incur no fees.
 
-The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10⁹ nano-atto units. There is no public
-sale or investment opportunity; tokens are distributed freely via a faucet and community reward programs.
+The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10⁹ units. There is no public sale or
+investment opportunity; tokens are distributed freely via a faucet and reward programs.
 
 Atto tokens can be used for payments and contribute in the network’s consensus mechanism. They do not entitle holders to
 profit-sharing, dividends, or ownership rights.
@@ -432,7 +432,7 @@ generation of digital commerce, from the smallest of transactions to everyday po
 
 - **Nature of the Offering:** No public token sale is being conducted under this whitepaper; Atto tokens are not being
   offered for purchase. Instead, distribution occurs through several non-monetary mechanisms: a public faucet,
-  Folding@home integration, contribution-based rewards, and an upcoming voting node incentive program. These methods are
+  folding@home integration, contribution-based rewards, and an upcoming voting node incentive program. These methods are
   designed to encourage adoption, community participation, and decentralization. No funds are raised from the public
   through this offering.
 
@@ -583,13 +583,14 @@ current status of the network and the resources available for users and develope
 late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 initially in a "[pre-release](/blog/pre-release)" phase where core
 features were live and the community was invited to participate early.
-Since then, Atto has matured rapidly. The basic functionality – creating accounts, sending and receiving transactions,
-and consensus via representatives – has proven to work reliably. The network has processed a growing number of
-transactions as more users have onboarded through the faucet and community events (such as token
-giveaways).
+Since then, Atto has matured rapidly. The basic functionality — creating accounts, sending and receiving transactions,
+and achieving consensus via representatives — has proven to work reliably. The network has processed a growing number of
+transactions as more users have onboarded through the faucet and reward programs (such as token giveaways, folding@home
+integration, and contributions to the ecosystem).
 
-There will be public lab stress tests to ensure the network can handle load, and so far the results have demonstrated
-that Atto's design is robust under pressure (thanks to the anti-spam measures and efficient consensus).
+Public lab stress tests have been conducted to ensure the network can handle load, and so far the results have
+demonstrated that Atto’s design is robust under pressure, thanks to its anti-spam measures and efficient consensus
+mechanism.
 
 **Network Nodes and Representatives:** Currently, the Atto network is maintained by a mix of nodes run by the core team
 and an increasing number run by community members. In the very beginning, the team operated most of the nodes to ensure
@@ -678,16 +679,19 @@ and use Atto responsibly.
 
 ## Environmental Impact
 
-Atto uses an energy-efficient consensus mechanism. Unlike Proof-of-Work systems, the Atto consensus does not require
-mining or continuous computation. Instead, network participants vote on transactions using digital
-signatures, which consumes minimal energy.
+Atto uses an energy-efficient consensus mechanism. Unlike Proof-of-Work systems, Atto’s consensus does not require
+mining or continuous computation. Instead, network participants vote on transactions using digital signatures, which
+consumes minimal energy.
 
-The estimated network-wide power consumption is extremely low — approximately equivalent to the combined electricity
-usage of 1 average european households. As a result, the environmental footprint of operating Atto is negligible
-compared to traditional blockchain systems.
+At the present stage of the network, the estimated total energy usage is extremely low — roughly equivalent to the
+electricity consumption of a single average European household. This estimate reflects current node count and activity
+levels during the network’s early growth phase.
 
-This design choice reflects a commitment to sustainability and aligns with broader global goals for low-impact digital
-infrastructure.
+As the network scales and more nodes come online, this section will be periodically updated to reflect the evolving
+energy profile. However, the fundamental consensus design remains lightweight and inherently sustainable.
+
+This design choice reflects a long-term commitment to environmental responsibility and aligns with broader global goals
+for low-impact digital infrastructure.
 
 ## Conclusion
 
