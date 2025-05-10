@@ -31,7 +31,7 @@ Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-f
 energy-efficient consensus model called Open Representative Voting, where users delegate voting power to trusted
 nodes. Transactions are confirmed in under a second and incur no fees.
 
-The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10⁹ units. There is no public sale or
+The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10^9 units. There is no public sale or
 investment opportunity; tokens are distributed freely via a faucet and reward programs.
 
 Atto tokens can be used for payments and contribute in the network’s consensus mechanism. They do not entitle holders to
