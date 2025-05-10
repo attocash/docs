@@ -4,8 +4,54 @@ sidebar_position: 1
 
 # Whitepaper
 
-**DTIF G3JQMFD76**
-**ISIN XTB89R03SZ10**
+**DTIF G3JQMFD76 ISIN XTB89R03SZ10 TICKER ATTO**
+
+**Date of Publication:** 2024-10-08 **Date of Notification:** 2025-05-10
+
+This crypto-asset white paper has not been approved by any competent authority in any Member State of the European
+Union. The issuer of the crypto-asset is solely responsible for the content of this crypto-asset white paper.
+
+The management body of **Atto B.V.** hereby confirms that this crypto-asset white paper complies with Regulation (EU)
+2023/1114 (MiCA), and that to the best of its knowledge the information presented is fair, clear and not misleading,
+with no material omissions.
+
+The crypto-asset may lose its value in part or in full, may not always be transferable, and may not be liquid. This
+crypto-asset is not covered by investor compensation schemes or deposit guarantee schemes in the EU.
+
+## Summary
+
+> **Warning:** This summary should be read as an introduction to the crypto-asset white paper. The prospective holder
+> should base any decision to purchase Atto on the content of the crypto-asset white paper as a whole and not on the
+> summary alone. The offer to the public of Atto does not constitute an offer or solicitation to purchase financial
+> instruments, and any such offer or solicitation can be made only by means of a prospectus or other offering documents
+> pursuant to applicable law. This crypto-asset white paper does not constitute a prospectus as referred to in
+> Regulation (EU) 2017/1129 or any other offer document under Union or national law.
+
+Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-face transactions. It uses an
+energy-efficient consensus model called Open Representative Voting, where users delegate voting power to trusted
+nodes. Transactions are confirmed in under a second and incur no fees.
+
+The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10⁹ nano-atto units. There is no public
+sale or investment opportunity; tokens are distributed freely via a faucet and community reward programs.
+
+Atto tokens can be used for payments and contribute in the network’s consensus mechanism. They do not entitle holders to
+profit-sharing, dividends, or ownership rights.
+
+This whitepaper was prepared by Atto B.V., a company incorporated in the Netherlands. Contact details and management
+information are provided in the issuer section. A full overview of risks, including volatility, liquidity constraints,
+and regulatory uncertainty, is provided in the “Risk Factors” section.
+
+## Issuer and Offeror Details
+
+- **Legal Entity Name:** Atto B.V.
+- **Legal Form:** Besloten Vennootschap (Private Limited Company)
+- **Country of Incorporation:** Netherlands
+- **Registration Number (KVK):** 95768548
+- **Registered Address:** Winthontlaan 200, 3526KV Utrecht, The Netherlands
+- **Legal Entity Identifier (LEI):** Not applicable
+- **Date of Incorporation:** 2024-12-10
+- **Management Body:** Felipe (Director)
+- **Contact Information:** felipe@atto.cash
 
 ## Introduction
 
@@ -382,13 +428,36 @@ generation of digital commerce, from the smallest of transactions to everyday po
 
 ## Tokenomics and Distribution
 
+### Offer Terms and Legal Disclosures
+
+- **Nature of the Offering:** No public token sale is being conducted under this whitepaper; Atto tokens are not being
+  offered for purchase. Instead, distribution occurs through several non-monetary mechanisms: a public faucet,
+  Folding@home integration, contribution-based rewards, and an upcoming voting node incentive program. These methods are
+  designed to encourage adoption, community participation, and decentralization. No funds are raised from the public
+  through this offering.
+
+- **Offer Scope:** The supply was created at genesis and is permanently capped (non-inflationary model). Distribution is
+  ongoing and limited per mechanism:
+  - The faucet allows anyone to claim a small amount of Atto (subject to time limits).
+  - Folding@home rewards are granted based on verified contribution of computing resources.
+  - Contribution rewards are manually or automatically issued to users who help improve Atto (e.g., through code,
+    design, content, or outreach).
+  - The voting node incentive program is planned and will reward users who help secure the network.
+
+- **Rights and Obligations:** Atto tokens are utility tokens used for value transfer and participation in consensus.
+  They do not represent shares, profit rights, or ownership in Atto B.V. Token holder rights are limited to
+  transactional and protocol-level functionality. While protocol parameters may evolve through decentralized governance,
+  the fixed supply, feeless transaction model, and open access to network participation will not be altered arbitrarily.
+
+### Distribution
+
 Atto’s economic design (tokenomics) and distribution model were carefully chosen to support its role as digital cash and
 to encourage widespread adoption. Unlike mined cryptocurrencies,
 **the entire supply of Atto was created at the start (genesis)**, and no new tokens will be created (non-inflationary
 model).
 The total supply is fixed at **18,000,000,000 Atto** tokens, each divisible into 10^9 fractional units (nano-atto, so to
-speak). This high divisibility (9 decimal places) ensures that even as Atto gains value, users can transact in tiny
-fractions for micropayments.
+speak). This high divisibility (9 decimal places) ensures that even if Atto were to gain value in the future, users can
+transact in tiny fractions for micropayments.
 
 The distribution of this supply is structured to foster growth and decentralization over time. The initial allocation
 was divided into several portions with different
@@ -581,6 +650,45 @@ credibility to the project’s promises; it’s not just theory, but a practical
 real-world presence will be crucial in gaining trust and proving that Atto’s model of instant, feeless micropayments is
 not only possible, but ready for the world to use.
 
+## Risk Factors
+
+Atto is an experimental cryptocurrency project. While it offers innovative features and practical use cases, prospective
+holders should be aware of the following risks:
+
+- **Market Volatility:** Atto’s value is highly volatile and can fluctuate dramatically. There is no guarantee of any
+  stable value – holders risk losing some or all of their tokens.
+
+- **Liquidity Risk:** Atto tokens may lack liquidity. There might not always be an active market or ability to trade
+  Atto on exchanges, meaning holders could find it difficult to sell or exchange tokens when desired.
+
+- **Technology and Security Risk:** As a cryptocurrency network, Atto faces technical risks such as software bugs,
+  hacks, or cyber-attacks. Vulnerabilities in the code or infrastructure could lead to security breaches, network
+  downtime, or loss of tokens.
+
+- **Regulatory Risk:** Cryptocurrencies are subject to evolving regulations. Changes in laws or government policies (in
+  the EU or other jurisdictions) could negatively impact Atto’s legality, usage, value, or the ability of the project to
+  continue operating as described.
+
+- **Operational Risk:** Atto is currently maintained by a small team during its early growth phase. There is a risk of
+  execution failure, delays in reaching roadmap goals, or other disruptions that could affect network stability or user
+  adoption.
+
+Additional or unforeseen risks may arise as the network evolves. Users are encouraged to fully understand the project
+and use Atto responsibly.
+
+## Environmental Impact
+
+Atto uses an energy-efficient consensus mechanism. Unlike Proof-of-Work systems, the Atto consensus does not require
+mining or continuous computation. Instead, network participants vote on transactions using digital
+signatures, which consumes minimal energy.
+
+The estimated network-wide power consumption is extremely low — approximately equivalent to the combined electricity
+usage of 1 average european households. As a result, the environmental footprint of operating Atto is negligible
+compared to traditional blockchain systems.
+
+This design choice reflects a commitment to sustainability and aligns with broader global goals for low-impact digital
+infrastructure.
+
 ## Conclusion
 
 Atto represents a **significant evolution in cryptocurrency tailored for payments**. By combining the feeless, rapid
@@ -618,4 +726,5 @@ fees, latency, and energy waste, Atto positions itself as an ideal medium of exc
 payments to everyday human transactions. The network is live, the fundamentals are strong, and the path ahead is one of
 community-driven growth. With Atto, we move closer to a world where value can flow as freely as information – empowering
 new possibilities for commerce, innovation, and financial inclusion.
+
 
