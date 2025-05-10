@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Whitepaper
 
-**DTIF G3JQMFD76 ISIN XTB89R03SZ10 TICKER ATTO**
+**DTIF:** G3JQMFD76 **ISIN:** XTB89R03SZ10 **TICKER:** ATTO
 
 **Date of Publication:** 2024-10-08 **Date of Notification:** 2025-05-10
 
