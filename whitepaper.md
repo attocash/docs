@@ -8,10 +8,10 @@ sidebar_position: 1
 
 **Date of Publication:** 2024-10-08 **Date of Notification:** 2025-05-10
 
-This crypto-asset white paper has not been approved by any competent authority in any Member State of the European
+This crypto-asset whitepaper has not been approved by any competent authority in any Member State of the European
 Union. The issuer of the crypto-asset is solely responsible for the content of this crypto-asset whitepaper.
 
-The management body of **Atto B.V.** hereby confirms that this crypto-asset white paper complies with Regulation (EU)
+The management body of **Atto B.V.** hereby confirms that this crypto-asset whitepaper complies with Regulation (EU)
 2023/1114 (MiCA), and that to the best of its knowledge the information presented is fair, clear and not misleading,
 with no material omissions.
 
@@ -20,11 +20,11 @@ crypto-asset is not covered by investor compensation schemes or deposit guarante
 
 ## Summary
 
-> **Warning:** This summary should be read as an introduction to the crypto-asset white paper. The prospective holder
-> should base any decision to purchase Atto on the content of the crypto-asset white paper as a whole and not on the
+> **Warning:** This summary should be read as an introduction to the crypto-asset whitepaper. The prospective holder
+> should base any decision to purchase Atto on the content of the crypto-asset whitepaper as a whole and not on the
 > summary alone. The offer to the public of Atto does not constitute an offer or solicitation to purchase financial
 > instruments, and any such offer or solicitation can be made only by means of a prospectus or other offering documents
-> pursuant to applicable law. This crypto-asset white paper does not constitute a prospectus as referred to in
+> pursuant to applicable law. This crypto-asset whitepaper does not constitute a prospectus as referred to in
 > Regulation (EU) 2017/1129 or any other offer document under Union or national law.
 
 Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-face transactions. It uses an
