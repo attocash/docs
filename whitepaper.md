@@ -1,8 +1,16 @@
 ---
 sidebar_position: 1
+
+title: Whitepaper
+
+toc: true
+numbersections: true
+header-includes:
+  - \renewcommand{\thesection}{\Alph{section}}
+  - \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 ---
 
-# Whitepaper
+# Atto Whitepaper
 
 **DTIF:** G3JQMFD76 **ISIN:** XTB89R03SZ10 **TICKER:** ATTO
 
