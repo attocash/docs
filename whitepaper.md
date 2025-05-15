@@ -56,7 +56,7 @@ and regulatory uncertainty, is provided in the “Risk Factors” section.
 - **Country of Incorporation:** Netherlands
 - **Registration Number (KVK):** 95768548
 - **Registered Address:** Winthontlaan 200, 3526KV Utrecht, The Netherlands
-- **Legal Entity Identifier (LEI):** Not applicable
+- **Legal Entity Identifier (LEI):** 6488ACA2HX03M49K4086
 - **Date of Incorporation:** 2024-12-10
 - **Management Body:** Felipe (Director)
 - **Contact Information:** felipe@atto.cash
