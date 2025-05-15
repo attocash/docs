@@ -59,7 +59,7 @@ and regulatory uncertainty, is provided in the “Risk Factors” section.
 - **Legal Entity Identifier (LEI):** 6488ACA2HX03M49K4086
 - **Date of Incorporation:** 2024-12-10
 - **Management Body:** Felipe (Director)
-- **Contact Information:** felipe@atto.cash
+- **Contact Information:** contact@atto.cash
 
 ## Introduction
 
