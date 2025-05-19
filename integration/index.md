@@ -26,8 +26,10 @@ production cluster.
 | **work‑server**        | 8080 / 8081        | Computes PoW required to submit transactions                | No      |
 | **wallet‑server**      | 8080 / 8081        | REST wallet ops, send and receive                           | MySQL   |
 
-> **Tip:** Voting and historical nodes use the **same container image**—the presence of the `PRIVATE_KEY` env‑var (or an
-> external signer) toggles the mode. Switching modes later isn't supported; choose once or plan a fresh bootstrap.
+:::tip
+Voting and historical nodes use the **same container image**—the presence of the `PRIVATE_KEY` env‑var (or an external
+signer) toggles the mode. Switching modes later isn't supported; choose once or plan a fresh bootstrap.
+:::
 
 ## Common Use Cases
 

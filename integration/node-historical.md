@@ -30,11 +30,13 @@ pipelines.
 | `ATTO_DB_USER`     | DB user with read/write perms              | `root`                        |
 | `ATTO_DB_PASSWORD` | User password                              | `super-secret`                |
 
-> Tip: When bootstrapping a new historical node, it is recommended to vertically scale your
-> MySQL database (e.g., by providing more CPU/RAM) until the node fully catches up with the network. A node is generally
-> considered in sync when there are no more unchecked transactions in its database. However, please note that due to the
-> asynchronous nature of Atto, some smaller and inactive accounts might take a bit longer to reflect their absolute
-> latest state even after the primary sync process appears complete.
+:::tip
+When bootstrapping a new historical node, it is recommended to vertically scale your MySQL database (e.g., by providing
+more CPU/RAM) until the node fully catches up with the network. A node is generally considered in sync when there are no
+more unchecked transactions in its database. However, please note that due to the asynchronous nature of Atto, some
+smaller and inactive accounts might take a bit longer to reflect their absolute latest state even after the primary sync
+process appears complete.
+:::
 
 ## Kubernetes Example
 
