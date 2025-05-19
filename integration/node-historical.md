@@ -156,4 +156,12 @@ volumes:
   node_mysql_data:
 ```
 
+You should modify the `ATTO_PUBLIC_URI`, `ATTO_DB_NAME`, `ATTO_DB_USER`, `ATTO_DB_PASSWORD`, and other settings to suit
+your setup like port mapping.
+
+:::warning
+Don't forget to set `ATTO_PUBLIC_URI`, otherwise your node won't be reachable. `{external-ip}` should be replaced with
+your actual public IP address, which can be found at [whatismyip.com](https://www.whatismyip.com).
+:::
+
 </details>
