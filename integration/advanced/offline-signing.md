@@ -13,9 +13,9 @@ the receiver’s chain (Receive or Open block). This mirrors classic accounting�
 UTXO table: each account’s latest block already carries its up‑to‑date balance.
 
 :::info
-Receivables vs UTXO: A Send block instantly debits the sender. Until the receiver publishes its matching Receive (or Open)
-block, the amount lives in a lightweight receivables list keyed by the send block hash. Receivables are only pending credits;
-they are not spendable outputs and disappear once claimed.
+Receivables vs UTXO: A Send block instantly debits the sender. Until the receiver publishes its matching Receive (or
+Open) block, the amount lives in a lightweight receivables list keyed by the send block hash. Receivables are only
+pending credits; they are not spendable outputs and disappear once claimed.
 :::
 
 * **Open** – Initializes a new account chain with an “open” block.
@@ -86,8 +86,14 @@ Fields (in order):
   "representativePublicKey": "69C010A8A74924D083D1FC8234861B4B357530F42341484B4EBDA6B99F047105",
   "height": 1
 }
-
 ```
+
+:::info
+The height field displayed in the JSON example for an Open block (shown as 1) is for informational purposes only and
+reflects the block's implicit position as the first in its account chain. This field is not part of the serialized Open
+block data that is hashed or signed, as stated in the general block field descriptions. For all Open blocks, the
+conceptual height is always 1.
+:::
 
 **HEX**:
 
@@ -321,10 +327,15 @@ function getThreshold(network, timestamp):
     return floor(baseThreshold / decrease)  // 64-bit unsigned int
 ```
 
-Use the threshold you obtain here in the PoW check:
+Use the threshold you obtained here in the PoW check. The `target` for the PoW hash is defined as follows:
+
+* For an **Open** block: The `target` is the 32-byte `publicKey` of the account being opened.
+* For **Send**, **Receive**, or **Change** blocks: The `target` is the 32-byte `previous` block hash.
+
+The PoW validation is then:
 
 ```
-valid = ULong(Blake2b-64(nonce || target)) ≤ threshold
+valid = ULong(Blake2b-64(nonce || target_value_as_defined_above)) ≤ threshold
 ```
 
 ## Transaction Assembly
