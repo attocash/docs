@@ -434,18 +434,12 @@ Atto addresses encode the public key and algorithm. The format:
 
 1. **Algorithm byte** (1 byte, e.g. `0` for V1).
 2. **Public key** (32 bytes).
-3. **Checksum** (5 bytes): The first 5 bytes of `Blake2b-40(pk||alg)` (or similar). The reference’s Base32 utility and
-   `AttoAddress` class calculate this. Concretely:
-
-* Compute `checksum = BLAKE2b-32(alg_byte || publicKey)` and take the first 5 bytes.
-
-4. **Concatenate** `[algByte][publicKey][checksum]` = 1 + 32 + 5 = 38 bytes.
-5. **Base32 encode** those 38 bytes (without padding, alphabet A-Z2-7).
+3. **Checksum** (5 bytes): The output of `Blake2b-40(algorthm || PublicKey)`.
+4. **Concatenate** `[algorthm][publicKey][checksum]` = 1 + 32 + 5 = 38 bytes.
+5. **Base32 encode** those 38 bytes (without padding, alphabet a-z2-7).
 6. **Prefix** with `atto://`.
 
-So address = `atto://` + Base32\_Encode(alg||pubkey||checksum).
-
-For example, if `alg=0` and publicKey=`0123...`, compute hash, take first 5 bytes, Base32-encode, and prefix.
+So address = `atto://` + Base32\_Encode(algorithm || publicKey || checksum).
 
 Example:
 
