@@ -394,6 +394,40 @@ Example:
 * **400 Bad Request** – Invalid transaction (failed `isValid()`, wrong network byte, malformed JSON, etc.).
 * **504 Gateway Timeout** – Only for `/transactions/stream`; node did not observe a confirmation within 40 seconds.
 
+### Querying Account State & Pending Credits
+
+| Purpose                                                  | HTTP method & path                      | Notes                                                                                                                                                                                       |
+|----------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Latest account state**                                 | **GET `/accounts/{publicKey}`**         | Returns the account’s current balance, height, last-block hash, representative, etc. Use this whenever you **don’t know the latest state** before composing a new block.                    |
+| **Stream pending receivables for one or more addresses** | **POST `/accounts/receivables/stream`** | Emits each *receivable* (unclaimed Send) as a separate line of JSON until the client closes the connection. Useful for wallets or services that want to sweep incoming funds automatically. |
+
+**Receivable event shape (example):**
+
+```json
+{
+  "hash": "0AF0F63BFE4DBC588F95FC3B154DE848AA9A5DD5604BAC99AE9E21C5EA8B4F64",
+  "version": 0,
+  "algorithm": "V1",
+  "publicKey": "53F1A85D25EDA5021C01A77A2B1BA99CEF9DD5FD912D7465B8B652FDEDB6A4F8",
+  "timestamp": 1705517157478,
+  "receiverAlgorithm": "V1",
+  "receiverPublicKey": "0C400961629D759176F009249A33899440900ABCE275F6C5C01C6F7F37A2C59A",
+  "amount": 18000000000000000000
+}
+```
+
+The server merges historical database rows with live “push” events, filters duplicates, and streams continuously. When
+you receive one of these objects, create a matching **Receive** (or **Open**) block, sign it, add PoW, and publish via
+`/transactions` or `/transactions/stream`.
+
+That’s all you need to round out the integration story:
+
+1. **Fetch state**
+1. **Build a Block**
+1. **Sign and Generate PoW**
+1. **Publish**
+1. **Continuously watch `/accounts/receivables/stream` for incoming transactions**.
+
 ## Address Format
 
 Atto addresses encode the public key and algorithm. The format:
