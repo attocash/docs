@@ -7,9 +7,16 @@ assembly, and address format. Exact field orders, byte lengths, and encodings ar
 
 ## Overview of Atto Blocks
 
-Atto uses a variation of **double-entry block chain** model. Each account has a chain of blocks, and balances are
-implicit in the
-chain. There are four block types:
+Atto is an account‑chain (double‑entry) ledger: every account maintains its own cryptographically‐linked chain of
+blocks. A value transfer is represented twice—once as a debit on the sender’s chain (Send block) and once as a credit on
+the receiver’s chain (Receive or Open block). This mirrors classic accounting’s double‑entry safety without a global
+UTXO table: each account’s latest block already carries its up‑to‑date balance.
+
+:::info
+Receivables vs. UTXO A Send block instantly debits the sender. Until the receiver publishes its matching Receive/Open
+block, the amount lives in a lightweight receivables list keyed by the send‑hash. Receivables are only pending credits;
+they are not spendable outputs and disappear once claimed.
+:::
 
 * **Open** – Initializes a new account chain with an “open” block.
 * **Send** – Debits an account, sending tokens to another address.
@@ -83,6 +90,7 @@ Fields (in order):
 ```
 
 **HEX**:
+
 ```
 000300000015625A4831C8F1312F1DB41550D0FD6C730FCC259ACE0FF88B500EA96783A348000008C5A1D8CCF9841C08E38C010000004DC7257C0F492B8C7AC2D8DE4A6DC4078B060BB42FDB6F8032A839AAA9048DB00069C010A8A74924D083D1FC8234861B4B357530F42341484B4EBDA6B99F047105
 ```
@@ -128,6 +136,7 @@ Fields (in order):
 ```
 
 **HEX**:
+
 ```
 0203000000A5E7E4B3B93150314E1177D5B9DE0057626B16A4B3C3F1DB37DF67628A5EF45702000000000000000100000000000000FB1D08E38C0100006CC2D3A7513723B1BA59DE784BA546BAF6447464D0BA3D80004752D6F9F4BA2300552254E101B51B22080D084C12C94BF7DFC5BE0D973025D62C0BC1FF4D9B145F0100000000000000
 ```
@@ -172,6 +181,7 @@ Fields (in order):
 ```
 
 **HEX**:
+
 ```
 010300000039B56483A0DE38D9578CAF7EA791C2FEC96B318C7BD9989207B575334C5D9F1B0200000000000000000008C5A1D8CCF9001E08E38C01000003783A08F51486A66A602439D9164894F07F150B548911086DAE4E4F57A9C4DD00EE5FDA9A1ACEC7A09231792C345CDF5CD29F1059E5C413535D9FCA66A1FB2F49
 ```
@@ -216,6 +226,7 @@ Fields (in order):
 ```
 
 **HEX**:
+
 ```
 03030000002415EE860847B3A1CE8B605267E83481D8426A4C42F8128EA72D72F0AD072DCC0200000000000000000008C5A1D8CCF9051E08E38C010000AD675BD718F3D96F9B89C58A8BF80741D5EDB6741D235B070D56E84098894DD50069C010A8A74924D083D1FC8234861B4B357530F42341484B4EBDA6B99F047105
 ```
@@ -349,6 +360,39 @@ JSON example:
   "work": "<8B nonce in hex>"
 }
 ```
+
+## Publishing Transactions (REST)
+
+Atto nodes expose two HTTP POST endpoints for broadcasting a signed transaction:
+
+| Endpoint                    | Content‑Type                                                     | Behaviour                                                                                                                                                                                                                                                                                                       | Best‑for                                                                                                         |
+|-----------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `POST /transactions`        | `application/json`                                               | **Asynchronous** publish. Returns **HTTP 200** as soon as the node verifies syntax, signature, PoW and network, then queues the transaction for consensus. The HTTP body is typically empty.                                                                                                                    | High‑throughput pipelines, batch uploads, or when you monitor confirmations via websockets or polling later.     |
+| `POST /transactions/stream` | Request :`application/json`  /  Response :`application/x‑ndjson` | **Synchronous streaming**. The node publishes the transaction (same checks as above) **then keeps the HTTP connection open** and streams newline‑delimited JSON updates until the transaction is cemented or a 40 s timeout elapses. On success it ends with **HTTP 200**; on timeout you receive **HTTP 504**. | Wallet UIs or custody systems that need immediate confirmation feedback without a separate subscription channel. |
+
+### Request body
+
+Both endpoints take exactly the JSON object described in [Transaction Assembly](#transaction-assembly) (block +
+signature + work).
+
+Example:
+
+```json
+{
+  "block": {
+    /* Send / Receive / … */
+  },
+  "signature": "f1c2…",
+  "work": "ff00aa…"
+}
+```
+
+### Success & Error Semantics
+
+* **200 OK** – Transaction accepted. For `/transactions` this is final. For `/transactions/stream` the 200 is returned
+  only **after** a confirmation message appears in the NDJSON stream.
+* **400 Bad Request** – Invalid transaction (failed `isValid()`, wrong network byte, malformed JSON, etc.).
+* **504 Gateway Timeout** – Only for `/transactions/stream`; node did not observe a confirmation within 40 seconds.
 
 ## Address Format
 
