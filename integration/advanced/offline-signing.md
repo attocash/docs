@@ -13,8 +13,8 @@ the receiver’s chain (Receive or Open block). This mirrors classic accounting�
 UTXO table: each account’s latest block already carries its up‑to‑date balance.
 
 :::info
-Receivables vs. UTXO A Send block instantly debits the sender. Until the receiver publishes its matching Receive/Open
-block, the amount lives in a lightweight receivables list keyed by the send‑hash. Receivables are only pending credits;
+Receivables vs UTXO: A Send block instantly debits the sender. Until the receiver publishes its matching Receive (or Open)
+block, the amount lives in a lightweight receivables list keyed by the send block hash. Receivables are only pending credits;
 they are not spendable outputs and disappear once claimed.
 :::
 
