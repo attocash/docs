@@ -266,12 +266,12 @@ The threshold is *deterministic* and depends **only** on
 
 The Kotlin reference logic is reproduced below in prose so you can re-implement it in any language.
 
-| Symbol                    | Meaning                                                                                                         | Typical value                                |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------|
-| `INITIAL_YEAR`            | The protocol launch year.                                                                                       | **2024**                                     |
-| `INITIAL_LIVE_THRESHOLD`  | Baseline PoW target for the LIVE network at launch.                                                             | **2³³ − 1 = 8 589 934 591 (0x1\_FFFF FFFF)** |
-| `DOUBLING_PERIOD`         | How many **years** must pass before the difficulty halves (threshold is divided by 2).                          | **2.0**                                      |
-| `thresholdIncreaseFactor` | A multiplier that makes test networks easier (larger threshold).<br/>LIVE = 1, BETA = 2, DEV = 8, LOCAL = 4 096 | network-specific                             |
+| Symbol                    | Meaning                                                                                                         | Typical value                                 |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+| `INITIAL_YEAR`            | The protocol launch year.                                                                                       | **2024**                                      |
+| `INITIAL_LIVE_THRESHOLD`  | Baseline PoW target for the LIVE network at launch.                                                             | **2³³ − 1 = 8 589 934 591 (0x1\_FFFF\_FFFF)** |
+| `DOUBLING_PERIOD`         | How many **years** must pass before the difficulty halves (threshold is divided by 2).                          | **2.0**                                       |
+| `thresholdIncreaseFactor` | A multiplier that makes test networks easier (larger threshold).<br/>LIVE = 1, BETA = 2, DEV = 8, LOCAL = 4 096 | network-specific                              |
 
 :::warning
 Use the exact values published by the core team; the ones above match the current reference implementation.
