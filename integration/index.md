@@ -10,7 +10,7 @@ production cluster.
 
 ## Why Atto?
 
-* **Instant confirmations** – 300 ms end‑to‑end.
+* **Instant confirmations** – 600 ms.
 * **Energy‑efficient** – no mining, just micro‑hash PoW.
 * **Zero fees** – yes, zero and forever
 * **Hardened by default** – containers are built from scratch images and compiled to GraalVM native binaries; only the
