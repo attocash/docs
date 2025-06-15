@@ -38,6 +38,14 @@ smaller and inactive accounts might take a bit longer to reflect their absolute 
 process appears complete.
 :::
 
+## Minimum Requirements
+
+The minimum requirements for running a historical node are:
+
+- A stable internet connection
+- 1 CPU core (10 years old or newer)
+- 1 GB of RAM
+
 ## Kubernetes Example
 
 <details>
