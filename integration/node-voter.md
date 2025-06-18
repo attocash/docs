@@ -73,6 +73,14 @@ These are in addition to the common variables like `ATTO_DB_HOST`, `ATTO_DB_NAME
 | `ATTO_SIGNER_MANAGEMENT_PORT` | Port for health checks and metrics for the signer.                             | `9091`                                                                                                     |
 | `ATTO_SIGNER_CAPABILITIES`    | Comma-separated list of actions the signer is allowed to perform. For a voter: | `CHALLENGE,VOTE`                                                                                           |
 
+## Minimum Requirements
+
+The minimum requirements for running a voter node are:
+
+- A stable internet connection
+- 1 CPU core (10 years old or newer)
+- 1 GB of RAM
+
 ## Kubernetes Example
 
 The following examples demonstrate deploying a Voter Node on Kubernetes. They assume:
