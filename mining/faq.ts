@@ -1,5 +1,10 @@
 export const miningFaq = [
   {
+    question: "Why am I not receiving any rewards?",
+    answer:
+      "Payouts are sent automatically every 3 hours for work units that have been fully completed and reported. If you still don’t see any rewards after that window, double-check that you’re folding under team 1066107 and that your Folding@Home username is set to your Atto address you wish to receive payouts to. Keep in mind that any work unit already in progress before you changed your team or username will still be credited using the old information."
+  },
+  {
     question: "Can I use my GPU for Folding@Home?",
     answer:
       "Yes! Folding@Home supports GPU processing for many work units. Using a capable GPU can significantly increase your contribution score compared to using only a CPU. Check the Folding@Home client settings to ensure your GPU is configured correctly."
