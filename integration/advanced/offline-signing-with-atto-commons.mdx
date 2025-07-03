@@ -1,0 +1,535 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Offline Signing with Atto Commons
+
+In this tutorial, we demonstrate how to integrate with the Atto network at a low level using the **Atto Commons**
+libraries (available for JavaScript/TypeScript and Kotlin). This approach allows you to generate and manage keys,
+construct transactions offline, and interact directly with an Atto node – all without relying on the Wallet Server
+component. This is ideal for advanced integrators (such as exchanges or custodians) who require full control over key
+management and offline signing.
+
+**Note:** Atto uses Ed25519 elliptic curve cryptography for its account keys and signatures. This means you can leverage
+third-party tools or HSMs for key derivation and signing if desired. In this guide, however, we will use the Atto
+Commons library for all key and transaction operations for consistency and simplicity.
+
+Before proceeding, ensure you have access to the following components in your environment:
+
+* An **Atto Historical Node** (with its REST API endpoint) connected to the main network.
+* An **Atto Work Server** for generating the Proof-of-Work required by transactions.
+
+Typically, integrators will run their own historical node and work server. For testing, you may use Atto's public
+endpoints (available upon request). In the code examples below, we will use the main network configuration.
+
+
+## Installation
+
+Make sure the Atto Commons libraries are available in your project:
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```bash
+    npm i @attocash/commons-js
+    ````
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    implementation("cash.atto:commons-node-remote:$commonsVersion")
+    implementation("cash.atto:commons-worker-remote:$commonsVersion")
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Key Generation and Derivation
+
+The first step is to generate a private key for your Atto account. The Atto Commons library provides utilities for
+secure key generation. In JavaScript, you can use `AttoPrivateKey.generate()` to create a new random key. In Kotlin, a
+similar `AttoPrivateKey.generate()` function (via the companion object) is available. You can also import an existing
+private key from a hex string if you have one (for example, from a mnemonic or another source).
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {AttoPrivateKey, fromHexToByteArray, toSignerJs} from '@attocash/commons-js';
+
+    // Generate a new random private key
+    const newPrivateKey = AttoPrivateKey.Companion.generate();
+    console.log("Generated Private Key:", toHex(newPrivateKey.value));
+
+    // (Optional) Import a private key from a known hex string
+    const hexKey = "0000000000000000000000000000000000000000000000000000000000000000";
+    const importedPrivateKey = new AttoPrivateKey(fromHexToByteArray(hexKey));
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    import cash.atto.commons.* // hypothetical import, adjust as needed
+
+    // Generate a new random private key
+    val newPrivateKey = AttoPrivateKey.generate()
+    println("Generated Private Key: ${newPrivateKey.toHex()}")
+
+    // (Optional) Import a private key from a known hex string
+    val hexKey = "0000000000000000000000000000000000000000000000000000000000000000"
+    val importedPrivateKey = AttoPrivateKey(hexKey.hexToByteArray())
+    ```
+
+  </TabItem>
+</Tabs>
+
+**About Key Security:** The private key is a 32-byte value. Keep this safe! With Ed25519, the public key can be derived
+from the private key, and the Atto address can be derived from the public key. If you prefer to derive keys from a
+mnemonic seed, ensure you use a secure, Atto-compatible method. (Atto Commons supports seed generation as well, though
+it’s not shown here.)
+
+## Address Generation
+
+Once you have a private key (and its corresponding public key), you can create an **Atto Address**. An Atto address is
+analogous to an account identifier on the network. It encodes the public key (and a checksum), along with a prefix that
+indicates the algorithm. Atto Commons makes address creation straightforward: you provide the algorithm (
+currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, and it returns the address object.
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {AttoAddress, AttoAlgorithm, toSignerJs} from '@attocash/commons-js';
+
+    // Assume we have a private key (e.g., importedPrivateKey from previous section)
+    const signer = toSignerJs(importedPrivateKey); // create a signer from the private key
+    const publicKey = signer.publicKey; // get the Ed25519 public key
+    const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // derive the Atto address (V1 algorithm)
+    console.log("Address:", address.toString());
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    import cash.atto.commons.*
+
+    val signer = newPrivateKey.toSigner() // create a signer from the private key (hypothetical extension)
+    val publicKey = signer.publicKey // obtain the Ed25519 public key (ByteArray)
+    val address = AttoAddress(AttoAlgorithm.V1, publicKey)
+    println("Address: $address")
+    ```
+
+  </TabItem>
+</Tabs>
+
+The resulting address (when printed) will be a string starting with the `atto://` prefix. This address is what you share to receive funds.
+
+**Choosing a Representative:** Every Atto account can designate a representative. In most cases, you can use your own voting node as its
+representative or use a default Atto representative.
+
+## Setting Up Network Client and Work Server
+
+To interact with the network, you need a client to communicate with an Atto node’s REST API, and a worker to compute
+Proof-of-Work (PoW). The Atto Commons library can create these for you:
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {createCustomAttoNodeClient, createAttoWorker, AttoNetwork} from '@attocash/commons-js';
+
+    // Configure network and endpoints (using mainnet in this example)
+    const client = createCustomAttoNodeClient(
+    AttoNetwork.LIVE, // target the main Atto network
+    "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
+    );
+
+    const worker = createAttoWorker(
+    "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
+    );
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    import cash.atto.commons.*
+
+    val client = AttoNodeOperations.custom(
+    AttoNetwork.LIVE, // target the main Atto network
+    "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
+    ) {}
+
+    val worker = AttoWorker.remote(
+    "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
+    )
+    ```
+
+  </TabItem>
+</Tabs>
+
+Make sure the URLs point to your own infrastructure or trusted public endpoints. The node client will be used for
+querying the blockchain state (accounts, transactions) and broadcasting signed transactions. The work server will be
+used to compute the small PoW required for each transaction block (Atto uses a micro-hash for spam prevention instead of
+fees).
+
+## Reading Account State
+
+Before crafting transactions, it’s important to retrieve the current state of your accounts (balance and height). The *
+*account height** is used to sequence transactions correctly (each new block on an account increments the height).
+
+Using the node client, you can fetch account information for one or multiple addresses via
+`client.account([...addresses])`. The result will include each account’s current balance, frontier (last block hash),
+and height, among other data. We can store this in a map for quick lookup.
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    // Prepare a list of addresses to monitor (in this example, our hot wallet and another account)
+    const addressesToMonitor = [hotWalletAddress, anotherAddress];
+    const accountsInfo = await client.account(addressesToMonitor);
+
+    // Create a map of address -> account info for easy reference
+    const accountMap = new Map(accountsInfo.map(acc => [acc.address.toString(), acc]));
+
+    // Example: print the current balance and height of the hot wallet
+    const hotWalletInfo = accountMap.get(hotWalletAddress.toString());
+    if (hotWalletInfo) {
+    console.log("Hot Wallet Balance:", hotWalletInfo.balance.toString());
+    console.log("Hot Wallet Height:", hotWalletInfo.height.toString());
+  }
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    val addressesToMonitor = listOf(hotWalletAddress, anotherAddress)
+    val accountsInfo = client.account(addressesToMonitor) // suspend function or similar returning account info list
+
+    // Create a map from address string to account info
+    val accountMap = accountsInfo.associateBy {it.address.toString()}.toMutableMap()
+
+    // Example: print current balance and height for the hot wallet
+    accountMap[hotWalletAddress.toString()]?.let {account ->
+    println("Hot Wallet Balance: ${info.balance}")
+    println("Hot Wallet Height: ${info.height}")
+  }
+    ```
+
+  </TabItem>
+</Tabs>
+
+If an address has never received any funds (and thus has no account entry on the ledger yet), the `client.account` call
+will return no entry for it. In our example, `anotherAddress` might be a brand new address (no
+funds yet), so it would not appear in `accountsInfo`. We handle this by checking `existingAccount == null` later when
+receiving funds.
+
+## Receiving Incoming Transactions (Opening / Receiving)
+
+One crucial aspect of integration is handling incoming funds to your addresses. In Atto, incoming funds arrive as
+**receivable** blocks (similar to pending transactions). To actually claim the funds, the receiving account must publish
+a corresponding block: an **open block** if it’s the account’s first transaction, or a **receive block** for subsequent
+ones.
+
+The Commons library provides helper functions to generate these blocks easily. We can subscribe to receivable events
+using `client.onReceivable(addresses, callback)` so that whenever someone sends Atto to one of our monitored addresses,
+we get notified and can immediately pocket the funds.
+
+Below, we set up a subscription for receivables and define a `receiver()` callback that will:
+
+* Look up the signer for the receiving address.
+* Determine if the account already exists (opened) or not.
+* Use `open` if no existing account (to create the open block with a representative), or `receive`
+if the account exists (to create a normal receive block).
+* Sign the block with our private key.
+* Request PoW from the work server.
+* Publish the completed transaction to the network via the node client.
+* Update our local `accountMap` with the new account state.
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {attoAccountOpen, attoAccountReceive, AttoHeight} from '@attocash/commons-js';
+
+    const signerMap = new Map([
+    [hotWalletAddress.toString(), hotWalletSigner],
+    [anotherAddress.toString(), anotherSigner]
+    ]);
+
+    // Define the callback to handle incoming receivables
+    const receiver = async (receivable) => {
+    console.log("Receivable detected:", receivable);
+    const receiverAddr = receivable.receiverAddress.toString();
+    const signer = signerMap.get(receiverAddr);
+    const existingAccount = accountMap.get(receiverAddr);
+
+    // Build the appropriate block (open or receive)
+    let result;
+    if (existingAccount == null) {
+    // If account not opened yet, create an open block with a representative
+    result = attoAccountOpen(AttoNetwork.LIVE, representativeAddress, receivable, client.now().toString());
+  } else {
+    // If account exists, create a receive block
+    result = attoAccountReceive(existingAccount, receivable, client.now().toString());
+  }
+    const {block, account} = result;
+
+    // Sign the block with the account's private key
+    const signature = await signer.signBlock(block);
+    // Compute Proof-of-Work for the block
+    const work = await worker.workBlock(block);
+    // Create the finalized transaction
+    const transaction = new AttoTransaction(block, signature, work);
+
+    // Publish the transaction to the network
+    await client.publish(transaction);
+    console.log("Published receive block for", receiverAddr);
+
+    // Update our local account state map
+    accountMap.set(receiverAddr, account);
+  };
+
+    // Start listening for receivables on our addresses
+    const receivableSubscription = client.onReceivable(
+    [hotWalletAddress, anotherAddress],
+    receiver,
+    errorMsg => console.error("Receivable stream closed/error:", errorMsg)
+    );
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    val signerMap = mapOf(
+    hotWalletAddress.toString() to hotWalletSigner,
+    anotherAddress.toString() to anotherSigner
+    )
+
+    // Callback to handle an incoming receivable
+    suspend fun onReceivable(receivable: Receivable) {
+    println("Receivable detected: $receivable")
+    val receiverAddr = receivable.receiverAddress.toString()
+    val signer = signerMap[receiverAddr] ?: return
+    val existingAccount = accountMap[receiverAddr]
+
+    // Build open or receive block
+    val (block, account) = if (existingAccount == null) {
+    AttoAccount.open(AttoNetwork.LIVE, representativeAddress, receivable, client.now())
+  } else {
+    existingAccount.receive(receivable, client.now())
+  }
+
+    // Sign and compute PoW
+    val signature = signer.signBlock(block)
+    val work = worker.workBlock(block)
+    val transaction = AttoTransaction(block, signature, work)
+
+    // Publish the transaction
+    client.publish(transaction)
+    println("Published receive block for $receiverAddr")
+
+    // Update local account state
+    accountMap[receiverAddr] = account
+  }
+
+    // Subscribe to receivables (assuming client has coroutine or callback-based subscription)
+    client.receivableStream(listOf(hotWalletAddress, anotherAddress)).collect {
+    onReceivable(it)
+  }
+    ```
+
+  </TabItem>
+</Tabs>
+
+In the above code, `now` is a timestamp retrieved from the node (e.g., via `client.now()`), used to timestamp the open
+block. We also used a `representativeAddress` which we set earlier (in this example, we might use our voting node address
+as the representative for new accounts).
+
+**What’s Happening:** When someone sends funds to our address, the node’s receivable stream triggers. We create an
+**open block** if this is the first time the address is receiving funds (which sets up the account with an initial
+representative), or a **receive block** if the account already exists. We then sign it and solve PoW, and publish it to
+incorporate the funds into our account. After publishing, the funds are confirmed in our account’s balance.
+
+## Sending a Transaction
+
+Sending Atto (e.g., processing a withdrawal) involves creating a **send block** on the sender’s account. The Atto
+Commons `send` function will produce a new send block along with the updated account state. You then sign the block,
+get PoW, and publish the transaction.
+
+Important considerations before sending:
+
+* The sending account must have a sufficient balance.
+* You must use the correct current height of the account (the library handles this if you pass the latest
+`existingAccount` object).
+* Each send reduces the account’s balance and increases its height.
+
+Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an example amount of 100.1 ATTO. We assume `accountMap` has been kept up-to-date with the latest state of
+`hotWalletAddress` (including any receives done above).
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {attoAccountSend, AttoAmount, AttoUnit} from '@attocash/commons-js';
+
+    // Define the amount to send (100.1 ATTO in this example)
+    const amount = AttoAmount.Companion.from(AttoUnit.ATTO, "100.1");
+
+    // Get the current account state for the sender
+    const senderAccount = accountMap.get(hotWalletAddress.toString());
+    if (!senderAccount) {
+    throw new Error("Sender account not found or not opened.");
+  }
+
+    // Build the send block and updated account state
+    const {block: sendBlock, account: updatedSenderAccount} =
+    attoAccountSend(senderAccount, anotherAddress, amount);
+
+    // Sign and compute PoW for the send block
+    const sendSignature = await signerMap.get(hotWalletAddress.toString()).signBlock(sendBlock);
+    const sendWork = await worker.work(sendBlock);
+
+    // Create and publish the send transaction
+    const sendTransaction = new AttoTransaction(sendBlock, sendSignature, sendWork);
+    await client.publish(sendTransaction);
+    console.log(`Sent ${amount} from ${hotWalletAddress} to ${anotherAddress}`);
+
+    // Update the local account state for the sender
+    accountMap.set(hotWalletAddress.toString(), updatedSenderAccount);
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    val amount = AttoAmount.from(AttoUnit.ATTO, "100.1")
+
+    val senderAccount = accountMap[hotWalletAddress.toString()]
+    ?: error("Sender account not found or not opened.")
+
+    // Build the send block
+    val (sendBlock, updatedSenderAccount) = senderAccount.send(anotherAddress, amount)
+
+    // Sign and compute PoW
+    val sendSignature = signerMap[hotWalletAddress.toString()]!!.signBlock(sendBlock)
+    val sendWork = worker.work(sendBlock)
+
+    // Create and publish the transaction
+    val sendTransaction = AttoTransaction(sendBlock, sendSignature, sendWork)
+    client.publish(sendTransaction)
+    println("Sent $amount from $hotWalletAddress to $anotherAddress")
+
+    // Update local sender account state
+    accountMap[hotWalletAddress.toString()] = updatedSenderAccount
+    ```
+
+  </TabItem>
+</Tabs>
+
+After publishing the send, the funds will be deducted from the sender’s account on the ledger, and a corresponding
+receivable will be waiting for the recipient (which, if it's one of our addresses and we have the receivable
+subscription running as above, will trigger an automatic receive).
+
+## Monitoring Account Activity (Transactions and Entries)
+
+To facilitate real-time updates (e.g., for showing confirmations or new incoming transactions), the Atto node provides
+streaming endpoints. We already used `receivable` for incoming pending funds. There are two other useful streams for
+integrators:
+
+* **Transaction Stream** – streams every new block (transaction) involving the specified accounts, starting from given heights.
+* **Account Entry Stream** – streams every new account entry (state update) for the specified accounts, starting from given heights.
+
+The difference between these streams is subtle but important. The **transaction stream** will emit on any new send or
+receive block for your accounts as they are confirmed on the network. The **account entry stream** will emit an event
+when an account’s state changes (for example, a new open block or any new block on the account). In practice, if you
+track all your addresses from their latest heights, both streams will notify you of new blocks; you can choose which to
+use based on the level of detail you need.
+
+First, we build a `HeightSearch` object that tells the node from which height to start streaming for each account.
+Typically, you start at the next height after the current one (or at height 0 for unopened accounts).
+
+<Tabs groupId="library">
+  <TabItem value="js" label="JavaScript">
+
+    ```javascript
+    import {AccountHeightSearch, HeightSearch, AttoHeight} from '@attocash/commons-js';
+
+    // Prepare height-based search for each address (start from current height + 1, or 0 if no account yet)
+    function buildHeightSearch() {
+    const searches = [];
+    for (const addressStr of signerMap.keys()) {
+    const accountInfo = accountMap.get(addressStr);
+    const startHeight = (accountInfo == null)
+    ? AttoHeight.Companion.MIN        // start at height 0 if account not opened
+    : accountInfo.height.next();      // start from next height of existing account
+    searches.push(new AccountHeightSearch(AttoAddress.Companion.parse(addressStr), startHeight));
+  }
+    return HeightSearch.Companion.fromArray(searches);
+  }
+
+    const heightSearch = buildHeightSearch();
+
+    // Subscribe to transaction stream
+    const transactionSubscription = client.onTransaction(
+    heightSearch,
+    tx => console.log("New transaction affecting our accounts:", tx),
+    err => console.warn("Transaction stream closed/error:", err)
+    );
+
+    // Subscribe to account entry stream
+    const accountEntrySubscription = client.onAccountEntry(
+    heightSearch,
+    entry => console.log("New account entry (state update):", entry),
+    err => console.warn("Account entry stream closed/error:", err)
+    );
+    ```
+
+  </TabItem>
+  <TabItem value="kotlin" label="Kotlin">
+
+    ```kotlin
+    fun buildHeightSearch(): HeightSearch {
+    val searches = signerMap.keys.map {addressStr ->
+    val accountInfo = accountMap[addressStr]
+    val startHeight = accountInfo?.height?.next() ?: AttoHeight.MIN  // 0 if not opened, or next height
+    AccountHeightSearch(AttoAddress.parse(addressStr), startHeight)
+  }
+    return HeightSearch.from(searches)
+  }
+    val heightSearch = buildHeightSearch()
+
+    // Subscribe to transaction stream
+    val transactionSubscription = client.transactionStream(heightSearch).collect {
+    println("New transaction affecting our accounts: $it")
+  }
+
+    // Subscribe to account entry stream
+    val accountEntrySubscription = client.accountEntryStream(heightSearch).collect {
+    println("New account entry (state update): $it")
+  }
+    ```
+
+  </TabItem>
+</Tabs>
+
+This can be useful to update balances, show confirmations, or trigger internal accounting logic in real time. Remember
+to handle the termination or errors of these streams (for example, re-establish them if needed, or clean up on application
+shutdown).
+
+## Conclusion
+
+By using the Atto Commons library for JS or Kotlin, you can fully manage the lifecycle of Atto transactions in your own
+code: from key creation and offline signing to publishing transactions on the network and reacting to incoming funds.
+This **advanced integration** approach gives you maximum flexibility and security (you control your private keys at all
+times) at the cost of a bit more implementation work compared to using a high-level Wallet Server.
+
+Integrators should ensure they maintain the `accountMap` state accurately and securely store private keys. Additionally,
+for production use, always run your own Atto node and work server for reliability and security. With the patterns shown
+in this tutorial, you can build a robust integration that handles sending and receiving Atto programmatically, all while
+keeping sensitive operations offline.

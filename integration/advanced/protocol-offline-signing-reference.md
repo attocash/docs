@@ -1,4 +1,4 @@
-# Protocol Offline Signing Specification
+# Protocol-Level Offline-Signing Reference
 
 This document fully details the Atto protocol’s offline signing and transaction format. It is intended for
 implementors (e.g., exchanges and custodial services) to build support without relying on the Kotlin reference code. We
