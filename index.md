@@ -2,38 +2,29 @@
 sidebar_position: 0
 ---
 
-# Introduction
+# Official Atto Documentation
 
-Welcome to the official documentation for Atto, an innovative and eco-friendly cryptocurrency designed for instant and
-fee-free transactions. Atto is built on principles of collaboration, sustainability, and openness, aiming to redefine
-digital payments by eliminating barriers like fees and slow processing times.
+Welcome to the official documentation for Atto!
 
-This documentation is designed to help both new and experienced users understand the Atto ecosystem, including how the
-network operates, how to contribute effectively, and how tokens are fairly distributed.
+Atto is a fast, feeless, and scalable digital currency, created from the ground up to be practical for everyday,
+real-world transactions. Our goal is to create a digital cash that is as easy and efficient to use as physical cash, but
+with the global reach and security of a decentralized network.
 
-## Explore the Documentation
+What makes Atto unique is its approach to both its technology and its distribution. Unlike many other cryptocurrencies,
+Atto has zero transaction fees, making it ideal for payments of any size. Furthermore, new Atto coins are not mined in
+the traditional sense. Instead, they are distributed to users who contribute their spare computing power to the
+Folding@home project, a distributed computing network that supports groundbreaking scientific research into diseases
+like Alzheimer's and cancer.
 
-### [Whitepaper](/docs/whitepaper)
+This documentation is your central resource for understanding every aspect of the Atto ecosystem. Here, we provide the
+knowledge and tools for you to learn, build, and participate:
 
-Dive deep into Atto’s foundational ideas, technology, and future roadmap outlined comprehensively in our whitepaper.
-Gain insight into the unique consensus model, proof-of-work strategies, and the vision driving Atto forward.
+* **For a deep dive into the technology,** start with our foundational [**Whitepaper**](/docs/whitepaper). It covers the
+  core principles, consensus model, and the innovative design that makes Atto possible.
+* **To learn how to earn Atto,** explore our guides on joining the [**Folding@home**](/docs/mining) effort and how our
+  reward system works.
+* **To get involved in the project,** see our section on [**Contribution Rewards**](/docs/reward-for-contributions) to find out how
+  you can lend your skills to our growing community and be recognized for it.
 
-### [Reward for Contributions](/docs/reward-for-contributions)
-
-Learn how to actively participate in the growth of Atto’s ecosystem through various contributions such as software
-development, bug reporting, creating educational materials, or community engagement. Understand clearly defined rewards
-and recognition systems in place for contributors.
-
-### [Token Distribution](/docs/distribution)
-
-Explore how attos are distributed within the community. Transparency is a core value at Atto, and our token distribution
-strategy ensures fairness and clarity regarding allocations, incentives, and future distribution plans.
-
-### [Mining via Folding@Home](/docs/mining)
-
-Earn attos by contributing your spare computing power to Folding@Home, a project dedicated to scientific research.
-Support vital research against diseases like cancer and Alzheimer’s, while simultaneously earning attos.
-Our integration makes it easy to start mining—no specialized hardware required.
-
-Whether you're a developer, researcher, contributor, or enthusiast, these resources will guide you through everything
-you need to get started and thrive within the Atto community.
+We believe in building a transparent, community-driven project. We're excited you're here to learn more and hope you'll
+join us in building the future of digital cash.
