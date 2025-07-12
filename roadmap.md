@@ -90,7 +90,7 @@ stabilized and the web wallet successfully launched, we officially unveiled Atto
 
 ## Phase 5: Integration
 
-### API Wallet (In Progress)
+### API Wallet ✅
 
 We're currently developing an API Wallet to make integrating with the Atto network seamless. This will allow developers
 and services to interact with the network effortlessly, paving the way for broader adoption and listings.
@@ -100,14 +100,23 @@ and services to interact with the network effortlessly, paving the way for broad
 We're actively working on getting Atto listed on key platforms to increase visibility and accessibility. Listings will
 make it easier for users to discover, trade, and adopt Atto across various ecosystems.
 
-### Educational Resources
+### Educational Resources (In Progress)
 
 To assist new users, we will provide:
 
-- **Comprehensive Guides**: Step-by-step instructions on hwo to integrate Atto.
+- **Comprehensive Guides**: Step-by-step instructions on how to integrate Atto.
 - **FAQs and Support**: Answers to common questions and dedicated support channels.
-- Promote: Incentivize community members, developers, and content creators to spread the word about Atto through
+- **Promote**: Incentivize community members, developers, and content creators to spread the word about Atto through
   bounties, referral programs, and educational content campaigns.
+
+### Metrics
+
+To enhance network transparency and provide valuable insights, we will:
+
+- **Expose Node Metrics**: Implement prometheus endpoint so node operators can monitor the health and performance of
+  their nodes.
+- **Launch a Network Dashboard**: Display key live metrics on our website, such as block count, transactions per
+  second (TPS), and other popular network statistics.
 
 ## Phase 6: Representative Program Introduction
 
@@ -132,7 +141,6 @@ We will introduce a payment protocol and browser extension to enable seamless mi
 - **Atto Payment Protocol**: A simple, open protocol for requesting and confirming payments.
 - **Self-Hosted Server**: A reference implementation that can be run by merchants or developers.
 - **Browser Extension**: A lightweight plugin to allow users to approve and send payments directly from their browser.
-
 
 ## Our Vision
 
