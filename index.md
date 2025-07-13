@@ -2,7 +2,7 @@
 sidebar_position: 0
 ---
 
-# Official Atto Documentation
+# Official Documentation
 
 Welcome to the official documentation for Atto!
 
@@ -23,8 +23,8 @@ knowledge and tools for you to learn, build, and participate:
   core principles, consensus model, and the innovative design that makes Atto possible.
 * **To learn how to earn Atto,** explore our guides on joining the [**Folding@home**](/docs/mining) effort and how our
   reward system works.
-* **To get involved in the project,** see our section on [**Contribution Rewards**](/docs/reward-for-contributions) to find out how
-  you can lend your skills to our growing community and be recognized for it.
+* **To get involved in the project,** see our section on [**Contribution Rewards**](/docs/reward-for-contributions) to
+  find out how you can lend your skills to our growing community and be recognized for it.
 
 We believe in building a transparent, community-driven project. We're excited you're here to learn more and hope you'll
 join us in building the future of digital cash.
