@@ -2,6 +2,7 @@
 sidebar_position: 1
 
 title: Whitepaper
+description: Discover Atto, a live, feeless, and eco-friendly cryptocurrency optimized for instant micropayments and face-to-face transactions. This official whitepaper details its consensus model, unique tokenomics, and vision for the future of digital cash.
 
 toc: true
 numbersections: true
@@ -16,8 +17,11 @@ header-includes:
 
 **Date of Publication:** 2024-10-08 **Date of Notification:** 2025-05-10
 
-This crypto-asset whitepaper has not been approved by any competent authority in any Member State of the European
-Union. The issuer of the crypto-asset is solely responsible for the content of this crypto-asset whitepaper.
+This crypto-asset whitepaper has not been approved by any competent authority in any Member State of the European Union.
+The offeror of the crypto-asset is solely responsible for the content of this crypto-asset whitepaper.
+
+The Atto token, as a utility token, may not be exchangeable for any promised goods or services – especially in the event
+that the Atto project fails or is discontinued.
 
 The management body of **Atto B.V.** hereby confirms that this crypto-asset whitepaper complies with Regulation (EU)
 2023/1114 (MiCA), and that to the best of its knowledge the information presented is fair, clear and not misleading,
@@ -58,8 +62,8 @@ and regulatory uncertainty, is provided in the “Risk Factors” section.
 - **Registered Address:** Winthontlaan 200, 3526KV Utrecht, The Netherlands
 - **Legal Entity Identifier (LEI):** 6488ACA2HX03M49K4086
 - **Date of Incorporation:** 2024-12-10
-- **Management Body:** Felipe (Director)
-- **Contact Information:** contact@atto.cash
+- **Management Body:** Felipe Rotilho (Director)
+- **Contact Information:** contact@atto.cash | +31 20 123 4567 | Inquiries will be responded to within 10 business days.
 
 ## Introduction
 
@@ -456,6 +460,10 @@ generation of digital commerce, from the smallest of transactions to everyday po
   They do not represent shares, profit rights, or ownership in Atto B.V. Token holder rights are limited to
   transactional and protocol-level functionality. While protocol parameters may evolve through decentralized governance,
   the fixed supply, feeless transaction model, and open access to network participation will not be altered arbitrarily.
+
+- **Applicable Law and Jurisdiction:** The offer of Atto tokens to the public is governed by the laws of the
+  Netherlands. Any disputes arising in connection with this offer or the Atto token shall fall under the jurisdiction of
+  the courts of the Netherlands.
 
 ### Distribution
 
