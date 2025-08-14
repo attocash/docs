@@ -109,16 +109,19 @@ To assist new users, we will provide:
 - **Promote**: Incentivize community members, developers, and content creators to spread the word about Atto through
   bounties, referral programs, and educational content campaigns.
 
-### Metrics
-
-To enhance network transparency and provide valuable insights, we will:
+### Node Metrics  ✅
 
 - **Expose Node Metrics**: Implement prometheus endpoint so node operators can monitor the health and performance of
   their nodes.
-- **Launch a Network Dashboard**: Display key live metrics on our website, such as block count, transactions per
-  second (TPS), and other popular network statistics.
 
 ## Phase 6: Representative Program Introduction
+
+### Network Metrics
+
+To enhance network transparency and provide valuable insights, we will:
+
+- **Launch a Network Dashboard**: Display key live metrics on our website, such as block count, transactions per
+  second (TPS), inflation, activity, and other popular network statistics.
 
 ### Empowering Network Participants
 
