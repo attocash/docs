@@ -9,6 +9,17 @@ numbersections: true
 header-includes:
   - \renewcommand{\thesection}{\Alph{section}}
   - \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+  - |
+    % Insert a blank page right after the TOC
+    \makeatletter
+    \let\origtableofcontents\tableofcontents
+    \renewcommand{\tableofcontents}{%
+      \origtableofcontents
+      \clearpage
+      \thispagestyle{empty}
+      \null
+      \clearpage}
+    \makeatother
 ---
 
 # Atto Whitepaper
