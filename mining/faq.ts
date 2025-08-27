@@ -27,7 +27,7 @@ export const miningFaq = [
   {
     question: "Can the Atto reward rate (5,000 attos/minute) change?",
     answer:
-      "The current reward rate is fixed for now. However, it could potentially be adjusted in the future depending on factors like the overall distribution progress and project goals. Any changes would be communicated to the community."
+      "Yes. The default is 5,000 attos/min, but the emission rate is adjusted weekly using a step ladder (5,000 → 4,000 → 3,000 → 2,000 → 1,000 → 500 → 250 → 100) based on the 7-day price change: down moves step the emission down (one step per −1%); up moves (>+1%) step it up by one. If price is stable (−1% to +1%), emissions stay the same. We also maintain an annual guardrail around ~15% of total supply; if we fall behind, emissions may temporarily exceed 5,000/min in stable conditions."
   },
   {
     question: "How can I check my Folding@Home contribution stats?",

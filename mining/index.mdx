@@ -92,17 +92,36 @@ As long as your username and team are correctly configured, your points will be 
 
 ## How Rewards Are Distributed
 
-The system periodically checks Folding@Home scores—about every 15 minutes, although the exact **timing may vary**.
+The system periodically checks Folding@Home scores and distributes rewards for **completed work units**.
 
 When an update is detected, the system calculates the rewards based on the time since the last update:
 
-* **5,000 attos are allocated per minute.**
-* If 12 hours (720 minutes) have passed since last update, then `5,000 × 720 = 3,600,000 attos` are distributed in that cycle.
+* **Emissions are allocated per minute at a variable rate `E`** (default **5,000 attos/min**) that can **step up or down weekly** (see policy below).
+* If 12 hours (720 minutes) have passed since last update, then `E × 720` attos are distributed in that cycle.
+* Example with the default: `5,000 × 720 = 3,600,000 attos`.
 * This total is then **split proportionally** among team members, based on the points they contributed during that time (as reported by the Folding@Home stats API).
 
 So if your machine provided 10% of the team’s total contribution, you’d receive 10% of that round’s rewards.
 
 Your Atto address (used as your Folding@Home username) is what links your contribution to your wallet—make sure it's accurate!
+
+### Emission & Price-Stability Policy (Weekly)
+
+To keep Atto **usable as money**, we aim for **stable prices**. We can’t control demand, but we can control **net new supply** (emissions).
+Each week we evaluate the **7-day price change** and **adjust the emission step** accordingly:
+
+
+**Emission ladder (high → low):**
+`5,000 → 4,000 → 3,000 → 2,000 → 1,000 → 500 → 250 → 100 attos/min`.
+
+
+- **If price is down:** for each full **−1%** over the last 7 days, **move down one step** for the next week.
+- Example: **−3%** → next week emits **2,000/min** (`5k → 4k → 3k → 2k`).
+- **If price is up:** if the 7-day change is **> +1%**, move **up one step** only (slow climb).
+- Example: from **2,000/min** and **+3%** → next week **3,000/min**.
+- **If price is stable:** between **−1% and +1%**, **no change**.
+- **Annual guardrail:** We target roughly **15% of total supply per year** (≈ **1.25%/month** baseline).
+If reductions put us behind this pace, emissions may temporarily **exceed 5,000/min** later—**only** when market conditions are stable enough to absorb it.
 
 ## Frequently Asked Questions (FAQ)
 
