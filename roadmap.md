@@ -95,7 +95,7 @@ stabilized and the web wallet successfully launched, we officially unveiled Atto
 We're currently developing an API Wallet to make integrating with the Atto network seamless. This will allow developers
 and services to interact with the network effortlessly, paving the way for broader adoption and listings.
 
-### Listings (In Progress)
+### Listings ✅
 
 We're actively working on getting Atto listed on key platforms to increase visibility and accessibility. Listings will
 make it easier for users to discover, trade, and adopt Atto across various ecosystems.
@@ -106,8 +106,6 @@ To assist new users, we will provide:
 
 - **Comprehensive Guides**: Step-by-step instructions on how to integrate Atto.
 - **FAQs and Support**: Answers to common questions and dedicated support channels.
-- **Promote**: Incentivize community members, developers, and content creators to spread the word about Atto through
-  bounties, referral programs, and educational content campaigns.
 
 ### Node Metrics  ✅
 
