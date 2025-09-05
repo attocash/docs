@@ -1,5 +1,6 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
 
 # Offline Signing with Atto Commons
 
@@ -30,17 +31,16 @@ Make sure the Atto Commons libraries are available in your project:
   <TabItem value="js" label="JavaScript">
 
     ```bash
-    npm i @attocash/commons-js
-    ````
+      npm i @attocash/commons-js
+    ```
 
   </TabItem>
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    implementation("cash.atto:commons-node-remote:$commonsVersion")
-    implementation("cash.atto:commons-worker-remote:$commonsVersion")
+      implementation("cash.atto:commons-node-remote:$commonsVersion")
+      implementation("cash.atto:commons-worker-remote:$commonsVersion")
     ```
-
   </TabItem>
 </Tabs>
 
@@ -55,30 +55,35 @@ private key from a hex string if you have one (for example, from a mnemonic or a
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {AttoPrivateKey, fromHexToByteArray, toSignerJs} from '@attocash/commons-js';
+      import {AttoPrivateKey, fromHexToByteArray, toSignerJs} from '@attocash/commons-js';
 
-    // Generate a new random private key
-    const newPrivateKey = AttoPrivateKey.Companion.generate();
-    console.log("Generated Private Key:", toHex(newPrivateKey.value));
+      // Generate a new random private key
+      const newPrivateKey = AttoPrivateKey.Companion.generate();
+      console.log("Generated Private Key:", toHex(newPrivateKey.value));
 
-    // (Optional) Import a private key from a known hex string
-    const hexKey = "0000000000000000000000000000000000000000000000000000000000000000";
-    const importedPrivateKey = new AttoPrivateKey(fromHexToByteArray(hexKey));
+      // (Optional) Import a private key from a known hex string
+      const hexKey = "0000000000000000000000000000000000000000000000000000000000000000";
+      const importedPrivateKey = new AttoPrivateKey(fromHexToByteArray(hexKey));
     ```
 
   </TabItem>
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    import cash.atto.commons.* // hypothetical import, adjust as needed
+      // Generate a new random private key
+      val newPrivateKey = AttoPrivateKey.generate()
+      println("Generated Private Key: ${newPrivateKey.value.toHex()}")
 
-    // Generate a new random private key
-    val newPrivateKey = AttoPrivateKey.generate()
-    println("Generated Private Key: ${newPrivateKey.toHex()}")
+      // (Optional) Import a private key from a known hex string
+      val hexKey = "0000000000000000000000000000000000000000000000000000000000000000"
+      val importedPrivateKey = AttoPrivateKey(hexKey.fromHexToByteArray())
 
-    // (Optional) Import a private key from a known hex string
-    val hexKey = "0000000000000000000000000000000000000000000000000000000000000000"
-    val importedPrivateKey = AttoPrivateKey(hexKey.hexToByteArray())
+      // Mnemonic
+      val anotherMnemonic = AttoMnemonic.generate()
+      println(anotherMnemonic.words.joinToString(" "))
+
+      val anotherSeed = anotherMnemonic.toSeed("my super secret passphrase")
+      val anotherPrivateKey = anotherSeed.toPrivateKey(0U)
     ```
 
   </TabItem>
@@ -100,25 +105,25 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {AttoAddress, AttoAlgorithm, toSignerJs} from '@attocash/commons-js';
+      import {AttoAddress, AttoAlgorithm, toSignerJs} from '@attocash/commons-js';
 
-    // Assume we have a private key (e.g., importedPrivateKey from previous section)
-    const signer = toSignerJs(importedPrivateKey); // create a signer from the private key
-    const publicKey = signer.publicKey; // get the Ed25519 public key
-    const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // derive the Atto address (V1 algorithm)
-    console.log("Address:", address.toString());
+      // Assume we have a private key (e.g., importedPrivateKey from previous section)
+      const signer = toSignerJs(importedPrivateKey); // create a signer from the private key
+      const publicKey = signer.publicKey; // get the Ed25519 public key
+      const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // derive the Atto address (V1 algorithm)
+      console.log("Address:", address.toString());
     ```
 
   </TabItem>
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    import cash.atto.commons.*
+      import cash.atto.commons.*
 
-    val signer = newPrivateKey.toSigner() // create a signer from the private key (hypothetical extension)
-    val publicKey = signer.publicKey // obtain the Ed25519 public key (ByteArray)
-    val address = AttoAddress(AttoAlgorithm.V1, publicKey)
-    println("Address: $address")
+      val signer = newPrivateKey.toSigner()
+      val publicKey = signer.publicKey
+      val address = AttoAddress(AttoAlgorithm.V1, publicKey)
+      println("Address: $address")
     ```
 
   </TabItem>
@@ -142,12 +147,12 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
 
     // Configure network and endpoints (using mainnet in this example)
     const client = createCustomAttoNodeClient(
-    AttoNetwork.LIVE, // target the main Atto network
-    "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
+      AttoNetwork.LIVE, // target the main Atto network
+      "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
     );
 
     const worker = createAttoWorker(
-    "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
+      "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
     );
     ```
 
@@ -159,11 +164,11 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
 
     val client = AttoNodeOperations.custom(
     AttoNetwork.LIVE, // target the main Atto network
-    "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
-    ) {}
+      "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
+    )
 
     val worker = AttoWorker.remote(
-    "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
+      "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
     )
     ```
 
@@ -208,16 +213,16 @@ and height, among other data. We can store this in a map for quick lookup.
 
     ```kotlin
     val addressesToMonitor = listOf(hotWalletAddress, anotherAddress)
-    val accountsInfo = client.account(addressesToMonitor) // suspend function or similar returning account info list
+    val accounts = client.account(addressesToMonitor) // suspend function or similar returning account info list
 
     // Create a map from address string to account info
-    val accountMap = accountsInfo.associateBy {it.address.toString()}.toMutableMap()
+    val accountMap = initialAccounts.associateBy {it.address}.toMutableMap()
 
     // Example: print current balance and height for the hot wallet
-    accountMap[hotWalletAddress.toString()]?.let {account ->
-    println("Hot Wallet Balance: ${info.balance}")
-    println("Hot Wallet Height: ${info.height}")
-  }
+    accountMap[hotWalletAddress]?.let { account ->
+      println("Hot Wallet Balance: ${account.balance}")
+      println("Hot Wallet Height: ${account.height}")
+    }
     ```
 
   </TabItem>
@@ -306,42 +311,50 @@ if the account exists (to create a normal receive block).
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    val signerMap = mapOf(
-    hotWalletAddress.toString() to hotWalletSigner,
-    anotherAddress.toString() to anotherSigner
-    )
+    private data class AddressState(
+      val signer: AttoSigner,
+      var account: AttoAccount? = null
+      ) {
+      private val mutex = Mutex()
+      val address = AttoAddress(AttoAlgorithm.V1, signer.publicKey)
 
-    // Callback to handle an incoming receivable
-    suspend fun onReceivable(receivable: Receivable) {
-    println("Receivable detected: $receivable")
-    val receiverAddr = receivable.receiverAddress.toString()
-    val signer = signerMap[receiverAddr] ?: return
-    val existingAccount = accountMap[receiverAddr]
+      suspend fun <T> withLock(block: suspend AddressState.() -> T): T =
+      mutex.withLock { block() }
+    }
 
-    // Build open or receive block
-    val (block, account) = if (existingAccount == null) {
-    AttoAccount.open(AttoNetwork.LIVE, representativeAddress, receivable, client.now())
-  } else {
-    existingAccount.receive(receivable, client.now())
-  }
+    private suspend fun receive(receivable: AttoReceivable) {
+      val state = monitoredStates.value[receivable.address]!!
+      state.withLock {
+        val existingAccount = account
 
-    // Sign and compute PoW
-    val signature = signer.signBlock(block)
-    val work = worker.workBlock(block)
-    val transaction = AttoTransaction(block, signature, work)
+        val now = client.now() // use when the clock is unreliable
+        val (block, updatedAccount) = existingAccount?.receive(receivable, now)
+        ?: AttoAccount.open(AttoAlgorithm.V1, representativeAddress.publicKey, receivable, network, now)
 
-    // Publish the transaction
-    client.publish(transaction)
-    println("Published receive block for $receiverAddr")
+        publish(block, signer)
 
-    // Update local account state
-    accountMap[receiverAddr] = account
-  }
+        this.account = updatedAccount
+      }
+    }
 
-    // Subscribe to receivables (assuming client has coroutine or callback-based subscription)
-    client.receivableStream(listOf(hotWalletAddress, anotherAddress)).collect {
-    onReceivable(it)
-  }
+    private fun startReceiverJob() {
+      receiverJob.getAndUpdate {
+          it.cancel()
+          scope.launch {
+          monitoredStates.collect {state ->
+            try {
+            client.receivableStream(state.keys.toList()).collect {receivable ->
+              receive(receivable)
+            }
+          } catch (e: Exception) {
+            println("Error: ${e.message}")
+          }
+            delay(1_000)
+            startReceiverJob()
+          }
+        }
+      }
+    }
     ```
 
   </TabItem>
@@ -408,25 +421,16 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    val amount = AttoAmount.from(AttoUnit.ATTO, "100.1")
+    private suspend fun send(senderAddress: AttoAddress, receiverAddress: AttoAddress, amount: AttoAmount) {
+      val state = monitoredStates.value[senderAddress]!!
+      state.withLock {
+        val (block, updatedAccount) = state.account!!.send(receiverAddress.algorithm, receiverAddress.publicKey, amount)
 
-    val senderAccount = accountMap[hotWalletAddress.toString()]
-    ?: error("Sender account not found or not opened.")
+        publish(block, signer)
 
-    // Build the send block
-    val (sendBlock, updatedSenderAccount) = senderAccount.send(anotherAddress, amount)
-
-    // Sign and compute PoW
-    val sendSignature = signerMap[hotWalletAddress.toString()]!!.signBlock(sendBlock)
-    val sendWork = worker.work(sendBlock)
-
-    // Create and publish the transaction
-    val sendTransaction = AttoTransaction(sendBlock, sendSignature, sendWork)
-    client.publish(sendTransaction)
-    println("Sent $amount from $hotWalletAddress to $anotherAddress")
-
-    // Update local sender account state
-    accountMap[hotWalletAddress.toString()] = updatedSenderAccount
+        this.account = updatedAccount
+      }
+    }
     ```
 
   </TabItem>
@@ -494,25 +498,30 @@ Typically, you start at the next height after the current one (or at height 0 fo
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    fun buildHeightSearch(): HeightSearch {
-    val searches = signerMap.keys.map {addressStr ->
-    val accountInfo = accountMap[addressStr]
-    val startHeight = accountInfo?.height?.next() ?: AttoHeight.MIN  // 0 if not opened, or next height
-    AccountHeightSearch(AttoAddress.parse(addressStr), startHeight)
-  }
-    return HeightSearch.from(searches)
-  }
-    val heightSearch = buildHeightSearch()
-
-    // Subscribe to transaction stream
-    val transactionSubscription = client.transactionStream(heightSearch).collect {
-    println("New transaction affecting our accounts: $it")
-  }
-
-    // Subscribe to account entry stream
-    val accountEntrySubscription = client.accountEntryStream(heightSearch).collect {
-    println("New account entry (state update): $it")
-  }
+    private fun startTransactionJob() {
+      transactionJob.getAndUpdate {
+        it.cancel()
+        scope.launch {
+          monitoredStates.collect { state ->
+            try {
+              val search = HeightSearch(state.keys.map { address ->
+                AccountHeightSearch(
+                  address,
+                  fromHeight = 1UL.toAttoHeight() // this should be set to the latest known height
+                )
+              })
+            client.transactionStream(search).collect { transaction ->
+              println("Transaction: $transaction")
+            }
+          } catch (e: Exception) {
+            println("Error: ${e.message}")
+          }
+            delay(1_000)
+            startReceiverJob()
+          }
+        }
+      }
+    }
     ```
 
   </TabItem>
