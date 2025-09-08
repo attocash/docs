@@ -12,8 +12,7 @@ The primary functions of the Wallet Server include:
 
 * Creating and managing wallets.
 * Creating and managing accounts within those wallets.
-* Sending Atto tokens.
-* Receiving Atto tokens (typically handled by accounts automatically reflecting incoming funds).
+* Sending Atto and automatically receiving incoming transactions.
 * Querying account history and balances.
 
 The Wallet Server interacts with an Atto Node for blockchain data and a Work Server for Proof of Work calculations

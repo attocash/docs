@@ -13,7 +13,7 @@ network growth.
 ### Faucet and Miner Distribution
 
 Atto offers a [faucet](/faucet) and a [folding@home integration](/docs/mining) where
-users can receive tokens for free. This method allows newcomers to experience the Atto network without any initial
+users can receive coins for free. This method allows newcomers to experience the Atto network without any initial
 investment.
 
 - **Purpose**: Introduce new users to Atto.
@@ -21,14 +21,14 @@ investment.
 
 ### Contribution Rewards
 
-Community members who contribute to the Atto project can earn tokens as rewards. Contributions can be in the form of
+Community members who contribute to the Atto project can earn coins as rewards. Contributions can be in the form of
 code development, documentation, community support, and more.
 
 - **Types of Contributions**:
   - Software development
   - Critical vulnerability reporting
   - Writing tutorials or guides
-- **Reward Mechanism**: Tokens are awarded based on the impact and quality of the contribution.
+- **Reward Mechanism**: Coins are awarded based on the impact and quality of the contribution.
 
 ### Voting Node Rewards (NOT IMPLEMENTED YET)
 

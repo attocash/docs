@@ -19,7 +19,7 @@ pending credits; they are not spendable outputs and disappear once claimed.
 :::
 
 * **Open** – Initializes a new account chain with an “open” block.
-* **Send** – Debits an account, sending tokens to another address.
+* **Send** – Debits an account, sending coins to another address.
 * **Receive** – Credits an account by receiving from a pending send.
 * **Change** – Updates an account’s representative (voting weight delegate).
 
