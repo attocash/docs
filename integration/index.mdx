@@ -2,6 +2,9 @@
 sidebar_position: 0
 ---
 
+import { faq } from "./faq";
+import Head from "@docusaurus/Head";
+
 # Integration Overview
 
 Welcome to the **Atto Integration Guide**! These docs walk you through deploying, configuring, and operating every major
@@ -50,3 +53,29 @@ signer) toggles the mode. Switching modes later isn't supported; choose once or 
 
 Need something else? Ping us on Discord or open a GitHub issue in
 the [docs repository](https://github.com/attocash/docs) and we'll make it happen.
+
+## Frequently Asked Questions (FAQ)
+
+<Head>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faq.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer
+        }
+      }))
+    })}
+  </script>
+</Head>
+
+{faq.map((faq, index) => (
+<details key={index} style={{ marginBottom: "1.5rem" }}>
+  <summary><strong>{faq.question}</strong></summary>
+  <p>{faq.answer}</p>
+</details>
+))}
