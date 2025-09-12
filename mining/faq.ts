@@ -1,4 +1,4 @@
-export const miningFaq = [
+export const faq = [
   {
     question: "Why am I not receiving any rewards?",
     answer:

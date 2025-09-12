@@ -1,4 +1,4 @@
-import { miningFaq } from "./faq";
+import { faq } from "./faq";
 import IdealImage from "@theme/IdealImage";
 import Head from "@docusaurus/Head";
 
@@ -137,7 +137,7 @@ If reductions put us behind this pace, emissions may temporarily **exceed 5,000/
     {JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": miningFaq.map((faq) => ({
+      "mainEntity": faq.map((faq) => ({
         "@type": "Question",
         name: faq.question,
         acceptedAnswer: {
@@ -149,7 +149,7 @@ If reductions put us behind this pace, emissions may temporarily **exceed 5,000/
   </script>
 </Head>
 
-{miningFaq.map((faq, index) => (
+{faq.map((faq, index) => (
 <details key={index} style={{ marginBottom: "1.5rem" }}>
   <summary><strong>{faq.question}</strong></summary>
   <p>{faq.answer}</p>
