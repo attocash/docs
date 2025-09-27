@@ -10,9 +10,9 @@ export const faq = [
       "Atto supports 9 decimal places. One ATTO = 1,000,000,000 raw units. Integrators should store balances as unsigned long in raw units to avoid floating point rounding errors."
   },
   {
-    question: "Are transactions on Atto free?",
+    question: "Are transactions on Atto feeless?",
     answer:
-      "Yes. Atto is a feeless blockchain. The amount a user sends is exactly what the recipient receives."
+      "Yes. Atto has no fees. The amount a user sends is exactly what the recipient receives."
   },
   {
     question: "Does Atto use Proof-of-Work?",
