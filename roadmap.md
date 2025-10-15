@@ -88,29 +88,34 @@ stabilized and the web wallet successfully launched, we officially unveiled Atto
 
 </details>
 
-## Phase 5: Integration
+## Phase 5: Integration ✅
 
-### API Wallet ✅
+<details>
+<summary>View Details</summary>
+
+### API Wallet
 
 We're currently developing an API Wallet to make integrating with the Atto network seamless. This will allow developers
 and services to interact with the network effortlessly, paving the way for broader adoption and listings.
 
-### Listings ✅
+### Listings
 
 We're actively working on getting Atto listed on key platforms to increase visibility and accessibility. Listings will
 make it easier for users to discover, trade, and adopt Atto across various ecosystems.
 
-### Educational Resources (In Progress)
+### Educational Resources
 
 To assist new users, we will provide:
 
 - **Comprehensive Guides**: Step-by-step instructions on how to integrate Atto.
 - **FAQs and Support**: Answers to common questions and dedicated support channels.
 
-### Node Metrics  ✅
+### Node Metrics
 
 - **Expose Node Metrics**: Implement prometheus endpoint so node operators can monitor the health and performance of
   their nodes.
+
+</details>
 
 ## Phase 6: Representative Program Introduction
 
