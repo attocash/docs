@@ -84,20 +84,20 @@ private key from a hex string if you have one (for example, from a mnemonic or a
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-      // Generate a new random private key
-      val newPrivateKey = AttoPrivateKey.generate()
-      println("Generated Private Key: ${newPrivateKey.value.toHex()}")
+      import cash.atto.commons.*
 
-      // (Optional) Import a private key from a known hex string
-      val hexKey = "0000000000000000000000000000000000000000000000000000000000000000"
-      val importedPrivateKey = AttoPrivateKey(hexKey.fromHexToByteArray())
+      // Generate a mnemonic and derive keys via seed/index
+      val mnemonic = AttoMnemonic.generate()
+      println(mnemonic.words.joinToString(" "))
 
-      // Mnemonic
-      val anotherMnemonic = AttoMnemonic.generate()
-      println(anotherMnemonic.words.joinToString(" "))
+      val seed = mnemonic.toSeed()
+      val index0 = 0u.toAttoIndex()
+      val privateKey0 = seed.toPrivateKey(index0)
+      println("Derived Private Key (hex): ${privateKey0.value.toHex()}")
 
-      val anotherSeed = anotherMnemonic.toSeed("my super secret passphrase")
-      val anotherPrivateKey = anotherSeed.toPrivateKey(0U)
+      // Derive the public key if needed
+      val publicKey0 = privateKey0.toSigner().publicKey
+      println("Public Key (hex): ${publicKey0.value.toHex()}")
     ```
 
   </TabItem>
@@ -133,8 +133,8 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
     ```kotlin
       import cash.atto.commons.*
 
-      val signer = newPrivateKey.toSigner()
-      val publicKey = signer.publicKey
+      // Use the key from the previous section
+      val publicKey = privateKey0.toSigner().publicKey
       val address = AttoAddress(AttoAlgorithm.V1, publicKey)
       println("Address: $address")
     ```
@@ -168,15 +168,11 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
 
     ```kotlin
     import cash.atto.commons.*
+    import kotlin.time.Duration.Companion.seconds
 
-    val client = AttoNodeOperations.custom(
-    AttoNetwork.LIVE, // target the main Atto network
-      "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
-    )
-
-    val worker = AttoWorker.remote(
-      "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
-    )
+    // Remote clients (v6)
+    val client = AttoNodeClient.remote("https://my-historical-node.mydomain.cash")
+    val worker = AttoWorker.remote("https://my-work-server.mydomain.cash").retry(1.seconds).cached()
     ```
 
   </TabItem>
@@ -220,10 +216,10 @@ and height, among other data. We can store this in a map for quick lookup.
 
     ```kotlin
     val addressesToMonitor = listOf(hotWalletAddress, anotherAddress)
-    val accounts = client.account(addressesToMonitor) // suspend function or similar returning account info list
+    val accounts = client.account(addressesToMonitor)
 
-    // Create a map from address string to account info
-    val accountMap = initialAccounts.associateBy {it.address}.toMutableMap()
+    // Create a map from address to account info
+    val accountMap = accounts.associateBy { it.address }.toMutableMap()
 
     // Example: print current balance and height for the hot wallet
     accountMap[hotWalletAddress]?.let { account ->
@@ -311,50 +307,21 @@ if the account exists (to create a normal receive block).
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    private data class AddressState(
-      val signer: AttoSigner,
-      var account: AttoAccount? = null
-      ) {
-      private val mutex = Mutex()
-      val address = AttoAddress(AttoAlgorithm.V1, signer.publicKey)
+    import cash.atto.commons.*
+    import kotlin.time.Duration.Companion.seconds
 
-      suspend fun <T> withLock(block: suspend AddressState.() -> T): T =
-      mutex.withLock { block() }
+    // Build account monitor and wallet
+    val accountMonitor = client.createAccountMonitor()
+    val wallet = AttoWallet.create(client, worker, seed)
+
+    // Start auto-receiver with a default representative for opens
+    val receiverJob = wallet.startAutoReceiver(accountMonitor) {
+      AttoAddress(AttoAlgorithm.V1, AttoPublicKey(ByteArray(32)))
     }
 
-    private suspend fun receive(receivable: AttoReceivable) {
-      val state = monitoredStates.value[receivable.address]!!
-      state.withLock {
-        val existingAccount = account
-
-        val now = client.now() // use when the clock is unreliable
-        val (block, updatedAccount) = existingAccount?.receive(receivable, now)
-        ?: AttoAccount.open(AttoAlgorithm.V1, representativeAddress.publicKey, receivable, network, now)
-
-        publish(block, signer)
-
-        this.account = updatedAccount
-      }
-    }
-
-    private fun startReceiverJob() {
-      receiverJob.getAndUpdate {
-          it.cancel()
-          scope.launch {
-          monitoredStates.collect {state ->
-            try {
-            client.receivableStream(state.keys.toList()).collect {receivable ->
-              receive(receivable)
-            }
-          } catch (e: Exception) {
-            println("Error: ${e.message}")
-          }
-            delay(1_000)
-            startReceiverJob()
-          }
-        }
-      }
-    }
+    // Open accounts you want to manage via the wallet
+    val genesisIndex = 0u.toAttoIndex()
+    wallet.openAccount(genesisIndex)
     ```
 
   </TabItem>
@@ -407,16 +374,17 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    private suspend fun send(senderAddress: AttoAddress, receiverAddress: AttoAddress, amount: AttoAmount) {
-      val state = monitoredStates.value[senderAddress]!!
-      state.withLock {
-        val (block, updatedAccount) = state.account!!.send(receiverAddress.algorithm, receiverAddress.publicKey, amount)
+    import cash.atto.commons.*
 
-        publish(block, signer)
+    // Using the wallet created earlier
+    val senderIndex = 0u.toAttoIndex()
+    val recipientIndex = 2u.toAttoIndex()
 
-        this.account = updatedAccount
-      }
-    }
+    val amount = AttoAmount.from(AttoUnit.ATTO, "100.1")
+    val recipientAddress = wallet.getAddress(recipientIndex)
+
+    val sendTx = wallet.send(senderIndex, recipientAddress, amount)
+    println("Sent $amount from index $senderIndex to $recipientAddress. Tx hash: ${sendTx.hash}")
     ```
 
   </TabItem>
