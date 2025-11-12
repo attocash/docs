@@ -55,15 +55,29 @@ private key from a hex string if you have one (for example, from a mnemonic or a
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-      import {AttoPrivateKey, fromHexToByteArray, toSignerJs} from '@attocash/commons-js';
+    import {
+      AttoMnemonic,
+      toSeedAsync,
+      toPrivateKey,
+      toPublicKey,
+      toAttoIndex,
+      toHex,
+    } from '@attocash/commons-js';
 
-      // Generate a new random private key
-      const newPrivateKey = AttoPrivateKey.Companion.generate();
-      console.log("Generated Private Key:", toHex(newPrivateKey.value));
+    // Generate a new mnemonic and derive a private key (index 0)
+    (async () => {
+      const mnemonic = AttoMnemonic.generate();
+      console.log('Mnemonic:', mnemonic.words.join(' '));
 
-      // (Optional) Import a private key from a known hex string
-      const hexKey = "0000000000000000000000000000000000000000000000000000000000000000";
-      const importedPrivateKey = new AttoPrivateKey(fromHexToByteArray(hexKey));
+      const seed = await toSeedAsync(mnemonic);
+      const index0 = toAttoIndex(0);
+      const privateKey0 = toPrivateKey(seed, index0);
+      console.log('Derived Private Key (hex):', toHex(privateKey0.value));
+
+      // Derive the public key if needed
+      const publicKey0 = toPublicKey(privateKey0);
+      console.log('Public Key (hex):', toHex(publicKey0.value));
+    })();
     ```
 
   </TabItem>
@@ -105,13 +119,12 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-      import {AttoAddress, AttoAlgorithm, toSignerJs} from '@attocash/commons-js';
+    import { AttoAddress, AttoAlgorithm, toPublicKey } from '@attocash/commons-js';
 
-      // Assume we have a private key (e.g., importedPrivateKey from previous section)
-      const signer = toSignerJs(importedPrivateKey); // create a signer from the private key
-      const publicKey = signer.publicKey; // get the Ed25519 public key
-      const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // derive the Atto address (V1 algorithm)
-      console.log("Address:", address.toString());
+    // Assume we have a private key from the previous section (e.g., privateKey0)
+    const publicKey = toPublicKey(privateKey0); // derive Ed25519 public key
+    const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // build the Atto address
+    console.log('Address:', address.toString());
     ```
 
   </TabItem>
@@ -143,17 +156,11 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {createCustomAttoNodeClient, createAttoWorker, AttoNetwork} from '@attocash/commons-js';
+    import { AttoNodeClientAsyncBuilder, AttoWorkerAsyncBuilder } from '@attocash/commons-js';
 
-    // Configure network and endpoints (using mainnet in this example)
-    const client = createCustomAttoNodeClient(
-      AttoNetwork.LIVE, // target the main Atto network
-      "https://my-historical-node.mydomain.cash" // base URL of your historical node's REST API
-    );
-
-    const worker = createAttoWorker(
-      "https://my-work-server.mydomain.cash" // base URL of a work server for PoW
-    );
+    // Configure endpoints (using mainnet infra in this example)
+    const nodeClient = new AttoNodeClientAsyncBuilder('https://my-historical-node.mydomain.cash').build();
+    const worker = new AttoWorkerAsyncBuilder('https://my-work-server.mydomain.cash').build();
     ```
 
   </TabItem>
@@ -195,7 +202,7 @@ and height, among other data. We can store this in a map for quick lookup.
     ```javascript
     // Prepare a list of addresses to monitor (in this example, our hot wallet and another account)
     const addressesToMonitor = [hotWalletAddress, anotherAddress];
-    const accountsInfo = await client.account(addressesToMonitor);
+    const accountsInfo = await nodeClient.account(addressesToMonitor);
 
     // Create a map of address -> account info for easy reference
     const accountMap = new Map(accountsInfo.map(acc => [acc.address.toString(), acc]));
@@ -259,52 +266,45 @@ if the account exists (to create a normal receive block).
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {attoAccountOpen, attoAccountReceive, AttoHeight} from '@attocash/commons-js';
+    import {
+      AttoAccountMonitorAsyncBuilder,
+      AttoWalletAsyncBuilder,
+      AttoAmount,
+      AttoUnit,
+      AttoAddress,
+      AttoAlgorithm,
+      AttoPublicKey,
+      toAttoIndex,
+    } from '@attocash/commons-js';
 
-    const signerMap = new Map([
-    [hotWalletAddress.toString(), hotWalletSigner],
-    [anotherAddress.toString(), anotherSigner]
-    ]);
+    // Assumes you already created `nodeClient`, `worker`, and have a `seed` from the key section.
+    const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
 
-    // Define the callback to handle incoming receivables
-    const receiver = async (receivable) => {
-    console.log("Receivable detected:", receivable);
-    const receiverAddr = receivable.receiverAddress.toString();
-    const signer = signerMap.get(receiverAddr);
-    const existingAccount = accountMap.get(receiverAddr);
+    // Optional: default representative provider (used when opening an account)
+    const defaultRepresentativeProvider = () => {
+      const dummyBytes = new Uint8Array(32);
+      return new AttoAddress(AttoAlgorithm.V1, new AttoPublicKey(dummyBytes));
+    };
 
-    // Build the appropriate block (open or receive)
-    let result;
-    if (existingAccount == null) {
-    // If account not opened yet, create an open block with a representative
-    result = attoAccountOpen(AttoNetwork.LIVE, representativeAddress, receivable, client.now().toString());
-  } else {
-    // If account exists, create a receive block
-    result = attoAccountReceive(existingAccount, receivable, client.now().toString());
-  }
-    const {block, account} = result;
+    // Build a wallet with auto-receiver enabled. It will automatically open/receive
+    // for any receivables found for accounts derived from your seed.
+    const wallet = new AttoWalletAsyncBuilder(nodeClient, worker)
+      .signerProviderSeed(seed)
+      .enableAutoReceiver(
+        accountMonitor,
+        AttoAmount.from(AttoUnit.ATTO, '1'), // minimum receivable to auto-receive
+        10,                                   // retry interval (seconds)
+        defaultRepresentativeProvider         // representative provider for opens
+      )
+      .build();
 
-    // Sign the block with the account's private key
-    const signature = await signer.signBlock(block);
-    // Compute Proof-of-Work for the block
-    const work = await worker.workBlock(block);
-    // Create the finalized transaction
-    const transaction = new AttoTransaction(block, signature, work);
+    // Example: open first account (index 0) so it’s tracked by the wallet
+    const index0 = toAttoIndex(0);
+    await wallet.openAccount(index0).asPromise();
 
-    // Publish the transaction to the network
-    await client.publish(transaction);
-    console.log("Published receive block for", receiverAddr);
-
-    // Update our local account state map
-    accountMap.set(receiverAddr, account);
-  };
-
-    // Start listening for receivables on our addresses
-    const receivableSubscription = client.onReceivable(
-    [hotWalletAddress, anotherAddress],
-    receiver,
-    errorMsg => console.error("Receivable stream closed/error:", errorMsg)
-    );
+    // You can derive/show its address
+    const address0 = await wallet.getAddress(index0).asPromise();
+    console.log('Account[0] address:', address0.toString());
     ```
 
   </TabItem>
@@ -389,32 +389,18 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {attoAccountSend, AttoAmount, AttoUnit} from '@attocash/commons-js';
+    import { AttoAmount, AttoUnit } from '@attocash/commons-js';
 
     // Define the amount to send (100.1 ATTO in this example)
-    const amount = AttoAmount.Companion.from(AttoUnit.ATTO, "100.1");
+    const amount = AttoAmount.from(AttoUnit.ATTO, '100.1');
 
-    // Get the current account state for the sender
-    const senderAccount = accountMap.get(hotWalletAddress.toString());
-    if (!senderAccount) {
-    throw new Error("Sender account not found or not opened.");
-  }
+    // Assume you built `wallet` earlier and opened index 0
+    const index0 = toAttoIndex(0);
 
-    // Build the send block and updated account state
-    const {block: sendBlock, account: updatedSenderAccount} =
-    attoAccountSend(senderAccount, anotherAddress, amount);
-
-    // Sign and compute PoW for the send block
-    const sendSignature = await signerMap.get(hotWalletAddress.toString()).signBlock(sendBlock);
-    const sendWork = await worker.work(sendBlock);
-
-    // Create and publish the send transaction
-    const sendTransaction = new AttoTransaction(sendBlock, sendSignature, sendWork);
-    await client.publish(sendTransaction);
-    console.log(`Sent ${amount} from ${hotWalletAddress} to ${anotherAddress}`);
-
-    // Update the local account state for the sender
-    accountMap.set(hotWalletAddress.toString(), updatedSenderAccount);
+    // Resolve or compute the recipient address (e.g., from public key)
+    // Here we assume `anotherAddress` is available from earlier examples
+    const tx = await wallet.sendByIndex(index0, anotherAddress, amount, null).asPromise();
+    console.log(`Sent ${amount} from index 0 to ${anotherAddress}. Tx hash: ${tx.hash}`);
     ```
 
   </TabItem>
@@ -462,35 +448,42 @@ Typically, you start at the next height after the current one (or at height 0 fo
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import {AccountHeightSearch, HeightSearch, AttoHeight} from '@attocash/commons-js';
+    import {
+      AttoTransactionMonitorAsyncBuilder,
+      AttoAccountEntryMonitorAsyncBuilder,
+      AttoAccountMonitorAsyncBuilder,
+      AttoAddress,
+      AttoAlgorithm,
+      toPublicKey,
+      toAttoHeight,
+      AttoHeight,
+    } from '@attocash/commons-js';
 
-    // Prepare height-based search for each address (start from current height + 1, or 0 if no account yet)
-    function buildHeightSearch() {
-    const searches = [];
-    for (const addressStr of signerMap.keys()) {
-    const accountInfo = accountMap.get(addressStr);
-    const startHeight = (accountInfo == null)
-    ? AttoHeight.Companion.MIN        // start at height 0 if account not opened
-    : accountInfo.height.next();      // start from next height of existing account
-    searches.push(new AccountHeightSearch(AttoAddress.Companion.parse(addressStr), startHeight));
-  }
-    return HeightSearch.Companion.fromArray(searches);
-  }
+    // Build monitors
+    const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
 
-    const heightSearch = buildHeightSearch();
+    // We will start streaming from height 1 for all addresses unless it's the genesis in your local mock.
+    // Provide a heightProvider callback that can decide per-address.
+    const transactionMonitor = new AttoTransactionMonitorAsyncBuilder(nodeClient, accountMonitor)
+      .heightProvider((address) => {
+        // example: start at height 1 for everyone
+        return Promise.resolve(AttoHeight.MIN);
+      })
+      .build();
 
-    // Subscribe to transaction stream
-    const transactionSubscription = client.onTransaction(
-    heightSearch,
-    tx => console.log("New transaction affecting our accounts:", tx),
-    err => console.warn("Transaction stream closed/error:", err)
+    const accountEntryMonitor = new AttoAccountEntryMonitorAsyncBuilder(nodeClient, accountMonitor)
+      .heightProvider((address) => Promise.resolve(AttoHeight.MIN))
+      .build();
+
+    // Register listeners
+    const txJob = transactionMonitor.onTransaction(
+      (tx) => console.log('Transaction event:', tx.hash),
+      (err) => { if (err) console.warn('Transaction monitor error:', err.message); }
     );
 
-    // Subscribe to account entry stream
-    const accountEntrySubscription = client.onAccountEntry(
-    heightSearch,
-    entry => console.log("New account entry (state update):", entry),
-    err => console.warn("Account entry stream closed/error:", err)
+    const entryJob = accountEntryMonitor.onAccountEntry(
+      (entry) => console.log('Account entry event:', entry.hash),
+      (err) => { if (err) console.warn('Account entry monitor error:', err.message); }
     );
     ```
 
