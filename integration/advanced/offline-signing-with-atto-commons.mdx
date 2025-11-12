@@ -5,7 +5,7 @@ import CodeBlock from "@theme/CodeBlock";
 # Offline Signing with Atto Commons
 
 In this tutorial, we demonstrate how to integrate with the Atto network at a low level using the **Atto Commons**
-libraries (available for JavaScript/TypeScript and Kotlin). This approach allows you to generate and manage keys,
+libraries (available for JavaScript/TypeScript, Kotlin, and Java). This approach allows you to generate and manage keys,
 construct transactions offline, and interact directly with an Atto node – all without relying on the Wallet Server
 component. This is ideal for advanced integrators (such as exchanges or custodians) who require full control over key
 management and offline signing.
@@ -41,6 +41,29 @@ Make sure the Atto Commons libraries are available in your project:
       implementation("cash.atto:commons-node-remote:$commonsVersion")
       implementation("cash.atto:commons-worker-remote:$commonsVersion")
     ```
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```xml
+    <!-- Maven -->
+    <dependency>
+      <groupId>cash.atto</groupId>
+      <artifactId>commons-node-remote-jvm</artifactId>
+      <version>${commonsVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>cash.atto</groupId>
+      <artifactId>commons-worker-remote-jvm</artifactId>
+      <version>${commonsVersion}</version>
+    </dependency>
+    ```
+
+    ```groovy
+    // Gradle (Groovy DSL)
+    implementation "cash.atto:commons-node-remote:${commonsVersion}"
+    implementation "cash.atto:commons-worker-remote:${commonsVersion}"
+    ```
+
   </TabItem>
 </Tabs>
 
@@ -101,6 +124,27 @@ private key from a hex string if you have one (for example, from a mnemonic or a
     ```
 
   </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+    import static cash.atto.commons.AttoKeyIndexes.toAttoIndex;
+
+    // Generate a mnemonic and derive keys via seed/index
+    AttoMnemonic mnemonic = AttoMnemonic.generate();
+    System.out.println(String.join(" ", mnemonic.getWords()));
+
+    AttoSeed seed = AttoSeeds.toSeedBlocking(mnemonic);
+    AttoKeyIndex index0 = toAttoIndex(0);
+    AttoPrivateKey privateKey0 = AttoPrivateKeys.toPrivateKey(seed, index0);
+    System.out.println("Derived Private Key (hex): " + AttoHex.toHex(privateKey0.getValue()));
+
+    // Derive the public key if needed
+    AttoPublicKey publicKey0 = AttoPublicKeys.toPublicKey(privateKey0);
+    System.out.println("Public Key (hex): " + AttoHex.toHex(publicKey0.getValue()));
+    ```
+
+  </TabItem>
 </Tabs>
 
 **About Key Security:** The private key is a 32-byte value. Keep this safe! With Ed25519, the public key can be derived
@@ -140,6 +184,18 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
     ```
 
   </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+
+    // Use the key from the previous section
+    AttoPublicKey publicKey = AttoPublicKeys.toPublicKey(privateKey0);
+    AttoAddress address = new AttoAddress(AttoAlgorithm.V1, publicKey);
+    System.out.println("Address: " + address);
+    ```
+
+  </TabItem>
 </Tabs>
 
 The resulting address (when printed) will be a string starting with the `atto://` prefix. This address is what you share to receive funds.
@@ -173,6 +229,18 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
     // Remote clients (v6)
     val client = AttoNodeClient.remote("https://my-historical-node.mydomain.cash")
     val worker = AttoWorker.remote("https://my-work-server.mydomain.cash").retry(1.seconds).cached()
+    ```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.node.*;
+    import cash.atto.commons.worker.*;
+
+    // Configure endpoints (using mainnet infra in this example)
+    AttoNodeClientAsync nodeClient = new AttoNodeClientAsyncBuilder("https://my-historical-node.mydomain.cash").build();
+    AttoWorkerAsync worker = new AttoWorkerAsyncBuilder("https://my-work-server.mydomain.cash").build();
     ```
 
   </TabItem>
@@ -225,6 +293,32 @@ and height, among other data. We can store this in a map for quick lookup.
     accountMap[hotWalletAddress]?.let { account ->
       println("Hot Wallet Balance: ${account.balance}")
       println("Hot Wallet Height: ${account.height}")
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+    import cash.atto.commons.node.*;
+    import java.util.*;
+
+    // Prepare a list of addresses to monitor (in this example, our hot wallet and another account)
+    List<AttoAddress> addressesToMonitor = Arrays.asList(hotWalletAddress, anotherAddress);
+    List<AttoAccount> accountsInfo = nodeClient.account(addressesToMonitor).get();
+
+    // Create a map of address -> account info for easy reference
+    Map<AttoAddress, AttoAccount> accountMap = new HashMap<>();
+    for (AttoAccount acc : accountsInfo) {
+      accountMap.put(acc.getAddress(), acc);
+    }
+
+    // Example: print the current balance and height of the hot wallet
+    AttoAccount hotWalletInfo = accountMap.get(hotWalletAddress);
+    if (hotWalletInfo != null) {
+      System.out.println("Hot Wallet Balance: " + hotWalletInfo.getBalance());
+      System.out.println("Hot Wallet Height: " + hotWalletInfo.getHeight());
     }
     ```
 
@@ -325,6 +419,44 @@ if the account exists (to create a normal receive block).
     ```
 
   </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+    import cash.atto.commons.node.monitor.*;
+    import cash.atto.commons.wallet.*;
+    import cash.atto.commons.worker.*;
+    import java.util.concurrent.*;
+
+    // Build account monitor and wallet (assumes nodeClient, worker, and seed from previous sections)
+    AttoAccountMonitorAsync accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
+
+    // Default representative provider for opens
+    java.util.function.Supplier<AttoAddress> defaultRepresentativeProvider = () -> {
+      byte[] dummyBytes = new byte[32];
+      return new AttoAddress(AttoAlgorithm.V1, new AttoPublicKey(dummyBytes));
+    };
+
+    AttoWalletAsync wallet = new AttoWalletAsyncBuilder(nodeClient, worker)
+      .signerProvider(seed)
+      .enableAutoReceiver(
+        accountMonitor,
+        AttoAmount.from(AttoUnit.ATTO, "1"),              // minimum receivable to auto-receive
+        java.time.Duration.ofSeconds(10),                  // retry interval
+        defaultRepresentativeProvider                      // representative for opens
+      )
+      .build();
+
+    // Open account index 0 so it is tracked by the wallet
+    AttoKeyIndex index0 = cash.atto.commons.AttoKeyIndexes.toAttoIndex(0);
+    wallet.openAccount(index0).get();
+
+    // Show its address
+    AttoAddress address0 = wallet.getAddress(index0).get();
+    System.out.println("Account[0] address: " + address0);
+    ```
+
+  </TabItem>
 </Tabs>
 
 In the above code, `now` is a timestamp retrieved from the node (e.g., via `client.now()`), used to timestamp the open
@@ -385,6 +517,24 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
 
     val sendTx = wallet.send(senderIndex, recipientAddress, amount)
     println("Sent $amount from index $senderIndex to $recipientAddress. Tx hash: ${sendTx.hash}")
+    ```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+    import static cash.atto.commons.AttoKeyIndexes.toAttoIndex;
+
+    // Using the wallet created earlier
+    AttoKeyIndex senderIndex = toAttoIndex(0);
+    AttoKeyIndex recipientIndex = toAttoIndex(2);
+
+    AttoAmount amount = AttoAmount.from(AttoUnit.ATTO, "100.1");
+    AttoAddress recipientAddress = wallet.getAddress(recipientIndex).get();
+
+    AttoTransaction sendTx = wallet.send(senderIndex, recipientAddress, amount, null).get();
+    System.out.println("Sent " + amount + " from index " + senderIndex + " to " + recipientAddress + ". Tx hash: " + sendTx.getHash());
     ```
 
   </TabItem>
@@ -459,30 +609,58 @@ Typically, you start at the next height after the current one (or at height 0 fo
   <TabItem value="kotlin" label="Kotlin">
 
     ```kotlin
-    private fun startTransactionJob() {
-      transactionJob.getAndUpdate {
-        it.cancel()
-        scope.launch {
-          monitoredStates.collect { state ->
-            try {
-              val search = HeightSearch(state.keys.map { address ->
-                AccountHeightSearch(
-                  address,
-                  fromHeight = 1UL.toAttoHeight() // this should be set to the latest known height
-                )
-              })
-            client.transactionStream(search).collect { transaction ->
-              println("Transaction: $transaction")
-            }
-          } catch (e: Exception) {
-            println("Error: ${e.message}")
-          }
-            delay(1_000)
-            startReceiverJob()
-          }
-        }
-      }
-    }
+    import cash.atto.commons.*
+    import cash.atto.commons.node.monitor.*
+    import kotlinx.coroutines.flow.first
+
+    // Build monitors from the account monitor (assumes you already have `client`)
+    val accountMonitor = client.createAccountMonitor()
+
+    val transactionMonitor = accountMonitor.toTransactionMonitor { 1U.toAttoHeight() }
+
+    val accountEntryMonitor = accountMonitor.toAccountEntryMonitor { 1U.toAttoHeight() }
+
+    // Example: consume one item from each stream and acknowledge it
+    val transactionMessage = transactionMonitor.stream().first()
+    transactionMessage.acknowledge()
+    println("Transaction: ${transactionMessage.value.hash}")
+
+    val accountEntryMessage = accountEntryMonitor.stream().first()
+    accountEntryMessage.acknowledge()
+    println("Account entry: ${accountEntryMessage.value.hash}")
+    ```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+    ```java
+    import cash.atto.commons.*;
+    import cash.atto.commons.node.*;
+    import cash.atto.commons.node.monitor.*;
+    import java.util.concurrent.*;
+
+    // Build monitors
+    AttoAccountMonitorAsync accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
+
+    // Start streaming from height 1 (MIN) for everyone in this example
+    AttoTransactionMonitorAsync transactionMonitor = new AttoTransactionMonitorAsyncBuilder(nodeClient, accountMonitor)
+      .heightProvider(address -> CompletableFuture.completedFuture(AttoHeight.MIN))
+      .build();
+
+    AttoAccountEntryMonitorAsync accountEntryMonitor = new AttoAccountEntryMonitorAsyncBuilder(nodeClient, accountMonitor)
+      .heightProvider(address -> CompletableFuture.completedFuture(AttoHeight.MIN))
+      .build();
+
+    // Register listeners
+    AttoJob txJob = transactionMonitor.onTransaction(
+      tx -> System.out.println("Transaction event: " + tx.getHash()),
+      err -> { if (err != null) System.out.println("Transaction monitor error: " + err.getMessage()); }
+    );
+
+    AttoJob entryJob = accountEntryMonitor.onAccountEntry(
+      entry -> System.out.println("Account entry event: " + entry.getHash()),
+      err -> { if (err != null) System.out.println("Account entry monitor error: " + err.getMessage()); }
+    );
     ```
 
   </TabItem>
