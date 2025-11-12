@@ -253,8 +253,7 @@ fees).
 
 ## Reading Account State
 
-Before crafting transactions, it’s important to retrieve the current state of your accounts (balance and height). The *
-*account height** is used to sequence transactions correctly (each new block on an account increments the height).
+Before crafting transactions, it’s important to retrieve the current state of your accounts (balance and height). The **account height** is used to sequence transactions correctly (each new block on an account increments the height).
 
 Using the node client, you can fetch account information for one or multiple addresses via
 `client.account([...addresses])`. The result will include each account’s current balance, frontier (last block hash),
@@ -337,20 +336,13 @@ One crucial aspect of integration is handling incoming funds to your addresses. 
 a corresponding block: an **open block** if it’s the account’s first transaction, or a **receive block** for subsequent
 ones.
 
-The Commons library provides helper functions to generate these blocks easily. We can subscribe to receivable events
-using `client.onReceivable(addresses, callback)` so that whenever someone sends Atto to one of our monitored addresses,
-we get notified and can immediately pocket the funds.
+The Commons wallet provides an auto-receiver built on top of the account monitor. It subscribes to receivables for you and
+handles opening/receiving, signing, PoW, publishing, and state updates automatically.
 
-Below, we set up a subscription for receivables and define a `receiver()` callback that will:
-
-* Look up the signer for the receiving address.
-* Determine if the account already exists (opened) or not.
-* Use `open` if no existing account (to create the open block with a representative), or `receive`
-if the account exists (to create a normal receive block).
-* Sign the block with our private key.
-* Request PoW from the work server.
-* Publish the completed transaction to the network via the node client.
-* Update our local `accountMap` with the new account state.
+Below, we enable the wallet’s auto‑receiver. It listens for receivables emitted by the account monitor and, when detected,
+automatically constructs the correct block (open for the first receive or receive for subsequent ones), timestamps it,
+requests PoW from the worker, signs, publishes, and updates the account state. You control the minimum amount to auto‑receive,
+the retry cadence, and the default representative used for new accounts.
 
 <Tabs groupId="library">
   <TabItem value="js" label="JavaScript">
@@ -459,9 +451,7 @@ if the account exists (to create a normal receive block).
   </TabItem>
 </Tabs>
 
-In the above code, `now` is a timestamp retrieved from the node (e.g., via `client.now()`), used to timestamp the open
-block. We also used a `representativeAddress` which we set earlier (in this example, we might use our voting node address
-as the representative for new accounts).
+The wallet handles block timestamps and PoW internally when auto-receiving. You provide a default representative to use for new accounts (opens).
 
 **What’s Happening:** When someone sends funds to our address, the node’s receivable stream triggers. We create an
 **open block** if this is the first time the address is receiving funds (which sets up the account with an initial
@@ -471,8 +461,7 @@ incorporate the funds into our account. After publishing, the funds are confirme
 ## Sending a Transaction
 
 Sending Atto (e.g., processing a withdrawal) involves creating a **send block** on the sender’s account. The Atto
-Commons `send` function will produce a new send block along with the updated account state. You then sign the block,
-get PoW, and publish the transaction.
+Commons wallet `send` will build the new send block and handle signing, PoW, and publishing for you.
 
 Important considerations before sending:
 
@@ -496,10 +485,11 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
     // Assume you built `wallet` earlier and opened index 0
     const index0 = toAttoIndex(0);
 
-    // Resolve or compute the recipient address (e.g., from public key)
-    // Here we assume `anotherAddress` is available from earlier examples
-    const tx = await wallet.sendByIndex(index0, anotherAddress, amount, null).asPromise();
-    console.log(`Sent ${amount} from index 0 to ${anotherAddress}. Tx hash: ${tx.hash}`);
+    // Derive the recipient address from account index 2 via the wallet (mirrors Kotlin/Java)
+    const recipientIndex = toAttoIndex(2);
+    const recipientAddress = await wallet.getAddress(recipientIndex).asPromise();
+    const tx = await wallet.sendByIndex(index0, recipientAddress, amount, null).asPromise();
+    console.log(`Sent ${amount} from index 0 to ${recipientAddress}. Tx hash: ${tx.hash}`);
     ```
 
   </TabItem>
@@ -572,7 +562,6 @@ Typically, you start at the next height after the current one (or at height 0 fo
       AttoAccountMonitorAsyncBuilder,
       AttoAddress,
       AttoAlgorithm,
-      toPublicKey,
       toAttoHeight,
       AttoHeight,
     } from '@attocash/commons-js';
@@ -580,7 +569,8 @@ Typically, you start at the next height after the current one (or at height 0 fo
     // Build monitors
     const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
 
-    // We will start streaming from height 1 for all addresses unless it's the genesis in your local mock.
+    // We will start streaming from AttoHeight.MIN for all addresses.
+    // In local mocks you may want to skip the genesis block (start from height 2 for the genesis address).
     // Provide a heightProvider callback that can decide per-address.
     const transactionMonitor = new AttoTransactionMonitorAsyncBuilder(nodeClient, accountMonitor)
       .heightProvider((address) => {
@@ -616,9 +606,9 @@ Typically, you start at the next height after the current one (or at height 0 fo
     // Build monitors from the account monitor (assumes you already have `client`)
     val accountMonitor = client.createAccountMonitor()
 
-    val transactionMonitor = accountMonitor.toTransactionMonitor { 1U.toAttoHeight() }
+    val transactionMonitor = accountMonitor.toTransactionMonitor { AttoHeight.MIN }
 
-    val accountEntryMonitor = accountMonitor.toAccountEntryMonitor { 1U.toAttoHeight() }
+    val accountEntryMonitor = accountMonitor.toAccountEntryMonitor { AttoHeight.MIN }
 
     // Example: consume one item from each stream and acknowledge it
     val transactionMessage = transactionMonitor.stream().first()
@@ -672,7 +662,7 @@ shutdown).
 
 ## Conclusion
 
-By using the Atto Commons library for JS or Kotlin, you can fully manage the lifecycle of Atto transactions in your own
+By using the Atto Commons library for JS, Kotlin, and Java, you can fully manage the lifecycle of Atto transactions in your own
 code: from key creation and offline signing to publishing transactions on the network and reacting to incoming funds.
 This **advanced integration** approach gives you maximum flexibility and security (you control your private keys at all
 times) at the cost of a bit more implementation work compared to using a high-level Wallet Server.
