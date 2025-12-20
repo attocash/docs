@@ -88,7 +88,7 @@ Importantly, Atto is not just a theoretical proposal – it is already a **live,
 in
 late [2024](https://atto.cash/explorer/transactions/D1C37D6BBB8F9984029EA21712BB1AA6D2B3D0CD9A484C8CC3B967B7A0501C08),
 and has since rolled out a public block [**explorer**](/explorer), a user-friendly
-web [**wallet**](https://wallet.atto.cash/), and a [**faucet**](/faucet) that lets anyone claim free attos to try out
+web [**wallet**](https://wallet.atto.cash), and a [**faucet**](/faucet) that lets anyone claim free attos to try out
 the system.  
 The network currently operates with a small number of nodes and representatives securing the ledger, and the core
 functionality (sending, receiving, and confirming transactions) is fully operational. The following sections of this
