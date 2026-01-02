@@ -376,7 +376,7 @@ Compose.
    Inside the `atto-voter-node` directory, create a file named `docker-compose.yml`.
 
 3. **Paste the Configuration:**
-   Open the `docker-voter.yml` file in a text editor and paste the following content into it:
+   Open the `docker-compose.yml` file in a text editor and paste the following content into it:
 
 ```yaml
 # docker-compose.yml
