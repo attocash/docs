@@ -62,8 +62,8 @@ The `signer` application exposes the following ports:
 
 | Port     | Purpose                                    | Exposure               |
 |----------|--------------------------------------------|------------------------|
-| **8080** | REST API                                   | Cluster‑internal only. |
-| **8081** | Liveness `/health` & metrics `/prometheus` | Cluster‑internal only. |
+| **9090** | REST API                                   | Cluster‑internal only. |
+| **9091** | Liveness `/health` & metrics `/prometheus` | Cluster‑internal only. |
 
 ## GCP KMS Specifics
 
