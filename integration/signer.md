@@ -73,9 +73,9 @@ When using `ATTO_SIGNER_BACKEND: GCP`:
   key must be an Ed25519 signing key.
 * **IAM Permissions:** The identity running the `signer` application (e.g., a Kubernetes Service Account federated with
   a GCP Service Account via Workload Identity) needs the following IAM permissions on the specified KMS key version:
-* `cloudkms.cryptoKeyVersions.viewPublicKey`: To retrieve the public key associated with the signing key.
-* `cloudkms.cryptoKeyVersions.useToSign`: To perform signing operations.
-* A common role that grants these is `roles/cloudkms.signerVerifier`.
+  * `cloudkms.cryptoKeyVersions.viewPublicKey`: To retrieve the public key associated with the signing key.
+  * `cloudkms.cryptoKeyVersions.useToSign`: To perform signing operations.
+  * A common role that grants these is `roles/cloudkms.signerVerifier`.
 
 Refer to the [GCP KMS documentation](https://cloud.google.com/kms/docs) for more details on managing keys and
 permissions.
