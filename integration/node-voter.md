@@ -354,13 +354,8 @@ spec:
 
 ## Docker Example
 
-For simplicity, this example uses the `ATTO_PRIVATE_KEY` environment variable rather than an external signer.
-
-<details>
-<summary>View Details</summary>
-
-This section guides you through setting up a minimal Atto voter node along with a MySQL 8.4 database using Docker
-Compose.
+This section guides you through setting up an Atto voter node along with a
+MySQL 8.4 database using Docker Compose.
 
 **Steps:**
 
@@ -377,6 +372,13 @@ Compose.
 
 3. **Paste the Configuration:**
    Open the `docker-compose.yml` file in a text editor and paste the following content into it:
+
+### Example 1: Voter Node with Direct Private Key
+
+This example uses the `ATTO_PRIVATE_KEY` environment variable rather than an external signer.
+
+<details>
+<summary>View Details</summary>
 
 ```yaml
 # docker-compose.yml
@@ -427,5 +429,90 @@ your actual public IP address, which can be found at [whatismyip.com](https://ww
 Without specifying `ATTO_PRIVATE_KEY` or the `ATTO_SIGNER` variables correctly, your node will not participate in
 voting.
 :::
+
+</details>
+
+### Example 2: Voter Node with GCP KMS Signer (Sidecar)
+
+This example deploys the Atto node with a [`signer`](/docs/integration/signer) container configured for GCP KMS.
+
+<details>
+<summary>View Details</summary>
+
+```yaml
+# docker-compose.yml
+services:
+  node-mysql:
+    image: "mysql:8.4"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "node"
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - node_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  signer:
+    image: "ghcr.io/attocash/signer:release"
+    environment:
+      ATTO_SIGNER_BACKEND: "GCP"
+      ATTO_SIGNER_KEY: "{projects/.../cryptoKeyVersions/1}"
+      ATTO_SIGNER_TOKEN: "{your secure token}"
+      GOOGLE_APPLICATION_CREDENTIALS: "/secrets/atto-signer.json"
+      ATTO_SIGNER_CAPABILITIES: "CHALLENGE,VOTE"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9091/health" ]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+    volumes:
+      - ./{your service account key file}.json:/secrets/atto-signer.json:ro
+
+  node:
+    image: "ghcr.io/attocash/node:live"
+    ports:
+      - "8080:8080"   # REST
+      - "8081:8081"   # health + metrics
+      - "8082:8082"   # gossip WS
+    environment:
+      ATTO_PUBLIC_URI: "ws(s)://{external ip or domain}:8082"
+      ATTO_DB_HOST: "node-mysql"
+      ATTO_DB_NAME: "node"
+      ATTO_DB_USER: "root"
+      ATTO_DB_PASSWORD: "root"
+      ATTO_SIGNER_BACKEND: "REMOTE"
+      ATTO_SIGNER_REMOTE_URL: "http://signer:9090"
+      ATTO_SIGNER_REMOTE_TOKEN: "{your secure token}"
+    depends_on:
+      - node-mysql
+    restart: unless-stopped
+
+volumes:
+  node_mysql_data:
+```
+
+You should modify the `ATTO_PUBLIC_URI`, `ATTO_DB_NAME`, `ATTO_DB_USER` and
+other settings to suit your setup like port mapping.
+
+:::warning
+Don't forget to set `ATTO_PUBLIC_URI`, otherwise your node won't be reachable. `{external-ip}` should be replaced with
+your actual public IP address, which can be found at [whatismyip.com](https://www.whatismyip.com).
+:::
+
+**Important Considerations for GCP KMS Signer:**
+
+* **Service Account**: `{your service account key file}` should be replaced
+  with the relative path of your GCP service account key (a JSON file), which
+  you should have downloaded from GCP.
+* **Key Version**: `ATTO_SIGNER_KEY` should be the resource name of the key
+  version, as obtained from GCP.
+* **Shared Token:** The `ATTO_SIGNER_REMOTE_TOKEN` (for the node) and `ATTO_SIGNER_TOKEN` (for the signer sidecar) must
+  be identical. This token should be a strong, randomly generated string.
 
 </details>
