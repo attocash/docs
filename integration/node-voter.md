@@ -473,6 +473,7 @@ services:
       start_period: 180s
     volumes:
       - ./{your service account key file}.json:/secrets/atto-signer.json:ro
+    restart: unless-stopped
 
   node:
     image: "ghcr.io/attocash/node:live"
