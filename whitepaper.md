@@ -479,19 +479,19 @@ The distribution of this supply is structured to foster growth and decentralizat
 was divided into several portions with different
 purposes:
 
-- **Faucet and [Folding@home integration](/docs/mining) (15% of supply):**
-  A significant share of tokens is being given out through a public faucet and folding@home over time (scheduled for
-  about the first year). This means anyone can claim Atto essentially for free. The purpose is to **jumpstart adoption**
-  by seeding the user base – new users can try Atto without having to buy in, which lowers the barrier to entry. It also
-  distributes tokens widely, which is healthy for decentralization.
+- **Faucet and [Folding@home integration](/docs/mining) (20% of supply):**  A significant share of tokens is being given
+  out through a public faucet and folding@home over time (scheduled for about the first year). This means anyone can
+  claim Atto essentially for free. The purpose is to jumpstart adoption by seeding the user base – new users can try
+  Atto without having to buy in, which lowers the barrier to entry. It also distributes tokens widely, which is healthy
+  for decentralization.
 
-- **Voter Incentives (20% of supply):** To encourage community participation in consensus, a portion is reserved to
+- **Voter Incentives (25% of supply):** To encourage community participation in consensus, a portion is reserved to
   reward those who help secure the network. Over a period of up to 10 years, these tokens will be gradually distributed
-  to users or nodes that participate in voting (ORV) and contribute to network security.
-  This aligns economic incentives with decentralization – as more people run nodes or actively engage in consensus, they
-  receive a share of tokens, broadening ownership.
+  to users or nodes that participate in voting and contribute to network security. This aligns economic incentives
+  with decentralization – as more people run nodes or actively engage in consensus, they receive a share of tokens,
+  broadening ownership.
 
-- **Development Fund (40% of supply):** This allocation is set aside for ongoing development, infrastructure, and
+- **Development Fund (20% of supply):** This allocation is set aside for ongoing development, infrastructure, and
   ecosystem growth. Building a sustainable network requires funding developers, running servers, and promoting the
   platform. It's important to note that Atto did not, and will not, conduct an ICO. Unlike many projects, we don't have
   millions from investors to fund development — this fund is critical for sustaining and improving Atto over time. Some
@@ -499,10 +499,9 @@ purposes:
   discussion [here](https://github.com/attocash/docs/discussions/5) to address them and gather feedback. We're committed
   to being transparent about how these funds are used and to continuously working with the community as Atto evolves.
 
-- **Community Rewards (24% of supply):** Another large portion is allocated to community-driven contributions and
-  bounties.
-  Atto actively rewards those who help the project – whether by finding and reporting bugs, contributing code or
-  documentation, creating educational content, or helping with outreach. For example, a security researcher who
+- **Community Rewards (34% of supply):** Another large portion is allocated to community-driven contributions and
+  bounties. Atto actively rewards those who help the project – whether by finding and reporting bugs, contributing code
+  or documentation, creating educational content, or helping with outreach. For example, a security researcher who
   discovers a vulnerability might earn a substantial Atto reward. Likewise, someone building a useful app on Atto or
   integrating it into a service could be rewarded. This approach leverages the wider community’s talents and creates a
   collaborative ecosystem where contributors are recognized in a meaningful (financial) way.
