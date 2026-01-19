@@ -74,7 +74,7 @@ pipelines.
 A **voter node** participates actively in the network's consensus mechanism by validating transactions and voting on blocks.
 This role is critical for the security and progression of the Atto ledger.
 
-## Historical node configuration
+## Historical Node Configuration
 
 Historical nodes do not require extra configuration beyond the environment
 variables mentioned in the [quick reference](#quick-reference).
