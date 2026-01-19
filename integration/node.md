@@ -79,7 +79,7 @@ This role is critical for the security and progression of the Atto ledger.
 Historical nodes do not require extra configuration beyond the environment
 variables mentioned in the [quick reference](#quick-reference).
 
-### Kubernetes Example
+### Kubernetes Example (Historical)
 
 <details>
 <summary>View Details</summary>
@@ -140,7 +140,7 @@ explained in the [quick reference](#quick-reference) to suit your setup like por
 
 </details>
 
-### Docker Example
+### Docker Example (Historical)
 
 <details>
 <summary>View Details</summary>
@@ -264,7 +264,7 @@ Keep your private key safe as it can be used to impersonate your node.
 | `ATTO_SIGNER_CAPABILITIES`    | Comma-separated list of actions the signer is allowed to perform. For a voter: | `CHALLENGE,VOTE`                                                                                           |
 
 
-### Kubernetes Example
+### Kubernetes Example (Voter)
 
 The following examples demonstrate deploying a Voter Node on Kubernetes. They assume:
 
@@ -536,7 +536,7 @@ suit your setup like port mapping.
 
 </details>
 
-### Docker Example
+### Docker Example (Voter)
 
 This section guides you through setting up an Atto voter node along with a
 MySQL 8.4 database using Docker Compose.
