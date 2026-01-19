@@ -97,7 +97,7 @@ Kubernetes Pod. This co-location allows secure and efficient communication over 
 
 For a detailed Kubernetes deployment example showing the `node` and `signer` containers working together, please refer
 to the **"Example 2: Voter Node with GCP KMS Signer (Sidecar)"** section in
-the [Voter Node documentation](./node-voter.md#example-2-voter-node-with-gcp-kms-signer-sidecar).
+the [Voter Node documentation](./node.md#example-2-voter-node-with-gcp-kms-signer-sidecar).
 
 The Kubernetes manifest in that example illustrates how to:
 
