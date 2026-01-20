@@ -1,0 +1,477 @@
+import React from 'react';
+
+# Staking Voter
+
+Atto relies on countless voter nodes across the world for its speed and decentralization. To this end, Atto rewards nodes that participate
+in voting as part of its [distribution](/docs/distribution).
+
+<!-- TODO: Update when node scoring is implemented -->
+Thanks to its lightweight design, a voter can be hosted on all but the oldest and lightest of servers, and on almost any computer/laptop you
+may have laying around. Nodes hosted on higher-end hardware, however, improve network speed and will receive greater scores and rewards at a
+later stage of the staking system.
+
+This guide explains the process of setting up a voter. Readers that have a fresh, working installation of Linux can skip the next section to
+[Securing the Server](#securing-the-server), while readers who have already set up secure remote login and a user account can skip to
+[Running the Node](#running-the-node).
+
+## Obtaining a Private Server
+
+While the node can be run on almost any computer, this guide targets computers and servers running Ubuntu Linux.
+
+If you have a computer lying around, then simply [install Ubuntu
+Desktop](https://documentation.ubuntu.com/desktop/en/latest/tutorial/install-ubuntu-desktop/) on it and skip to [Securing the
+Server](#securing-the-server). If you're not paying for a static IP address, your home network is likely behind NAT, so you will also need
+to set up a reverse tunnel (for example, [install Tailscale](https://tailscale.com/kb/1031/install-linux#mainstream-distributions) and
+[enable Funnel](https://tailscale.com/kb/1223/funnel?q=tailscale+funnel#get-started-with-funnel)).
+
+If you don't have a spare computer, you can rent a private server, with some being priced as low as $5/month with no commitment
+while still meeting the minimum requirements. For less hassle and a positive impact on network performance, however, it's best to follow the
+recommended requirements outlined below.
+
+If you're going for a private server, you need to select a private server provider.
+
+### Choosing a Private Server Provider
+
+Different providers have servers in different locations, although some may have servers within the same city or datacenter. In order to
+promote homogeneity in the hopes of improved network performance, the following providers are listed in a random order:
+
+export const RandomList = ({items}) => {
+  const [randomized, setRandomized] = React.useState([]);
+
+  React.useEffect(() => {
+    const shuffled = [...items].sort(() => Math.random() - 0.5);
+    setRandomized(shuffled);
+  }, [items]);
+
+  return (
+    <ul>
+      {randomized.map((item, index) => (
+        <li key={index}>
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+<!-- Hetzner prohibits crypto RPC nodes. -->
+<RandomList items={[
+  { name: 'noez.de', url: 'https://noez.de/en/vserver-kvm' },
+  { name: 'Contabo', url: 'https://contabo.com/en/vps/' },
+  { name: 'DigitalOcean', url: 'https://cloud.digitalocean.com/droplets/new' },
+  { name: 'Linode', url: 'https://www.linode.com/pricing/' },
+  { name: 'Vultr', url: 'https://www.vultr.com/products/cloud-compute/' },
+  { name: 'Hostinger', url: 'https://www.hostinger.com/pricing/vps-hosting#pricing' }
+]} />
+
+You should pick one of these and follow the link. You will be presented with a series of plans. The next section will guide your decision.
+
+### Choosing a Plan
+
+Most providers offer shared CPU plans (virtual private servers, or VPSes) and dedicated CPU plans (dedicated servers). VPSes tend to be
+cheaper and are adequate for hosting a node.
+
+Among VPSes, some providers offer both KVM (virtualized) and LXC (containerized) VPSes. LXC servers are unsupported because the Atto node is
+released as a Docker container, which cannot run in an already containerized environment.
+
+You will be given several options for the allocated hardware. The following recommendations are above the minimum requirements and ensure a
+smoothly functioning network:
+
+- **Storage**: 10 GB or greater SSD or NVMe SSD
+- **RAM**: 2 GB or greater
+
+When asked for the operating system, picking the latest LTS version of Ubuntu will enable you to smoothly follow along with this guide.
+
+Follow the provider's instructions to pick the right plan, create an account and pay your first payment. After this, you should be greeted
+with your new server's management interface.
+
+### Logging Into Your Server
+
+Now that you have a server, navigate to its console/dashboard (if you're not already there) and start your server.
+
+Most providers provide a VNC / remote desktop portal through which you can log into your node as a last resort. In general, however, you'll
+want to log in using SSH.
+
+Your provider's console should provide three key bits of information:
+- The IP address (e.g. 123.45.67.89) or domain name (e.g. vps123.example.com)
+- The username (assume "root" if not given)
+- The password
+
+With this, you can open Windows Terminal (in Windows 11), Command Prompt (Windows 10 or earlier) or other terminal software (found by
+searching for "terminal" on most operating systems) and run the following command to log into your server:
+
+```bash
+ssh <username>@<IP address>
+```
+
+For example, if the username is "root" (or not provided) and the IP address is 123.45.67.89, type `ssh root@123.45.67.89` and press enter.
+
+If this is your first time connecting to this server, you will see a warning about the authenticity of the host. Simpy write "yes" and press
+enter.
+
+Now you are logged in and should see a prompt ending with `#` (for the root user) or `$` (for a regular user) on the last line. Your next
+step is to ensure that no one else can log in.
+
+## Securing the Server
+
+A new server may allow remote login via the root user and will use a standard SSH port (22). These open up the doors for simple automated
+attacks from all over the internet to try and guess your password.
+
+The following sections will help you to secure your server to avoid it being overtaken or your private key (discussed later) being stolen.
+
+### Creating a Non-Root User
+
+At this point, you should be logged into the computer/server as root. If you're logged in as another user or created a new user while
+installing Ubuntu, you can skip this section.
+
+Decide on a username, then run the following two commands to create a new user and allow it to use `sudo`. Replace `<username>` with your
+chosen username.
+
+```bash
+adduser <username>
+gpasswd -a -G <username> sudo
+```
+
+For example, `adduser waldo` will create a new user named "waldo" and ask you to create a new password.
+
+`adduser` will ask you a few questions, but you can leave all of them blank. When it asks for a password, enter a strong, randomly generated
+password. A sequence of four or more randomly generated words is recommended, as this is [hard to
+guess](https://explainxkcd.com/wiki/index.php/936:_Password_Strength) but easy to remember.
+
+In the case of a server, to test your username and password (to avoid locking yourself out), open a new Windows Terminal, Command Prompt or
+other terminal window and run `ssh <username>@<IP address>` and enter your new password. Then run `sudo echo 'sudo works!'` to test if sudo
+works. If you don't see any errors, you've successfully added the new user and should stop using root. You can now close the old terminal
+window.
+
+### Securing SSH
+
+To configure SSH, start editing a new config file with `nano`. This command is run with `sudo` because this file is under the /etc/
+directory, which can only be modified by root:
+
+```bash
+sudo nano /etc/ssh/sshd_config.d/port-and-nonroot.conf
+```
+
+Pick a random port number between 49152 and 65535, and enter the following (replacing `<port>` with your chosen port) to tell SSH to use
+this port instead of 22 and to disable password-based root login now that you have an unprivileged user.
+
+```
+Port <port>
+PermitRootLogin prohibit-password
+```
+
+To apply the configuration, run the following two commands:
+
+```
+sudo systemctl daemon-reload
+sudo systemctl restart ssh.socket
+```
+
+If the terminal hangs after the first command, open a new terminal and log in with `ssh <username>@<IP address>`.
+
+After running the second command, logging into your server will require running `ssh -p <port> <username>@<IP address>`.
+
+The bottom of the screen shows how to exit nano. Press Ctrl+X. Now, as long as your password is strong, your system is secured against
+unauthorized login attempts.
+
+### Updating the System
+
+Updating the system ensures that all of the latest security patches are installed, fixing well-known bugs that could leave your server
+vulnerable.
+
+Run `sudo apt update` to tell the package manager `apt` to find updates to packages. Then run `sudo apt upgrade` to download and install the
+updates.
+
+When faced with the following dialog, choose "keep the local version currently installed".
+
+```
+┌───────────────────────┤ Configuring openssh-server ├───────────────────────┐
+│ A new version (/tmp/tmp.XXXXXXXXXX) of configuration file                  │
+│ /path/to/file is available, but the version installed currently has been   │
+│ locally modified.                                                          │
+│                                                                            │
+│ What do you want to do about modified configuration file?                  │
+│                                                                            │
+│             install the package maintainer's version                       │
+│             keep the local version currently installed                     │
+│             show the differences between the versions                      │
+│             show a side-by-side difference between the versions            │
+│             show a 3-way difference between available versions             │
+│             do a 3-way merge between available versions                    │
+│             start a new shell to examine the situation                     │
+│                                                                            │
+│                                    <Ok>                                    │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+```
+
+Your system should be updated on a regular basis and as soon as you hear about a security vulnerability that affects Linux.
+
+Now that your server is secure, you can set up the node.
+
+## Running the Node
+
+Setting up the node involves setting up a project directory, creating the docker-compose.yml file, installing Docker and Docker Compose, and
+starting the containers.
+
+When creating the docker-compose.yml file, you will need to configure the private key that your node will use to sign its votes and derive
+its address.
+
+### Generating a Private Key
+
+Generate a random byte sequence (which qualifies as a private key) by running `openssl rand -hex 32` and copying the result.
+
+:::warning
+Store this key safely and do not share it with anyone, as it can be used to impersonate your node.
+:::
+
+Now that you have a private key, you can create the docker-compose.yml file, which will tell Docker Compose what containers to spawn.
+
+### Setting Up the Project Directory
+
+Run the following commands on your server from a terminal:
+
+```bash
+cd ~/                   # Navigate to your user's home directory. Your working directory is now ~/.
+mkdir atto-voter-node   # Make a new directory inside your working directory.
+cd atto-voter-node/     # Navigate to the new directory. Your working directory is now ~/atto-voter-node/.
+nano docker-compose.yml # Create and edit ~/atto-voter-node/docker-compose.yml.
+```
+
+Paste the [Docker example for a voter node with a direct private
+key](/docs/integration/node#example-1-voter-node-with-direct-private-key-1).
+
+```yml
+# docker-compose.yml
+services:
+
+# ... rest of the example ...
+```
+
+Replace `atto.example.com` after ATTO\_PUBLIC\_URI with your server's IP address. If your server is a computer that you're physically working on, you can find its
+IP address at [whatismyip.com](https://www.whatismyip.com/). Also replace `wss://` with `ws://`, unless you'll be TLS-terminating the gossip
+port, for example using Tailscale Funnel.
+
+Replace `{your chosen private key}` (the curly braces as well) with the private key you copied and stored safely.
+
+:::warning
+When backing up your docker-compose.yml file or your server, do not share the backup with anyone, as it contains the private key which can
+be used to impersonate your node.
+:::
+
+This file will be read by Docker Compose, but you need to install Docker and Docker Compose first.
+
+### Installing Docker and the Docker Compose Plugin
+
+Because Docker and the Docker Compose plugin aren't included in Ubuntu's official package repositories, they can't be installed with `sudo
+apt install` yet. To fix this, add Docker's repository to apt by running the following commands one at a time.
+
+```bash
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+```
+
+Finally, install Docker and Docker Compose with `sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`.
+
+:::tip
+If you get stuck at any point, visit [Docker's official
+documentation](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) for up to date instructions.
+:::
+
+Before you can start the node, you need to make sure it has enough memory.
+
+### Adding a Swapfile
+
+A swapfile is used as extra virtual memory when the system runs out of RAM. Because swapfiles are on the disk, they are much slower than
+actual RAM, which is why it was important to choose a server with enough RAM.
+
+To check if you need a swapfile, run `free -h`. If the amount of free memory + free swap adds up to less than 2 GiB (2048 MiB), you need a
+swapfile in order to run the node. Run the following commands one at a time.
+
+```bash
+sudo fallocate -l 2G /swapfile # Create a contiguous, empty 2GiB file called "swapfile" in the / directory
+sudo chmod 0600 /swapfile      # Ensure only the file owner (root) can use the swapfile
+sudo mkswap /swapfile          # Format the swapfile
+sudo swapon /swapfile          # Enable the swapfile (until the next reboot)
+```
+
+To ensure that the changes stick, you need to ensure that it's mounted on boot. Start editing the fstab file with `sudo nano /etc/fstab`
+and add the following line anywhere in the file:
+
+```
+/swapfile none swap sw 0 0
+```
+
+Now that you have enough swap (verify with `free -h`), you can run the node.
+
+### Starting the node
+
+First ensure that you have permission to interact with Docker:
+
+```
+sudo gpasswd -a <username> docker
+```
+
+Then log out with Ctrl+D and log back in.
+
+Ensure you're in the `atto-voter-node` project directory you created and tell Docker to read the `docker-compose.yml` file in the current
+directory and start the containers in the background:
+
+```
+cd ~/atto-voter-node
+docker compose up -d
+```
+
+Docker will download the images and start the two containers: The node, which participates in the network, and the MySQL database, where
+the node stores all transactions.
+
+Because the containers are started in the background, you can't tell whether they are running successfully yet. The next section provides
+you with the tools needed to inspect your node and make sure it's operating correctly.
+
+### Verifying that the node is running
+
+You can verify the node's activities by following the `node` container's logs. First check the `NAME` of the node's container (not the mysql
+container) with `docker ps`.
+
+It will likely be called `atto-voter-node-node-1`. Start following the latest log messages with `docker logs -f atto-voter-node-node-1`. You
+should see messages like "Saved X unchecked transactions" and "Resolved X unchecked transactions", which indicate that the node is
+bootstrapping.
+
+Stop following the log by interrupting the currently running command with Ctrl+C.
+
+**Bootstrapping** means that your node is downloading a full history of all transactions on the network. You can check its progress by
+seeing how many transactions it has resolved:
+
+1. Check the name of the mysql container with `docker ps`, then run the `mysql` command *inside* it with `docker exec -it
+   atto-voter-node-node-mysql-1 mysql -u <username> -p`, where `<username>` should be replaced with the value of ATTO\_DB\_USER above, which
+   is `root` if you didn't change it.
+2. Enter the password, which is `root` if you didn't change ATTO\_DB\_PASSWORD.
+3. Select the node database with `USE <database>`, where `<database>` is `node` if you didn't change ATTO\_DB\_NAME.
+4. Finally, sum up the `height`s of all accounts in the `account` table, which gives you the number of resolved transactions, with `SELECT
+   SUM(height) FROM account;`. Don't forget the semicolon.
+5. Press Ctrl+D to exit the MySQL monitor.
+
+The number of transactions in the network is greater than 400,000 at the time of writing. You can get a more exact number by asking the
+Atto community in the Discord server or on r/atto.
+
+Congratulations, you are now running a node! However, to ensure that it keeps operating smoothly, you need to learn how to maintain it on a
+regular basis. After that, you will learn how to register for staking.
+
+## Maintaining the Node
+
+Maintaining a node involves four steps:
+
+1. Updating the system to receive security updates.
+2. Checking the node's log for issues.
+3. Checking the node's database for unchecked transactions.
+4. Updating the node Docker image to the latest version.
+
+### Updating the System
+
+Run `sudo apt update`. When that finishes, run `sudo apt upgrade`.
+
+### Checking the Node Log
+
+Run `docker logs -f atto-voter-node-node-1`. This may take a while if you don't maintain your node often.
+
+Inspect the logs to determine if your node is still connected to other nodes.
+
+### Checking for Unchecked Transactions.
+
+Your node should have zero unchecked transactions at all times, except when bootstrapping (when first setting it up or after some downtime).
+To check, log into the node's database (as explained before) and run `SELECT COUNT(*) FROM unchecked_transaction;`.
+
+If there are any unchecked transactions and they aren't going away, update the node, wait a few hours and check again.
+
+### Updating the Node Docker Image
+
+To update the node's Docker Image:
+
+1. Enter the project directory containing the `docker-compose.yml` file.
+2. Run `docker compose pull` to download updates for all images used by the project, and `docker compose up -d` to restart the containers
+   for which there were any updates.
+
+Now that you know how to maintain your node, you are ready to register it (and yourself) to become a staking voter.
+
+## Registering for Staking
+
+In order to register for staking, you need to add information about yourself and your node to the known-addresses GitHub repository. The
+information about you is required to verify your authenticity in the future so that no one else may make changes to your voter's details
+such as the payout address or the percentage shared with your delegates.
+
+The first piece of information you need is your node's address.
+
+### Getting Your Node's Address
+
+<!-- TODO: Update when log contains address -->
+Run the following command to get your node's address:
+
+```bash
+curl -s 'http://localhost:8081/metrics/node.version' | sed 's/.*"address","values":\["\([^"]*\).*/\1\n/'
+```
+
+### Adding your information
+
+Create an account on [GitHub](https://github.com). Then, [fork the known-addresses repo and start editing
+entities.ndjson](https://github.com/attocash/known-addresses/edit/main/entities.ndjson) and add the following information on a new line,
+using the exact same format as the existing lines:
+
+- **`entity`**: Short identifier used to link from other files. Lowercase letters, numbers and dashes.
+- **`organization`**: Canonical organization identifier (can match 'entity' or be more specific).
+- **`label`**: Human-friendly display name.
+- **`description`**: Short description of what this entity is.
+- **`tags`**: Classification tags for this entity.
+- **`website`**: Public website for this entity.
+
+Commit your changes, then click on "Create pull request", name it "Add \<entity\> entity", and click on "Create pull request" again.
+
+[Start editing voters.json](https://github.com/attocash/known-addresses/edit/main/voters.ndjson), adding the following information on a new
+line:
+
+- **`address`**: Voter address (Atto URI) that you got in the previous section.
+- **`label`**: Short human-friendly name.
+- **`entity`**: Entity identifier this address belongs to (must match an entity from entities.ndjson).
+- **`payToAddress`**: If null, this voter does NOT participate in staking rewards. Must never be the same as 'address'.
+- **`sharePercentage`**: Percentage of rewards this voter shares with delegators.
+- **`addedAt`**: Date the entry was created (UTC).
+- **`updatedAt`**: Date the entry was last updated (UTC) (same as addedAt).
+- **`description`**: Longer description of the voter.
+
+Commit and create a pull request as before, naming it "Add \<entity\> voter".
+
+You will now need to wait for your pull requests to get accepted, or make changes if requested by the Atto team.
+
+Once your pull requests have been accepted, your voter will be added to the wallet. At this point, you should elect it with your own
+accounts as well as encourage others to do so, in order to pass the minimum weight threshold needed for it to start voting.
+
+## Frequently Asked Questions (FAQ)
+
+<details>
+<summary>Why does the wallet say "Last voted: Unknown"?</summary>
+
+Your node hasn't voted. This could be because it's still bootstrapping, doesn't have enough weight or is experiencing an error.
+
+Accumulating weight takes time as your voter gains popularity and more people delegate to it. In the meantime, you can check if it has
+finished bootstrapping and is experiencing no errors by checking the node's log and the number of resolved and unchecked transactions.
+</details>
+
+---
+
+Your computer is now helping to secure Atto's network and speed—and earning Atto as a reward. Thank you for making a difference!
