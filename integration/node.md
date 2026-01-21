@@ -130,8 +130,9 @@ spec:
                   name: atto-db
                   key: PASSWORD
           ports:
-            - containerPort: 8080 # REST
-            - containerPort: 8081 # health + metrics
+# Only uncomment these two lines if you have placed these ports behind a web-application firewall (WAF) at minimum
+#            - containerPort: 8080 # REST
+#            - containerPort: 8081 # health + metrics
             - containerPort: 8082 # gossip WS
 ```
 
@@ -185,8 +186,9 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     ports:
-      - "8080:8080"   # REST
-      - "8081:8081"   # health + metrics
+# Only uncomment these two lines if you have placed these ports behind a web-application firewall (WAF) at minimum
+#      - "8080:8080"   # REST
+#      - "8081:8081"   # health + metrics
       - "8082:8082"   # gossip WS
     environment:
       ATTO_PUBLIC_URI: "wss://atto.example.com:8082"
@@ -331,8 +333,8 @@ spec:
             # Add other relevant environment variables (logging, etc.)
             # LOGGING_LEVEL_CASH_ATTO_NODE_VOTE: "DEBUG" # Example
           ports:
-            - containerPort: 8080 # REST API
-            - containerPort: 8081 # Health & Metrics
+# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
+#            - containerPort: 8081 # Health & Metrics
             - containerPort: 8082 # Gossip WebSocket
           # Define resources, probes (liveness, readiness, startup) as needed
           resources:
@@ -436,8 +438,8 @@ spec:
                   key: SIGNER_SHARED_TOKEN
             # Add other node-specific environment variables as needed
           ports:
-            - containerPort: 8080
-            - containerPort: 8081
+# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
+#            - containerPort: 8081
             - containerPort: 8082
           resources:
             requests:
@@ -585,8 +587,8 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     ports:
-      - "8080:8080"   # REST
-      - "8081:8081"   # health + metrics
+# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
+#      - "8081:8081"   # health + metrics
       - "8082:8082"   # gossip WS
     environment:
       ATTO_PUBLIC_URI: "wss://atto.example.com:8082"
@@ -656,8 +658,8 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     ports:
-      - "8080:8080"   # REST
-      - "8081:8081"   # health + metrics
+# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
+#      - "8081:8081"   # health + metrics
       - "8082:8082"   # gossip WS
     environment:
       ATTO_PUBLIC_URI: "wss://atto.example.com:8082"
