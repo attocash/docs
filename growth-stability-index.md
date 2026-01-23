@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Growth Stability Index (GSI)
+# Growth Stability Index
 
 The Growth Stability Index (GSI) is a metric that dynamically adjusts Atto's distribution rate based on market conditions. It helps balance the need for widespread token distribution with price stability, ensuring that Atto remains practical as digital cash.
 
