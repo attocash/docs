@@ -132,8 +132,8 @@ uniquely suited for micropayments and face-to-face transactions.
   throughput of transactions and ensuring that even as the user base grows, the network remains quick and responsive.
 
 - **Eco-Friendly by Design:** With no mining and minimal computational work required, Atto’s environmental footprint is
-  tiny. The network’s nodes use only a few kilowatt-hours each, meaning the entire global system could run on modest
-  energy resources.
+  tiny. The network’s nodes use only a few kilowatt-hours per day each, meaning the entire global system could run on
+  modest energy resources.
   This stands in stark contrast to traditional Proof-of-Work blockchains that consume significant electricity. Atto
   proves that a cryptocurrency can be **green and sustainable** while still delivering top-tier performance.
 
@@ -207,8 +207,8 @@ been refined in Atto’s implementation to enhance performance and robustness.
 ## Ledger Structure and Transaction Model
 
 Under the hood, Atto’s ledger is structured in a fundamentally different way from the traditional blockchain used by
-Bitcoin or Ethereum. Instead of one single chain of blocks that all transactions compete to be added to, Atto uses an *
-*account-chain model** (also known as a block-lattice structure). In this design, **each account (address) has its own
+Bitcoin or Ethereum. Instead of one single chain of blocks that all transactions compete to be added to, Atto uses an
+**account-chain model** (also known as a block-lattice structure). In this design, **each account (address) has its own
 blockchain**, recording only that account’s transactions.
 Every time you send or receive funds, you add a block to *your* account’s chain. This architecture provides several
 benefits: it eliminates global contention (no need for the whole network to agree on one next block at a time), allows
@@ -405,9 +405,9 @@ customer experience – essentially **cash-like immediacy with digital convenien
 
 Because Atto transactions are final after confirmation, merchants can trust the payment similar to how they trust cash
 in hand. There's no risk of chargeback fraud or reversal by a third-party, since there is no central party who can
-reverse the transaction. For the consumer, using Atto could be as simple as scanning a QR code or tapping their phone (
-if a wallet app supports NFC or QR display). The barrier to using Atto in these scenarios is low, given that a user only
-needs a smartphone with an internet connection and an Atto wallet app.
+reverse the transaction. For the consumer, using Atto could be as simple as scanning a QR code or tapping their phone
+(if a wallet app supports NFC or QR display). The barrier to using Atto in these scenarios is low, given that a user
+only needs a smartphone with an internet connection and an Atto wallet app.
 
 Face-to-face transactions also benefit from Atto’s lack of fees: small businesses or individuals can accept digital
 payments without sacrificing a percentage cut to payment processors. For example, a street vendor could accept
@@ -513,10 +513,11 @@ purposes:
   holdings and to show that the founder’s stake is limited. (This 1% also aligns the founder’s incentives with the
   long-term success of the network without giving them outsized control.)
 
-All token movements and distributions are made transparently. The Atto team maintains a **public transparency log** (
-ledger of distributions) that anyone can review. This log records how tokens from the various allocations are being used
-over time. By doing so, Atto commits to openness and community trust – participants can verify that, for instance, the
-development fund is being used for development, or how much has been given out via the faucet to date.
+All token movements and distributions are made transparently. The Atto team maintains a [**public transparency
+log**](https://github.com/attocash/transparency) (ledger of distributions) that anyone can review. This log records how
+tokens from the various allocations are being used over time. By doing so, Atto commits to openness and community trust
+– participants can verify that, for instance, the development fund is being used for development, or how much has been
+given out via the faucet to date.
 
 This distribution model has immediate implications for Atto’s **current network state**. In the early phase, since a
 large number of tokens are in the faucet, voter, and reward allocations (which are controlled by the project initially),
@@ -592,7 +593,7 @@ group.
 
 ## Network Status and Accessibility
 
-As of 2025, the Atto network is fully operational and accessible to the public. This section provides an overview of the
+As of 2026, the Atto network is fully operational and accessible to the public. This section provides an overview of the
 current status of the network and the resources available for users and developers to engage with Atto.
 
 **Launch and Maturity:** The Atto mainnet was launched in
@@ -612,7 +613,7 @@ mechanism.
 and an increasing number run by community members. In the very beginning, the team operated most of the nodes to ensure
 stability. For example, as noted under environmental impact, there were 6 known nodes (plus some supporting hardware)
 as of late 2024.
-Now in 2025, community-run nodes are coming online, especially as the software is open source and people are
+Now in 2026, community-run nodes are coming online, especially as the software is open source and people are
 incentivized by the voter rewards to run their own representatives. The network topology is distributed globally – nodes
 communicate via the internet and collectively uphold the ledger. An official network explorer provides real-time
 information on nodes and voting weights, so anyone can see how decentralized the network is becoming. Atto’s consensus
