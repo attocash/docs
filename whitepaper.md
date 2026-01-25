@@ -513,10 +513,11 @@ purposes:
   holdings and to show that the founder’s stake is limited. (This 1% also aligns the founder’s incentives with the
   long-term success of the network without giving them outsized control.)
 
-All token movements and distributions are made transparently. The Atto team maintains a **public transparency log**
-(ledger of distributions) that anyone can review. This log records how tokens from the various allocations are being
-used over time. By doing so, Atto commits to openness and community trust – participants can verify that, for instance,
-the development fund is being used for development, or how much has been given out via the faucet to date.
+All token movements and distributions are made transparently. The Atto team maintains a [**public transparency
+log**](https://github.com/attocash/transparency) (ledger of distributions) that anyone can review. This log records how
+tokens from the various allocations are being used over time. By doing so, Atto commits to openness and community trust
+– participants can verify that, for instance, the development fund is being used for development, or how much has been
+given out via the faucet to date.
 
 This distribution model has immediate implications for Atto’s **current network state**. In the early phase, since a
 large number of tokens are in the faucet, voter, and reward allocations (which are controlled by the project initially),
