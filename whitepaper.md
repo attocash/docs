@@ -592,7 +592,7 @@ group.
 
 ## Network Status and Accessibility
 
-As of 2025, the Atto network is fully operational and accessible to the public. This section provides an overview of the
+As of 2026, the Atto network is fully operational and accessible to the public. This section provides an overview of the
 current status of the network and the resources available for users and developers to engage with Atto.
 
 **Launch and Maturity:** The Atto mainnet was launched in
@@ -612,7 +612,7 @@ mechanism.
 and an increasing number run by community members. In the very beginning, the team operated most of the nodes to ensure
 stability. For example, as noted under environmental impact, there were 6 known nodes (plus some supporting hardware)
 as of late 2024.
-Now in 2025, community-run nodes are coming online, especially as the software is open source and people are
+Now in 2026, community-run nodes are coming online, especially as the software is open source and people are
 incentivized by the voter rewards to run their own representatives. The network topology is distributed globally – nodes
 communicate via the internet and collectively uphold the ledger. An official network explorer provides real-time
 information on nodes and voting weights, so anyone can see how decentralized the network is becoming. Atto’s consensus
