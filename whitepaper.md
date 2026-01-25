@@ -405,9 +405,9 @@ customer experience – essentially **cash-like immediacy with digital convenien
 
 Because Atto transactions are final after confirmation, merchants can trust the payment similar to how they trust cash
 in hand. There's no risk of chargeback fraud or reversal by a third-party, since there is no central party who can
-reverse the transaction. For the consumer, using Atto could be as simple as scanning a QR code or tapping their phone (
-if a wallet app supports NFC or QR display). The barrier to using Atto in these scenarios is low, given that a user only
-needs a smartphone with an internet connection and an Atto wallet app.
+reverse the transaction. For the consumer, using Atto could be as simple as scanning a QR code or tapping their phone
+(if a wallet app supports NFC or QR display). The barrier to using Atto in these scenarios is low, given that a user
+only needs a smartphone with an internet connection and an Atto wallet app.
 
 Face-to-face transactions also benefit from Atto’s lack of fees: small businesses or individuals can accept digital
 payments without sacrificing a percentage cut to payment processors. For example, a street vendor could accept
