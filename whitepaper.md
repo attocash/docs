@@ -132,8 +132,8 @@ uniquely suited for micropayments and face-to-face transactions.
   throughput of transactions and ensuring that even as the user base grows, the network remains quick and responsive.
 
 - **Eco-Friendly by Design:** With no mining and minimal computational work required, Atto’s environmental footprint is
-  tiny. The network’s nodes use only a few kilowatt-hours each, meaning the entire global system could run on modest
-  energy resources.
+  tiny. The network’s nodes use only a few kilowatt-hours per day each, meaning the entire global system could run on
+  modest energy resources.
   This stands in stark contrast to traditional Proof-of-Work blockchains that consume significant electricity. Atto
   proves that a cryptocurrency can be **green and sustainable** while still delivering top-tier performance.
 
