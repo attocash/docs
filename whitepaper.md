@@ -207,8 +207,8 @@ been refined in Atto’s implementation to enhance performance and robustness.
 ## Ledger Structure and Transaction Model
 
 Under the hood, Atto’s ledger is structured in a fundamentally different way from the traditional blockchain used by
-Bitcoin or Ethereum. Instead of one single chain of blocks that all transactions compete to be added to, Atto uses an *
-*account-chain model** (also known as a block-lattice structure). In this design, **each account (address) has its own
+Bitcoin or Ethereum. Instead of one single chain of blocks that all transactions compete to be added to, Atto uses an
+**account-chain model** (also known as a block-lattice structure). In this design, **each account (address) has its own
 blockchain**, recording only that account’s transactions.
 Every time you send or receive funds, you add a block to *your* account’s chain. This architecture provides several
 benefits: it eliminates global contention (no need for the whole network to agree on one next block at a time), allows
@@ -513,10 +513,10 @@ purposes:
   holdings and to show that the founder’s stake is limited. (This 1% also aligns the founder’s incentives with the
   long-term success of the network without giving them outsized control.)
 
-All token movements and distributions are made transparently. The Atto team maintains a **public transparency log** (
-ledger of distributions) that anyone can review. This log records how tokens from the various allocations are being used
-over time. By doing so, Atto commits to openness and community trust – participants can verify that, for instance, the
-development fund is being used for development, or how much has been given out via the faucet to date.
+All token movements and distributions are made transparently. The Atto team maintains a **public transparency log**
+(ledger of distributions) that anyone can review. This log records how tokens from the various allocations are being
+used over time. By doing so, Atto commits to openness and community trust – participants can verify that, for instance,
+the development fund is being used for development, or how much has been given out via the faucet to date.
 
 This distribution model has immediate implications for Atto’s **current network state**. In the early phase, since a
 large number of tokens are in the faucet, voter, and reward allocations (which are controlled by the project initially),
