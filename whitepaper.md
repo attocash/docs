@@ -479,17 +479,16 @@ The distribution of this supply is structured to foster growth and decentralizat
 was divided into several portions with different
 purposes:
 
-- **Faucet and [Folding@home integration](/docs/mining) (15% of supply):**
-  A significant share of tokens is being given out through a public faucet and folding@home over time (scheduled for
-  about the first year). This means anyone can claim Atto essentially for free. The purpose is to **jumpstart adoption**
-  by seeding the user base – new users can try Atto without having to buy in, which lowers the barrier to entry. It also
-  distributes tokens widely, which is healthy for decentralization.
-
-- **Voter Incentives (20% of supply):** To encourage community participation in consensus, a portion is reserved to
-  reward those who help secure the network. Over a period of up to 10 years, these tokens will be gradually distributed
-  to users or nodes that participate in voting (ORV) and contribute to network security.
-  This aligns economic incentives with decentralization – as more people run nodes or actively engage in consensus, they
-  receive a share of tokens, broadening ownership.
+- **Network Incentives (35% of supply):**  
+  This allocation funds Atto’s primary onboarding and participation incentives under a single umbrella: the
+  **[public faucet](/faucet)**, the **[miner program](/docs/mining)**, and **[staking](/docs/staking)** for
+  participants who help secure the network.   
+  Distribution from this pool does **not** follow a fixed schedule (e.g., “first year” or “over 10 years”). Instead, the
+  release rate is **automatically adjusted based on market conditions** using Atto’s
+  **[Growth-Stability Index (GSI)](/docs/growth-stability-index)**. In more stable markets, distribution can increase to
+  encourage adoption and participation; in less stable markets, it can slow down to prioritize stability.  
+  Each mechanism has its own eligibility rules, baseline emission parameters, and per-mechanism limits, but all
+  distributions draw from this shared incentives allocation.
 
 - **Development Fund (40% of supply):** This allocation is set aside for ongoing development, infrastructure, and
   ecosystem growth. Building a sustainable network requires funding developers, running servers, and promoting the
