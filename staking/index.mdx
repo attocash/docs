@@ -1,6 +1,5 @@
----
-sidebar_position: 5
----
+import { faq } from "./faq";
+import Head from "@docusaurus/Head";
 
 # Staking
 
@@ -77,3 +76,29 @@ Staking serves multiple purposes in the Atto ecosystem:
 - **Strengthen the network**: Active stakers contribute to network security and consensus
 
 For more information on how distribution rates are adjusted based on market conditions, see the [Growth Stability Index](/docs/growth-stability-index) documentation.
+
+## Frequently Asked Questions (FAQ)
+
+<Head>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faq.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer
+        }
+      }))
+    })}
+  </script>
+</Head>
+
+{faq.map((faq, index) => (
+<details key={index} style={{ marginBottom: "1.5rem" }}>
+  <summary><strong>{faq.question}</strong></summary>
+  <p>{faq.answer}</p>
+</details>
+))}
