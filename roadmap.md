@@ -132,7 +132,7 @@ We are introducing the **Atto Representative Program**, designed to enhance netw
 who contribute positively.
 
 - **Performance-Based Scoring**: Representatives will be evaluated on transaction confirmation speed and frequency.
-- **Hourly Rewards**: Awards distributed every hour, proportional to voting weight and capped at 1%.
+- **Daily Rewards**: Awards distributed every day, proportional to voting weight and capped at 1%.
 - **Transparency**: Clear criteria and real-time performance metrics will be available to all participants.
 
 ### How to Get Involved
