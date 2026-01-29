@@ -170,7 +170,3 @@ that serves the true purpose of digital currency.
 
 For any questions or feedback, please reach out to us on our community channels. Let's make Atto the currency of the
 future—starting today.
-
----
-
-*Stay tuned for more updates!*
