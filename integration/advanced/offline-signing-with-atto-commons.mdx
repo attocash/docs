@@ -90,7 +90,8 @@ private key from a hex string if you have one (for example, from a mnemonic or a
     // Generate a new mnemonic and derive a private key (index 0)
     (async () => {
       const mnemonic = AttoMnemonic.generate();
-      console.log('Mnemonic:', mnemonic.words.join(' '));
+      console.log('Mnemonic:', mnemonic.phrase);
+      console.log('Mnemonic:', AttoMnemonic.fromPhrase(mnemonic.phrase).phrase);
 
       const seed = await toSeedAsync(mnemonic);
       const index0 = toAttoIndex(0);
@@ -137,11 +138,11 @@ private key from a hex string if you have one (for example, from a mnemonic or a
     AttoSeed seed = AttoSeeds.toSeedBlocking(mnemonic);
     AttoKeyIndex index0 = toAttoIndex(0);
     AttoPrivateKey privateKey0 = AttoPrivateKeys.toPrivateKey(seed, index0);
-    System.out.println("Derived Private Key (hex): " + AttoHex.toHex(privateKey0.getValue()));
+    System.out.println("Derived Private Key: " + privateKey0);
 
     // Derive the public key if needed
     AttoPublicKey publicKey0 = AttoPublicKeys.toPublicKey(privateKey0);
-    System.out.println("Public Key (hex): " + AttoHex.toHex(publicKey0.getValue()));
+    System.out.println("Public Key: " + publicKey0);
     ```
 
   </TabItem>
@@ -169,6 +170,7 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
     const publicKey = toPublicKey(privateKey0); // derive Ed25519 public key
     const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // build the Atto address
     console.log('Address:', address.toString());
+    console.log('Address:', AttoAddress.Companion.parse(address.toString()).toString())
     ```
 
   </TabItem>
@@ -305,7 +307,7 @@ and height, among other data. We can store this in a map for quick lookup.
 
     // Prepare a list of addresses to monitor (in this example, our hot wallet and another account)
     List<AttoAddress> addressesToMonitor = Arrays.asList(hotWalletAddress, anotherAddress);
-    List<AttoAccount> accountsInfo = nodeClient.account(addressesToMonitor).get();
+    Collection<AttoAccount> accountsInfo = nodeClient.account(addressesToMonitor).get();
 
     // Create a map of address -> account info for easy reference
     Map<AttoAddress, AttoAccount> accountMap = new HashMap<>();
@@ -424,7 +426,7 @@ the retry cadence, and the default representative used for new accounts.
     AttoAccountMonitorAsync accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
 
     // Default representative provider for opens
-    java.util.function.Supplier<AttoAddress> defaultRepresentativeProvider = () -> {
+    kotlin.jvm.functions.Function0<AttoAddress> defaultRepresentativeProvider = () -> {
       byte[] dummyBytes = new byte[32];
       return new AttoAddress(AttoAlgorithm.V1, new AttoPublicKey(dummyBytes));
     };
