@@ -1,6 +1,5 @@
 ---
-sidebar_position: 1
-
+sidebar_position: 7
 title: Whitepaper
 description: Discover Atto, a live, feeless, and eco-friendly cryptocurrency optimized for instant micropayments and face-to-face transactions. This official whitepaper details its consensus model, unique tokenomics, and vision for the future of digital cash.
 
