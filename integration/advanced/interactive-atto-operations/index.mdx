@@ -1,0 +1,35 @@
+---
+title: Interactive Atto Operations
+description: Try basic Atto operations directly in your browser using the commons library.
+unlisted: true
+---
+
+import SeedGenerator from './SeedGenerator';
+import AddressConverter from './AddressConverter';
+import MonitorDemo from './MonitorDemo';
+
+# Interactive Atto Operations
+
+This page lets you experiment with basic Atto operations directly in your browser using the `@attocash/commons-js` library.
+
+## Generate Seed
+
+Click the button below to generate a new mnemonic phrase, derive a seed, and compute the private key.
+
+::::warning
+These keys are generated client-side in your browser. Never use keys generated on a website for real funds. This is for educational purposes only.
+::::
+
+<SeedGenerator />
+
+## Convert Public Key ↔ Address
+
+Convert between public keys (hex) and Atto addresses.
+
+<AddressConverter />
+
+## TODO: Monitors
+
+The following examples show how to set up monitors to track accounts, transactions, and account entries in real-time.
+
+<MonitorDemo />`
