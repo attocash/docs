@@ -85,12 +85,11 @@ Learn how Atto tokens are distributed fairly to the community through multiple c
 - **[Node Setup](/docs/integration/node)** - Run your own Atto node
 - **[Node API](/api/node)** - Complete REST API reference
 - **[Wallet API](/api/wallet)** - Wallet service endpoints
-- **[Commons Library](https://github.com/attocash/commons)** - Official JavaScript/TypeScript library
 
 ### Advanced Topics
 - **[Interactive Playground](/docs/integration/advanced/interactive-playground)** - Test seed generation and address conversion
-- **[RPC Protocol](/docs/integration/rpc)** - Low-level node communication
-- **[Security Best Practices](/docs/integration/security)** - Secure your integration
+- **[Offline Signing](/docs/integration/advanced/offline-signing-with-atto-commons)** - Sign transactions offline with atto-commons
+- **[Protocol Reference](/docs/integration/advanced/protocol-offline-signing-reference)** - Offline signing protocol specification
 
 ## Key Features
 
