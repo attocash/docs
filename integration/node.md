@@ -514,7 +514,7 @@ spec:
 ```
 
 You should modify the `ATTO_PUBLIC_URI`, `ATTO_DB_NAME`, `ATTO_DB_USER`, `ATTO_DB_PASSWORD`, and other settings as
-explained in the [quick reference](#quick-reference) and [voting node quick reference](#Voting_Node_Quick_Reference) to
+explained in the [quick reference](#quick-reference) and [voting node quick reference](#voting-node-quick-reference) to
 suit your setup like port mapping.
 
 **Important Considerations for GCP KMS Signer:**
@@ -607,7 +607,7 @@ volumes:
 
 
 You should modify the `ATTO_PUBLIC_URI`, `ATTO_DB_NAME`, `ATTO_DB_USER`, `ATTO_DB_PASSWORD`, and other settings as
-explained in the [quick reference](#quick-reference) and [voting node quick reference](#Voting_Node_Quick_Reference) to
+explained in the [quick reference](#quick-reference) and [voting node quick reference](#voting-node-quick-reference) to
 suit your setup like port mapping.
 
 </details>
