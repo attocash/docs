@@ -63,7 +63,7 @@ Below are examples of how to deploy a Work Server on Kubernetes.
 ### CPU-based
 
 This manifest deploys a Work Server using the CPU image. It is suitable for development and testing scenarios. On the
-live network, PoW calculation on a CPU can take hours and is not recommended.
+live network, PoW calculation on a CPU can take minutes and is not recommended.
 
 <details>
 <summary>View Details</summary>
