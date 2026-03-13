@@ -19,7 +19,7 @@ header-includes:
 This crypto-asset whitepaper has not been approved by any competent authority in any Member State of the European Union.
 The offeror of the crypto-asset is solely responsible for the content of this crypto-asset whitepaper.
 
-The Atto token, as a utility token, may not be exchangeable for any promised goods or services – especially in the event
+The Atto coin, as a utility coin, may not be exchangeable for any promised goods or services – especially in the event
 that the Atto project fails or is discontinued.
 
 The management body of **Atto B.V.** hereby confirms that this crypto-asset whitepaper complies with Regulation (EU)
@@ -42,10 +42,10 @@ Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-f
 energy-efficient consensus model called Open Representative Voting, where users delegate voting power to trusted
 nodes. Transactions are confirmed in under a second and incur no fees.
 
-The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10^9 units. There is no public sale or
-investment opportunity; tokens are distributed freely via a faucet and reward programs.
+The total supply is fixed at 18,000,000,000 Atto coins, each divisible into 10^9 units. There is no public sale or
+investment opportunity; coins are distributed freely via a faucet and reward programs.
 
-Atto tokens can be used for payments and contribute in the network’s consensus mechanism. They do not entitle holders to
+Atto coins can be used for payments and contribute in the network’s consensus mechanism. They do not entitle holders to
 profit-sharing, dividends, or ownership rights.
 
 This whitepaper was prepared by Atto B.V., a company incorporated in the Netherlands. Contact details and management
@@ -441,7 +441,7 @@ generation of digital commerce, from the smallest of transactions to everyday po
 
 ### Offer Terms and Legal Disclosures
 
-- **Nature of the Offering:** No public token sale is being conducted under this whitepaper; Atto tokens are not being
+- **Nature of the Offering:** No public coin sale is being conducted under this whitepaper; Atto coins are not being
   offered for purchase. Instead, distribution occurs through several non-monetary mechanisms: a public faucet,
   folding@home integration, contribution-based rewards, and an upcoming voting node incentive program. These methods are
   designed to encourage adoption, community participation, and decentralization. No funds are raised from the public
@@ -455,22 +455,22 @@ generation of digital commerce, from the smallest of transactions to everyday po
     design, content, or outreach).
   - The voting node incentive program is planned and will reward users who help secure the network.
 
-- **Rights and Obligations:** Atto tokens are utility tokens used for value transfer and participation in consensus.
-  They do not represent shares, profit rights, or ownership in Atto B.V. Token holder rights are limited to
+- **Rights and Obligations:** Atto coins are utility coins used for value transfer and participation in consensus.
+  They do not represent shares, profit rights, or ownership in Atto B.V. Coin holders rights are limited to
   transactional and protocol-level functionality. While protocol parameters may evolve through decentralized governance,
   the fixed supply, feeless transaction model, and open access to network participation will not be altered arbitrarily.
 
-- **Applicable Law and Jurisdiction:** The offer of Atto tokens to the public is governed by the laws of the
-  Netherlands. Any disputes arising in connection with this offer or the Atto token shall fall under the jurisdiction of
+- **Applicable Law and Jurisdiction:** The offer of Atto coins to the public is governed by the laws of the
+  Netherlands. Any disputes arising in connection with this offer or the Atto coins shall fall under the jurisdiction of
   the courts of the Netherlands.
 
 ### Distribution
 
 Atto’s economic design (tokenomics) and distribution model were carefully chosen to support its role as digital cash and
 to encourage widespread adoption. Unlike mined cryptocurrencies,
-**the entire supply of Atto was created at the start (genesis)**, and no new tokens will be created (non-inflationary
+**the entire supply of Atto was created at the start (genesis)**, and no new coins will be created (non-inflationary
 model).
-The total supply is fixed at **18,000,000,000 Atto** tokens, each divisible into 10^9 fractional units (nano-atto, so to
+The total supply is fixed at **18,000,000,000 Atto** coins, each divisible into 10^9 fractional units (nano-atto, so to
 speak). This high divisibility (9 decimal places) ensures that even if Atto were to gain value in the future, users can
 transact in tiny fractions for micropayments.
 
@@ -511,52 +511,52 @@ purposes:
   holdings and to show that the founder’s stake is limited. (This 1% also aligns the founder’s incentives with the
   long-term success of the network without giving them outsized control.)
 
-All token movements and distributions are made transparently. The Atto team maintains a [**public transparency
+All coins movements and distributions are made transparently. The Atto team maintains a [**public transparency
 log**](https://github.com/attocash/transparency) (ledger of distributions) that anyone can review. This log records how
-tokens from the various allocations are being used over time. By doing so, Atto commits to openness and community trust
+coins from the various allocations are being used over time. By doing so, Atto commits to openness and community trust
 – participants can verify that, for instance, the development fund is being used for development, or how much has been
 given out via the faucet to date.
 
 This distribution model has immediate implications for Atto’s **current network state**. In the early phase, since a
-large number of tokens are in the faucet, voter, and reward allocations (which are controlled by the project initially),
+large number of coins are in the faucet, voter, and reward allocations (which are controlled by the project initially),
 the network’s control is somewhat **concentrated**. The Atto team is essentially bootstrapping the network, operating
-initial representative nodes and overseeing distribution. However, as tokens get dispersed to users worldwide through
+initial representative nodes and overseeing distribution. However, as coins get dispersed to users worldwide through
 the faucet and rewards, and as those users start staking their claim in consensus (by delegating or running nodes), the
 network will **decentralize progressively**.
 
 The goal outlined by the team is to reach a **Satoshi Nakamoto coefficient of 10** (at least 10 independent entities
 would need to collude to control a majority) within about three years.
 This means they intend for governance power to be much more distributed as adoption grows. The economic incentives are
-in place to achieve that: tokens are literally being handed out to those who join and contribute, resulting in a more
+in place to achieve that: coins are literally being handed out to those who join and contribute, resulting in a more
 diffuse ownership.
 
 In summary, Atto’s tokenomics support its use as a currency (high supply, high divisibility, no inflation) and its
 distribution plan prioritizes adoption and decentralization. By giving users free entry via the faucet and rewarding
 active participation, Atto is cultivating a broad base of stakeholders. This not only helps in marketing and growth
-(more people trying and using it) but also underpins the network’s security model – the more widely tokens (and thus
+(more people trying and using it) but also underpins the network’s security model – the more widely coins (and thus
 voting weight) are held, the more decentralized and robust the consensus becomes. It’s a cycle where adoption begets
 more decentralization, which begets trust and further adoption.
 
 ## Governance and Decentralization
 
-Governance in Atto is closely tied to the consensus mechanism and distribution of tokens. In essence, **governance is
-user-driven via the ORV system** – each token holder has a voice (directly or through a representative) in what
+Governance in Atto is closely tied to the consensus mechanism and distribution of coins. In essence, **governance is
+user-driven via the ORV system** – each coin holder has a voice (directly or through a representative) in what
 transactions are confirmed and, by extension, in any consensus rule changes or network policies that might be voted on
 by representatives. However, beyond the technical consensus, there are aspects of network governance and project
 direction to consider, especially during the early phases when the founding team plays a larger role.
 
 Currently, Atto is in a **transitional phase from a centralized launch to a decentralized network**. At launch, the
-founding team controlled most of the supply and ran the key nodes, simply because the tokens had not yet been widely
+founding team controlled most of the supply and ran the key nodes, simply because the coins had not yet been widely
 distributed. This is intentional and common in new networks – it prevents attacks at birth and allows the system to
 bootstrap. However, the project is committed to **diluting that early centralization quickly**. The distribution model
-(faucet, voter rewards, etc.) is the primary tool to achieve this, pushing tokens and influence out to the community
+(faucet, voter rewards, etc.) is the primary tool to achieve this, pushing coins and influence out to the community
 over time, as described above.
 
 In terms of measuring decentralization, the team uses metrics like the **Nakamoto coefficient** (which counts how many
 entities control a significant portion of voting power). The target of reaching a coefficient of 10 means they aim for a
 state where no fewer than 10 independent parties collectively hold the majority of voting weight.
-In practical terms, this would indicate a healthy spread of large token holders or representatives. Achieving this will
-likely come as the faucet distributes tokens to thousands of users and as some of those users (or groups of users)
+In practical terms, this would indicate a healthy spread of large coin holders or representatives. Achieving this will
+likely come as the faucet distributes coins to thousands of users and as some of those users (or groups of users)
 emerge as significant representatives. It’s a gradual process, but one that is actively incentivized.
 
 **Representative Accountability:** A key governance feature of Atto’s design is that **users can change their
@@ -583,7 +583,7 @@ This honesty helps set the expectations with the community and invites them to p
 
 In conclusion, governance in Atto is designed to evolve. Early on, the core team is steering the ship, but with a clear
 roadmap to hand over the reins to the community of users and node operators. The representative system means that
-ultimately, **the power in the network lies with the token holders**, and as distribution progresses, this power becomes
+ultimately, **the power in the network lies with the coin holders**, and as distribution progresses, this power becomes
 more diffuse. Atto’s approach is to guide the network through its infancy and then let it grow into a self-governing,
 decentralized ecosystem – one where decisions are made collectively and no single entity has outsized influence. This is
 aligned with the project’s philosophy of being a currency *for everyone*, not controlled by any corporation or small
@@ -600,7 +600,7 @@ initially in a "[pre-release](/blog/pre-release)" phase where core
 features were live and the community was invited to participate early.
 Since then, Atto has matured rapidly. The basic functionality — creating accounts, sending and receiving transactions,
 and achieving consensus via representatives — has proven to work reliably. The network has processed a growing number of
-transactions as more users have onboarded through the faucet and reward programs (such as token giveaways, folding@home
+transactions as more users have onboarded through the faucet and reward programs (such as coin giveaways, folding@home
 integration, and contributions to the ecosystem).
 
 Public lab stress tests have been conducted to ensure the network can handle load, and so far the results have
@@ -634,7 +634,7 @@ preferences:
   payment apps.
 
 Using any of these wallets, users can easily access the faucet from directly within the app or via the website to claim
-free tokens and start transacting. Because transactions are feeless, even a small drip of tokens from the faucet is
+free coins and start transacting. Because transactions are feeless, even a small drip of coins from the faucet is
 enough to make numerous transactions, demonstrating the capability of the network.
 
 **Block Explorer and Transparency:** The **Atto Explorer** is a web-based blockchain explorer that was launched to
@@ -660,7 +660,7 @@ codes for tips, and possibly integration into existing payment platforms as a tr
 
 In summary, the Atto network is **up and running**, with all the essential components in place for users to join and use
 it today. The focus now is on expanding and decentralizing the network further, improving the user experience, and
-fostering adoption. Accessibility has been a key consideration – from free token distribution to easy-to-use web
+fostering adoption. Accessibility has been a key consideration – from free coin distribution to easy-to-use web
 wallets – and this will remain important as Atto aims to reach a broad audience. The fact that Atto is live lends
 credibility to the project’s promises; it’s not just theory, but a practical system one can test firsthand. This
 real-world presence will be crucial in gaining trust and proving that Atto’s model of instant, feeless micropayments is
@@ -672,14 +672,14 @@ Atto is an experimental cryptocurrency project. While it offers innovative featu
 holders should be aware of the following risks:
 
 - **Market Volatility:** Atto’s value is highly volatile and can fluctuate dramatically. There is no guarantee of any
-  stable value – holders risk losing some or all of their tokens.
+  stable value – holders risk losing some or all of their coins.
 
-- **Liquidity Risk:** Atto tokens may lack liquidity. There might not always be an active market or ability to trade
-  Atto on exchanges, meaning holders could find it difficult to sell or exchange tokens when desired.
+- **Liquidity Risk:** Atto coins may lack liquidity. There might not always be an active market or ability to trade
+  Atto on exchanges, meaning holders could find it difficult to sell or exchange coins when desired.
 
 - **Technology and Security Risk:** As a cryptocurrency network, Atto faces technical risks such as software bugs,
   hacks, or cyber-attacks. Vulnerabilities in the code or infrastructure could lead to security breaches, network
-  downtime, or loss of tokens.
+  downtime, or loss of coins.
 
 - **Regulatory Risk:** Cryptocurrencies are subject to evolving regulations. Changes in laws or government policies (in
   the EU or other jurisdictions) could negatively impact Atto’s legality, usage, value, or the ability of the project to
