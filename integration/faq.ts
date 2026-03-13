@@ -107,6 +107,6 @@ export const faq = [
   {
     question: "Is Atto MiCA compliant?",
     answer:
-      "Atto falls under the 'other crypto-asset' category in MiCA. While Atto B.V. develops and maintains the software, there was no ICO or fundraising event, and tokens are distributed through community and reward mechanisms. This makes Atto suitable for listing under EU compliance frameworks, provided standard exchange due diligence is met."
+      "Atto falls under the 'other crypto-asset' category in MiCA. While Atto B.V. develops and maintains the software, there was no ICO or fundraising event, and coins are distributed through community and reward mechanisms. This makes Atto suitable for listing under EU compliance frameworks, provided standard exchange due diligence is met."
   }
 ];
