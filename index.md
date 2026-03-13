@@ -20,7 +20,7 @@ description: Everything you need to know about Atto - the instant, feeless, and 
   <a href="/faucet" style={{display: 'block', padding: '1.5rem', background: 'linear-gradient(135deg, #FFFEF5 0%, #FFF8C6 100%)', border: '2px solid #FFE249', borderRadius: '16px', textDecoration: 'none', color: '#373B3E', transition: 'all 0.3s ease'}}>
     <div style={{fontSize: '2.5rem', marginBottom: '0.5rem'}}>🚰</div>
     <h3 style={{margin: '0.5rem 0', color: '#373B3E', fontSize: '1.25rem', fontWeight: '700'}}>Get Free Atto</h3>
-    <p style={{margin: 0, color: '#656B72', fontSize: '0.95rem'}}>Claim free Atto tokens from our faucet - no signup required</p>
+    <p style={{margin: 0, color: '#656B72', fontSize: '0.95rem'}}>Claim free Atto coins from our faucet - no signup required</p>
   </a>
 
   <a href="/explorer" style={{display: 'block', padding: '1.5rem', background: 'linear-gradient(135deg, #FFFEF5 0%, #FFF8C6 100%)', border: '2px solid #FFE249', borderRadius: '16px', textDecoration: 'none', color: '#373B3E', transition: 'all 0.3s ease'}}>
@@ -39,11 +39,11 @@ Deep dive into Atto's technology, collaborative consensus, architecture, and eco
 - Open Representative Voting (ORV) consensus
 - Account-chain architecture
 - Anti-spam mechanism via lightweight PoW
-- Fixed supply of 18B tokens (no new minting)
+- Fixed supply of 18B coins (no new minting)
 - Energy efficiency (comparable to ~6 households)
 
 ### [Token Distribution](/docs/distribution)
-Learn how Atto tokens are distributed fairly to the community through multiple channels, with rates dynamically adjusted via the Growth Stability Index (GSI).
+Learn how Atto coins are distributed fairly to the community through multiple channels, with rates dynamically adjusted via the Growth Stability Index (GSI).
 
 **Distribution Methods:**
 - **Faucet** - Free tokens for newcomers
@@ -129,7 +129,7 @@ Unlike traditional blockchains with a single global chain, **each Atto account h
 To prevent spam without fees, Atto requires a small amount of **Proof-of-Work** for each transaction. This PoW is quick to compute on modern devices but makes large-scale spam attacks economically infeasible.
 
 ### Fixed Supply
-**18 billion Atto tokens** were created at genesis - no new tokens will ever be minted. All tokens are distributed through community programs, ensuring fair access.
+**18 billion Atto coins** were created at genesis - no new coins will ever be minted. All coins are distributed through community programs, ensuring fair access.
 
 ## Additional Resources
 
@@ -142,7 +142,7 @@ To prevent spam without fees, Atto requires a small amount of **Proof-of-Work** 
 ## Important Information
 
 :::caution Legal Disclaimer
-Atto tokens may lose value, may not be liquid, and are not covered by investor compensation schemes. This documentation does not constitute financial advice or a prospectus. Always do your own research.
+Atto coins may lose value, may not be liquid, and are not covered by investor compensation schemes. This documentation does not constitute financial advice or a prospectus. Always do your own research.
 :::
 
 ## Get Involved
