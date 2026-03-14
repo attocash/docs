@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Distribution
 
-Atto's total supply of 18 billion tokens was created at genesis—no new tokens can ever be minted. However, these tokens enter circulation gradually through various distribution programs, each designed to grow the network while maintaining stability.
+Atto's total supply of 18 billion coins was created at genesis—no new coins can ever be minted. However, these coins enter circulation gradually through various distribution programs, each designed to grow the network while maintaining stability.
 
 Distribution rates are dynamically adjusted using the [Growth Stability Index (GSI)](/docs/growth-stability-index), which responds to market conditions to balance adoption with price stability.
 
