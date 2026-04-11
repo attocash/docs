@@ -27,7 +27,7 @@ export const faq = [
   {
     question: "How fast are transactions confirmed?",
     answer:
-      "In normal conditions, transactions are confirmed in 300–600 ms. Once confirmed, they are final and irreversible."
+      "In normal conditions, transactions are confirmed in less than 200ms. Once confirmed, they are final and irreversible."
   },
   {
     question: "How many confirmations are required for deposits?",

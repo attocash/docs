@@ -6,7 +6,7 @@ description: Everything you need to know about Atto - the instant, feeless, and 
 
 # Welcome to Atto Documentation
 
-**Atto is a live, feeless digital currency designed for fast, real-world payments.** With sub-second confirmations (200-600ms), zero transaction fees, and energy-efficient consensus, Atto makes cryptocurrency practical for everyday use - from micropayments to large transfers.
+**Atto is a live, feeless digital currency designed for fast, real-world payments.** With instant confirmations, zero transaction fees, and energy-efficient consensus, Atto makes cryptocurrency practical for everyday use - from micropayments to large transfers.
 
 ## Quick Start
 
@@ -94,7 +94,7 @@ Learn how Atto coins are distributed fairly to the community through multiple ch
 ## Key Features
 
 ### Instant Transactions
-Transactions confirm in **200-600 milliseconds** with finality - no waiting, no block times, no reorganizations.
+Transactions confirm in **<Metric name="network.confirmation-time.ms.seven-day-p50"/>-<Metric name="network.confirmation-time.ms.seven-day-p95"/> milliseconds** with finality - no waiting, no block times, no reorganizations.
 
 ### Zero Fees
 **Truly feeless** - send any amount without paying transaction fees. Perfect for micropayments, tips, and everyday transactions.
