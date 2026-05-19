@@ -4,169 +4,235 @@ sidebar_position: 6
 
 # Roadmap
 
-*Redefining Cryptocurrency as a True Currency*
+*What shipped, what changed, and what comes next.*
 
-Welcome to the journey of **Atto**, where we are committed to bringing cryptocurrency back to its original purpose—a
-medium of exchange that is accessible, efficient, and truly functional as a currency. Below is our roadmap outlining the
-upcoming phases and initiatives we are excited to share with our community.
+Atto did not move in a straight line. Some ideas shipped. Some got replaced once a simpler path became obvious. This
+roadmap is the public trail: completed phases read as history, open phases read as work still ahead.
 
-## Phase 0: Pre Release ✅
+## Phase 0: Pre-release
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What shipped</summary>
 
-### Website
+### Public website
 
-Launched the official Atto website to introduce the project, share the vision, and provide access to key resources like
-documentation, the whitepaper, and community links.
+The first website gave Atto a home: the whitepaper, basic docs, community links, and a place for new users to
+understand what the project was trying to build.
 
-### Live Network Launch
+### Live network
 
-Deployed the Atto network and opened it to early users and testers. This marked the beginning of real transactions on
-the network, laying the foundation for future growth and stability.
+The network went live early, before every product surface was polished. That mattered. Real accounts and real
+transactions gave us better feedback than a private test environment could.
 
 </details>
 
-## Phase 1: Explorer Launch & Platform Stabilization ✅
+## Phase 1: Explorer and platform stabilization
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What shipped</summary>
 
-### Network Explorer Release
+### Explorer
 
-We are thrilled to announce the upcoming release of the **Atto Network Explorer**. This tool will provide real-time
-visibility into all network transactions and activities, improving transparency and allowing users to monitor the health
-and performance of the Atto network.
+The [explorer](/explorer) made the network visible. Users could inspect accounts and transactions without asking an
+operator to check node logs.
 
-### Faucet and Wallet Enhancements
+### Faucet and wallet improvements
 
-Our team is working diligently to make the **Atto Faucet** and **Wallet** robust and user-friendly.
+The faucet and wallet were tightened up around the basic loop: get a small amount of ATTO, open a wallet, send it,
+receive it, and see the transaction on the explorer.
 
 </details>
 
-## Phase 2: Mobile Wallet Releases ✅
+## Phase 2: Wallet direction
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What changed</summary>
 
-Originally, we planned to develop native Android and iOS wallet applications. After careful consideration and initial
-development efforts, we’ve concluded our mobile app approach. We’re now pivoting toward a **Web Wallet** solution to
-provide a more unified and accessible experience.
+Native Android and iOS wallets were the first plan. We changed direction.
 
-### Introducing the Atto Web Wallet
-
-- **Cross-Platform Accessibility**: Users will be able to access the Atto Wallet from any modern web browser, removing
-  the need for separate native apps.
-- **Unified Codebase**: Streamlined development and maintenance, ensuring faster feature updates and security patches.
-- **Seamless User Experience**: Designed with simplicity and performance in mind, the Web Wallet will offer a consistent
-  interface across devices.
+Atto needed one wallet that could move faster across desktop and mobile, so the web wallet became the main wallet
+surface. That kept development focused on the flows that mattered most: creating an account, receiving funds, sending
+ATTO, and later, choosing a voter for staking.
 
 </details>
 
-## Phase 3: Miner ✅
+## Phase 3: Mining through Folding@Home
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What shipped</summary>
 
-Atto remains committed to a fast and green cryptocurrency model and will not compromise on that principle. Traditional
-mining is not only wasteful but also largely unnecessary to achieve network security. Instead, our "miner" utilizes
-[folding@home](https://foldingathome.org), ensuring that electricity goes into meaningful computations that aid
-scientific research rather than being wasted on repetitive hashing. This approach is inspired by Banano and aligns with
-our vision of a sustainable and community-driven cryptocurrency.
+Atto does not use mining for consensus. Consensus uses Open Representative Voting.
+
+The "mining" program is a distribution path. Users contribute computing power to
+[Folding@Home](https://foldingathome.org), and Atto rewards completed work through the mining program. Electricity goes
+toward scientific computation instead of repeated hashing for block production.
 
 </details>
 
-## Phase 4: Atto Full Launch ✅
+## Phase 4: Public launch
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What shipped</summary>
 
-### Transition from Pre-Release Stage to Official Release
-
-After running for several months, we are now confident that Atto is ready for a broader audience. With the platform
-stabilized and the web wallet successfully launched, we officially unveiled Atto to a bigger audience.
+After the pre-release period, Atto moved into a broader public launch. By then, the network, website, wallet, faucet,
+explorer, and early distribution paths were usable enough for people outside the initial group of testers.
 
 </details>
 
-## Phase 5: Integration ✅
+## Phase 5: Integrations
+
+Status: complete
 
 <details>
-<summary>View Details</summary>
+<summary>What shipped</summary>
 
-### API Wallet
+### Developer APIs and services
 
-We're currently developing an API Wallet to make integrating with the Atto network seamless. This will allow developers
-and services to interact with the network effortlessly, paving the way for broader adoption and listings.
+The integration work made Atto easier to build on. The docs now cover the node, wallet server, work server, signer, and
+the API references needed to send, receive, inspect accounts, and operate infrastructure.
 
-### Listings
+### Listings and discovery
 
-We're actively working on getting Atto listed on key platforms to increase visibility and accessibility. Listings will
-make it easier for users to discover, trade, and adopt Atto across various ecosystems.
+Atto reached public discovery and listing channels, including exchange listing announcements and CoinGecko coverage.
+Current market availability can change, so the roadmap should not be used as the source of truth for where ATTO trades
+today.
 
-### Educational Resources
+### Node metrics
 
-To assist new users, we will provide:
-
-- **Comprehensive Guides**: Step-by-step instructions on how to integrate Atto.
-- **FAQs and Support**: Answers to common questions and dedicated support channels.
-
-### Node Metrics
-
-- **Expose Node Metrics**: Implement prometheus endpoint so node operators can monitor the health and performance of
-  their nodes.
+Node operators got health and Prometheus metrics so they can monitor infrastructure instead of guessing from the
+outside.
 
 </details>
 
-## Phase 6: Representative Program Introduction
+## Phase 6: Representative program
 
-### Network Metrics
+Status: complete
 
-To enhance network transparency and provide valuable insights, we will:
+<details>
+<summary>What shipped</summary>
 
-- **Launch a Network Dashboard**: Display key live metrics on our website, such as block count, transactions per
-  second (TPS), inflation, activity, and other popular network statistics.
+### Staking and voter choice
 
-### Empowering Network Participants
+The representative program moved voting from a background network detail into something users can act on. Wallet users
+can choose a voter, keep custody of their ATTO, and receive rewards when they are eligible.
 
-We are introducing the **Atto Representative Program**, designed to enhance network efficiency and reward participants
-who contribute positively.
+### Voter transparency
 
-- **Performance-Based Scoring**: Representatives will be evaluated on transaction confirmation speed and frequency.
-- **Daily Rewards**: Awards distributed every day, proportional to voting weight and capped at 1%.
-- **Transparency**: Clear criteria and real-time performance metrics will be available to all participants.
+The staking docs, wallet, [voter explorer](/explorer/voters), and [metrics dashboard](/metrics) make voter choice less
+opaque. Users can compare voters, avoid crowded ones, and understand how delegation affects the network.
 
-### How to Get Involved
+### Daily rewards
 
-- **Become a Representative**: Instructions will be provided on how to set up and optimize your node.
-- **Maximize Your Impact**: Tips on improving performance and increasing your contribution to the network.
+Rewards are paid daily for eligible accounts. The current APY and distribution data are dynamic, so the live staking
+docs and wallet should be used for current values.
 
-## Phase 7: Micropayments
+</details>
 
-We will introduce a payment protocol and browser extension to enable seamless micropayments across the web.
+## Side quests: redesigns
 
-- **Atto Payment Protocol**: A simple, open protocol for requesting and confirming payments.
-- **Self-Hosted Server**: A reference implementation that can be run by merchants or developers.
-- **Browser Extension**: A lightweight plugin to allow users to approve and send payments directly from their browser.
+Status: complete
 
-## Our Vision
+<details>
+<summary>What shipped</summary>
 
-Atto is more than just a cryptocurrency; it's a movement to reaffirm the original intent of digital currencies—as tools
-for everyday transactions that are fast, secure, and decentralized. We are committed to building a platform that
-embodies these principles, and we believe that with your support, we can make this vision a reality.
+These were not protocol milestones, but they mattered. If Atto is supposed to feel like everyday money, the public
+product surfaces have to be clear.
 
-## Get Involved
+### Website redesign
 
-Your involvement is crucial to the success of Atto. Whether you're a developer, a crypto enthusiast, or someone who
-believes in the future of decentralized currencies, there's a place for you in our community.
+The website had grown around launches, docs, metrics, blog posts, and integration pages. The redesign made the current
+product easier to understand: wallet, staking, mining, explorer, metrics, integrations, and community entry points.
 
-- **Participate in Testing**: Help us refine our products by providing feedback.
-- **Spread the Word**: Share Atto with friends and on social media.
-- **Contribute Your Skills**: From development to community management, your skills can make a difference.
+The goal was less marketing wallpaper and more direct paths. People should be able to land on the site and know what
+Atto is, how to try it, how to earn it, how to build with it, and where to check the network.
 
-## Thank You for Being Part of Atto
+### Wallet redesign
 
-We appreciate your interest and support. Together, we can reshape the landscape of cryptocurrency and build a platform
-that serves the true purpose of digital currency.
+The wallet is where Atto either feels usable or it does not.
 
-For any questions or feedback, please reach out to us on our community channels. Let's make Atto the currency of the
-future—starting today.
+The redesign focused on the everyday flows: onboarding, account overview, sending, receiving pending funds, staking,
+voter selection, local work status, and mobile use. The hard parts should be visible when they matter and out of the way
+when they do not.
+
+</details>
+
+## Phase 7: Micropayment rails
+
+Status: started
+
+Atto already has the traits small payments need: fast confirmation, no protocol fees, and simple transfers. The next
+step is turning that into payment flows that software can use without a custom checkout for every request.
+
+This phase is about making small paid requests work for APIs, tools, and agents.
+
+Planned work:
+
+- Support an x402-style payment flow where a service can request payment, the client can pay, and the service can return
+  the resource after verification.
+- Keep the design multi-rail so ATTO can be used where it makes sense without closing the door on other payment rails.
+- Ship one paid demo endpoint with settlement receipts, replay protection, and clear failure behavior.
+- Add spending controls for agents: per-call limits, daily limits, allowlists, duplicate-payment checks, and readable
+  payment metadata.
+- Publish developer docs for protecting an API route or MCP tool behind a small payment.
+
+## Phase 8: `atto.market` beta
+
+Status: planned
+
+`atto.market` should be the first public product built on the new rails. The goal is not a giant app store. The first
+version should be a small, curated market for agent-ready paid services.
+
+Planned work:
+
+- Launch a beta catalog for paid APIs, MCP tools, and agent services.
+- Start with a few useful first-party or closely reviewed listings, such as Atto network data, explorer queries, market
+  context, or small automation tools.
+- Make each listing readable by humans and agents: description, price, accepted rails, input schema, output schema,
+  uptime/status, and integration docs.
+- Provide an agent-readable discovery path so an agent can find a service, inspect the price and schema, pay, and call
+  the endpoint.
+- Include one complete example showing an agent discovering a listing, paying for it, and using the result.
+
+## Phase 9: Merchant and self-hosted payments
+
+Status: planned
+
+Once the core payment flow is proven, Atto should support merchant infrastructure that people already run.
+
+Planned work:
+
+- Research BTCPay Server integration paths: plugin, headless API integration, payment requests, and invoices.
+- Build the smallest useful BTCPay integration before attempting a full payment-server stack.
+- Keep self-hosting as the default direction for merchants who do not want a hosted processor.
+
+## Phase 10: Content payments
+
+Status: planned
+
+The original content idea still matters: pay to read an article, unlock a post, tip a creator, or add a small payment
+plugin to a website. This comes after merchant and self-hosted payments because the payment rails should be proven
+before the creator-facing plugin work starts.
+
+Planned work:
+
+- Article unlocks and pay-per-read flows.
+- Website and publisher plugins.
+- Examples for tips, gated downloads, and small paid actions.
+- A simple reader flow that does not require copying addresses by hand.
+
+## How to help
+
+The roadmap is not a promise of dates. It is the current order of work.
+
+Useful help is usually concrete: test the wallet, run infrastructure, report broken flows, improve docs, build example
+integrations, or make public Atto pages easier to understand.
