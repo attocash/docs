@@ -4,9 +4,11 @@ title: Documentation
 description: Everything you need to know about Atto - the instant, feeless, and eco-friendly cryptocurrency
 ---
 
+import Metric from "@site/src/components/Metric";
+
 # Welcome to Atto Documentation
 
-**Atto is a live, feeless digital currency designed for fast, real-world payments.** With instant confirmations, zero transaction fees, and energy-efficient consensus, Atto makes cryptocurrency practical for everyday use - from micropayments to large transfers.
+**Atto is a live, feeless digital currency designed for fast, real-world payments.** With [instant confirmations](/metrics#confirmation-speed), zero transaction fees, and energy-efficient consensus, Atto makes cryptocurrency practical for everyday use - from micropayments to large transfers.
 
 ## Quick Start
 
@@ -94,7 +96,7 @@ Learn how Atto coins are distributed fairly to the community through multiple ch
 ## Key Features
 
 ### Instant Transactions
-Transactions confirm in **<Metric name="network.confirmation-time.ms.seven-day-p50"/>-<Metric name="network.confirmation-time.ms.seven-day-p95"/> milliseconds** with finality - no waiting, no block times, no reorganizations.
+Atto does not wait for blocks. Transactions are processed as they reach the network; the current median/P50 confirmation time is about <a href="/metrics#confirmation-speed"><Metric name="network.confirmation-time.ms.seven-day-p50" precision={0} suffix=" ms" /></a>, and once representatives confirm a transaction, it is final.
 
 ### Zero Fees
 **Truly feeless** - send any amount without paying transaction fees. Perfect for micropayments, tips, and everyday transactions.

@@ -40,7 +40,7 @@ crypto-asset is not covered by investor compensation schemes or deposit guarante
 
 Atto is a live, feeless cryptocurrency optimized for micropayments and face-to-face transactions. It uses an
 energy-efficient consensus model called Open Representative Voting, where users delegate voting power to trusted
-nodes. Transactions are confirmed in under a second and incur no fees.
+nodes. Transactions are typically confirmed in [under a second](/metrics#confirmation-speed) and incur no fees.
 
 The total supply is fixed at 18,000,000,000 Atto tokens, each divisible into 10^9 units. There is no public sale or
 investment opportunity; tokens are distributed freely via a faucet and reward programs.
@@ -77,8 +77,8 @@ coffee face-to-face or tipping someone a fraction of a cent online, Atto enables
 Atto’s core design focuses on **speed, efficiency, and sustainability**. It achieves high performance through a unique
 consensus mechanism called **Open Representative Voting** and built on an innovative ledger architecture where each user
 has their own chain of transactions. This means **transfers are
-[finalized](https://www.ledger.com/academy/glossary/finality) in under a
-second in real-world conditions**, without anyone having to pay network fees. Moreover, Atto avoids
+[finalized](https://www.ledger.com/academy/glossary/finality) in [under a second](/metrics#confirmation-speed) in normal network conditions**, without
+anyone having to pay network fees. Moreover, Atto avoids
 [energy-hungry mining](https://en.wikipedia.org/wiki/Environmental_impact_of_bitcoin); the network’s power usage is so
 low that it could be run on the equivalent of a small solar farm (only about the energy of six average households). This
 makes Atto not only fast and feeless, but also environmentally friendly and sustainable for the long term.
@@ -101,8 +101,8 @@ uniquely suited for micropayments and face-to-face transactions.
   contrast to conventional payment methods that have high processing fees for small amounts.
   In Atto, **it's your money – you can send it without any deductions**.
 
-- **Near-Instant Confirmation:** Speed is a top priority. The network achieves **sub-second confirmation times** for
-  typical transactions.
+- **Near-Instant Confirmation:** Speed is a top priority. The network is designed for [sub-second confirmation](/metrics#confirmation-speed) of
+  typical transactions, with average, P95, and P99 values available for more technical readers.
   This low latency means users are not left waiting; payments can be accepted on the spot, which is crucial for
   in-person transactions like retail purchases or splitting a bill with friends.
 
@@ -113,9 +113,9 @@ uniquely suited for micropayments and face-to-face transactions.
 
 - **Face-to-Face Payment Friendly:** Atto’s combination of instant finality and offline-capable wallet designs makes it
   ideal for point-of-sale and face-to-face payments. A customer can pay a merchant via a quick QR code scan, and the
-  transaction will be **confirmed within milliseconds**, providing a smooth experience comparable to (or faster than)
-  tapping
-  a contactless card. The **finality** of Atto transactions (once confirmed by the network majority) ensures that the
+  transaction can be confirmed in under a second in normal conditions, providing a smooth experience comparable to (or
+  faster than) tapping a contactless card. The
+  **finality** of Atto transactions (once confirmed by the network majority) ensures that the
   recipient can trust the payment irreversibly, which is important in physical exchanges.
 
 - **Open Representative Voting Consensus (ORV):** Instead of wasteful mining, Atto secures its ledger through a
@@ -253,8 +253,8 @@ different actions in an account, simplifying the logic and ensuring consistency.
 
 Each block (regardless of type) is cryptographically signed by the account owner, ensuring authenticity, and includes a
 **proof-of-work** (PoW) puzzle solution. The PoW attached to each block is very small (far easier than Bitcoin’s mining
-puzzles) and is mainly used as an anti-spam measure. It requires a device to do a bit of computation (on the order of a
-few milliseconds to a second of work, depending on hardware) to create a valid block. This minor work helps prevent
+puzzles) and is mainly used as an anti-spam measure. It requires a device to do a small amount of computation,
+depending on hardware, to create a valid block. This minor work helps prevent
 someone from creating millions of bogus transactions per second, as they would need to expend computational effort for
 each one.
 In normal use, the PoW is unnoticeable (wallet software usually computes it in the background), but it dramatically
@@ -297,8 +297,8 @@ countermeasures to ensure the network remains smooth and secure even under load 
   transfers can be underway simultaneously – only one transfer per account at a time is constrained. This means someone
   could be sending money at the same time someone else is, without waiting on each other. Confirmation times remain only
   a function of the ORV voting speed, which is kept very fast through efficient networking among representatives. In
-  tests and early usage, Atto transactions routinely confirm in well under a second, and the system is designed to
-  maintain this performance even as it scales to more users.
+  typical confirmations remain [under a second](/metrics#confirmation-speed) today. The system is
+  designed to maintain low latency even as it scales to more users.
 
 - **Lightweight Proof-of-Work per Transaction:** Every transaction (block) requires solving a small Proof-of-Work puzzle
   before it’s accepted by the network. Unlike Proof-of-Work mining, this is not used to choose who gets to add a block,
@@ -396,9 +396,10 @@ channels. Traditional electronic payment methods (credit cards, mobile payment a
 point of use, but they rely on centralized intermediaries, and merchants pay fees for each transaction.
 
 Atto offers a decentralized alternative that is **fast enough for in-person use**. Thanks to ORV consensus, a payment
-can be confirmed in seconds or less, which is on par or faster than processing a card transaction. For instance, if you
-purchase an item from a store using Atto, by the time the cashier finishes saying the total and you approve the payment
-on your phone, the merchant’s device can already receive confirmation that the payment is complete. There’s no need to
+can be confirmed in under a second in normal network conditions, which is on par or faster than processing a card
+transaction. For instance, if you purchase an item from a store using Atto, by the time the cashier finishes saying the
+total and you approve the payment on your phone, the merchant’s device can already receive confirmation that the payment
+is complete. There’s no need to
 make change (as with cash) or wait for terminal approvals and signatures (as with cards). The result is a smooth
 customer experience – essentially **cash-like immediacy with digital convenience**.
 
@@ -640,7 +641,7 @@ enough to make numerous transactions, demonstrating the capability of the networ
 **Block Explorer and Transparency:** The **Atto Explorer** is a web-based blockchain explorer that was launched to
 provide transparency and insight into the network.
 Through the explorer, anyone can search for transactions, view account balances (addresses are pseudonymous), and
-monitor network stats such as transaction throughput, confirmation times, and representative voting weights. The
+monitor network stats such as transaction throughput, confirmation time, and representative voting weights. The
 explorer makes the blockchain data human-readable and accessible, which is important for trust – users can verify that
 their transactions went through, and curious observers can inspect how active the network is. It also helps developers
 by providing an easy way to debug or analyze network behavior.
@@ -745,5 +746,3 @@ fees, latency, and energy waste, Atto positions itself as an ideal medium of exc
 payments to everyday human transactions. The network is live, the fundamentals are strong, and the path ahead is one of
 community-driven growth. With Atto, we move closer to a world where value can flow as freely as information – empowering
 new possibilities for commerce, innovation, and financial inclusion.
-
-

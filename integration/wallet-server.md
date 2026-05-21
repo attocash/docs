@@ -21,7 +21,7 @@ necessary for sending transactions. The full OpenAPI specification for the api c
 
 ## Synchronous Operations and Timeouts
 
-Atto network transactions are designed to be extremely fast. Consequently,the Wallet Server API operates synchronously
+Atto network transactions are designed to be extremely fast. Consequently, the Wallet Server API operates synchronously
 for most actions, including sending transactions.
 
 Key considerations for timeouts:

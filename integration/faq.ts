@@ -17,17 +17,27 @@ export const faq = [
   {
     question: "Does Atto use Proof-of-Work?",
     answer:
-      "Atto requires a very small Proof-of-Work for each transaction to prevent spam. This work is trivial compared to traditional mining and can be computed in milliseconds on modern hardware. Consensus itself is achieved through Open Representative Voting (ORV), not PoW."
+      "Atto requires a very small Proof-of-Work for each transaction to prevent spam. This work is trivial compared to traditional mining and can usually be computed quickly on modern hardware. Consensus itself is achieved through Open Representative Voting (ORV), not PoW."
   },
   {
     question: "What is the block time on Atto?",
     answer:
-      "Atto does not use traditional blocks. Each account maintains its own chain of transactions. Transactions are processed as they are received, with confirmation typically under 1 second."
+      "Atto does not use traditional blocks. Each account maintains its own chain of transactions, and transactions are processed as they are received. That is why ",
+    link: {
+      href: "/metrics#confirmation-speed",
+      label: "confirmation can feel near-instant",
+      suffix: " instead of waiting for a block interval."
+    }
   },
   {
     question: "How fast are transactions confirmed?",
     answer:
-      "In normal conditions, transactions are confirmed in less than 200ms. Once confirmed, they are final and irreversible."
+      "In normal conditions, Atto is built for ",
+    link: {
+      href: "/metrics#confirmation-speed",
+      label: "sub-second confirmation",
+      suffix: ". The technical view includes median/P50, average, P95, and P99 values. Once a transaction is confirmed, it is final and irreversible."
+    }
   },
   {
     question: "How many confirmations are required for deposits?",
@@ -52,7 +62,7 @@ export const faq = [
   {
     question: "How are double-spends or forks prevented?",
     answer:
-      "Each account can only have one valid chain of transactions. Representatives vote on the correct transaction when published. Finality is achieved within a second and forks are effectively resolved immediately."
+      "Each account can only have one valid chain of transactions. Representatives vote on the correct transaction when published. Once representative voting confirms a transaction, it is final and conflicting updates are rejected."
   },
   {
     question: "What is the minimum deposit or withdrawal amount?",
@@ -97,7 +107,7 @@ export const faq = [
   {
     question: "What monitoring is recommended?",
     answer:
-      "Atto nodes expose detailed Prometheus metrics out of the box, which is the industry standard for application monitoring. These metrics can be scraped directly and exported to commercial tools such as Grafana, Datadog, or any compatible monitoring system. The most common metrics of interest for node operators are confirmation speeds (how fast transactions are finalized), account height, and unchecked transactions."
+      "Atto nodes expose detailed Prometheus metrics out of the box, which is the industry standard for application monitoring. These metrics can be scraped directly and exported to commercial tools such as Grafana, Datadog, or any compatible monitoring system. The most common metrics of interest for node operators are confirmation time, account height, and unchecked transactions. For confirmation time, track median/P50 for the typical transaction, P95/P99 for slower confirmations, and average for the arithmetic mean."
   },
   {
     question: "Is there a testnet?",

@@ -12,7 +12,7 @@ production cluster.
 
 ## Why Atto?
 
-* **Instant confirmations:** ~<Metric name="network.confirmation-time.ms.seven-day-p95" />ms.
+* **Instant confirmations:** ~<Metric name="network.confirmation-time.ms.seven-day-p50" />ms.
 * **Energy‑efficient:** no mining, just micro‑hash PoW.
 * **Zero fees:** yes, zero and forever
 * **Hardened by default:** containers are built from scratch images and compiled to GraalVM native binaries; only the
@@ -65,7 +65,9 @@ the [docs repository](https://github.com/attocash/docs) and we'll make it happen
         name: faq.question,
         acceptedAnswer: {
           "@type": "Answer",
-          text: faq.answer
+          text: faq.link
+            ? `${faq.answer}${faq.link.label}${faq.link.suffix ?? ""}`
+            : faq.answer
         }
       }))
     })}
@@ -75,6 +77,10 @@ the [docs repository](https://github.com/attocash/docs) and we'll make it happen
 {faq.map((faq, index) => (
 <details key={index} style={{ marginBottom: "1.5rem" }}>
   <summary><strong>{faq.question}</strong></summary>
-  <p>{faq.answer}</p>
+  <p>
+    {faq.answer}
+    {faq.link && <a href={faq.link.href}>{faq.link.label}</a>}
+    {faq.link?.suffix}
+  </p>
 </details>
 ))}
