@@ -66,7 +66,7 @@ How Atto enters circulation through the faucet, Folding@Home mining, staking, an
     <p className="mt-2 text-sm leading-relaxed text-neutral-600">Delegate to a voter and receive daily rewards when your account stays eligible.</p>
   </a>
 
-  <a href="/docs/reward-for-contributions" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
+  <a href="/contributions" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
     <h3 className="text-lg font-semibold text-neutral-900">Contributions</h3>
     <p className="mt-2 text-sm leading-relaxed text-neutral-600">Earn rewards for useful code, docs, security reports, guides, and community work.</p>
   </a>
@@ -147,4 +147,4 @@ Atto needs practical contributions, especially work that helps people run, use, 
 - Help users on Discord
 - Create useful guides or technical content
 
-The [Contribution Rewards](/docs/reward-for-contributions) program explains what kinds of work may qualify for ATTO rewards.
+The [Contribution Rewards policy](/docs/reward-for-contributions) explains what kinds of work may qualify for ATTO rewards.

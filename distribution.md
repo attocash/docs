@@ -24,11 +24,11 @@ Voters who help secure the network through [Open Representative Voting](/docs/wh
 
 ### Contribution Rewards
 
-Community members who contribute to Atto earn rewards based on impact:
+Community members may earn rewards for accepted pull requests that improve Atto:
 
 - Software development and code contributions
-- Critical vulnerability reporting
 - Documentation, tutorials, and educational content
-- Community support and outreach
+- Tests, tooling, integrations, UI polish, and fixes
+- Private critical vulnerability reporting as the security exception
 
-For details, see [Rewards for Contributions](/docs/reward-for-contributions).
+Reward-eligible PRs receive a tier label before merge, then ATTO is sent automatically after merge. For larger work, check in first because not every contribution will be accepted. For details, see [Rewards for Contributions](/docs/reward-for-contributions).

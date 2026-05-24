@@ -452,8 +452,8 @@ generation of digital commerce, from the smallest of transactions to everyday po
   ongoing and limited per mechanism:
   - The faucet allows anyone to claim a small amount of Atto (subject to time limits).
   - Folding@home rewards are granted based on verified contribution of computing resources.
-  - Contribution rewards are manually or automatically issued to users who help improve Atto (e.g., through code,
-    design, content, or outreach).
+  - Contribution rewards are issued to users whose reward-labeled pull requests are merged, with private critical
+    vulnerability reports handled as a security exception.
   - The voting node incentive program is planned and will reward users who help secure the network.
 
 - **Rights and Obligations:** Atto tokens are utility tokens used for value transfer and participation in consensus.
@@ -500,11 +500,11 @@ purposes:
 
 - **Community Rewards (24% of supply):** Another large portion is allocated to community-driven contributions and
   bounties.
-  Atto actively rewards those who help the project – whether by finding and reporting bugs, contributing code or
-  documentation, creating educational content, or helping with outreach. For example, a security researcher who
-  discovers a vulnerability might earn a substantial Atto reward. Likewise, someone building a useful app on Atto or
-  integrating it into a service could be rewarded. This approach leverages the wider community’s talents and creates a
-  collaborative ecosystem where contributors are recognized in a meaningful (financial) way.
+  Atto may reward useful accepted pull requests, including code, documentation, educational content, integrations, and
+  fixes. Ordinary bug reports are not reward-eligible by themselves, but private reports of critical vulnerabilities can
+  qualify through the security process. Likewise, someone building a useful app on Atto or integrating it into a service
+  could be rewarded. This approach gives contributors a concrete way to be recognized for work that lands in the
+  ecosystem.
 
 - **Founder Allocation (1% of supply):** A very small portion was reserved for the project’s
   creator/founder.
