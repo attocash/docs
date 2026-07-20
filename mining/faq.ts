@@ -2,7 +2,7 @@ export const faq = [
   {
     question: "Why am I not receiving any rewards?",
     answer:
-      "Payouts are sent automatically every 3 hours for work units that have been fully completed and reported. If you still don’t see any rewards after that window, double-check that you’re folding under team 1066107 and that your Folding@Home username is set to your Atto address you wish to receive payouts to. Keep in mind that any work unit already in progress before you changed your team or username will still be credited using the old information."
+      "Reward processing currently runs roughly every 3 hours, although timing can vary. If an eligible completed work unit has not produced a reward after that window, double-check that you’re folding under team 1066107 and that your Folding@Home username is the Atto address where you want to receive rewards. A work unit already in progress when you change your team or username is still credited using the old information."
   },
   {
     question: "Can I use my GPU for Folding@Home?",
@@ -12,22 +12,22 @@ export const faq = [
   {
     question: "How often are Atto rewards distributed?",
     answer:
-      "The distribution timing isn't fixed to a strict schedule. Currently, updates and distributions happen roughly every 3 hours on average, but this is not guaranteed and can vary."
+      "Distribution timing is variable. Under current operations, reward updates and distributions typically happen about every 3 hours."
   },
   {
     question: "If the updates aren't frequent, do I lose potential rewards?",
     answer:
-      "No, no work is lost due to the timing of distributions. The system calculates rewards based on the total time passed since the last distribution cycle and your proportional contribution during that entire period. Whether the updates happen every hour or every 12 hours, the total reward pool for that time is distributed fairly based on reported scores."
+      "A longer update interval does not by itself shorten the calculation period; the reward calculation uses the total time since the previous distribution cycle and each eligible participant’s proportional contribution during that period. The resulting allocation still depends on eligibility, reported scores, and the current reward rules."
   },
   {
     question: "Will I receive Atto rewards for incomplete Folding@Home Work Units (WUs)?",
     answer:
-      "No. Atto rewards are distributed based on the points awarded by Folding@Home. Folding@Home only awards points for Work Units that are fully completed and successfully uploaded back to their servers. Incomplete or partially processed WUs do not contribute to your score for Atto reward calculation."
+      "Mining rewards are calculated for eligible participants from points reported by Folding@Home. Folding@Home awards points only for Work Units that are fully completed and successfully uploaded, so incomplete or partially processed WUs do not contribute to that score."
   },
   {
-    question: "Can the Atto reward rate (5,000 attos/minute) change?",
+    question: "Can the Atto mining reward rate change?",
     answer:
-      "Yes. The default is 5,000 attos/min, but the emission rate is adjusted weekly using a step ladder (5,000 → 4,000 → 3,000 → 2,000 → 1,000 → 500 → 250 → 100) based on the 7-day price change: down moves step the emission down (one step per −1%); up moves (>+1%) step it up by one. If price is stable (−1% to +1%), emissions stay the same. We also maintain an annual guardrail around ~15% of total supply; if we fall behind, emissions may temporarily exceed 5,000/min in stable conditions."
+      "Yes. The mining reward rate is variable under the current reward policy. The published Growth Stability Index (GSI) design can scale configured distribution rates, but mining’s current mapping, settings, and cadence must be confirmed from operational records. Check the Growth Stability Index and Distribution documentation for the published mechanism."
   },
   {
     question: "How can I check my Folding@Home contribution stats?",
@@ -37,16 +37,16 @@ export const faq = [
   {
     question: "Where can I see my received Atto rewards?",
     answer:
-      "Your earned Atto will be sent directly to the Atto address you configured as your username in Folding@Home. You can check your balance using your Atto wallet interface or the explorer."
+      "Any mining reward distributed to you is sent to the Atto address configured as your Folding@Home username. You can check that address using your Atto wallet or the explorer."
   },
   {
     question: "What happens if I entered the wrong Atto address as my username?",
     answer:
-      "Rewards are sent exclusively to the address configured as your Folding@Home username within Team 1066107. If you enter an incorrect or invalid address, the rewards associated with your folding work will be sent to that incorrect address and likely be inaccessible to you. It is crucial to double-check that you have entered your correct Atto address."
+      "The reward system uses the Atto address configured as your Folding@Home username within Team 1066107. If a reward is distributed while an incorrect or invalid address is configured, it can be sent to that address and become inaccessible to you. Double-check the address before folding."
   },
   {
     question: "Do I need to run Folding@Home 24/7?",
     answer:
-      "No, you can start and stop Folding@Home whenever you like. However, rewards are proportional to your contribution. The more you run it (and the more powerful your hardware), the higher your contribution score will be relative to the team, and thus the larger your share of the distributed attos."
+      "No, you can start and stop Folding@Home whenever you like. Mining reward allocations are proportional to reported contribution scores, so a higher score relative to the team generally produces a larger share of a distribution cycle when you are eligible."
   }
 ];

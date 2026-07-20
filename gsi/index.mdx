@@ -8,69 +8,59 @@ import Metric from "@site/src/components/Metric";
 
 # Growth Stability Index
 
-The Growth Stability Index (GSI) dynamically adjusts Atto's distribution rate based on market conditions. The current GSI is **<Metric name="distribution.growth-stability-index" />**, meaning distribution rates are adjusted to this factor. It balances widespread token distribution with price stability, ensuring Atto remains practical as digital cash.
+The Growth Stability Index (GSI) adjusts the configured rates of Atto distribution programmes that use it. The current GSI is **<Metric name="distribution.growth-stability-index" />**. A programme's configured base rate is multiplied by this value.
+
+:::note Release pacing, not a price target
+The GSI changes how quickly Atto is released. It is not a peg and does not promise a particular price or market outcome.
+:::
 
 <GsiChart />
 
-## How It Works
+## How it works
 
-The GSI is a value between a configured minimum (typically 0.10) and 1.0 that represents the current market position relative to recent price history. It is calculated using three key price metrics:
+The GSI ranges from a configured minimum, typically 0.10, to 1.0. It compares Atto's recent market position using three price measures:
 
-- **7-Day Average Price**: A smoothed price that reduces noise from short-term fluctuations
-- **All-Time High (ATH)**: The highest price Atto has ever reached
-- **1-Month Low**: The lowest price in the past 30 days
+- **7-day average price**: Smooths out short-term price movements
+- **All-time high (ATH)**: The highest recorded Atto price
+- **1-month low**: The lowest price in the past 30 days
 
-### The Formula
+### Formula
 
 ```
 GSI = (7-Day Average Price - 1-Month Low) / (ATH - 1-Month Low)
 ```
 
-This formula positions the current price on a scale from 0 to 1:
-- **GSI near 0**: Price is close to the 1-month low (bearish conditions)
-- **GSI near 1**: Price is close to the all-time high (bullish conditions)
+The result places the 7-day average between the 1-month low and the all-time high:
 
-## Asymmetric Adjustment
+- **GSI near 0**: The average is close to the 1-month low
+- **GSI near 1**: The average is close to the all-time high
 
-A key feature of the GSI is its **asymmetric adjustment mechanism**:
+## Asymmetric adjustment
 
-- **Downward adjustments are instant**: When market conditions worsen, the GSI drops immediately to the target value
-- **Upward adjustments are capped**: When conditions improve, the GSI can only increase by a maximum of 0.01 per update cycle
+The GSI responds faster when its target falls than when it rises:
 
-This asymmetry serves an important purpose: it allows the system to **quickly reduce distribution** when prices fall (protecting against selling pressure), while **gradually increasing distribution** when prices rise (preventing overheating during rallies).
+- **Lower target**: The lower value is applied on the next update
+- **Higher target**: The GSI can increase by no more than 0.01 per update
+
+This lets a distribution rate fall quickly after lower price readings, while returning more gradually after higher readings.
 
 ### Example
 
-Consider a scenario where:
-- Current GSI: 0.50
-- Market rallies, target GSI becomes: 0.80
+Suppose the current GSI is 0.50 and the next target is 0.80. Rather than jumping straight to 0.80, it rises in steps:
 
-Instead of jumping to 0.80, the GSI will increase gradually:
 - Update 1: 0.50 → 0.51
 - Update 2: 0.51 → 0.52
 - ... and so on
 
-However, if the market then crashes and the target GSI drops to 0.30:
-- The GSI immediately adjusts: 0.52 → 0.30
+If a later price reading produces a target of 0.30, the lower target is applied on the next update: 0.52 → 0.30.
 
-## Impact on Distribution
+## Effect on distribution
 
-The GSI directly influences the rate at which new Atto enters circulation through mining, staking rewards, and other regular distribution programs. When the GSI is:
+The full 18 billion ATTO supply was created at genesis. The GSI does not create new ATTO; it changes how quickly part of that existing supply enters circulation through programmes that use it.
 
-- **High (closer to 1.0)**: Distribution rates can be higher, as market conditions support additional supply
-- **Low (closer to minimum)**: Distribution rates are reduced to minimize selling pressure during weak market conditions
+- **Higher GSI**: Rates can move closer to their configured base rates
+- **Lower GSI**: Rates are scaled down further
 
-This creates a self-regulating system where:
-1. Strong markets allow for faster distribution, accelerating adoption
-2. Weak markets trigger reduced distribution, supporting price stability
-3. The asymmetric adjustment prevents rapid oscillation between states
+The aim is to limit additional sell pressure from distribution when market conditions are weak. The slower upward adjustment also slows the return to the full configured rate after a rise.
 
-## Why GSI Matters
-
-The GSI embodies Atto's commitment to being **usable money**, not just a speculative asset. By dynamically adjusting distribution based on market conditions:
-
-- **Users gain confidence**: Knowing that distribution responds to market conditions reduces fear of sudden supply floods
-- **Volatility is dampened**: The asymmetric mechanism naturally smooths out boom-bust cycles
-- **Long-term adoption is prioritized**: Gradual, stable growth is favored over short-term hype
-
-For more details on Atto's distribution strategy, see the [Distribution](/docs/distribution) page and the blog post on [A New Distribution Strategy](/blog/new-distribution-strategy).
+For more on how Atto enters circulation, see [Token Distribution](/docs/distribution). The [August 2025 distribution strategy article](/blog/new-distribution-strategy) explains the history behind the mechanism.
