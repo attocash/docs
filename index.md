@@ -1,7 +1,7 @@
 ---
 sidebar_position: 0
 title: Documentation
-description: Everything you need to know about Atto - the instant, feeless, and eco-friendly cryptocurrency
+description: Everything you need to know about Atto - instant, feeless digital cash using representative voting
 ---
 
 import Metric from "@site/src/components/Metric";
@@ -38,17 +38,21 @@ The technical overview of Atto's consensus, account-chain model, supply, and sec
 - Account-chain architecture
 - Anti-spam mechanism via lightweight PoW
 - Fixed supply of 18B coins (no new minting)
-- Energy-efficient consensus without mining
+- Representative voting rather than competitive proof-of-work mining for consensus
 
 ### [Token Distribution](/docs/distribution)
-How Atto enters circulation through the faucet, Folding@Home mining, staking, and contribution rewards. Distribution rates can adjust through the [Growth Stability Index (GSI)](/docs/growth-stability-index).
+How Atto enters circulation through the faucet, Folding@Home mining, staking rewards, and contribution rewards. Rates and eligibility follow the current reward policy. The [Growth Stability Index (GSI)](/docs/growth-stability-index) adjusts configured rates for distribution programmes that use it.
 
 - Faucet for new users
 - Folding@Home mining for research contributors
-- Staking rewards for accounts delegated to voters
+- Staking rewards for eligible accounts delegated to participating voters
 - Contribution rewards for useful work
 
-## Ways to Earn Atto
+## Distribution and Reward Routes
+
+:::note Reward availability
+Reward eligibility, rates, and timing depend on the current rules for each route and may change.
+:::
 
 <div className="my-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
   <a href="/faucet" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
@@ -58,17 +62,17 @@ How Atto enters circulation through the faucet, Folding@Home mining, staking, an
 
   <a href="/docs/mining" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
     <h3 className="text-lg font-semibold text-neutral-900">Folding@Home mining</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Contribute compute to medical research and receive Atto from the mining program.</p>
+    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Contribute compute to medical research and you may receive Atto under the current mining reward rules.</p>
   </a>
 
   <a href="/docs/staking" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
     <h3 className="text-lg font-semibold text-neutral-900">Staking</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Delegate to a voter and receive daily rewards when your account stays eligible.</p>
+    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Eligible accounts delegated to participating voters may receive staking rewards under the current reward policy.</p>
   </a>
 
   <a href="/contributions" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
     <h3 className="text-lg font-semibold text-neutral-900">Contributions</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Earn rewards for useful code, docs, security reports, guides, and community work.</p>
+    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Useful code, docs, security reports, guides, and community work may qualify for contribution rewards.</p>
   </a>
 </div>
 
@@ -87,16 +91,16 @@ How Atto enters circulation through the faucet, Folding@Home mining, staking, an
 ## Key Features
 
 ### Instant Transactions
-Atto does not wait for blocks. Transactions are processed as they reach the network; the current median/P50 confirmation time is about <a href="/metrics#confirmation-speed"><Metric name="network.confirmation-time.ms.seven-day-p50" precision={0} suffix=" ms" /></a>, and once representatives confirm a transaction, it is final.
+Atto does not wait for a shared block queue. Transactions are processed as they reach the network, and the current median/P50 confirmation time is about <a href="/metrics#confirmation-speed"><Metric name="network.confirmation-time.ms.seven-day-p50" precision={0} suffix=" ms" /></a>. A transaction may be treated as confirmed when it satisfies the network's then-current voting rules. Confirmation and recovery still depend on software, voting-weight distribution, connectivity, infrastructure, and operating conditions.
 
 ### Zero Fees
 Atto has no protocol transaction fee. If you send 1 ATTO, the recipient receives 1 ATTO. That makes small payments, tips, faucets, and everyday transfers practical instead of being eaten by fixed network fees.
 
-### Eco-Friendly
+### Lightweight Consensus
 Consensus is voting, not mining. Each transaction includes a small proof-of-work to slow spam, but representatives decide confirmation through **Open Representative Voting (ORV)**. The result is a payment network that stays lightweight without turning security into an energy race.
 
 ### Secure & Decentralized
-Each account controls its own chain of transactions, and conflicting updates are rejected by representative votes. Delegation gives representatives voting weight, not custody of funds, so users can help secure the network without handing over their coins.
+Each account controls its own chain of transactions, and conflicting updates are resolved by representative votes. Delegation assigns representatives voting weight without transferring custody of the account's funds.
 
 ### Scalable
 Atto uses account chains instead of one shared block queue. Independent accounts can move in parallel, so the network is not forced to serialize every payment through a single global block.
@@ -104,7 +108,7 @@ Atto uses account chains instead of one shared block queue. Independent accounts
 ## Use Cases
 
 - Micropayments for pay-per-use services, content tips, and in-app purchases
-- Retail payments where checkout needs fast finality and no network fee
+- Retail payments where checkout needs fast confirmation and no network fee
 - Remittances where the sender should not lose value to fixed transfer fees
 - Machine-to-machine payments for small automated transfers
 - Gaming balances, item trades, donations, and tips
@@ -129,7 +133,9 @@ The full 18 billion ATTO supply was created at genesis. No new coins can be mint
 - **[Explorer](/explorer)** - Real-time network activity
 - **[Discord](https://discord.gg/atto)** - Join the community
 - **[GitHub](https://github.com/attocash)** - Contribute to the codebase
-- **[Buy Atto](https://www.xt.com/en/trade/atto_usdt)** - Available on LCX and XT exchanges
+<!-- Revalidation owner: Atto documentation maintainers; recheck both venue links and statuses before each documentation release. -->
+- **[XT ATTO/USDT](https://www.xt.com/en/trade/atto_usdt)** - Third-party market; availability and status are controlled by XT and may change
+- **[LCX ATTO/EUR](https://lcx.com/en/trade/ATTO-EUR)** - Third-party market; availability and status are controlled by LCX and may change
 
 ## Important Information
 

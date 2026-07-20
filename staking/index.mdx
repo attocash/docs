@@ -12,61 +12,63 @@ import StakingContent from "@site/src/components/StakingContent";
 
 <StakingContent>
 
-Earn rewards by helping secure and decentralize the Atto network. Simply delegate your balance to a [voter](/explorer/voters) and receive **daily payouts** based on the current APY.
+Staking is Atto's reward mechanism for eligible accounts delegated to participating [voters](/explorer/voters). Delegation also assigns voting weight for Open Representative Voting, but staking rewards are separate from transaction consensus.
 
-**Current rates:** The effective APY is **<Metric name="distribution.staking.annual-percentage-yield.effective" suffix="%" />** (base <Metric name="distribution.staking.annual-percentage-yield" suffix="%" /> × <Metric name="distribution.growth-stability-index" suffix="" /> [GSI](/docs/growth-stability-index)). Each voter decides how much of the APY they will share with you.
+:::note Reward rates can change
+Staking rewards are variable and depend on the current reward policy, account eligibility, and voter settings. This page also shows the base-APY × GSI programme calculation. Displayed APY and payout timing can change.
+:::
+
+**Programme inputs:** The displayed base APY is **<Metric name="distribution.staking.annual-percentage-yield" suffix="%" />**, the [GSI](/docs/growth-stability-index) is **<Metric name="distribution.growth-stability-index" suffix="" />**, and the effective programme APY is **<Metric name="distribution.staking.annual-percentage-yield.effective" suffix="%" />** (base APY × GSI). The effective figure is before the selected voter's delegator share and any cap-related reduction, so an eligible account's rate may be lower. These figures are not a promised user return, and ATTO's market value may fall.
 
 <StakingApySlider />
 
 ## Why Stake?
 
-- **Earn passive income**: Generate returns on your Atto holdings with daily payouts
-- **Support decentralization**: By choosing diverse voters, you help distribute network power
-- **Strengthen the network**: Active stakers contribute to network security and consensus
+- **Receive staking rewards**: Eligible accounts may receive rewards based on the displayed variable APY
+- **Support representative diversity**: Choosing among voters can distribute delegated voting weight
+- **Keep control of your funds**: Delegation assigns voting weight without transferring custody
 
 ## How to Start Staking
 
-1. **Get Atto**: Ensure you have at least **$10 USD worth** of Atto in your wallet
-2. **Choose a Voter**: In your wallet, select a voter that shows an APY percentage ([browse active voters](/explorer/voters))
-3. **Stay Active**: Make at least one transaction every 30 days to remain eligible
-4. **Receive Funds**: Log into your wallet regularly to receive any pending transactions
+1. **Get Atto**: Under current rules, have at least **$10 USD worth** of Atto in your wallet to meet the displayed minimum
+2. **Choose a Voter**: In your wallet, select a participating voter that displays an APY percentage ([browse active voters](/explorer/voters))
+3. **Stay Eligible**: Make at least one transaction every 30 days
+4. **Receive Funds**: Log into your wallet regularly to receive pending transactions so they can count toward your balance
 
 ## How Rewards Are Calculated
 
 ### Effective Balance
 
-Your rewards are based on your **effective balance**:
+Reward calculations use your **effective balance**:
 
 - The **average of your daily balances** over the past 30 days
 - Capped at your **current balance** (you can't earn on funds you no longer hold)
 
 This rewards consistent holders and prevents gaming the system by briefly inflating balances.
 
-### Daily Reward Formula
+### Pre-Share Illustration
+
+The simplified expression below illustrates the amount before applying voter sharing and any cap-related reduction. Its inputs and eligibility rules may change.
 
 ```
-Daily Reward = Effective Balance × Daily APY Rate
+Illustrative Pre-Share Amount = Effective Balance × Programme Daily Rate
 ```
 
-Where:
-
-```
-Daily APY Rate = (1 + Annual APY)^(1/365) - 1
-```
+The programme daily rate is derived from the programme annual APY. This is not a complete user payout formula: the selected voter's delegator share applies, and allocations may then be proportionally reduced when that voter's delegated balance exceeds the cap.
 
 ### Voter Cap
 
-To promote decentralization, each voter has a **cap of 180 million Atto** in total delegated balance. If exceeded, rewards are proportionally reduced for all delegators to that voter.
+The current reward calculation applies a **cap of 180 million Atto** to each voter's total delegated balance. Above the cap, reward allocations are proportionally reduced for that voter's eligible delegators.
 
-**Tip:** Choose voters with lower total delegation for potentially better reward rates.
+**Tip:** A participating voter with lower total delegation may be less affected by the cap.
 
 ### GSI Influence
 
-The effective APY is adjusted daily based on the [Growth Stability Index (GSI)](/docs/growth-stability-index). During favorable market conditions the APY may be higher; during bearish conditions it adjusts downward to maintain price stability.
+The programme calculation multiplies the base APY by the [Growth Stability Index (GSI)](/docs/growth-stability-index).
 
 ## Payout Schedule
 
-Rewards are **paid out once per day**. The system calculates rewards for the previous day and distributes them to all eligible accounts automatically.
+Under current operations, the reward system generally processes staking rewards once per day for eligible accounts using the previous day's calculation. Processing time may vary.
 
 ## Frequently Asked Questions (FAQ)
 
