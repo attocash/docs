@@ -1,0 +1,8 @@
+{
+  "label": "Node",
+  "position": 0,
+  "link": {
+    "type": "doc",
+    "id": "integration/node/index"
+  }
+}

@@ -24,7 +24,7 @@ Through the [Folding@Home integration](/docs/mining), participants contribute co
 
 ### Staking
 
-In [Open Representative Voting](/docs/whitepaper#consensus-mechanism-open-representative-voting), representatives vote on transactions using delegated voting weight. Separately, eligible accounts delegated to participating voters may receive staking rewards under the current reward policy. Running a voter node or receiving delegated weight does not by itself create reward eligibility. See the [staking voter guide](/blog/how-to-host-a-staking-voter) for setup instructions.
+In [Open Representative Voting](/docs/whitepaper#consensus-mechanism-open-representative-voting), representatives vote on transactions using delegated voting weight. Separately, eligible accounts delegated to participating voters may receive staking rewards under the current reward policy. Running a voter node or receiving delegated weight does not by itself create reward eligibility. Use the [node integration guide](/docs/integration/node) for deployment configuration and the [voter tutorial](/blog/how-to-host-a-staking-voter) for server setup and registration.
 
 ### Contribution Rewards
 
