@@ -8,7 +8,9 @@ Use this page to run an Atto historical or voter node with Docker Compose. Revie
 [node requirements and quick reference](/docs/integration/node) before choosing a configuration.
 
 The examples run MySQL on the same host, so use at least 2 GB of host RAM. The node service itself needs 1 GB; if MySQL
-runs elsewhere, size that database host separately.
+runs elsewhere, size that database host separately. They also allow the node to use up to 1 GB of host swap as an
+emergency safeguard. Docker does not create swap, so make sure the host has swap available. Do not count swap toward the
+RAM requirement: when the node uses it, synchronization throughput may fall and disk activity may increase.
 
 ## Historical Node {#historical-node}
 
@@ -77,7 +79,7 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     mem_limit: "1g"
-    memswap_limit: "1g"
+    memswap_limit: "2g" # 1 GB RAM plus up to 1 GB swap
     ports:
       - "127.0.0.1:8080:8080" # REST
       - "127.0.0.1:8081:8081" # health + metrics
@@ -187,7 +189,7 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     mem_limit: "1g"
-    memswap_limit: "1g"
+    memswap_limit: "2g" # 1 GB RAM plus up to 1 GB swap
     ports:
       - "127.0.0.1:8081:8081" # health + metrics
       - "8082:8082"   # gossip WS
@@ -286,7 +288,7 @@ services:
   node:
     image: "ghcr.io/attocash/node:live"
     mem_limit: "1g"
-    memswap_limit: "1g"
+    memswap_limit: "2g" # 1 GB RAM plus up to 1 GB swap
     ports:
       - "127.0.0.1:8081:8081" # health + metrics
       - "8082:8082"   # gossip WS

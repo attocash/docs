@@ -57,7 +57,9 @@ The minimum requirements for running a node are:
 The Compose examples limit the node to 1 GB but do not hard-cap MySQL, because a 512 MB database limit can cause a fresh
 bootstrap to fail. If MySQL runs on another machine, the node host still needs 1 GB and the database host must be sized
 separately. An all-in-one host with an already-bootstrapped database may sometimes operate with 1 GB, but this is below
-the recommended configuration and should not be used for a fresh setup. Do not count swap as RAM.
+the recommended configuration and should not be used for a fresh setup. The Docker examples allow the node to use a
+limited amount of host swap as an emergency safeguard, but swap does not count toward these RAM requirements and may
+reduce synchronization throughput when used.
 
 ## Choose a Node Role
 
