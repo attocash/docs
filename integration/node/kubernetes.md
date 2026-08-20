@@ -8,6 +8,8 @@ Use this page to deploy an Atto historical or voter node on Kubernetes. Review t
 [node requirements and quick reference](/docs/integration/node) before choosing a manifest.
 
 The manifests assume MySQL is provided as a separate reachable service. Size the node and database independently.
+Declaring a `containerPort` does not expose it outside the pod. Keep ports 8080 and 8081 cluster-internal, and expose
+only port 8082 through the Service or Ingress used for public gossip traffic.
 
 ## Historical Node {#historical-node}
 
@@ -59,9 +61,8 @@ spec:
                   name: atto-db
                   key: PASSWORD
           ports:
-# Only uncomment these two lines if you have placed these ports behind a web-application firewall (WAF) at minimum
-#            - containerPort: 8080 # REST
-#            - containerPort: 8081 # health + metrics
+            - containerPort: 8080 # cluster-internal REST
+            - containerPort: 8081 # cluster-internal health + metrics
             - containerPort: 8082 # gossip WS
 ```
 
@@ -133,8 +134,7 @@ spec:
             # Add other relevant environment variables (logging, etc.)
             # LOGGING_LEVEL_CASH_ATTO_NODE_VOTE: "DEBUG" # Example
           ports:
-# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
-#            - containerPort: 8081 # Health & Metrics
+            - containerPort: 8081 # cluster-internal health + metrics
             - containerPort: 8082 # Gossip WebSocket
           # Define resources, probes (liveness, readiness, startup) as needed
           resources:
@@ -246,8 +246,7 @@ spec:
                   key: SIGNER_SHARED_TOKEN
             # Add other node-specific environment variables as needed
           ports:
-# Only uncomment this line if you have placed port 8081 behind a web-application firewall (WAF) at minimum
-#            - containerPort: 8081
+            - containerPort: 8081 # cluster-internal health + metrics
             - containerPort: 8082
           resources:
             requests:

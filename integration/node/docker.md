@@ -12,6 +12,9 @@ runs elsewhere, size that database host separately. They also allow the node to 
 emergency safeguard. Docker does not create swap, so make sure the host has swap available. Do not count swap toward the
 RAM requirement: when the node uses it, synchronization throughput may fall and disk activity may increase.
 
+The `mem_swappiness: 0` setting asks compatible hosts to avoid swapping MySQL, but it does not prohibit swap and may not
+be enforced on cgroup v2 hosts. Monitor actual swap use rather than relying on this setting alone.
+
 ## Historical Node {#historical-node}
 
 <details>
@@ -350,13 +353,13 @@ transactions with:
 curl --fail http://127.0.0.1:8081/health
 docker compose logs --tail 200 node
 curl --fail http://127.0.0.1:8081/metrics/account.height.count
+curl --fail http://127.0.0.1:8081/metrics/transactions.unchecked.count
 curl -fsSL https://gatekeeper.live.application.atto.cash/projections/metrics \
   | jq -r '.metrics[] | select(.name == "account.height.count") | .value'
-docker compose exec node-mysql sh -c \
-  'mysql -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" -e \
-  "SELECT COALESCE(SUM(height), 0) AS account_height FROM account; \
-   SELECT COUNT(*) AS unchecked FROM unchecked_transaction;"'
 ```
+
+The unchecked metric refreshes once per minute. Wait at least one minute between samples before deciding that the node
+is synchronized.
 
 To intentionally delete the local ledger and start a fresh bootstrap, stop both services before removing the volume:
 
