@@ -31,7 +31,11 @@ Make sure the Atto Commons libraries are available in your project:
   <TabItem value="js" label="JavaScript">
 
     ```bash
-      npm i @attocash/commons-js
+      npm i @attocash/commons-core@7.0.2 \
+        @attocash/commons-node@7.0.2 \
+        @attocash/commons-node-remote@7.0.2 \
+        @attocash/commons-wallet@7.0.2 \
+        @attocash/commons-worker-remote@7.0.2
     ```
 
   </TabItem>
@@ -70,9 +74,9 @@ Make sure the Atto Commons libraries are available in your project:
 ## Key Generation and Derivation
 
 The first step is to generate a private key for your Atto account. The Atto Commons library provides utilities for
-secure key generation. In JavaScript, you can use `AttoPrivateKey.generate()` to create a new random key. In Kotlin, a
-similar `AttoPrivateKey.generate()` function (via the companion object) is available. You can also import an existing
-private key from a hex string if you have one (for example, from a mnemonic or another source).
+secure key generation. In JavaScript, `await AttoMnemonic.generate()` creates a fresh mnemonic that can derive indexed
+private keys. Kotlin also exposes secure key generation through Atto Commons. You can import an existing private key
+from a hex string if you have one (for example, from a mnemonic or another source).
 
 <Tabs groupId="library">
   <TabItem value="js" label="JavaScript">
@@ -80,26 +84,23 @@ private key from a hex string if you have one (for example, from a mnemonic or a
     ```javascript
     import {
       AttoMnemonic,
-      toSeedAsync,
-      toPrivateKey,
-      toPublicKey,
       toAttoIndex,
       toHex,
-    } from '@attocash/commons-js';
+    } from '@attocash/commons-core';
 
     // Generate a new mnemonic and derive a private key (index 0)
     (async () => {
-      const mnemonic = AttoMnemonic.generate();
+      const mnemonic = await AttoMnemonic.generate();
       console.log('Mnemonic:', mnemonic.phrase);
-      console.log('Mnemonic:', AttoMnemonic.fromPhrase(mnemonic.phrase).phrase);
+      console.log('Mnemonic:', (await AttoMnemonic.fromPhrase(mnemonic.phrase)).phrase);
 
-      const seed = await toSeedAsync(mnemonic);
+      const seed = await mnemonic.toSeedAsync();
       const index0 = toAttoIndex(0);
-      const privateKey0 = toPrivateKey(seed, index0);
+      const privateKey0 = await seed.toPrivateKey(index0);
       console.log('Derived Private Key (hex):', toHex(privateKey0.value));
 
       // Derive the public key if needed
-      const publicKey0 = toPublicKey(privateKey0);
+      const publicKey0 = await privateKey0.toPublicKey();
       console.log('Public Key (hex):', toHex(publicKey0.value));
     })();
     ```
@@ -164,13 +165,13 @@ currently `AttoAlgorithm.V1` for Ed25519-based addresses) and the public key, an
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import { AttoAddress, AttoAlgorithm, toPublicKey } from '@attocash/commons-js';
+    import { AttoAddress, AttoAlgorithm } from '@attocash/commons-core';
 
     // Assume we have a private key from the previous section (e.g., privateKey0)
-    const publicKey = toPublicKey(privateKey0); // derive Ed25519 public key
-    const address = new AttoAddress(AttoAlgorithm.V1, publicKey); // build the Atto address
+    const publicKey = await privateKey0.toPublicKey(); // derive Ed25519 public key
+    const address = publicKey.toAddress(AttoAlgorithm.V1); // build the Atto address
     console.log('Address:', address.toString());
-    console.log('Address:', AttoAddress.Companion.parse(address.toString()).toString())
+    console.log('Parsed address:', AttoAddress.parse(address.toString()).toString());
     ```
 
   </TabItem>
@@ -214,7 +215,8 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import { AttoNodeClientAsyncBuilder, AttoWorkerAsyncBuilder } from '@attocash/commons-js';
+    import { AttoNodeClientAsyncBuilder } from '@attocash/commons-node-remote';
+    import { AttoWorkerAsyncBuilder } from '@attocash/commons-worker-remote';
 
     // Configure endpoints (using mainnet infra in this example)
     const nodeClient = new AttoNodeClientAsyncBuilder('https://my-historical-node.mydomain.cash').build();
@@ -258,7 +260,7 @@ fees).
 Before crafting transactions, it’s important to retrieve the current state of your accounts (balance and height). The **account height** is used to sequence transactions correctly (each new block on an account increments the height).
 
 Using the node client, you can fetch account information for one or multiple addresses via
-`client.account([...addresses])`. The result will include each account’s current balance, frontier (last block hash),
+`client.accountByAddresses([...addresses])`. The result will include each account’s current balance, frontier (last block hash),
 and height, among other data. We can store this in a map for quick lookup.
 
 <Tabs groupId="library">
@@ -267,7 +269,7 @@ and height, among other data. We can store this in a map for quick lookup.
     ```javascript
     // Prepare a list of addresses to monitor (in this example, our hot wallet and another account)
     const addressesToMonitor = [hotWalletAddress, anotherAddress];
-    const accountsInfo = await nodeClient.account(addressesToMonitor);
+    const accountsInfo = await nodeClient.accountByAddresses(addressesToMonitor);
 
     // Create a map of address -> account info for easy reference
     const accountMap = new Map(accountsInfo.map(acc => [acc.address.toString(), acc]));
@@ -351,22 +353,22 @@ the retry cadence, and the default representative used for new accounts.
 
     ```javascript
     import {
-      AttoAccountMonitorAsyncBuilder,
-      AttoWalletAsyncBuilder,
       AttoAmount,
       AttoUnit,
       AttoAddress,
       AttoAlgorithm,
       AttoPublicKey,
       toAttoIndex,
-    } from '@attocash/commons-js';
+    } from '@attocash/commons-core';
+    import { AttoAccountMonitorAsyncBuilder } from '@attocash/commons-node';
+    import { AttoWalletAsyncBuilder } from '@attocash/commons-wallet';
 
     // Assumes you already created `nodeClient`, `worker`, and have a `seed` from the key section.
     const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
 
     // Optional: default representative provider (used when opening an account)
     const defaultRepresentativeProvider = () => {
-      const dummyBytes = new Uint8Array(32);
+      const dummyBytes = new Int8Array(32);
       return new AttoAddress(AttoAlgorithm.V1, new AttoPublicKey(dummyBytes));
     };
 
@@ -384,10 +386,10 @@ the retry cadence, and the default representative used for new accounts.
 
     // Example: open first account (index 0) so it’s tracked by the wallet
     const index0 = toAttoIndex(0);
-    await wallet.openAccount(index0).asPromise();
+    await wallet.openAccount(index0);
 
     // You can derive/show its address
-    const address0 = await wallet.getAddress(index0).asPromise();
+    const address0 = await wallet.getAddress(index0);
     console.log('Account[0] address:', address0.toString());
     ```
 
@@ -479,7 +481,7 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
   <TabItem value="js" label="JavaScript">
 
     ```javascript
-    import { AttoAmount, AttoUnit } from '@attocash/commons-js';
+    import { AttoAmount, AttoUnit, toAttoIndex } from '@attocash/commons-core';
 
     // Define the amount to send (100.1 ATTO in this example)
     const amount = AttoAmount.from(AttoUnit.ATTO, '100.1');
@@ -489,8 +491,8 @@ Below we craft a send from our `hotWalletAddress` to `anotherAddress` for an exa
 
     // Derive the recipient address from account index 2 via the wallet (mirrors Kotlin/Java)
     const recipientIndex = toAttoIndex(2);
-    const recipientAddress = await wallet.getAddress(recipientIndex).asPromise();
-    const tx = await wallet.sendByIndex(index0, recipientAddress, amount, null).asPromise();
+    const recipientAddress = await wallet.getAddress(recipientIndex);
+    const tx = await wallet.sendByIndex(index0, recipientAddress, amount, null);
     console.log(`Sent ${amount} from index 0 to ${recipientAddress}. Tx hash: ${tx.hash}`);
     ```
 
@@ -559,14 +561,13 @@ Typically, you start at the next height after the current one (or at height 0 fo
 
     ```javascript
     import {
+      AttoHeight,
+    } from '@attocash/commons-core';
+    import {
       AttoTransactionMonitorAsyncBuilder,
       AttoAccountEntryMonitorAsyncBuilder,
       AttoAccountMonitorAsyncBuilder,
-      AttoAddress,
-      AttoAlgorithm,
-      toAttoHeight,
-      AttoHeight,
-    } from '@attocash/commons-js';
+    } from '@attocash/commons-node';
 
     // Build monitors
     const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
@@ -595,6 +596,12 @@ Typically, you start at the next height after the current one (or at height 0 fo
       (entry) => console.log('Account entry event:', entry.hash),
       (err) => { if (err) console.warn('Account entry monitor error:', err.message); }
     );
+
+    // Call this during shutdown and await both cancellations.
+    async function stopMonitoring() {
+      await txJob.cancelAndJoin();
+      await entryJob.cancelAndJoin();
+    }
     ```
 
   </TabItem>

@@ -1,0 +1,19 @@
+---
+title: Live Network
+description: Make explicit read-only Atto node queries and watch cancellable live transaction, receivable, and account-entry streams.
+sidebar_position: 5
+---
+
+import NetworkTools from "@site/src/components/AttoTools/NetworkTools";
+
+# Live Network
+
+Use the public live node to inspect current data or watch protocol activity. This page exposes only read and stream methods from the Commons node client. It cannot sign, create work, publish, or modify an account.
+
+<NetworkTools />
+
+:::warning Public endpoint
+Queries go to `https://gatekeeper.live.application.atto.cash`. The operator can observe ordinary request metadata plus any address or hash you submit. Use your own node when that metadata is sensitive.
+:::
+
+Streams are not background subscriptions. They start only after you press **Start stream**, stop when you press **Stop stream**, and are cancelled when the component unmounts. A dropped stream reconnects with bounded backoff only while it remains explicitly enabled.

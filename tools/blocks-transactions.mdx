@@ -1,0 +1,26 @@
+---
+title: Blocks & Transactions
+description: Build, decode, map, and validate Atto blocks, full transactions, and existing work values.
+sidebar_position: 4
+---
+
+import BlockTools from "@site/src/components/AttoTools/BlockTools";
+
+# Blocks & Transactions
+
+Each Atto account has its own ordered chain. A block describes one state transition on that chain; a transaction adds the account signature and anti-spam work needed to submit it.
+
+| Block | What changes | Serialized size |
+| --- | --- | ---: |
+| `OPEN` | Creates an account from a receivable and selects a representative | 119 bytes |
+| `RECEIVE` | Claims a later receivable | 126 bytes |
+| `SEND` | Lowers the sender balance and creates a receivable | 134 bytes |
+| `CHANGE` | Selects a new representative without moving funds | 126 bytes |
+
+The visual maps below use zero-based half-open ranges: `[5, 37)` starts at byte 5 and stops before byte 37. This convention makes the range length simply `37 - 5 = 32` bytes.
+
+<BlockTools />
+
+:::note Validation is layered
+Parsing proves that the representation has the expected shape. Block validation checks protocol invariants. Full transaction validation additionally checks the signature and work. None of these tools checks whether a transaction is confirmed or publishable against current account state.
+:::

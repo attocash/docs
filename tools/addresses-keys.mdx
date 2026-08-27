@@ -1,0 +1,23 @@
+---
+title: Addresses & Demo Keys
+description: Convert and inspect Atto addresses, then explore mnemonic, seed, private-key, public-key, and address derivation safely.
+sidebar_position: 3
+---
+
+import AddressTools from "@site/src/components/AttoTools/AddressTools";
+
+# Addresses & Demo Keys
+
+An Atto address is not a separate cryptographic identity. It is a human-friendly, checksummed encoding of an algorithm byte and a 32-byte public key.
+
+```text
+atto:// + base32(algorithm [1 byte] + public key [32 bytes] + checksum [5 bytes])
+```
+
+The checksum is the first five bytes of BLAKE2b over the algorithm byte followed by the public key. It detects transcription errors; it is not a signature.
+
+<AddressTools />
+
+:::info Local execution
+These controls do not call an Atto node. Generated values live only in React component memory until you clear them, reload, or leave the page. Browser extensions, injected scripts, screen capture, and a compromised device remain outside that boundary.
+:::

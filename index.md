@@ -84,7 +84,7 @@ Reward eligibility, rates, and timing depend on the current rules for each route
 - **[Wallet API](/api/wallet)** - Wallet service endpoints
 
 ### Advanced Topics
-- **[Interactive Playground](/docs/integration/advanced/interactive-playground)** - Test seed generation and address conversion
+- **[Atto Tools](/docs/tools)** - Inspect encodings, hashes, addresses, keys, blocks, transactions, and live network data
 - **[Offline Signing](/docs/integration/advanced/offline-signing-with-atto-commons)** - Sign transactions offline with atto-commons
 - **[Protocol Reference](/docs/integration/advanced/protocol-offline-signing-reference)** - Offline signing protocol specification
 
