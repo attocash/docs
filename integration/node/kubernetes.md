@@ -64,6 +64,24 @@ spec:
             - containerPort: 8080 # cluster-internal REST
             - containerPort: 8081 # cluster-internal health + metrics
             - containerPort: 8082 # gossip WS
+          startupProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8081
+            failureThreshold: 180
+            periodSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8081
+            failureThreshold: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8081
+            failureThreshold: 5
+            periodSeconds: 60
 ```
 
 You should modify the `ATTO_PUBLIC_URI`, `ATTO_DB_NAME`, `ATTO_DB_USER`, `ATTO_DB_PASSWORD`, and other settings as
@@ -146,13 +164,19 @@ spec:
               cpu: "0.5"
           startupProbe:
             httpGet:
-              path: /health
+              path: /health/liveness
               port: 8081
             failureThreshold: 180
             periodSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8081
+            failureThreshold: 3
+            periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /health
+              path: /health/liveness
               port: 8081
             failureThreshold: 5
             periodSeconds: 60
@@ -257,13 +281,19 @@ spec:
               cpu: "0.5"
           startupProbe:
             httpGet:
-              path: /health
+              path: /health/liveness
               port: 8081
             failureThreshold: 180
             periodSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8081
+            failureThreshold: 3
+            periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /health
+              path: /health/liveness
               port: 8081
             failureThreshold: 5
             periodSeconds: 60

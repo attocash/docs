@@ -16,8 +16,11 @@ containing all transactions from the network's inception.
 | Port     | Purpose                                                 | Exposure                                                     |
 |----------|---------------------------------------------------------|--------------------------------------------------------------|
 | **8080** | REST APIs. Refer to the [OpenAPI definition](/api/node) | Cluster‑internal on historical nodes, private on voters.     |
-| **8081** | Liveness `/health` & metrics `/prometheus`              | Cluster‑internal only.                                       |
+| **8081** | Health probes and metrics                               | Cluster‑internal only.                                       |
 | **8082** | Node‑to‑node gossip (WebSocket)                         | Terminate TLS at the load‑balancer / ingress. Public‑facing. |
+
+The dedicated probe endpoints are `/health/liveness` and `/health/readiness`. The aggregate `/health` endpoint includes
+external health indicators and should not be used as a liveness probe. Metrics remain available at `/prometheus`.
 
 ### Required Environment Variables
 
