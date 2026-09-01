@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="646" viewBox="0 0 460 646" role="img" aria-labelledby="title desc">
+  <title id="title">Recover a payment with an unknown outcome</title>
+  <desc id="desc">Keep the original transaction and hash after a timeout. Look up that hash and check the account history. If the matching Send is confirmed, continue the existing order. If the node cannot find the hash or cannot be reached, the outcome remains unknown. If a different block confirmed, check the account and order before creating another payment.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect width="460" height="646" rx="16" fill="#f8fafc"/>
+  <g font-family="system-ui, sans-serif" fill="#172c42" text-anchor="middle">
+    <text x="230" y="36" font-size="23" font-weight="700">Publication timed out</text>
+    <rect x="30" y="56" width="400" height="79" rx="9" fill="#fff4dc" stroke="#8a5900"/>
+    <text x="230" y="88" font-size="21">Keep the original transaction</text>
+    <text x="230" y="118" font-size="21">and its hash</text>
+    <path d="M230 138V172" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="184" width="400" height="79" rx="9" fill="#fff" stroke="#64748b"/>
+    <text x="230" y="216" font-size="21" font-weight="700">Check the recorded outcome</text>
+    <text x="230" y="245" font-size="20">Look up hash and account history</text>
+    <path d="M230 266V283H16V587" fill="none" stroke="#334155" stroke-width="2"/>
+    <path d="M16 335H38" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M16 460H38" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M16 585H38" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="40" y="297" width="390" height="89" rx="9" fill="#e8f1fb" stroke="#37658f"/>
+    <text x="235" y="328" font-size="21" font-weight="700">Matching Send confirmed</text>
+    <text x="235" y="358" font-size="20">Continue the existing order.</text>
+    <rect x="40" y="408" width="390" height="103" rx="9" fill="#fff" stroke="#64748b"/>
+    <text x="235" y="440" font-size="21" font-weight="700">Hash absent or node unavailable</text>
+    <text x="235" y="470" font-size="20">Outcome remains unknown.</text>
+    <text x="235" y="496" font-size="20">Reconnect and check again.</text>
+    <rect x="40" y="533" width="390" height="93" rx="9" fill="#fff" stroke="#64748b"/>
+    <text x="235" y="562" font-size="21" font-weight="700">A different block confirmed</text>
+    <text x="235" y="589" font-size="20">Check the account and order</text>
+    <text x="235" y="615" font-size="20">before creating another payment.</text>
+  </g>
+</svg>

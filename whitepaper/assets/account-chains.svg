@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="724" viewBox="0 0 460 724" role="img" aria-labelledby="title desc">
+  <title id="title">One payment connects two account chains</title>
+  <desc id="desc">Alice's previous block has a balance of 25 ATTO. Her Send extends that block and leaves 15 ATTO. Confirmation creates a 10 ATTO receivable identified by the Send hash. Bob's Receive extends his own previous block, which has 4 ATTO, and references Alice's Send. Confirmation consumes the receivable and leaves Bob with 14 ATTO.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#334155" stroke-width="1.5"/></marker></defs>
+  <rect width="460" height="724" rx="16" fill="#f8fafc"/>
+  <g font-family="system-ui, sans-serif" fill="#172c42" text-anchor="middle">
+    <text x="230" y="35" font-size="22" font-weight="700">Alice's account chain</text>
+    <rect x="38" y="52" width="384" height="62" rx="9" fill="#fff" stroke="#64748b"/>
+    <text x="230" y="90" font-size="21">Previous block · 25 ATTO</text>
+    <path d="M230 116V153" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="38" y="164" width="384" height="80" rx="9" fill="#fff4dc" stroke="#8a5900" stroke-width="2"/>
+    <text x="230" y="196" font-size="22" font-weight="700">Send 10 ATTO to Bob</text>
+    <text x="230" y="227" font-size="20">After confirmation: 15 ATTO</text>
+    <path d="M230 247V288" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <rect x="38" y="301" width="384" height="89" rx="9" fill="#e8f1fb" stroke="#37658f"/>
+    <text x="230" y="332" font-size="21" font-weight="700">After Send confirmation</text>
+    <text x="230" y="363" font-size="20">Receivable: 10 ATTO · Send hash</text>
+    <path d="M423 346H441V611H424" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <text x="230" y="435" font-size="22" font-weight="700">Bob's account chain</text>
+    <rect x="38" y="452" width="384" height="62" rx="9" fill="#fff" stroke="#64748b"/>
+    <text x="230" y="490" font-size="21">Previous block · 4 ATTO</text>
+    <path d="M230 516V553" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="38" y="564" width="384" height="88" rx="9" fill="#e8f1fb" stroke="#37658f" stroke-width="2"/>
+    <text x="230" y="596" font-size="22" font-weight="700">Receive using the Send hash</text>
+    <text x="230" y="628" font-size="20">After confirmation: 14 ATTO</text>
+    <text x="230" y="682" font-size="20">Solid arrows: account chain order</text>
+    <text x="230" y="710" font-size="20">Dashed arrows: transfer dependency</text>
+  </g>
+</svg>

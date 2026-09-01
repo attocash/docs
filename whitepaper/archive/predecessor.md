@@ -1,14 +1,17 @@
 ---
-sidebar_position: 7
-title: Whitepaper
-description: Discover Atto, a live, feeless, and eco-friendly cryptocurrency optimized for instant micropayments and face-to-face transactions. This official whitepaper details its consensus model, unique tokenomics, and vision for the future of digital cash.
-
-toc: true
-numbersections: true
-header-includes:
-  - \renewcommand{\thesection}{\Alph{section}}
-  - \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+title: Historical Atto Whitepaper (superseded)
+description: Superseded historical Atto whitepaper, retained for reference.
+sidebar_label: Historical whitepaper (superseded)
+sidebar_position: 9
+pagination_prev: null
+pagination_next: null
 ---
+
+:::warning Superseded — no longer valid
+This historical whitepaper is no longer the applicable disclosure. See the [Whitepapers page](/docs/whitepaper) for the applicable **MiCA Crypto-Asset Whitepaper** and the separate **Atto Technical Whitepaper**.
+
+The original text below is preserved, including its historical dates and statements. Those statements have not been updated or endorsed by this archive notice.
+:::
 
 # Atto Whitepaper
 

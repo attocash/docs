@@ -31,8 +31,8 @@ Atto is live, feeless digital cash built for payments. It confirms quickly, has 
 
 ## Core Documentation
 
-### [Whitepaper](/docs/whitepaper)
-The technical overview of Atto's consensus, account-chain model, supply, and security assumptions.
+### [Whitepapers](/docs/whitepaper)
+Read the MiCA Crypto-Asset Whitepaper or the separate technical explanation of Atto's consensus, account-chain model, supply, and security assumptions.
 
 - Open Representative Voting (ORV) consensus
 - Account-chain architecture
