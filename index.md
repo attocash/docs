@@ -1,33 +1,26 @@
 ---
 sidebar_position: 0
 title: Documentation
-description: Everything you need to know about Atto - instant, feeless digital cash using representative voting
+description: Build with Atto, explore its payment model, and find wallet, network, and integration guides for agents and humans.
 ---
 
 import Metric from "@site/src/components/Metric";
+import GuideCards from "@site/src/components/Docs/GuideCards";
 
-# Welcome to Atto Documentation
+# Atto documentation {#welcome-to-atto-documentation}
 
-Atto is live, feeless digital cash built for payments. It confirms quickly, has no protocol transaction fees, and keeps consensus lightweight enough for everyday use.
+Atto is feeless digital cash for agents and humans. Start with an integration, try a wallet, or look inside the protocol.
 
 ## Quick Start
 
-<div className="my-8 grid gap-4 md:grid-cols-3">
-  <a href="/wallet" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Create a wallet</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Open the web wallet, create an account, and receive your first transactions.</p>
-  </a>
+<GuideCards items={[
+  {title: 'Build with Atto', label: 'Integrations', description: 'Connect an AI agent, use the CLI, automate with N8N, or build with Commons.', href: '/docs/integration'},
+  {title: 'Explore the protocol', label: 'How it works', description: 'Understand account chains, representative voting, and the two sides of a payment.', href: '/docs/whitepaper/technical'},
+  {title: 'Create a wallet', label: 'Get started', description: 'Choose a wallet and learn how to receive your first payment.', href: '/wallet'},
+  {title: 'Inspect the data', label: 'Browser tools', description: 'Explore amounts, addresses, blocks, and network data without building an integration first.', href: '/docs/tools'},
+]} />
 
-  <a href="/faucet" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Get a small amount</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Use the faucet to try Atto without buying any first.</p>
-  </a>
-
-  <a href="/explorer" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Check the network</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">View accounts, transactions, voters, and live network activity.</p>
-  </a>
-</div>
+Already have a wallet? [Try the faucet](/faucet) for a small amount, or [open the explorer](/explorer) to inspect accounts and transactions.
 
 ## Core Documentation
 
@@ -54,31 +47,17 @@ How Atto enters circulation through the faucet, Folding@Home mining, staking rew
 Reward eligibility, rates, and timing depend on the current rules for each route and may change.
 :::
 
-<div className="my-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-  <a href="/faucet" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Faucet</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Claim a small amount of Atto and test the network from your own wallet.</p>
-  </a>
-
-  <a href="/docs/mining" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Folding@Home mining</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Contribute compute to medical research and you may receive Atto under the current mining reward rules.</p>
-  </a>
-
-  <a href="/docs/staking" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Staking</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Eligible accounts delegated to participating voters may receive staking rewards under the current reward policy.</p>
-  </a>
-
-  <a href="/contributions" className="block rounded-xl border border-gray-200 bg-white p-5 text-neutral-700 transition-colors hover:border-brand-600 hover:shadow-card-md hover:no-underline">
-    <h3 className="text-lg font-semibold text-neutral-900">Contributions</h3>
-    <p className="mt-2 text-sm leading-relaxed text-neutral-600">Useful code, docs, security reports, guides, and community work may qualify for contribution rewards.</p>
-  </a>
-</div>
+<GuideCards items={[
+  {title: 'Faucet', description: 'Claim a small amount of Atto and try payments from your own wallet.', href: '/faucet'},
+  {title: 'Folding@Home mining', description: 'Contribute compute to medical research. Rewards depend on the current mining rules.', href: '/docs/mining'},
+  {title: 'Staking', description: 'Read the eligibility rules for accounts delegated to participating voters.', href: '/docs/staking'},
+  {title: 'Contributions', description: 'Find the reward policy for useful code, docs, security reports, and community work.', href: '/contributions'},
+]} />
 
 ## For Developers
 
 ### Integration Guides
+- **[Build with Atto](/docs/integration)** - Choose MCP, CLI, N8N, or Commons and follow a first-party guide
 - **[Node Setup](/docs/integration/node)** - Run your own Atto node
 - **[Node API](/api/node)** - Complete REST API reference
 - **[Wallet API](/api/wallet)** - Wallet service endpoints

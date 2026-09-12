@@ -1,29 +1,61 @@
 ---
-sidebar_position: 8
+sidebar_position: 0
+title: Build with Atto
+description: Add feeless micropayments to AI agents, terminal scripts, N8N workflows, and applications. Choose an integration and start with a read-only operation.
+hide_table_of_contents: true
 ---
 import { faq } from "./faq";
 import Head from "@docusaurus/Head";
+import GuideCards from "@site/src/components/Docs/GuideCards";
 
-# Integration Overview
+# Build with Atto {#integration-overview}
 
-Welcome to the **Atto Integration Guide**! These docs walk you through deploying, configuring, and operating every major
-component in the Atto ecosystem—whether you're spinning up a zero‑friction local demo or rolling out a hardened
-production cluster.
+Add feeless micropayments to the software you already use. Connect an AI agent, work from a terminal, build an N8N workflow, or bring Atto directly into your application.
 
-## Why Atto?
+## Choose your integration
 
-* **Instant confirmations:** ~<Metric name="network.confirmation-time.ms.seven-day-p50" />ms.
-* **Energy‑efficient:** no mining, just micro‑hash PoW.
-* **Zero fees:** yes, zero and forever
-* **Hardened by default:** containers are built from scratch images and compiled to GraalVM native binaries; only the
-  bare minimum ships inside.
+<GuideCards items={[
+  {title: 'MCP', label: 'For AI agents', description: 'Give your assistant wallet tools. Start read-only, then approve spending locally within limits you choose.', href: '/docs/integration/mcp'},
+  {title: 'CLI', label: 'For terminals and scripts', description: 'Manage a wallet, inspect the network, and bring payment commands into your own scripts.', href: '/docs/integration/cli'},
+  {title: 'N8N', label: 'For workflows', description: 'Read accounts, act on incoming payments, and add payment steps to self-hosted N8N.', href: '/docs/integration/n8n'},
+  {title: 'Commons', label: 'For application code', description: 'Choose protocol primitives, node clients, wallet tools, signers, and workers from a modular library.', href: '/docs/integration/commons'},
+]} />
 
-## Components
+## Start with a read
+
+You do not need spending access to explore the network. The guides begin with an address, a balance check, or a local amount conversion. Add wallet credentials and payment permissions only when your application needs them.
+
+If you want to try the data formats before writing code, open the [browser tools](/docs/tools). For a wallet without an integration, start with [Wallet](/wallet).
+
+## Why Atto? {#why-atto}
+
+There is no protocol transaction fee to subtract from a small payment. Amounts support nine decimal places, and independent account chains can progress concurrently. See the [network measurements](/metrics) and [technical whitepaper](/docs/whitepaper/technical) for timing and protocol details.
+
+:::note Two sides of a payment
+A confirmed send creates a receivable for its destination. A receive or open block adds that amount to the recipient's account balance. Distinguish a payment arriving from funds becoming spendable when designing your application.
+:::
+
+## Common Use Cases {#common-use-cases}
+
+| You are building… | Start here |
+| --- | --- |
+| An agent that checks balances or makes approved payments | [MCP guide](/docs/integration/mcp) |
+| A terminal workflow or payment script | [CLI guide](/docs/integration/cli) |
+| Automation triggered by incoming payments | [N8N guide](/docs/integration/n8n) |
+| A custom wallet or payment application | [Commons guide](/docs/integration/commons) |
+| A backend using wallet REST operations | [Wallet Server](/docs/integration/wallet-server) and [Wallet API](/api/wallet) |
+| A service reading ledger data | [Node API](/api/node) and [node deployment](/docs/integration/node) |
+
+## Run your own infrastructure
+
+The integrations above and the deployment references below serve different needs. Use the node, wallet, signer, and work-server guides when you want to operate those services yourself.
+
+### Components {#components}
 
 | Component              | Default Ports      | Role                                                        | Storage |
 |------------------------|--------------------|-------------------------------------------------------------|---------|
 | **historical node**    | 8080 / 8081 / 8082 | Full ledger (REST enabled)                                  | MySQL   |
-| **voter node**         | 8080 / 8081 / 8082 | Vote‑only (REST disabled)                                   | MySQL   |
+| **voter node**         | 8080 / 8081 / 8082 | Maintains the ledger and signs consensus votes              | MySQL   |
 | **signer** *(sidecar)* | Configurable       | Hardware‑backed vote signing for the voting node (optional) | No      |
 | **work‑server**        | 8080 / 8081        | Computes PoW required to submit transactions                | No      |
 | **wallet‑server**      | 8080 / 8081        | REST wallet ops, send and receive                           | MySQL   |
@@ -33,25 +65,17 @@ Voting and historical nodes use the **same container image**—the presence of t
 signer) toggles the mode. Switching modes later isn't supported; choose once or plan a fresh bootstrap.
 :::
 
-## Common Use Cases
+Follow the [node guide](/docs/integration/node) for historical and voter roles, the [wallet-server guide](/docs/integration/wallet-server) for wallet REST operations, the [work-server guide](/docs/integration/work-server) for proof-of-work, and the [signer guide](/docs/integration/signer) for external signing.
 
-| I want to…                      | Components to deploy                                                                                                                                       |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Send & receive transactions** | [`historical node`](/docs/integration/node#historical-node), [`wallet‑server`](/docs/integration/wallet-server), [`work‑server`](/docs/integration/work-server) |
-| **Participate in consensus**    | [`voter node`](/docs/integration/node#voter-node) + optional [`signer`](/docs/integration/signer)                                         |
-| **Run analytics**               | [`historical node`](/docs/integration/node#historical-node)                                                                                                   |
-| **Check things out**            | [`historical node`](/docs/integration/node#historical-node)                                                                                                   |
-
-## Ports Cheat‑Sheet
+### Ports Cheat‑Sheet {#ports-cheatsheet}
 
 | Port     | Purpose                                    | Exposure                                                     |
 |----------|--------------------------------------------|--------------------------------------------------------------|
 | **8080** | REST Interface                             | Cluster‑internal only.                                       |
-| **8081** | Liveness `/health` & metrics `/prometheus` | Cluster‑internal only.                                       |
+| **8081** | `/health/liveness`, `/health/readiness` & `/prometheus` | Cluster‑internal only.                                       |
 | **8082** | Node‑to‑node gossip (WebSocket)            | Terminate TLS at the load‑balancer / ingress. Public‑facing. |
 
-Need something else? Ping us on Discord or open a GitHub issue in
-the [docs repository](https://github.com/attocash/docs) and we'll make it happen.
+For lower-level transaction construction, use [offline signing with Commons](/docs/integration/advanced/offline-signing-with-atto-commons) and the [protocol reference](/docs/integration/advanced/protocol-offline-signing-reference). Keep production secrets out of tutorial examples and logs.
 
 ## Frequently Asked Questions (FAQ)
 
