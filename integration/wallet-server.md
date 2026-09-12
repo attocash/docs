@@ -1,12 +1,17 @@
 ---
 sidebar_position: 13
+title: Atto Wallet Server Setup — Self-Hosted Wallet API
+sidebar_label: Wallet Server
+description: Configure the self-hosted Atto Wallet Server with MySQL, a node and a work service. Review wallet encryption, internal access and deployment settings.
 ---
 
-# Wallet Server
+# Set up the Atto Wallet Server {#wallet-server}
 
 The Atto Wallet Server is a self-hostable application that provides an API for managing accounts, sending and receiving
 transactions, and checking balances on the Atto network. It's designed to be used by applications, offering a simplified
 interface that abstracts the complexities of direct node interaction.
+
+You run this service for your application and control who can access its API, unlock wallets and authorize payments. Keep wallet secrets protected. If you want to send and receive by hand, use the [browser wallet](/wallet); CLI and MCP wallet profiles are managed separately from this server.
 
 The primary functions of the Wallet Server include:
 
@@ -17,7 +22,7 @@ The primary functions of the Wallet Server include:
 
 The Wallet Server interacts with an Atto Node for blockchain data and a Work Server for Proof of Work calculations
 necessary for sending transactions. The full OpenAPI specification for the api can be found at the
-[Wallet Open Doc](/api/wallet).
+[Wallet Server API reference](/api/wallet).
 
 ## Synchronous Operations and Timeouts
 
@@ -142,19 +147,19 @@ spec:
           startupProbe:
             httpGet:
               path: /health
-              port: http-mgmt # Port 8081
+              port: management # Port 8081
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health
-              port: http-mgmt # Port 8081
+              port: management # Port 8081
             failureThreshold: 3
             periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /health
-              port: http-mgmt # Port 8081
+              port: management # Port 8081
             initialDelaySeconds: 5
             periodSeconds: 10
 ```

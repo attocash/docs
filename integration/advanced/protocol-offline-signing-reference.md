@@ -1,6 +1,12 @@
-# Protocol-Level Offline-Signing Reference
+---
+title: Atto Transaction Format — Serialization and Offline Signing
+sidebar_label: Protocol signing reference
+description: Implement Atto transactions with field tables, byte layouts and examples for block hashing, offline signing, proof-of-work and address encoding.
+---
 
-This document fully details the Atto protocol’s offline signing and transaction format. It is intended for
+# Atto transaction format and offline signing {#protocol-level-offline-signing-reference}
+
+This reference describes the Atto protocol’s offline signing and transaction format. It is intended for
 implementors (e.g., exchanges and custodial services) to build support without relying on the Kotlin reference code. We
 cover how Atto’s double-entry blocks work, block serialization, block hashing, signing, Proof-of-Work, transaction
 assembly, and address format. Exact field orders, byte lengths, and encodings are specified from the source.
@@ -237,6 +243,8 @@ Fields (in order):
 03030000002415EE860847B3A1CE8B605267E83481D8426A4C42F8128EA72D72F0AD072DCC0200000000000000000008C5A1D8CCF9051E08E38C010000AD675BD718F3D96F9B89C58A8BF80741D5EDB6741D235B070D56E84098894DD50069C010A8A74924D083D1FC8234861B4B357530F42341484B4EBDA6B99F047105
 ```
 
+Use the browser tools to [inspect block fields and validation](/docs/tools/blocks-transactions) alongside these formats.
+
 ## Block Hashing
 
 An **Atto block hash** is computed by taking the BLAKE2b-256 hash (32 bytes) of the **serialized block bytes** (as
@@ -270,12 +278,10 @@ The Kotlin reference logic is reproduced below in prose so you can re-implement 
 |---------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | `INITIAL_YEAR`            | The protocol launch year.                                                                                       | **2024**                                      |
 | `INITIAL_LIVE_THRESHOLD`  | Baseline PoW target for the LIVE network at launch.                                                             | **2³³ − 1 = 8 589 934 591 (0x1\_FFFF\_FFFF)** |
-| `DOUBLING_PERIOD`         | How many **years** must pass before the difficulty halves (threshold is divided by 2).                          | **2.0**                                       |
+| `DOUBLING_PERIOD`         | The interval in years over which the unrounded divisor doubles. The final divisor is truncated to a whole number. | **2.0**                                     |
 | `thresholdIncreaseFactor` | A multiplier that makes test networks easier (larger threshold).<br/>LIVE = 1, BETA = 2, DEV = 8, LOCAL = 4 096 | network-specific                              |
 
-:::warning
-Use the exact values published by the core team; the ones above match the current reference implementation.
-:::
+These constants and the formula below follow the [Commons 7.0.1 work calculation](https://github.com/attocash/commons/blob/70e316c9719724f85fedf8709bf24e4806ed05f6/commons-core/src/commonMain/kotlin/cash/atto/commons/AttoWork.kt). Check that calculation when upgrading your integration.
 
 #### Formula
 
@@ -283,19 +289,18 @@ Use the exact values published by the core team; the ones above match the curren
 let year        = UTCYear(timestamp)               // e.g. 2025
 let yearsPassed = year - INITIAL_YEAR              // e.g. 1
 let decreasePow = yearsPassed / DOUBLING_PERIOD    // with doubles => 1 / 2 = 0.5
-let decrease    = 2 ^ decreasePow                  // 2^0.5 ≈ 1.4142
+let decrease    = floor(2 ^ decreasePow)           // floor(2^0.5) = 1
 let initialNet  = INITIAL_LIVE_THRESHOLD * thresholdIncreaseFactor(network)
-threshold       = floor(initialNet / decrease)     // UInt64 / UInt64
+threshold       = initialNet div decrease          // unsigned integer division
 ```
 
-Rounded to integer division (`ULong` in Kotlin).
+Truncate the positive exponential factor to an integer **before** dividing (`toULong()` in Kotlin). Then use unsigned integer division for the threshold. For 2025, the divisor is 1, not approximately 1.4142; flooring only the final result would produce a different threshold.
 
 ##### What it means in plain English
 
 * **LIVE network** starts with `0x1_FFFF_FFFF` (≈8.6 billion).
-* After **DOUBLING\_PERIOD** years (two years in the default params) the threshold is divided by 2 → PoW becomes **twice
-  as hard**.
-* Test networks multiply the starting threshold first, making them *easier*, and then follow the same halving schedule.
+* A smaller threshold makes valid work harder to find. The divisor is 1 in 2024 and 2025, 2 in 2026 and 2027, and 4 in 2028. A divisor of 2 halves the threshold, making work roughly twice as hard as at launch. Later years use the same formula and integer truncation.
+* Test networks multiply the starting threshold first, making them *easier*, and then apply the same year-based divisor.
 
 #### Work example
 
@@ -304,7 +309,7 @@ Rounded to integer division (`ULong` in Kotlin).
 ```
 yearsPassed   = 2028 - 2024 = 4
 decreasePow   = 4 / 2.0     = 2.0
-decrease      = 2 ^ 2.0     = 4
+decrease      = floor(2 ^ 2.0) = 4
 initialNet    = 8 589 934 591 * 1 = 8 589 934 591
 threshold     = floor(8 589 934 591 / 4) = 2 147 483 647
 ```
@@ -321,10 +326,10 @@ function getThreshold(network, timestamp):
     year          = utcYear(timestamp)           // 2024, 2025, …
     yearsPassed   = year - INITIAL_YEAR
     decreasePow   = yearsPassed / DOUBLING_PERIOD   // float math OK
-    decrease      = 2 ^ decreasePow
+    decrease      = floor(2 ^ decreasePow)
     baseThreshold = INITIAL_LIVE_THRESHOLD * thresholdIncreaseFactor(network)
 
-    return floor(baseThreshold / decrease)  // 64-bit unsigned int
+    return baseThreshold div decrease  // unsigned integer division
 ```
 
 Use the threshold you obtained here in the PoW check. The `target` for the PoW hash is defined as follows:
@@ -374,12 +379,16 @@ JSON example:
 
 ## Publishing Transactions (REST)
 
-Atto nodes expose two HTTP POST endpoints for broadcasting a signed transaction:
+Atto nodes expose two HTTP POST endpoints for publishing a signed transaction. Both accept `application/json` requests and wait for local confirmation before returning the confirmed transaction.
 
-| Endpoint                    | Content‑Type                                                     | Behaviour                                                                                                                                                                                                                                                                                                       | Best‑for                                                                                                         |
-|-----------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `POST /transactions`        | `application/json`                                               | **Asynchronous** publish. Returns **HTTP 200** as soon as the node verifies syntax, signature, PoW and network, then queues the transaction for consensus. The HTTP body is typically empty.                                                                                                                    | High‑throughput pipelines, batch uploads, or when you monitor confirmations via websockets or polling later.     |
-| `POST /transactions/stream` | Request :`application/json`  /  Response :`application/x‑ndjson` | **Synchronous streaming**. The node publishes the transaction (same checks as above) **then keeps the HTTP connection open** and streams newline‑delimited JSON updates until the transaction is cemented or a 40 s timeout elapses. On success it ends with **HTTP 200**; on timeout you receive **HTTP 504**. | Wallet UIs or custody systems that need immediate confirmation feedback without a separate subscription channel. |
+| Endpoint | Response after local confirmation |
+| --- | --- |
+| `POST /transactions` | Returns the confirmed transaction as a single JSON object. |
+| `POST /transactions/stream` | Emits the confirmed transaction as one line of newline-delimited JSON (NDJSON), then closes the stream. |
+
+Both endpoints use the same [confirmation operation](https://github.com/attocash/node/blob/v1.35/src/main/kotlin/cash/atto/node/transaction/TransactionController.kt), with a 40-second timeout on the confirmation wait. The [Node API reference](/api/node) includes transaction schemas.
+
+After a timeout or lost response, inspect the original transaction hash and account history before creating another payment. A timeout is an unknown payment outcome, not proof that funds were not sent. See [payment failure recovery](/docs/whitepaper/technical#payment-failure-recovery).
 
 ### Request body
 
@@ -400,10 +409,9 @@ Example:
 
 ### Success & Error Semantics
 
-* **200 OK** – Transaction accepted. For `/transactions` this is final. For `/transactions/stream` the 200 is returned
-  only **after** a confirmation message appears in the NDJSON stream.
-* **400 Bad Request** – Invalid transaction (failed `isValid()`, wrong network byte, malformed JSON, etc.).
-* **504 Gateway Timeout** – Only for `/transactions/stream`; node did not observe a confirmation within 40 seconds.
+* **200 OK** – The returned transaction reports local confirmation. For streaming responses, inspect the emitted transaction rather than relying only on the initial HTTP status.
+* **400 Bad Request** – Invalid transaction, such as a failed signature/work check, wrong network or malformed JSON. A transaction rejected during processing can also return this status; inspect the error before deciding how to recover.
+* **Timeout or interrupted stream** – The confirmation result is unknown to the caller. Check the original transaction hash and account history before creating another payment.
 
 ### Querying Account State & Pending Credits
 

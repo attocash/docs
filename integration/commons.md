@@ -1,13 +1,15 @@
 ---
 sidebar_position: 4
-title: Atto Commons
+title: Atto Commons Getting Started — Packages and Exact Amounts
 sidebar_label: Commons
 description: Build Atto applications with modular libraries for exact amounts, addresses, node clients, wallets, signing, and proof-of-work.
 ---
 
-# Atto Commons
+# Get started with Atto Commons {#atto-commons}
 
 Use Commons when you want Atto inside your own application. It provides the protocol types and client libraries behind addresses, transactions, network monitoring, and wallet operations. You choose the modules your application needs.
+
+Commons is available for TypeScript and JavaScript through npm, and for Java and Kotlin on the JVM. See [Commons capabilities and supported languages](/build/commons) to find the right starting point for your application.
 
 For a ready-made agent connection, terminal interface, or workflow node, start with [MCP](/docs/integration/mcp), [CLI](/docs/integration/cli), or [N8N](/docs/integration/n8n) instead.
 
@@ -55,6 +57,8 @@ The packages are split by responsibility. Start with the smallest set that suppo
 | Spring Boot integration | [commons-spring-boot-starter](https://github.com/attocash/commons/tree/main/commons-spring-boot-starter) |
 | Mock services and test utilities | [commons-test](https://github.com/attocash/commons/tree/main/commons-test) |
 
+Working in Java? The maintained [Java client example](https://github.com/attocash/commons/tree/main/examples/java-client) walks through a wallet flow against local mock services, with its own setup instructions.
+
 Kotlin/JVM, JavaScript, and Wasm support varies by module. Check the module README for its supported targets. JavaScript packages use the `@attocash/` scope; Gradle dependencies use the `cash.atto` group. Prefer the individual packages over the deprecated `@attocash/commons-js` aggregate.
 
 ## Connect an application
@@ -83,7 +87,7 @@ Keep reads separate from writes. An account query needs a public address; publis
 
 - [Commons source and module documentation](https://github.com/attocash/commons)
 - [Published Core package](https://www.npmjs.com/package/@attocash/commons-core)
-- [Offline signing guide](/docs/integration/advanced/offline-signing-with-atto-commons) — lower-level concepts and version-pinned examples.
+- [Advanced Commons integration](/docs/integration/advanced/offline-signing-with-atto-commons) — lower-level concepts and version-pinned examples.
 - [Browser tools](/docs/tools) — inspect encodings, addresses, blocks, and network data.
 - [All integration paths](/docs/integration)
 

@@ -12,7 +12,7 @@ export const faq = [
   {
     question: "Are transactions on Atto feeless?",
     answer:
-      "Yes. Atto has no fees. The amount a user sends is exactly what the recipient receives."
+      "Yes. Atto charges no transaction fee, so the amount you send is exactly what the recipient receives. Exchanges or other services may charge their own fees, and running your integration still has infrastructure costs."
   },
   {
     question: "Does Atto use Proof-of-Work?",
@@ -36,13 +36,13 @@ export const faq = [
     link: {
       href: "/metrics#confirmation-speed",
       label: "sub-second confirmation",
-      suffix: ". The technical view includes median/P50, average, P95, and P99 values. Once a transaction is confirmed, it is final and irreversible."
+      suffix: ". The metrics page shows median/P50, average, P95 and P99 so you can see both typical and slower confirmations. Actual timing depends on network conditions."
     }
   },
   {
     question: "How many confirmations are required for deposits?",
     answer:
-      "One confirmation is sufficient. Atto has no reorgs, so once a transaction is confirmed by representatives it is final."
+      "One confirmed account update is enough; you do not need to wait for additional global blocks. Before crediting a deposit, check the node’s confirmed transaction, destination and amount. The receiving wallet must also publish a Receive or Open transaction to add the funds to its spendable balance."
   },
   {
     question: "Why does a transfer not show up?",
@@ -62,12 +62,12 @@ export const faq = [
   {
     question: "How are double-spends or forks prevented?",
     answer:
-      "Each account can only have one valid chain of transactions. Representatives vote on the correct transaction when published. Once representative voting confirms a transaction, it is final and conflicting updates are rejected."
+      "Each account has one confirmed chain of transactions. Its owner signs each update, which links back to the previous block. If conflicting updates are proposed, representatives vote to select one; nodes reject updates that conflict with the confirmed chain."
   },
   {
     question: "What is the minimum deposit or withdrawal amount?",
     answer:
-      "Atto has no protocol-level minimum. However, exchanges may choose to enforce their own minimums to avoid dust deposits."
+      "You can send as little as 0.000000001 ATTO, one raw unit, without a network fee eating into the payment. Exchanges and applications may set higher deposit or withdrawal minimums."
   },
   {
     question: "Does Atto support smart contracts?",
@@ -82,12 +82,22 @@ export const faq = [
   {
     question: "Can Atto transactions fail?",
     answer:
-      "If the transaction is invalid, it will be rejected. Otherwise, once broadcast and confirmed, transactions cannot fail anymore or be reversed."
+      "Yes. An invalid transaction is rejected, and a submitted transaction can be dropped or remain unconfirmed. A timeout does not necessarily mean failure: the payment may already have confirmed. Check its saved hash and account history before creating another payment. See ",
+    link: {
+      href: "/docs/whitepaper/technical#failure-modes-and-their-boundaries",
+      label: "confirmation and failure boundaries",
+      suffix: "."
+    }
   },
   {
     question: "Does Atto support reorgs or chain rollbacks?",
     answer:
-      "No. Atto achieves immediate finality via representative voting. There are no reorgs and no need to wait multiple blocks."
+      "Atto does not use longest-chain reorganizations or require you to wait for later blocks to make a payment final. Representatives confirm each account update through voting. The technical whitepaper explains the network assumptions behind that finality and what happens when they are not met. See ",
+    link: {
+      href: "/docs/whitepaper/technical#failure-modes-and-their-boundaries",
+      label: "confirmation and failure boundaries",
+      suffix: "."
+    }
   },
   {
     question: "How do I query balances and transactions?",
@@ -97,12 +107,12 @@ export const faq = [
   {
     question: "Can I use the same infrastructure for multiple services?",
     answer:
-      "Yes. A single Atto node can serve multiple integrations, exchanges, or services. Just ensure adequate resources and redundancy for uptime. If you run more than one node behind a load balancer, make sure to use sticky sessions. Because Atto nodes do not maintain a global synchronized state, different nodes may observe confirmations at slightly different speeds. By sticking a client session to the same node, you guarantee consistent responses."
+      "Yes. A single node can serve several applications or exchanges; give it enough resources, appropriate access controls and redundancy for uptime. Behind a load balancer, nodes can briefly observe different account states. Sticky sessions keep a client on the same node, but do not replace transaction-hash checks and recovery after an uncertain response."
   },
   {
     question: "What happens if a user sends funds to the wrong address?",
     answer:
-      "Transactions on Atto are irreversible. If funds are sent to an incorrect or non-controlled address, they cannot be recovered without cooperation from the recipient."
+      "You cannot cancel a confirmed Send. If you sent funds to the wrong person, you need their cooperation to receive the payment and send it back. If no one controls the destination’s key, the funds cannot be recovered."
   },
   {
     question: "What monitoring is recommended?",
@@ -112,11 +122,16 @@ export const faq = [
   {
     question: "Is there a testnet?",
     answer:
-      "Yes. A development network can be spun up on demand for controlled testing. However, because Atto is completely feeless and supports micro amounts, most testing can be done directly on the live network at no cost. This makes it easy to validate deposits, withdrawals, and API interactions without worrying about fees."
+      "Yes. You can run a local development network for controlled tests; the protocol supports LIVE, BETA, DEV and LOCAL networks. Check endpoint availability before using a shared test network. You can also try tiny payments on LIVE to test deposits and withdrawals without transaction fees. Those payments still move real ATTO, so use a test wallet and small amounts."
   },
   {
     question: "Is Atto MiCA compliant?",
     answer:
-      "Atto falls under the 'other crypto-asset' category in MiCA. While Atto B.V. develops and maintains the software, there was no ICO or fundraising event, and tokens are distributed through community and reward mechanisms. This makes Atto suitable for listing under EU compliance frameworks, provided standard exchange due diligence is met."
+      "Read the ",
+    link: {
+      href: "/docs/whitepaper",
+      label: "MiCA Crypto-Asset Whitepaper",
+      suffix: " for the crypto-asset disclosure, including classification, rights, trading and risks. Publication does not mean approval by an EU competent authority."
+    }
   }
 ];

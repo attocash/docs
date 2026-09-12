@@ -1,5 +1,6 @@
 ---
-title: Encoding & Values
+title: ATTO Raw Converter and Encoding Tools
+sidebar_label: Encoding & Values
 description: Convert text, hex, exact Atto amounts, and timestamps; calculate variable-length BLAKE2b hashes.
 sidebar_position: 2
 ---
@@ -10,6 +11,8 @@ import EncodingTools from "@site/src/components/AttoTools/EncodingTools";
 
 Protocols operate on bytes, while people usually work with text and decimal values. These tools make that boundary explicit: the byte count is shown, malformed encodings are rejected, and amounts never pass through a JavaScript `number`.
 
+Convert ATTO to raw units and back without floating-point rounding. The same page also converts text and hex, calculates BLAKE2b hashes, and converts Unix-millisecond timestamps.
+
 <EncodingTools />
 
 ## Details worth remembering
@@ -18,3 +21,5 @@ Protocols operate on bytes, while people usually work with text and decimal valu
 - Atto V1 uses BLAKE2b with different output sizes depending on the field. A block hash is 32 bytes; an address checksum is 5 bytes.
 - One ATTO is `1,000,000,000` raw. Commons accepts at most nine fractional ATTO digits.
 - Protocol timestamps are signed 64-bit Unix epoch milliseconds. Keep them as strings or `bigint` in JavaScript.
+
+The Commons getting-started guide shows how to [use exact amounts in application code](/docs/integration/commons).

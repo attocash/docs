@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Follow Atto’s completed releases, payment-infrastructure work in progress and planned agent-market, merchant and content-payment integrations.
 ---
 
 # Roadmap
@@ -174,6 +175,8 @@ Atto already has the traits small payments need: fast confirmation, no protocol 
 step is turning that into payment flows that software can use without a custom checkout for every request.
 
 This phase is about making small paid requests work for APIs, tools, and agents.
+
+You can already approve wallet spending limits in the [CLI](/build/cli) and [MCP](/build/mcp). This phase builds on those controls to connect a payment to a paid request, so a service can check the payment and return the result.
 
 Planned work:
 

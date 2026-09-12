@@ -1,13 +1,15 @@
 ---
-title: Atto for N8N
+title: Atto N8N Setup — Install Nodes and Receive Payment Events
 sidebar_label: N8N
 description: Add Atto payments and live account events to N8N workflows. Start with a public account lookup that needs no wallet secret.
 sidebar_position: 3
 ---
 
-# Atto for N8N
+# Set up Atto in N8N {#atto-for-n8n}
 
 Connect payments to a workflow: read an account, start a process when a payment arrives, or send funds as a workflow step. The package provides an **Atto** action node and an **Atto Trigger** node for live network events.
+
+For capabilities and workflow examples, see [Atto payment workflows for N8N](/build/n8n).
 
 ## Install on self-hosted N8N
 

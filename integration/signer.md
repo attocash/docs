@@ -1,8 +1,11 @@
 ---
 sidebar_position: 11
+title: Atto External Signer — GCP KMS Configuration
+sidebar_label: Signer
+description: Configure an external Atto voter signer with GCP KMS, scoped signing capabilities, bearer-token authentication and private sidecar communication.
 ---
 
-# Signer
+# Atto external signer {#signer}
 
 The Signer is a dedicated external application designed to handle cryptographic signing operations, typically for voting
 nodes. Using an external signer is highly recommended for Voter Nodes to enhance security by decoupling private key

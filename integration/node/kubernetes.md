@@ -1,8 +1,11 @@
 ---
 sidebar_position: 2
+title: Deploy an Atto Node on Kubernetes
+sidebar_label: Kubernetes
+description: Deploy Atto historical and voter nodes on Kubernetes with MySQL, Secrets, health probes and optional GCP KMS signer-sidecar configuration.
 ---
 
-# Kubernetes
+# Deploy an Atto node on Kubernetes {#kubernetes}
 
 Use this page to deploy an Atto historical or voter node on Kubernetes. Review the shared
 [node requirements and quick reference](/docs/integration/node) before choosing a manifest.

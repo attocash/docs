@@ -1,5 +1,6 @@
 ---
-title: Addresses & Demo Keys
+title: Atto Address Validator and Demo Key Tools
+sidebar_label: Addresses & Demo Keys
 description: Convert and inspect Atto addresses, then explore mnemonic, seed, private-key, public-key, and address derivation safely.
 sidebar_position: 3
 ---
@@ -15,6 +16,8 @@ atto:// + base32(algorithm [1 byte] + public key [32 bytes] + checksum [5 bytes]
 ```
 
 The checksum is the first five bytes of BLAKE2b over the algorithm byte followed by the public key. It detects transcription errors; it is not a signature.
+
+Convert a public key to an Atto address, decode an address and check its checksum, or study key derivation with disposable demo values. To create a wallet you intend to fund, use the [Atto wallet](/wallet).
 
 <AddressTools />
 

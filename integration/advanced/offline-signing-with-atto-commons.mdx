@@ -1,18 +1,24 @@
+---
+title: Advanced Atto Commons Integration — Keys and Transactions
+sidebar_label: Advanced Commons integration
+description: Build an Atto integration with Commons examples for key generation, addresses, signed transactions, sending, receiving and network monitoring.
+---
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import CodeBlock from "@theme/CodeBlock";
 
-# Offline Signing with Atto Commons
+# Advanced Atto Commons integration {#offline-signing-with-atto-commons}
 
 In this tutorial, we demonstrate how to integrate with the Atto network at a low level using the **Atto Commons**
 libraries (available for JavaScript/TypeScript, Kotlin, and Java). This approach allows you to generate and manage keys,
-construct transactions offline, and interact directly with an Atto node – all without relying on the Wallet Server
+construct and sign transactions, and interact directly with an Atto node – all without relying on the Wallet Server
 component. This is ideal for advanced integrators (such as exchanges or custodians) who require full control over key
-management and offline signing.
+management and transaction authorization.
 
-**Note:** Atto uses Ed25519 elliptic curve cryptography for its account keys and signatures. This means you can leverage
-third-party tools or HSMs for key derivation and signing if desired. In this guide, however, we will use the Atto
-Commons library for all key and transaction operations for consistency and simplicity.
+Key generation and signing happen locally, while the examples use online clients for account data, work and publication. If you need air-gapped signing, keep the signing component separate from those clients. The [protocol serialization and signing reference](/docs/integration/advanced/protocol-offline-signing-reference) explains the byte-level formats.
+
+**Note:** Atto uses Ed25519 elliptic curve cryptography for its account keys and signatures. If you use a third-party signer or HSM, check both its Ed25519 support and how you will handle Atto key derivation and transactions. In this guide, we use Atto Commons for all key and transaction operations for consistency and simplicity.
 
 Before proceeding, ensure you have access to the following components in your environment:
 
@@ -26,6 +32,8 @@ endpoints (available upon request). In the code examples below, we will use the 
 ## Installation
 
 Make sure the Atto Commons libraries are available in your project:
+
+The JavaScript examples use Commons 7.0.2. Keep their packages on matching versions, and check the JVM examples against the release you install. For a shorter introduction, start with the [Commons getting-started guide](/docs/integration/commons).
 
 <Tabs groupId="library">
   <TabItem value="js" label="JavaScript">
@@ -73,6 +81,8 @@ Make sure the Atto Commons libraries are available in your project:
 
 ## Key Generation and Derivation
 
+Use a disposable wallet while following these examples. Never log recovery phrases or private keys, and do not fund a wallet whose secrets have appeared in logs, screenshots or shared output. The examples below print only public values.
+
 The first step is to generate a private key for your Atto account. The Atto Commons library provides utilities for
 secure key generation. In JavaScript, `await AttoMnemonic.generate()` creates a fresh mnemonic that can derive indexed
 private keys. Kotlin also exposes secure key generation through Atto Commons. You can import an existing private key
@@ -91,13 +101,10 @@ from a hex string if you have one (for example, from a mnemonic or another sourc
     // Generate a new mnemonic and derive a private key (index 0)
     (async () => {
       const mnemonic = await AttoMnemonic.generate();
-      console.log('Mnemonic:', mnemonic.phrase);
-      console.log('Mnemonic:', (await AttoMnemonic.fromPhrase(mnemonic.phrase)).phrase);
 
       const seed = await mnemonic.toSeedAsync();
       const index0 = toAttoIndex(0);
       const privateKey0 = await seed.toPrivateKey(index0);
-      console.log('Derived Private Key (hex):', toHex(privateKey0.value));
 
       // Derive the public key if needed
       const publicKey0 = await privateKey0.toPublicKey();
@@ -113,12 +120,10 @@ from a hex string if you have one (for example, from a mnemonic or another sourc
 
       // Generate a mnemonic and derive keys via seed/index
       val mnemonic = AttoMnemonic.generate()
-      println(mnemonic.words.joinToString(" "))
 
       val seed = mnemonic.toSeed()
       val index0 = 0u.toAttoIndex()
       val privateKey0 = seed.toPrivateKey(index0)
-      println("Derived Private Key (hex): ${privateKey0.value.toHex()}")
 
       // Derive the public key if needed
       val publicKey0 = privateKey0.toSigner().publicKey
@@ -134,12 +139,10 @@ from a hex string if you have one (for example, from a mnemonic or another sourc
 
     // Generate a mnemonic and derive keys via seed/index
     AttoMnemonic mnemonic = AttoMnemonic.generate();
-    System.out.println(String.join(" ", mnemonic.getWords()));
 
     AttoSeed seed = AttoSeeds.toSeedBlocking(mnemonic);
     AttoKeyIndex index0 = toAttoIndex(0);
     AttoPrivateKey privateKey0 = AttoPrivateKeys.toPrivateKey(seed, index0);
-    System.out.println("Derived Private Key: " + privateKey0);
 
     // Derive the public key if needed
     AttoPublicKey publicKey0 = AttoPublicKeys.toPublicKey(privateKey0);
@@ -151,8 +154,7 @@ from a hex string if you have one (for example, from a mnemonic or another sourc
 
 **About Key Security:** The private key is a 32-byte value. Keep this safe! With Ed25519, the public key can be derived
 from the private key, and the Atto address can be derived from the public key. If you prefer to derive keys from a
-mnemonic seed, ensure you use a secure, Atto-compatible method. (Atto Commons supports seed generation as well, though
-it’s not shown here.)
+mnemonic seed, ensure you use a secure, Atto-compatible method, as illustrated above. Do not expose the mnemonic, seed or private key in application output.
 
 ## Address Generation
 
@@ -230,7 +232,7 @@ Proof-of-Work (PoW). The Atto Commons library can create these for you:
     import cash.atto.commons.*
     import kotlin.time.Duration.Companion.seconds
 
-    // Remote clients (v6)
+    // Remote clients; verify these APIs against your installed JVM release
     val client = AttoNodeClient.remote("https://my-historical-node.mydomain.cash")
     val worker = AttoWorker.remote("https://my-work-server.mydomain.cash").retry(1.seconds).cached()
     ```
@@ -671,12 +673,6 @@ shutdown).
 
 ## Conclusion
 
-By using the Atto Commons library for JS, Kotlin, and Java, you can fully manage the lifecycle of Atto transactions in your own
-code: from key creation and offline signing to publishing transactions on the network and reacting to incoming funds.
-This **advanced integration** approach gives you maximum flexibility and security (you control your private keys at all
-times) at the cost of a bit more implementation work compared to using a high-level Wallet Server.
+With Atto Commons for JavaScript/TypeScript, Kotlin and Java, you can manage the transaction lifecycle in your own code: generate keys, construct and sign transactions, publish them, and react to incoming funds. You control key storage and payment authorization, with more flexibility and more implementation work than a high-level Wallet Server integration.
 
-Integrators should ensure they maintain the `accountMap` state accurately and securely store private keys. Additionally,
-for production use, always run your own Atto node and work server for reliability and security. With the patterns shown
-in this tutorial, you can build a robust integration that handles sending and receiving Atto programmatically, all while
-keeping sensitive operations offline.
+Keep `accountMap` up to date, store private keys securely, and check the original transaction hash after a lost response before creating another payment. Running your own node and work server gives you control over those dependencies. If your signing keys must stay offline, separate signing from the online clients used in this tutorial.

@@ -1,16 +1,23 @@
 ---
-title: Live Network
+title: Atto API Explorer — Read-Only Lookups and Streams
+sidebar_label: Live Network
 description: Make explicit read-only Atto node queries and watch cancellable live transaction, receivable, and account-entry streams.
 sidebar_position: 5
 ---
 
 import NetworkTools from "@site/src/components/AttoTools/NetworkTools";
 
-# Live Network
+# Read-only Atto API explorer {#live-network}
 
 Use the public live node to inspect current data or watch protocol activity. This page exposes only read and stream methods from the Commons node client. It cannot sign, create work, publish, or modify an account.
 
+See the [Node API endpoint reference](/api/node) for request and response contracts.
+
+Look up node time, an account, a transaction or an account entry, then start a live stream when you want to inspect incoming protocol events. No wallet secret is needed.
+
 <NetworkTools />
+
+For general account and transaction browsing, [browse the Atto explorer](/explorer).
 
 :::warning Public endpoint
 Queries go to `https://gatekeeper.live.application.atto.cash`. The operator can observe ordinary request metadata plus any address or hash you submit. Use your own node when that metadata is sensitive.

@@ -1,6 +1,7 @@
 ---
 sidebar_position: 0
-title: Build with Atto
+title: Atto Integration Guides — MCP, CLI, N8N and Commons
+sidebar_label: Build with Atto
 description: Add feeless micropayments to AI agents, terminal scripts, N8N workflows, and applications. Choose an integration and start with a read-only operation.
 hide_table_of_contents: true
 ---
@@ -8,7 +9,7 @@ import { faq } from "./faq";
 import Head from "@docusaurus/Head";
 import GuideCards from "@site/src/components/Docs/GuideCards";
 
-# Build with Atto {#integration-overview}
+# Choose an Atto integration {#integration-overview}
 
 Add feeless micropayments to the software you already use. Connect an AI agent, work from a terminal, build an N8N workflow, or bring Atto directly into your application.
 
@@ -75,7 +76,7 @@ Follow the [node guide](/docs/integration/node) for historical and voter roles, 
 | **8081** | `/health/liveness`, `/health/readiness` & `/prometheus` | Cluster‑internal only.                                       |
 | **8082** | Node‑to‑node gossip (WebSocket)            | Terminate TLS at the load‑balancer / ingress. Public‑facing. |
 
-For lower-level transaction construction, use [offline signing with Commons](/docs/integration/advanced/offline-signing-with-atto-commons) and the [protocol reference](/docs/integration/advanced/protocol-offline-signing-reference). Keep production secrets out of tutorial examples and logs.
+For lower-level transaction construction, use the [advanced Commons integration guide](/docs/integration/advanced/offline-signing-with-atto-commons) and the [protocol reference](/docs/integration/advanced/protocol-offline-signing-reference). Keep production secrets out of tutorial examples and logs.
 
 ## Frequently Asked Questions (FAQ)
 

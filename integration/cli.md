@@ -1,13 +1,15 @@
 ---
-title: Atto CLI
+title: Atto CLI Setup — Install, Receive and Send
 sidebar_label: CLI
 description: Create an Atto wallet in your terminal, inspect balances, receive payments, and send with durable request IDs.
 sidebar_position: 2
 ---
 
-# Atto CLI
+# Set up the Atto CLI {#atto-cli}
 
 Use Atto from your terminal or a script: inspect accounts, follow incoming payments, and send exact amounts. JSON output makes the same commands usable in your own tooling. The CLI is currently in beta for macOS, Linux, and Windows.
+
+For capabilities and examples before installing, see the [Atto CLI overview](/build/cli).
 
 ## Install
 

@@ -1,13 +1,15 @@
 ---
-title: Atto MCP
+title: Atto MCP Setup — Connect a Wallet and Approve Access
 sidebar_label: MCP
 description: Connect an AI assistant to Atto. Start read-only, then approve bounded spending in your own terminal.
 sidebar_position: 1
 ---
 
-# Atto MCP
+# Set up Atto MCP {#atto-mcp}
 
 Give an MCP-compatible assistant access to balances, payment history, and live events. When you want it to pay for a service or complete a purchase, you can approve a spending allowance without putting a recovery phrase in the conversation.
+
+For capabilities and the approval flow before setup, see the [Atto MCP overview](/build/mcp).
 
 ## Before you begin
 

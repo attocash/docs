@@ -123,7 +123,7 @@ threshold = 8,589,934,591 div divisor
 
 In 2026, the divisor is 2 and the threshold is 4,294,967,295. If hash outputs are uniformly distributed, each trial succeeds with probability `(threshold + 1) / 2⁶⁴`. The expected search therefore takes 2³² trials. This is a mathematical expectation; elapsed time depends on the hardware and whether work was prepared in advance. The calendar-based threshold does not respond to current network congestion. [Work calculation](https://github.com/attocash/commons/blob/b11122e731f7072869ae124943f6d2fbe15b33bc/commons-core/src/commonMain/kotlin/cash/atto/commons/AttoWork.kt), [network constants](https://github.com/attocash/commons/blob/b11122e731f7072869ae124943f6d2fbe15b33bc/commons-core/src/commonMain/kotlin/cash/atto/commons/AttoNetwork.kt#L25-L37)
 
-*Version note:* The [offline-signing guide](/docs/integration/advanced/protocol-offline-signing-reference) contains the field tables but omits the divisor's integer truncation from its difficulty formula. The calculation above follows the referenced Commons implementation, including that truncation.
+The [protocol signing reference](/docs/integration/advanced/protocol-offline-signing-reference) includes field tables and a worked example of the work-threshold calculation.
 
 ## Consensus Mechanism: Open Representative Voting
 
@@ -254,7 +254,7 @@ If a connection fails after sending a transaction, the payment may already have 
 
 **Advanced detail — publishing APIs.** Both `POST /transactions` and `POST /transactions/stream` return the transaction after local confirmation, with a 40-second timeout on the confirmation wait. The latter uses newline-delimited JSON (NDJSON), with a JSON value on each line. Success follows a stored account update or recognition that the transaction is already the account's latest confirmed block. `GET /transactions/{hash}` queries stored history. Publishing with `deduplicate=true` can return an already confirmed result or share the pending request for the same hash. The application must still save its own payment and order records. [Controller implementation](https://github.com/attocash/node/blob/344ae1e59d8f5b6712cb7a71e66b8d930edf1904/src/main/kotlin/cash/atto/node/transaction/TransactionController.kt)
 
-The [offline-signing guide](/docs/integration/advanced/protocol-offline-signing-reference) describes `POST /transactions` as asynchronous, while the referenced node implementation waits for confirmation. Integrators need to check which behavior their node version provides and examine the returned transaction as well as the HTTP status. A request timeout, or a node dropping an operation from its queue, does not undo a transaction confirmed elsewhere.
+The [protocol signing reference](/docs/integration/advanced/protocol-offline-signing-reference#publishing-transactions-rest) describes request formats and confirmation responses. Examine the returned transaction as well as the HTTP status. A request timeout, or a node dropping an operation from its queue, does not undo a transaction confirmed elsewhere.
 
 The referenced wallet send screen reports caught errors as payment failures. It does not separately show an unknown outcome after a lost response, so a failure message can require the transaction-history checks described above. [Wallet send handling](https://github.com/attocash/wallet/blob/b7bcf7e2f859953f0d444045dbd1d3d0c7289a5d/composeApp/src/commonMain/kotlin/cash/atto/wallet/viewmodel/SendTransactionViewModel.kt)
 

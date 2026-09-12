@@ -6,6 +6,8 @@ sidebar_position: 1
 
 Atto's total supply of 18 billion coins was created at genesis—no new coins can ever be minted. These existing coins enter circulation gradually through the faucet, mining, staking rewards, and contribution rewards.
 
+See how the supply was [allocated at genesis](/docs/whitepaper/technical#tokenomics-and-distribution), or follow how much has entered circulation in the [network metrics](/metrics).
+
 Distribution rates can be adjusted using the [Growth Stability Index (GSI)](/docs/growth-stability-index), which scales configured rates in response to market data.
 
 :::note Current distribution rules

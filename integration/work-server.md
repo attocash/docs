@@ -1,17 +1,24 @@
 ---
 sidebar_position: 12
+title: Atto Work Server — Generate Transaction Proof of Work
+sidebar_label: Work Server
+description: Run a CPU or GPU service to generate Atto’s transaction anti-spam work. Compare deployment options and keep work generation separate from consensus.
 ---
 
-# Work Server
+# Atto Work Server {#work-server}
 
 The Atto network operates without transaction fees. Instead, to prevent spam and prioritize network resources, it
 requires a small amount of Proof of Work (PoW) to be computed for each transaction before it's submitted. The Work
 Server is a dedicated service designed to perform these PoW computations.
 
+This work is an anti-spam requirement, not consensus mining. See [how signatures and work differ](/docs/whitepaper/technical#block-identity-signatures-and-work).
+
 Clients and applications wishing to send transactions on the Atto network will typically delegate the PoW calculation to
 a Work Server.
 
-## Why is a Work Server Required?
+## When to use a Work Server {#why-is-a-work-server-required}
+
+Every Atto transaction needs valid anti-spam work. A separate Work Server is optional: applications can generate work locally or delegate it to a service without sharing the spending key. [Commons worker modules](/build/commons) support local and remote work generation.
 
 * **Fee-less Transactions:** Atto's design replaces monetary fees with computational work. This PoW needs to be
   generated for every transaction.
@@ -22,7 +29,7 @@ a Work Server.
 
 ## Performance Considerations
 
-The time taken to compute the PoW can vary significantly based on the available hardware:
+The time taken to compute PoW varies with the hardware, software and work difficulty. The examples below describe work generation, which happens before transaction confirmation. Preparing work in advance can avoid making the user wait for that calculation.
 
 * **CPU:** Standard CPUs can compute the PoW, but it might take a noticeable amount of time, potentially several minutes
   for a single transaction depending on the CPU's performance. This might be acceptable for development or
@@ -106,13 +113,13 @@ spec:
           startupProbe:
             httpGet:
               path: /health
-              port: health # Refers to named port 'health' (8081)
+              port: management # Refers to named port 'management' (8081)
             failureThreshold: 180
             periodSeconds: 1
           livenessProbe:
             httpGet:
               path: /health
-              port: health # Refers to named port 'health' (8081)
+              port: management # Refers to named port 'management' (8081)
             failureThreshold: 5
             periodSeconds: 60
 ```

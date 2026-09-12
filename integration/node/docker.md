@@ -1,8 +1,11 @@
 ---
 sidebar_position: 1
+title: Run an Atto Node with Docker Compose
+sidebar_label: Docker
+description: Deploy an Atto historical or voter node with Docker Compose and MySQL. Configure secrets, networking, startup checks and synchronization monitoring.
 ---
 
-# Docker
+# Run an Atto node with Docker Compose {#docker}
 
 Use this page to run an Atto historical or voter node with Docker Compose. Review the shared
 [node requirements and quick reference](/docs/integration/node) before choosing a configuration.

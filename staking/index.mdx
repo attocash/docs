@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+title: Atto Staking Rules — Eligibility and Reward Calculation
+sidebar_label: Staking
 ---
 
 import { faq } from "./faq";
@@ -8,11 +10,13 @@ import Metric from "@site/src/components/Metric";
 import StakingApySlider from "@site/src/components/StakingApySlider";
 import StakingContent from "@site/src/components/StakingContent";
 
-# Staking
+# Atto staking rules {#staking}
 
 <StakingContent>
 
 Staking is Atto's reward mechanism for eligible accounts delegated to participating [voters](/explorer/voters). Delegation also assigns voting weight for Open Representative Voting, but staking rewards are separate from transaction consensus.
+
+Try the [staking overview and reward calculator](/staking) to see how the calculation works with your balance.
 
 :::note Reward rates can change
 Staking rewards are variable and depend on the current reward policy, account eligibility, and voter settings. This page also shows the base-APY × GSI programme calculation. Displayed APY and payout timing can change.
@@ -64,7 +68,7 @@ The current reward calculation applies a **cap of 180 million Atto** to each vot
 
 ### GSI Influence
 
-The programme calculation multiplies the base APY by the [Growth Stability Index (GSI)](/docs/growth-stability-index).
+The displayed calculation multiplies base APY by the [Growth Stability Index (GSI)](/docs/growth-stability-index). For example, a GSI of 0.5 halves the base rate; a GSI of 2 doubles it. Your account's reward also depends on voter sharing, the delegation cap and eligibility. The FAQ below explains the distinction between this calculation and the programme's active settings.
 
 ## Payout Schedule
 
