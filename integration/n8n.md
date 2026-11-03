@@ -1,7 +1,7 @@
 ---
-title: Atto N8N Setup — Install Nodes and Receive Payment Events
+title: Atto N8N Setup — Machine-to-Machine Payment Workflows
 sidebar_label: N8N
-description: Add Atto payments and live account events to N8N workflows. Start with a public account lookup that needs no wallet secret.
+description: Set up Atto nodes for machine-to-machine payment workflows in N8N. Read an account, listen for incoming payments, and receive funds with a dedicated wallet.
 sidebar_position: 3
 ---
 
@@ -53,6 +53,22 @@ N8N does not use the CLI/MCP profile or inherit its spending caps and terminal a
 :::
 
 Keep wallet secrets in N8N's encrypted credentials, not chat, exported workflow JSON, or ordinary node parameters. Review execution-data retention before using real funds. The [security and operation reference](https://github.com/attocash/integrations-n8n/blob/main/USAGE.md) covers credential use and node behavior.
+
+## Machine-to-machine payment workflow {#machine-to-machine-payment-workflow}
+
+Use the maintained [incoming-to-receive workflow](https://github.com/attocash/integrations-n8n/blob/main/examples/incoming-to-receive.json) to turn an incoming payment into spendable funds. It connects **Atto Trigger > Receivable** to **Atto > Receivable > Receive**. The trigger watches the address derived from your credential; the action signs and publishes a Receive transaction, or an Open transaction for an unopened account.
+
+1. Download the example JSON and import it into N8N.
+2. Select your own dedicated **Atto API** signing credential in **both nodes**. The exported credential named `Atto Local`, with ID `1`, is a placeholder.
+3. Check the credential's **Wallet Secret Type**, **Wallet Secret**, and **Key Index** against your intended receiving address. Use Node and Worker URLs for the same network. For LIVE, both public URLs are `https://gatekeeper.live.application.atto.cash`.
+4. Keep the trigger's **Address Source** set to **Credentials** and the action's **Secret Source** set to **Credentials**. Review both nodes and their signing access before running the workflow.
+5. When ready to test it yourself, start the trigger in test mode and send a small payment from another wallet on that network. Inspect the trigger item, then the receive action's output. Confirm the receiving account with **Account > Get**.
+
+The trigger item includes the incoming Send's `hash`, recipient `address`, `fromAddress`, and `amount`. The receive action returns `status: "received"`, its own transaction `hash`, the receiving `address`, `amount`, and `height`. Keep the incoming and receive hashes distinct. **Account > Get** should report `found: true` and a balance that includes the received amount. An unopened account becomes open after its first successful receive.
+
+The action processes each supplied receivable item. A run with several input items can publish several Receive/Open transactions; the action does not drain other pending funds automatically.
+
+For a paid service, add your own quoting, payment verification, order matching, and result delivery as described in the [agent payment guide](/docs/integration/agent-payments#connect-the-payment-to-an-api-result). Only start the purchased work after checking the payment against the intended order. N8N signing credentials grant the workflow access to this wallet and do not inherit CLI/MCP spending limits.
 
 ## Next steps
 
