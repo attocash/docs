@@ -90,6 +90,8 @@ atto --json balances
 
 ## Next steps
 
+- [Make your first agent payment](/docs/integration/agent-payments) for the payment flow and a CLI alternative using the same wallet profile.
+- [Compare agent payment networks](/blog/payments-for-ai-agents-compared) for costs, funding, and confirmation guarantees.
 - [Build with Atto](/docs/integration) to choose an integration.
 - [MCP](/docs/integration/mcp) for assistants, or [N8N](/docs/integration/n8n) for workflows.
 - [CLI source and command reference](https://github.com/attocash/integrations/tree/main/atto-cli) for account selection, retries, profiles, and recovery.

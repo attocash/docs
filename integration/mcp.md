@@ -64,6 +64,8 @@ MCP limits constrain these wallet tools, not arbitrary programs running as your 
 
 ## Next steps
 
+- [Make your first agent payment](/docs/integration/agent-payments) with a funded wallet, approved allowance, and recoverable request ID.
+- [Compare agent payment networks](/blog/payments-for-ai-agents-compared) for costs, funding, and confirmation guarantees.
 - [Build with Atto](/docs/integration) to compare integration options.
 - [CLI](/docs/integration/cli) for terminal payments, or [N8N](/docs/integration/n8n) for workflows.
 - [MCP source and tool reference](https://github.com/attocash/integrations/tree/main/atto-mcp) for configuration, watches, and troubleshooting.

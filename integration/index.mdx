@@ -13,7 +13,13 @@ import GuideCards from "@site/src/components/Docs/GuideCards";
 
 Add feeless micropayments to the software you already use. Connect an AI agent, work from a terminal, build an N8N workflow, or bring Atto directly into your application.
 
-## Choose your integration
+## From choosing a network to making a payment
+
+1. [Compare Atto, Nano, USDC and Lightning](/blog/payments-for-ai-agents-compared) for agent payments.
+2. [Choose MCP, CLI, N8N or Commons](#choose-your-integration) for your application.
+3. [Make your first agent payment](/docs/integration/agent-payments#make-your-first-payment) with a funded wallet and an approved allowance.
+
+## Choose your integration {#choose-your-integration}
 
 <GuideCards items={[
   {title: 'MCP', label: 'For AI agents', description: 'Give your assistant wallet tools. Start read-only, then approve spending locally within limits you choose.', href: '/docs/integration/mcp'},
@@ -31,8 +37,6 @@ If you want to try the data formats before writing code, open the [browser tools
 ## Why Atto? {#why-atto}
 
 There is no protocol transaction fee to subtract from a small payment. Amounts support nine decimal places, and independent account chains can progress concurrently. See the [network measurements](/metrics) and [technical whitepaper](/docs/whitepaper/technical) for timing and protocol details.
-
-Still choosing a payment network? Read [Payments for AI agents: Atto, Nano, USDC and Lightning compared](/blog/payments-for-ai-agents-compared) for costs, funding requirements, confirmation guarantees and available integration paths.
 
 :::note Two sides of a payment
 A confirmed send creates a receivable for its destination. A receive or open block adds that amount to the recipient's account balance. Distinguish a payment arriving from funds becoming spendable when designing your application.

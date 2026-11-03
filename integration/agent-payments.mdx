@@ -1,0 +1,115 @@
+---
+title: How do AI agents pay for APIs?
+sidebar_label: First payment
+sidebar_position: 0.5
+description: Give an AI agent a funded Atto wallet, approve bounded spending, make a first payment, and understand how an API verifies payment before returning a result.
+---
+
+# How do AI agents pay for APIs?
+
+An agent can pay for an API by using a wallet to send the quoted amount within an owner-approved budget. For direct Atto payments, the service verifies the confirmed Send and matches its transaction hash to the order before returning the result.
+
+Atto provides wallet tools for the payment step through [MCP](/docs/integration/mcp), the [CLI](/docs/integration/cli), and [N8N](/docs/integration/n8n). The CLI and MCP packages are in beta. A general merchant's quote, order matching, and result delivery still need application logic. The [micropayment roadmap](/docs/roadmap#phase-7-micropayment-rails) includes an x402-style paid HTTP flow and a paid demo endpoint; this guide demonstrates a native transfer, not an automatic paid API client.
+
+:::tip What you'll finish with
+
+- A separate, funded agent wallet.
+- A small spending allowance that you approve locally.
+- A native payment with a confirmed transaction hash and a local request ID to inspect or retry it.
+
+:::
+
+The wallet exercise ends with that payment. The [API integration section](#connect-the-payment-to-an-api-result) explains the custom quote, order-matching, and result-delivery steps your application must add.
+
+## Set up a separate agent wallet
+
+Follow [MCP setup](/docs/integration/mcp#before-you-begin), including its Node.js, local stdio, and OS password-store requirements. Choose **Dedicated MCP wallet (default)** and start **read-only**. Create or import it in your own terminal; keep the recovery phrase out of chat.
+
+After reconnecting your assistant, ask:
+
+> Show my wallet directory, network, address at index 0, balance, and access limits. Do not change anything.
+
+It can use `wallet_status`, `address_list`, `balances_get` with `{"index": 0}`, and `limits_get`. Keep the returned directory: it identifies this wallet profile. MCP and CLI have different default profiles.
+
+Manually send a small amount to the address at index `0` from an existing wallet, or use the [faucet](/faucet) for a LIVE wallet. Check that the funding source and wallet use the same network. An incoming payment can remain pending until a receive opens or credits the account.
+
+## Approve a small allowance
+
+Ask:
+
+> Propose spending access from account 0 only: at most 0.001 ATTO per payment and 0.005 ATTO across a rolling day, without consolidation. Show me the changes and the returned approval command. Do not run it.
+
+The corresponding `limits_propose` arguments are:
+
+```json
+{
+  "access": "spend",
+  "policy": {
+    "perRequest": { "amount": "0.001", "unit": "ATTO" },
+    "rolling": [{ "days": 1, "amount": "0.005", "unit": "ATTO" }]
+  },
+  "pool": { "indexes": [0], "consolidate": false }
+}
+```
+
+These amounts are illustrative, not an API price. Choose limits appropriate to your funds and intended service. With this policy, account `0` must hold the entire payment; the tools cannot combine funds from other accounts.
+
+A proposal grants nothing. Review the wallet, network, directory, access, caps, and source pool. Run the actual returned `approval.commands.atto` or `approval.commands.npx` yourself in your local terminal, preserving its path, proposal ID, and shell quoting. The assistant must not execute approval. Confirm locally, then ask for `limits_get` to check the active allowance.
+
+Spending access also permits receiving. Ask the assistant to call `receive_all` with `{"index": 0}`, then `balances_get` with `{"index": 0}`. Receiving opens the account if needed and makes incoming funds spendable. Automatic receiving may already have done this. Receiving does not consume the sending allowance.
+
+## Make your first payment {#make-your-first-payment}
+
+Choose a recipient whose public address you have independently verified. For a practice transfer, another wallet you control works. For a service, get its quote and check the network, exact amount, destination, expiry, and how it associates a payment hash with your order.
+
+The following example sends real funds. Replace `RECIPIENT_ADDRESS` before asking the assistant to proceed:
+
+> Send 0.0001 ATTO from account 0 to this verified recipient, using request ID agent-payment-demo-001. Show me the payment status and transaction hash.
+
+The `send` arguments are:
+
+```json
+{
+  "index": 0,
+  "destination": "RECIPIENT_ADDRESS",
+  "amount": "0.0001",
+  "unit": "ATTO",
+  "requestId": "agent-payment-demo-001"
+}
+```
+
+Use the service's actual quoted amount for a purchase. Amounts are exact decimal strings. Within the approved allowance, the wallet can send without another terminal approval for each payment.
+
+Ask for `journal_get` with `{"requestId": "agent-payment-demo-001"}`. A successful native send reports `status: "published"` after node confirmation, with its transaction hash. Keep both the hash and request ID. There is no separate `confirmed` journal status to wait for.
+
+## Connect the payment to an API result
+
+:::note Application work beyond the exercise
+The wallet tools handle the transfer. Your service must implement its quote, payment-to-order matching, and API result delivery.
+:::
+
+The merchant must independently verify the **confirmed Send** on the intended network and match its destination and amount to the quote. It must bind that hash to the correct order, reject reuse for another order, and deliver the result only after those checks. A client-provided hash alone is not proof of payment.
+
+The merchant can deliver after verifying the confirmed send. Its own Receive or Open transaction makes the funds spendable in its account; that is a separate step from verifying the customer paid.
+
+`requestId` prevents duplicate payment attempts within the local wallet profile. It is not transmitted as an invoice number or payment reference. Your application must pass the hash and order identifier through its own API flow. Payment confirmation also does not prove that the API delivered its result; handle result retrieval separately from payment retries.
+
+## Recover an uncertain payment {#recover-an-uncertain-payment}
+
+If a call times out, inspect `journal_get` with the original request ID. Journal states include `reserved`, `signed`, `published`, `unknown`, and `failed`; a timeout or `unknown` does not establish that nothing was paid.
+
+Keep the same profile, network, request ID, source index, destination, and amount when retrying `send`. This lets the wallet resume or reconcile the recorded payment. A new ID creates a separate payment attempt. Check the recorded outcome before deciding to make a replacement payment, and do not pay again merely because retrieving the API result failed.
+
+## Use the CLI instead
+
+After [installing the CLI](/docs/integration/cli#install), you can use the same funded and approved profile. Replace the example directory with the absolute `directory` returned by MCP's `wallet_status`, and replace the recipient:
+
+```sh
+atto --data-dir "/absolute/path/from-wallet-status" balances --index 0
+atto --data-dir "/absolute/path/from-wallet-status" send RECIPIENT_ADDRESS 0.0001 --unit ATTO --index 0 --request-id agent-payment-demo-001
+atto --data-dir "/absolute/path/from-wallet-status" journal show agent-payment-demo-001
+```
+
+This is an alternative interface to the same payment. Reusing its ID checks or resumes that payment; choose a new ID only for a genuinely new payment. Keep `--data-dir` on each command so the CLI uses the agent wallet.
+
+For network tradeoffs, read [Atto, Nano, USDC and Lightning compared](/blog/payments-for-ai-agents-compared). To receive incoming payments in an automation, continue with the [N8N guide](/docs/integration/n8n).

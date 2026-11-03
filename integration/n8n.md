@@ -56,6 +56,8 @@ Keep wallet secrets in N8N's encrypted credentials, not chat, exported workflow 
 
 ## Next steps
 
+- [How agents pay for APIs](/docs/integration/agent-payments) explains payment verification, order matching, and result delivery.
+- [Compare agent payment networks](/blog/payments-for-ai-agents-compared) for costs, funding, and confirmation guarantees.
 - [Build with Atto](/docs/integration) to compare integration options.
 - [MCP](/docs/integration/mcp) for agent access, or [CLI](/docs/integration/cli) for terminal payments.
 - [N8N source and examples](https://github.com/attocash/integrations-n8n) for the full operation list and importable workflows.
