@@ -72,6 +72,7 @@ For a paid service, add your own quoting, payment verification, order matching, 
 
 ## Next steps
 
+- [Agent payments](/agent-payments) introduces the tools and their roles.
 - [How agents pay for APIs](/docs/integration/agent-payments) explains payment verification, order matching, and result delivery.
 - [Compare agent payment networks](/blog/payments-for-ai-agents-compared) for costs, funding, and confirmation guarantees.
 - [Build with Atto](/docs/integration) to compare integration options.
