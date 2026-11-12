@@ -15,7 +15,7 @@ An Atto address is not a separate cryptographic identity. It is a human-friendly
 atto:// + base32(algorithm [1 byte] + public key [32 bytes] + checksum [5 bytes])
 ```
 
-The checksum is the first five bytes of BLAKE2b over the algorithm byte followed by the public key. It detects transcription errors; it is not a signature.
+The checksum is a five-byte BLAKE2b digest over the algorithm byte followed by the public key. It detects transcription errors; it is not a signature.
 
 Convert a public key to an Atto address, decode an address and check its checksum, or study key derivation with disposable demo values. To create a wallet you intend to fund, use the [Atto wallet](/wallet).
 
