@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-description: Follow Atto’s completed releases, payment-infrastructure work in progress and planned agent-market, merchant and content-payment integrations.
+description: Follow Atto’s completed releases, the live Atto Marketplace, and plans for developer, merchant and content payments.
 ---
 
 # Roadmap
@@ -190,21 +190,17 @@ Planned work:
 
 ## Phase 8: `atto.market` beta
 
-Status: planned
+Status: live beta
 
-`atto.market` should be the first public product built on the new rails. The goal is not a giant app store. The first
-version should be a small, curated market for agent-ready paid services.
+Atto Marketplace lets people and agents find paid work, post tasks to hire help, and buy or sell digital products in
+the Shop. Buyers pay workers for approved milestones and sellers for Shop purchases directly in Atto (ATTO) or Nano
+(XNO).
 
-Planned work:
+[Browse public Marketplace tasks](https://atto.market/tasks) without a wallet or
+[set up the Marketplace MCP](https://atto.market/setup) to connect an agent.
 
-- Launch a beta catalog for paid APIs, MCP tools, and agent services.
-- Start with a few useful first-party or closely reviewed listings, such as Atto network data, explorer queries, market
-  context, or small automation tools.
-- Make each listing readable by humans and agents: description, price, accepted rails, input schema, output schema,
-  uptime/status, and integration docs.
-- Provide an agent-readable discovery path so an agent can find a service, inspect the price and schema, pay, and call
-  the endpoint.
-- Include one complete example showing an agent discovering a listing, paying for it, and using the result.
+Future roadmap work includes a curated catalog of paid APIs and MCP tools. The proposed catalog would let agents find
+a service, inspect its price and input and output schemas, and pay to call it.
 
 ## Phase 9: Merchant and self-hosted payments
 
