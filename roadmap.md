@@ -1,155 +1,198 @@
 ---
-sidebar_position: 6
+title: Roadmap
 description: Follow Atto’s completed releases, the live Atto Marketplace, and plans for developer, merchant and content payments.
+displayed_sidebar: null
+hide_table_of_contents: true
+hide_title: true
 ---
+
+import styles from '@site/src/components/Docs/Roadmap.module.css';
+import {useEffect} from 'react';
+import {useLocation} from '@docusaurus/router';
+import useBrokenLinks from '@docusaurus/useBrokenLinks';
+
+export function ShippedChapters({children}) {
+  const {hash} = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+
+    let anchor;
+    try {
+      anchor = decodeURIComponent(hash.slice(1));
+    } catch {
+      return;
+    }
+
+    const heading = document.getElementById(anchor);
+    const milestone = heading?.closest('details.' + styles.milestone);
+    if (milestone && !milestone.open) {
+      milestone.open = true;
+      heading.scrollIntoView();
+    }
+  }, [hash]);
+
+  return children;
+}
+
+export function ShippedMilestone({anchor, title, date, children}) {
+  useBrokenLinks().collectAnchor(anchor);
+
+  return (
+    <details className={styles.milestone}>
+      <summary>
+        <h4 id={anchor} className={styles.milestoneTitle}>{title}</h4>
+        <span className={styles.milestoneDate}>{date}</span>
+      </summary>
+      <div className={styles.milestoneBody}>{children}</div>
+    </details>
+  );
+}
+
+export function Disclosure({summary, children}) {
+  return (
+    <details className={styles.disclosure}>
+      <summary>{summary}</summary>
+      <div className={styles.disclosureBody}>{children}</div>
+    </details>
+  );
+}
+
+<div className={styles.roadmap}>
+
+<header className={styles.header}>
 
 # Roadmap
 
-*What shipped, what changed, and what comes next.*
+What’s live, what we’re building, and how we got here.
 
-Atto did not move in a straight line. Some ideas shipped. Some got replaced once a simpler path became obvious. This
-roadmap is the public trail: completed phases read as history, open phases read as work still ahead.
+</header>
 
-## Phase 0: Pre-release
+<div className={styles.timeline}>
 
-Status: complete
+<section className={styles.stop} aria-labelledby="now">
 
-<details>
-<summary>What shipped</summary>
+## Now
 
-### Public website
+<div className={styles.now}>
 
-The first website gave Atto a home: the whitepaper, basic docs, community links, and a place for new users to
-understand what the project was trying to build.
+<div className={styles.feature}>
+<p className={styles.liveStatus}>Live beta · public by <time dateTime="2026-11-17">Nov 17, 2026</time></p>
 
-### Live network
+### Atto Marketplace {#phase-8-attomarket-beta}
 
-The network went live early, before every product surface was polished. That mattered. Real accounts and real
-transactions gave us better feedback than a private test environment could.
+Find paid work, hire help, or buy and sell digital products. Pay for approved milestones and Shop purchases directly
+in ATTO or XNO.
 
-</details>
+<div className={styles.actions}>
+  <a className={styles.primaryLink} href="https://atto.market/tasks">Browse tasks <span aria-hidden="true">↗</span></a>
+  <a href="https://atto.market/setup">Set up Marketplace MCP</a>
+</div>
 
-## Phase 1: Explorer and platform stabilization
+<Disclosure summary="What’s next for Marketplace">
 
-Status: complete
+A planned catalog of paid APIs and MCP tools would let agents find
+a service, inspect its price and input and output schemas, and pay to call it.
 
-<details>
-<summary>What shipped</summary>
+</Disclosure>
+</div>
 
-### Explorer
+<div className={styles.card}>
+<p className={styles.status}>In progress</p>
 
-The [explorer](/explorer) made the network visible. Users could inspect accounts and transactions without asking an
-operator to check node logs.
+### Micropayment rails {#phase-7-micropayment-rails}
 
-### Faucet and wallet improvements
+Let apps and agents pay for individual API and tool calls with fast confirmation and no protocol fees.
 
-The faucet and wallet were tightened up around the basic loop: get a small amount of ATTO, open a wallet, send it,
-receive it, and see the transaction on the explorer.
+<Disclosure summary="Planned work on micropayment rails">
 
-</details>
+Marketplace already uses x402 for direct ATTO and XNO payments. Its integration guide covers payment receipts and safe
+retries. The Atto and Nano x402 proposals are open upstream. [Marketplace integration](https://atto.market/integration#shared-direct-payment-flow), [Atto proposal](https://github.com/x402-foundation/x402/pull/715), [Nano proposal](https://github.com/x402-foundation/x402/pull/3432)
 
-## Phase 2: Wallet direction
+The wallet CLI and MCP already support per-payment and rolling spending limits, approved source accounts, and
+request-ID recovery. [CLI guide](/build/cli), [MCP guide](/build/mcp), [First agent payment](/docs/integration/agent-payments)
 
-Status: complete
+- Extend the x402 flow to general-purpose APIs and tools so a service can verify a payment and return the requested resource.
+- Carry forward support for multiple payment rails.
+- Ship a paid demo endpoint with settlement receipts, replay protection, and clear failure behavior.
+- Add recipient or service allowlists and build on existing wallet approvals and payment records.
+- Publish a guide for putting an API route or MCP tool behind a small payment.
 
-<details>
-<summary>What changed</summary>
+</Disclosure>
+</div>
 
-Native Android and iOS wallets were the first plan. We changed direction.
+</div>
+</section>
 
-Atto needed one wallet that could move faster across desktop and mobile, so the web wallet became the main wallet
-surface. That kept development focused on the flows that mattered most: creating an account, receiving funds, sending
-ATTO, and later, choosing a voter for staking.
+<section className={styles.stop} aria-labelledby="up-next">
 
-</details>
+## Up next
 
-## Phase 3: Mining through Folding@Home
+<div className={styles.plans}>
 
-Status: complete
+<div className={styles.plan}>
 
-<details>
-<summary>What shipped</summary>
+### Merchant and self-hosted payments {#phase-9-merchant-and-self-hosted-payments}
 
-Atto does not use mining for consensus. Consensus uses Open Representative Voting.
+Explore a BTCPay Server integration so merchants can accept Atto on infrastructure they run.
 
-The "mining" program is a distribution path. Users contribute computing power to
-[Folding@Home](https://foldingathome.org), and Atto rewards completed work through the mining program. Electricity goes
-toward scientific computation instead of repeated hashing for block production.
+<Disclosure summary="View merchant payment plans">
 
-</details>
+- Research BTCPay Server integration paths: plugin, headless API integration, payment requests, and invoices.
+- Build the smallest useful BTCPay integration before attempting a full payment-server stack.
+- Keep self-hosting as the default direction for merchants who do not want a hosted processor.
 
-## Phase 4: Public launch
+</Disclosure>
+</div>
 
-Status: complete
+<div className={styles.plan}>
 
-<details>
-<summary>What shipped</summary>
+### Content payments {#phase-10-content-payments}
 
-After the pre-release period, Atto moved into a broader public launch. By then, the network, website, wallet, faucet,
-explorer, and early distribution paths were usable enough for people outside the initial group of testers.
+Once the payment rails are proven, let readers pay to unlock articles and downloads or tip creators.
 
-</details>
+<Disclosure summary="View content payment plans">
 
-## Phase 5: Integrations
+- Article unlocks and pay-per-read flows.
+- Website and publisher plugins.
+- Examples for tips, gated downloads, and small paid actions.
+- A simple reader flow that does not require copying addresses by hand.
 
-Status: complete
+</Disclosure>
+</div>
 
-<details>
-<summary>What shipped</summary>
+</div>
+</section>
 
-### Developer APIs and services
+<section className={styles.stop} aria-labelledby="shipped">
 
-The integration work made Atto easier to build on. The docs now cover the node, wallet server, work server, signer, and
-the API references needed to send, receive, inspect accounts, and operate infrastructure.
+## Shipped
 
-### Listings and discovery
+<ShippedChapters>
 
-Atto reached public discovery and listing channels, including exchange listing announcements and CoinGecko coverage.
-Current market availability can change, so the roadmap should not be used as the source of truth for where ATTO trades
-today.
+<section className={styles.chapter} aria-labelledby="building-on-atto">
 
-### Node metrics
+### Building on Atto {#building-on-atto}
 
-Node operators got health and Prometheus metrics so they can monitor infrastructure instead of guessing from the
-outside.
+<ShippedMilestone anchor="developer-tooling" title="Developer tooling" date={<>2026 rollout · <time dateTime="2026-05-31">May 31</time>–<time dateTime="2026-09-16">Sep 16</time></>}>
 
-</details>
+Developers can connect Atto to n8n workflows, use wallet tools from the terminal or an MCP client, and inspect the
+protocol from a browser.
 
-## Phase 6: Representative program
+- Browser tools arrived August 27. WebMCP support followed September 16, exposing public content, protocol tools,
+  and network queries to compatible browsers. [Browser tools](/docs/tools)
+- The CLI and wallet MCP entered public beta on September 7, with locally approved wallet access and spending limits.
+  [CLI guide](/build/cli), [MCP guide](/build/mcp)
+- The n8n integration went live on May 31. Streaming payment triggers followed July 28.
+  [n8n guide](/docs/integration/n8n)
 
-Status: complete
+</ShippedMilestone>
 
-<details>
-<summary>What shipped</summary>
+<ShippedMilestone anchor="side-quests-redesigns" title="Website and wallet redesigns" date={<>Website · <time dateTime="2026-09-12">Sep 12, 2026</time> / Wallet 2.0 · <time dateTime="2026-05-05">May 5, 2026</time></>}>
 
-### Staking and voter choice
+The site made it easier to find Atto’s tools, and the wallet simplified sending, receiving and staking.
 
-The representative program moved voting from a background network detail into something users can act on. Wallet users
-can choose a voter, keep custody of their ATTO, and receive rewards when they are eligible.
-
-### Voter transparency
-
-The staking docs, wallet, [voter explorer](/explorer/voters), and [metrics dashboard](/metrics) make voter choice less
-opaque. Users can compare voters, avoid crowded ones, and understand how delegation affects the network.
-
-### Daily rewards
-
-Rewards are paid daily for eligible accounts. The current APY and distribution data are dynamic, so the live staking
-docs and wallet should be used for current values.
-
-</details>
-
-## Side quests: redesigns
-
-Status: complete
-
-<details>
-<summary>What shipped</summary>
-
-These were not protocol milestones, but they mattered. If Atto is supposed to feel like everyday money, the public
-product surfaces have to be clear.
-
-### Website redesign
+##### Website redesign
 
 The website had grown around launches, docs, metrics, blog posts, and integration pages. The redesign made the current
 product easier to understand: wallet, staking, mining, explorer, metrics, integrations, and community entry points.
@@ -157,7 +200,7 @@ product easier to understand: wallet, staking, mining, explorer, metrics, integr
 The goal was less marketing wallpaper and more direct paths. People should be able to land on the site and know what
 Atto is, how to try it, how to earn it, how to build with it, and where to check the network.
 
-### Wallet redesign
+##### Wallet redesign
 
 The wallet is where Atto either feels usable or it does not.
 
@@ -165,73 +208,148 @@ The redesign focused on the everyday flows: onboarding, account overview, sendin
 voter selection, local work status, and mobile use. The hard parts should be visible when they matter and out of the way
 when they do not.
 
-</details>
+</ShippedMilestone>
 
-## Phase 7: Micropayment rails
+<ShippedMilestone anchor="technical-whitepaper-rewrite" title="Technical whitepaper rewrite" date={<>Published · <time dateTime="2026-09-01">Sep 1, 2026</time></>}>
 
-Status: started
+The rewritten technical whitepaper explains account chains, representative voting, and how payments settle.
+Atto published its MiCA disclosure as a separate document. [Technical whitepaper](/docs/whitepaper/technical)
 
-Atto already has the traits small payments need: fast confirmation, no protocol fees, and simple transfers. The next
-step is turning that into payment flows that software can use without a custom checkout for every request.
+</ShippedMilestone>
 
-This phase is about making small paid requests work for APIs, tools, and agents.
+<ShippedMilestone anchor="treasury-reconciliation-automation" title="Treasury reconciliation automation" date={<>Published · <time dateTime="2026-08-12">Aug 12, 2026</time></>}>
 
-You can already approve wallet spending limits in the [CLI](/build/cli) and [MCP](/build/mcp). This phase builds on those controls to connect a payment to a paid request, so a service can check the payment and return the result.
+The treasury reconciliation tool verifies Genesis and treasury account transfers against on-chain records
+and regenerates the public ledger. [Treasury transparency ledger](https://github.com/attocash/transparency)
 
-Planned work:
+</ShippedMilestone>
 
-- Support an x402-style payment flow where a service can request payment, the client can pay, and the service can return
-  the resource after verification.
-- Keep the design multi-rail so ATTO can be used where it makes sense without closing the door on other payment rails.
-- Ship one paid demo endpoint with settlement receipts, replay protection, and clear failure behavior.
-- Add spending controls for agents: per-call limits, daily limits, allowlists, duplicate-payment checks, and readable
-  payment metadata.
-- Publish developer docs for protecting an API route or MCP tool behind a small payment.
+<ShippedMilestone anchor="network-observability" title="Network observability" date={<>Dashboard launched · <time dateTime="2026-03-20">Mar 20, 2026</time></>}>
 
-## Phase 8: `atto.market` beta
+The public dashboard shows confirmation times, daily transaction counts, circulating supply, and distribution history.
+[View network metrics](/metrics)
 
-Status: live beta
+</ShippedMilestone>
 
-Atto Marketplace lets people and agents find paid work, post tasks to hire help, and buy or sell digital products in
-the Shop. Buyers pay workers for approved milestones and sellers for Shop purchases directly in Atto (ATTO) or Nano
-(XNO).
+</section>
 
-[Browse public Marketplace tasks](https://atto.market/tasks) without a wallet or
-[set up the Marketplace MCP](https://atto.market/setup) to connect an agent.
+<section className={styles.chapter} aria-labelledby="public-rollout">
 
-Future roadmap work includes a curated catalog of paid APIs and MCP tools. The proposed catalog would let agents find
-a service, inspect its price and input and output schemas, and pay to call it.
+### Public rollout {#public-rollout}
 
-## Phase 9: Merchant and self-hosted payments
+<ShippedMilestone anchor="phase-6-representative-program" title="Representative program" date={<>Staking launched · <time dateTime="2026-02-12">Feb 12, 2026</time></>}>
 
-Status: planned
+##### Staking and voter choice
 
-Once the core payment flow is proven, Atto should support merchant infrastructure that people already run.
+The representative program moved voting from a background network detail into something users can act on. Wallet users
+can choose a voter, keep custody of their ATTO, and receive rewards when they are eligible.
 
-Planned work:
+##### Voter transparency
 
-- Research BTCPay Server integration paths: plugin, headless API integration, payment requests, and invoices.
-- Build the smallest useful BTCPay integration before attempting a full payment-server stack.
-- Keep self-hosting as the default direction for merchants who do not want a hosted processor.
+Explorer voter details went live on January 28, 2026, helping users compare voters and understand how delegation
+affects the network. [Voter explorer](/explorer/voters)
 
-## Phase 10: Content payments
+##### Daily rewards
 
-Status: planned
+Eligible rewards are generally processed daily. Use the staking docs and wallet for current rates and eligibility.
+[Staking guide](/docs/staking)
 
-The original content idea still matters: pay to read an article, unlock a post, tip a creator, or add a small payment
-plugin to a website. This comes after merchant and self-hosted payments because the payment rails should be proven
-before the creator-facing plugin work starts.
+</ShippedMilestone>
 
-Planned work:
+<ShippedMilestone anchor="phase-5-integrations" title="Integrations" date={<>Phase completed · <time dateTime="2025-10-15">Oct 15, 2025</time></>}>
 
-- Article unlocks and pay-per-read flows.
-- Website and publisher plugins.
-- Examples for tips, gated downloads, and small paid actions.
-- A simple reader flow that does not require copying addresses by hand.
+##### Developer APIs and services
+
+The developer guides added in May 2025 made Atto easier to build on. Current docs cover the node, wallet server,
+work server, signer, and the APIs needed to send, receive, inspect accounts, and operate infrastructure. [Integration guides](/docs/integration)
+
+##### Listings and discovery
+
+August 2025 brought three public announcements. ATTO went live on LCX on August 4, appeared on CoinGecko on August 8,
+and was listed on XT on August 21. Current availability can change. [LCX](/blog/atto-is-now-live-on-lcx), [CoinGecko](/blog/atto-is-now-live-on-coingecko), [XT](/blog/atto-is-now-live-on-xt)
+
+##### Node metrics
+
+Node operators gained expanded Prometheus metrics and peer health checks in the May 2025 node releases. [Node v1.5](https://github.com/attocash/node/releases/tag/v1.5), [Node v1.6](https://github.com/attocash/node/releases/tag/v1.6)
+
+</ShippedMilestone>
+
+<ShippedMilestone anchor="phase-4-public-launch" title="Public launch" date={<>Full launch · <time dateTime="2025-05-01">May 1, 2025</time></>}>
+
+The broader launch ended the pre-release period. By then, the network, website, web wallet, faucet, explorer,
+and Folding@Home rewards were open to a wider audience.
+
+</ShippedMilestone>
+
+</section>
+
+<section className={styles.chapter} aria-labelledby="foundations">
+
+### Foundations {#foundations}
+
+<ShippedMilestone anchor="phase-3-mining-through-foldinghome" title="Folding@Home rewards" date={<>Announced · <time dateTime="2025-03-31">Mar 31, 2025</time></>}>
+
+Atto does not use mining for consensus. Consensus uses Open Representative Voting.
+
+The "mining" program is a distribution path. Users contribute computing power to
+[Folding@Home](https://foldingathome.org), and Atto rewards completed work through the mining program. Electricity goes
+toward scientific computation instead of repeated hashing for block production.
+
+</ShippedMilestone>
+
+<ShippedMilestone anchor="phase-2-wallet-direction" title="Web wallet direction" date={<>Released · <time dateTime="2025-01-29">Jan 29, 2025</time></>}>
+
+Native Android and iOS wallets were the first plan. We changed direction.
+
+Atto needed one wallet that could move faster across desktop and mobile, so the web wallet became the main wallet
+surface. That kept development focused on the flows that mattered most: creating an account, receiving funds, sending
+ATTO, and later, choosing a voter for staking.
+
+</ShippedMilestone>
+
+<ShippedMilestone anchor="phase-1-explorer-and-platform-stabilization" title="Explorer and platform improvements" date={<>Phase completed · <time dateTime="2024-12-08">Dec 8, 2024</time></>}>
+
+##### Explorer
+
+The [explorer](/explorer) made the network visible. Users could inspect accounts and transactions without asking an
+operator to check node logs.
+
+##### Faucet and wallet improvements
+
+The faucet and wallet were tightened up around the basic loop: get a small amount of ATTO, open a wallet, send it,
+receive it, and see the transaction on the explorer.
+
+</ShippedMilestone>
+
+<ShippedMilestone anchor="phase-0-pre-release" title="Pre-release" date={<>Mainnet and public pre-release · <time dateTime="2024-11-23">Nov 23, 2024</time></>}>
+
+##### Public website
+
+The first website gave Atto a home for the whitepaper, docs, and community links. The public pre-release announcement
+introduced a working desktop wallet, faucet, and contribution rewards. [Pre-release announcement](/blog/pre-release)
+
+##### Live network
+
+Atto opened mainnet to early users at genesis. The first public treasury records include funding for the faucet and
+the contribution rewards bot. [Technical whitepaper](/docs/whitepaper/technical), [November 2024 treasury ledger](https://github.com/attocash/transparency/blob/main/log/2024-11.csv)
+
+</ShippedMilestone>
+
+</section>
+
+</ShippedChapters>
+
+</section>
+
+</div>
+
+<section className={styles.help} aria-labelledby="how-to-help">
 
 ## How to help
 
-The roadmap is not a promise of dates. It is the current order of work.
+Test the wallet, run infrastructure, report broken flows, improve the docs, or build an example integration.
+See the policy for work that may qualify for rewards. [Contribution Rewards Policy](/docs/reward-for-contributions)
 
-Useful help is usually concrete: test the wallet, run infrastructure, report broken flows, improve docs, build example
-integrations, or make public Atto pages easier to understand.
+</section>
+
+</div>
