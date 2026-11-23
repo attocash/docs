@@ -1,25 +1,35 @@
 ---
-title: Atto N8N Setup — Machine-to-Machine Payment Workflows
-sidebar_label: N8N
-description: Set up Atto nodes for machine-to-machine payment workflows in N8N. Read an account, listen for incoming payments, and receive funds with a dedicated wallet.
+title: Atto n8n Setup — Machine-to-Machine Payment Workflows
+sidebar_label: n8n
+description: Install the verified Atto community node in n8n Cloud or self-hosted n8n. Read an account, listen for incoming payments, and receive funds with a dedicated wallet.
 sidebar_position: 3
 ---
 
-# Set up Atto in N8N {#atto-for-n8n}
+# Set up Atto in n8n {#atto-for-n8n}
 
 Connect payments to a workflow: read an account, start a process when a payment arrives, or send funds as a workflow step. The package provides an **Atto** action node and an **Atto Trigger** node for live network events.
 
-For capabilities and workflow examples, see [Atto payment workflows for N8N](/build/n8n).
+For capabilities and workflow examples, see [Atto payment workflows for n8n](/build/n8n).
 
-## Install on self-hosted N8N
+## Install from the n8n editor
 
-Use an N8N installation that permits community nodes. Its runtime must meet both N8N's requirements and this package's minimum of Node.js 22.22.0. See the [package](https://www.npmjs.com/package/@attocash/n8n-nodes-atto) and [installation reference](https://github.com/attocash/integrations-n8n#installation).
+Atto maintains the [Atto community node](https://n8n.io/integrations/atto/), and n8n has verified it. An instance owner or admin can install it on n8n Cloud or a self-hosted instance with verified community nodes enabled.
+
+1. In the workflow editor, select **+** to open the nodes panel and search for **Atto**.
+2. Under **More from the community**, select **Atto** with the verified badge and choose **Install**.
+3. Any member of the instance can now add **Atto** or **Atto Trigger** to a workflow.
+
+If the verified node is missing on n8n Cloud, check **Verified community nodes** in the Cloud console's **Instance settings**. See [n8n's verified-node installation guide](https://docs.n8n.io/integrations/community-nodes/installation-and-management/install-verified-community-nodes).
+
+## Install on self-hosted n8n
+
+The self-hosted runtime must meet both n8n's requirements and the [Atto package's minimum](https://www.npmjs.com/package/@attocash/n8n-nodes-atto) of Node.js 22.22.0. On an instance that permits package installation, an owner or admin can also install by package name.
 
 1. Open **Settings > Community Nodes** and select **Install**.
 2. Enter `@attocash/n8n-nodes-atto`.
 3. Review and accept the community-node warning, then install.
 
-Restart N8N if the nodes do not appear in the picker.
+Restart n8n if the nodes do not appear in the picker. See the [package installation reference](https://github.com/attocash/integrations-n8n#installation).
 
 ## Read an account without a wallet secret
 
