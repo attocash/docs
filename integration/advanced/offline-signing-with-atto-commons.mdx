@@ -20,7 +20,7 @@ Key generation and signing happen locally, while the examples use online clients
 
 **Note:** Atto uses Ed25519 elliptic curve cryptography for its account keys and signatures. If you use a third-party signer or HSM, check both its Ed25519 support and how you will handle Atto key derivation and transactions. In this guide, we use Atto Commons for all key and transaction operations for consistency and simplicity.
 
-Before proceeding, ensure you have access to the following components in your environment:
+For the network examples later in this guide, ensure you have access to the following components:
 
 * An **Atto Historical Node** (with its REST API endpoint) connected to the main network.
 * An **Atto Work Server** for generating the Proof-of-Work required by transactions.
@@ -78,6 +78,23 @@ The JavaScript examples use Commons 7.0.2. Keep their packages on matching versi
 
   </TabItem>
 </Tabs>
+
+### Check the JavaScript installation locally
+
+After installing the packages above, save this as `check-address.mjs` in the same project and run `node check-address.mjs`.
+It uses a [public test address from Commons](https://github.com/attocash/commons/blob/979b0103a6c8b554848be5fbd271fc88037e7df7/commons-core/src/commonTest/kotlin/cash/atto/commons/AttoAddressTest.kt#L9-L11).
+The check does not create a key or wallet, call a node or work server, or move funds.
+
+```javascript
+import assert from 'node:assert/strict';
+import { AttoAddress } from '@attocash/commons-core';
+
+const address = 'atto://aarfzz26z5pfwrkdcwt4jdhhe2vvixscqwehgmfjqxku43rgtjso5p5cjw6fw';
+assert.equal(AttoAddress.parse(address).toString(), address);
+console.log('Commons address check passed');
+```
+
+If it prints `Commons address check passed`, the Core import and address round trip worked. This does not check node connectivity or signing.
 
 ## Key Generation and Derivation
 
