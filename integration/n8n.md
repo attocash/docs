@@ -46,6 +46,8 @@ Add **Atto Trigger** and select event **Receivable**. Choose **Manual Addresses*
 
 Run the trigger in test mode or activate the workflow to listen for live receivable events. The trigger uses the Node's streaming endpoints and reconnects when a stream closes. You can import the [receivable-trigger example](https://github.com/attocash/integrations-n8n/blob/main/examples/receivable-trigger.json); select your own credential and switch its **Address Source** to **Manual Addresses** to use it without a wallet secret.
 
+When the trigger reconnects, the node can emit the same incoming Send again if it is still pending. If the workflow fulfills an order or must act only once per payment, use `{{ $json.hash }}` on the trigger output as a durable idempotency key. Keep that Send hash for later steps, since the Receive transaction has its own hash.
+
 A receivable is an incoming payment waiting to be received by its destination account. The trigger only reports it. To receive funds, connect an **Atto** node using **Receivable > Receive**, with signing credentials for that destination. This step publishes a receive transaction, or opens the account for its first payment. See the [incoming-to-receive example](https://github.com/attocash/integrations-n8n/blob/main/examples/incoming-to-receive.json).
 
 ## Enable signing only where it is needed
