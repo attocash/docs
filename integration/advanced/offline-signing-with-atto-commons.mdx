@@ -574,46 +574,36 @@ when an account’s state changes (for example, a new open block or any new bloc
 track all your addresses from their latest heights, both streams will notify you of new blocks; you can choose which to
 use based on the level of detail you need.
 
-First, we build a `HeightSearch` object that tells the node from which height to start streaming for each account.
-Typically, you start at the next height after the current one (or at height 0 for unopened accounts).
+Choose a starting height for each account. The [Node API](/api/node) treats `fromHeight` as inclusive. Start an unopened
+account at height 1. To watch only future blocks on an open account, use its current height plus one.
+
+To resume after a process restart, persist the last successfully processed height for each address. When supplying your
+own `fromHeight`, use that saved height plus one. Make any side effects idempotent by transaction hash so a replay can
+be processed safely. The Kotlin Commons monitors keep the last acknowledged height in memory and can replay that
+height when they retry. Process each event before acknowledging it.
 
 <Tabs groupId="library">
   <TabItem value="js" label="JavaScript">
 
+    Subscribe directly to each stream for `hotWalletAddress`, starting at height 1 with no upper bound. To resume an
+    interrupted subscription, persist the last successfully processed height separately for each stream and reopen it
+    at that height plus one.
+
     ```javascript
-    import {
-      AttoHeight,
-    } from '@attocash/commons-core';
-    import {
-      AttoTransactionMonitorAsyncBuilder,
-      AttoAccountEntryMonitorAsyncBuilder,
-      AttoAccountMonitorAsyncBuilder,
-    } from '@attocash/commons-node';
+    import { AttoHeight } from '@attocash/commons-core';
 
-    // Build monitors
-    const accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
-
-    // We will start streaming from AttoHeight.MIN for all addresses.
-    // In local mocks you may want to skip the genesis block (start from height 2 for the genesis address).
-    // Provide a heightProvider callback that can decide per-address.
-    const transactionMonitor = new AttoTransactionMonitorAsyncBuilder(nodeClient, accountMonitor)
-      .heightProvider((address) => {
-        // example: start at height 1 for everyone
-        return Promise.resolve(AttoHeight.MIN);
-      })
-      .build();
-
-    const accountEntryMonitor = new AttoAccountEntryMonitorAsyncBuilder(nodeClient, accountMonitor)
-      .heightProvider((address) => Promise.resolve(AttoHeight.MIN))
-      .build();
-
-    // Register listeners
-    const txJob = transactionMonitor.onTransaction(
+    const txJob = nodeClient.onTransactionByPublicKey(
+      hotWalletAddress.publicKey,
+      AttoHeight.MIN,
+      null,
       (tx) => console.log('Transaction event:', tx.hash),
       (err) => { if (err) console.warn('Transaction monitor error:', err.message); }
     );
 
-    const entryJob = accountEntryMonitor.onAccountEntry(
+    const entryJob = nodeClient.onAccountEntryByPublicKey(
+      hotWalletAddress.publicKey,
+      AttoHeight.MIN,
+      null,
       (entry) => console.log('Account entry event:', entry.hash),
       (err) => { if (err) console.warn('Account entry monitor error:', err.message); }
     );
@@ -635,19 +625,20 @@ Typically, you start at the next height after the current one (or at height 0 fo
 
     // Build monitors from the account monitor (assumes you already have `client`)
     val accountMonitor = client.createAccountMonitor()
+    accountMonitor.monitor(hotWalletAddress)
 
     val transactionMonitor = accountMonitor.toTransactionMonitor { AttoHeight.MIN }
 
     val accountEntryMonitor = accountMonitor.toAccountEntryMonitor { AttoHeight.MIN }
 
-    // Example: consume one item from each stream and acknowledge it
+    // Process one item from each stream before acknowledging it.
     val transactionMessage = transactionMonitor.stream().first()
-    transactionMessage.acknowledge()
     println("Transaction: ${transactionMessage.value.hash}")
+    transactionMessage.acknowledge()
 
     val accountEntryMessage = accountEntryMonitor.stream().first()
-    accountEntryMessage.acknowledge()
     println("Account entry: ${accountEntryMessage.value.hash}")
+    accountEntryMessage.acknowledge()
     ```
 
   </TabItem>
@@ -661,6 +652,7 @@ Typically, you start at the next height after the current one (or at height 0 fo
 
     // Build monitors
     AttoAccountMonitorAsync accountMonitor = new AttoAccountMonitorAsyncBuilder(nodeClient).build();
+    accountMonitor.monitor(hotWalletAddress).join();
 
     // Start streaming from height 1 (MIN) for everyone in this example
     AttoTransactionMonitorAsync transactionMonitor = new AttoTransactionMonitorAsyncBuilder(nodeClient, accountMonitor)
@@ -673,13 +665,25 @@ Typically, you start at the next height after the current one (or at height 0 fo
 
     // Register listeners
     AttoJob txJob = transactionMonitor.onTransaction(
-      tx -> System.out.println("Transaction event: " + tx.getHash()),
-      err -> { if (err != null) System.out.println("Transaction monitor error: " + err.getMessage()); }
+      tx -> {
+        System.out.println("Transaction event: " + tx.getHash());
+        return CompletableFuture.completedFuture(null);
+      },
+      err -> {
+        if (err != null) System.out.println("Transaction monitor error: " + err.getMessage());
+        return CompletableFuture.completedFuture(null);
+      }
     );
 
     AttoJob entryJob = accountEntryMonitor.onAccountEntry(
-      entry -> System.out.println("Account entry event: " + entry.getHash()),
-      err -> { if (err != null) System.out.println("Account entry monitor error: " + err.getMessage()); }
+      entry -> {
+        System.out.println("Account entry event: " + entry.getHash());
+        return CompletableFuture.completedFuture(null);
+      },
+      err -> {
+        if (err != null) System.out.println("Account entry monitor error: " + err.getMessage());
+        return CompletableFuture.completedFuture(null);
+      }
     );
     ```
 
