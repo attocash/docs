@@ -435,8 +435,12 @@ Example:
 }
 ```
 
-The server merges historical database rows with live “push” events, filters duplicates, and streams continuously. When
-you receive one of these objects, create a matching **Receive** (or **Open**) block, sign it, add PoW, and publish via
+Each connection merges pending receivables from an initial database scan with live notifications and suppresses live
+notifications for Send hashes already returned by that scan. Reconnecting can emit a previously reported Send again if
+it is still pending. Use the Send's `hash` as a durable idempotency key for any application action that must happen once
+per payment.
+
+To claim a receivable, create a matching **Receive** or **Open** block, sign it, add proof of work, and publish it via
 `/transactions` or `/transactions/stream`.
 
 That’s all you need to round out the integration story:
