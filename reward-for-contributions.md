@@ -90,4 +90,4 @@ atto receive SEND_HASH --index 0
 atto balances --index 0
 ```
 
-If your wallet received it automatically, the credit is already visible in your account history.
+If your wallet received the reward automatically, open your account in the explorer. Under **Transaction history**, select the hash of the **Open** or **Receive** block. Expand **More details** and check that **Send transaction** matches the Send block hash in the bot's PR comment.
