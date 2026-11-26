@@ -88,6 +88,7 @@ Keep reads separate from writes. An account query needs a public address; publis
 - [Commons source and module documentation](https://github.com/attocash/commons)
 - [Published Core package](https://www.npmjs.com/package/@attocash/commons-core)
 - [Advanced Commons integration](/docs/integration/advanced/offline-signing-with-atto-commons) — lower-level concepts and version-pinned examples.
+  Try its JavaScript examples in a fresh directory outside this project. Their install command uses Commons `7.0.2` and would replace the `8.0.0` packages installed above if run here.
 - [Browser tools](/docs/tools) — inspect encodings, addresses, blocks, and network data.
 - [All integration paths](/docs/integration)
 
