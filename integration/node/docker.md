@@ -349,16 +349,23 @@ docker compose up -d
 docker compose ps
 ```
 
-The node waits for an authenticated MySQL health check before starting. Check its health, logs, height, and unchecked
-transactions with:
+The node waits for an authenticated MySQL health check before starting. Use these commands to check the local node's
+health, logs, height, and unchecked transactions.
 
 ```bash
 curl --fail http://127.0.0.1:8081/health
 docker compose logs --tail 200 node
 curl --fail http://127.0.0.1:8081/metrics/account.height.count
 curl --fail http://127.0.0.1:8081/metrics/transactions.unchecked.count
+```
+
+Use `curl` and `jq` to fetch the public reference height and compare it with the local height above. The public endpoint
+returns HTTP 200 with a JSON `metrics` array. The `account.height.count` entry has a changing decimal string as its
+`value`. The `jq -er` command prints it without quotes and exits with a nonzero status if no matching value is found.
+
+```bash
 curl -fsSL https://gatekeeper.live.application.atto.cash/projections/metrics \
-  | jq -r '.metrics[] | select(.name == "account.height.count") | .value'
+  | jq -er '.metrics[] | select(.name == "account.height.count") | .value'
 ```
 
 The unchecked metric refreshes once per minute. Wait at least one minute between samples before deciding that the node
