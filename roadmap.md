@@ -138,7 +138,7 @@ Explore a BTCPay Server integration so merchants can accept Atto on infrastructu
 
 <Disclosure summary="View merchant payment plans">
 
-- Research BTCPay Server integration paths: plugin, headless API integration, payment requests, and invoices.
+- [Explore the proposed BTCPay Server integration](/docs/integration/advanced/btcpay-server-design), including the store plugin, headless API, payment requests and invoices.
 - Build the smallest useful BTCPay integration before attempting a full payment-server stack.
 - Keep self-hosting as the default direction for merchants who do not want a hosted processor.
 
