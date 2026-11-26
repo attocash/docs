@@ -60,7 +60,7 @@ To qualify for the critical vulnerability tier, report the issue privately throu
 
 Maintainers review the PR before it is merged. If the contribution qualifies, they add a tier label to the PR before merge. That label is the reward decision.
 
-After the labeled PR is merged, the ATTO reward is sent automatically.
+After the labeled PR is merged, the reward bot sends ATTO to the address it confirmed on the PR.
 
 The tier can depend on impact, difficulty, completeness, review effort, and how useful the change is to the project.
 
@@ -74,6 +74,20 @@ Reward amounts are guidelines and may change over time. If reward amounts change
 4. Explain what changed and why it matters.
 5. Respond to maintainer review.
 6. If the PR qualifies, maintainers add the reward-tier label before merge.
-7. After the labeled PR is merged, the reward is sent automatically.
+7. If the reward bot asks for an address, add your public `atto://…` receiving address to the **PR description**. Check the address in the bot's follow-up comment before merge.
+8. After merge, the bot posts the Send block hash. Use it to [check and receive your reward](#receive-your-reward).
 
 For security vulnerabilities, skip the public PR and use the private security flow instead.
+
+## Receive your reward
+
+Paste the Send block hash from the bot's comment into the [Atto explorer](/explorer). Check **Receiver** against your address and **Amount** against the reward tier. Your wallet credits the reward with a separate Open block for a new account or a Receive block for an existing account.
+
+If you use the [Atto CLI](/docs/integration/cli), select the wallet and account index for the address in your PR. For example, to check pending payments for account `0`, run `atto receivables --index 0`. If the bot's hash appears, replace `SEND_HASH` below with that hash to receive just this reward and check the balance.
+
+```sh
+atto receive SEND_HASH --index 0
+atto balances --index 0
+```
+
+If your wallet received it automatically, the credit is already visible in your account history.
